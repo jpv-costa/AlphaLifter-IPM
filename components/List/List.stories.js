@@ -30,7 +30,7 @@ storiesOf("Lists", module)
 const data = [
     {
         id: 1,
-        iconId: "dumbbell-with-circle",
+        iconId: "dumbbell",
         title: "Lorem ipsum",
         extraInfo: "10min",
         description:
@@ -38,7 +38,7 @@ const data = [
     },
     {
         id: 2,
-        iconId: "dumbbell-with-circle",
+        iconId: "dumbbell",
         title: "Ut labore et",
         extraInfo: "10min",
         description:
@@ -46,7 +46,7 @@ const data = [
     },
     {
         id: 3,
-        iconId: "dumbbell-with-circle",
+        iconId: "dumbbell",
         title: "Exercitation ullamco laboris nisi",
         extraInfo: "10min",
         description:
@@ -54,7 +54,7 @@ const data = [
     },
     {
         id: 4,
-        iconId: "dumbbell-with-circle",
+        iconId: "dumbbell",
         title: "Reprehenderit in voluptate",
         extraInfo: "10min",
         description:

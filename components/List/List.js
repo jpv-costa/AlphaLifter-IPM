@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { color, space, layout, size, typography } from "styled-system";
-import { FlatList } from "react-native";
+import { FlatList, View, StyleSheet } from "react-native";
 import { Icon } from "../Icon/Icon";
 
 const ListContainer = styled.TouchableOpacity`
@@ -30,7 +30,27 @@ const ListContent = styled.View`
 
 const ListHeader = styled.View`
     flex-direction: row;
-    justify_content: space-between;
+    justify-content: space-between;
+`;
+
+const Circle = styled.View`
+    width: 44;
+    height: 44;
+    background-color: #00171f;
+    border-radius: ${44 / 2};
+    opacity: ${0.15};
+    position: absolute;
+`;
+
+const IconCircle = styled.View`
+    width: 44;
+    height: 44;
+`;
+
+const CenterItem = styled.View`
+    flex: 1;
+    justify-content: center;
+    align-items: center;
 `;
 
 const ListItem = props => {
@@ -42,7 +62,12 @@ const ListItem = props => {
             py={3}
             selected={selected}
             onPress={props.onPress}>
-            <Icon id={iconId} size={45} fill='#4C5C62' />
+            <IconCircle>
+                <Circle />
+                <CenterItem>
+                    <Icon id={iconId} size={28} fill='#00171f' />
+                </CenterItem>
+            </IconCircle>
             <ListContent ml={3}>
                 <ListHeader>
                     <Text fontSize={2} fontWeight='bold'>

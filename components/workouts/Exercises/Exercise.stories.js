@@ -43,8 +43,11 @@ const data = [
         configuration: {
             1: {
                 sets: 1,
-                reps: 3,
-                intensity: 0.85,
+                reps: {
+                    min: 4,
+                    max: 6
+                },
+                intensity: 0.8725,
                 RIR: {
                     min: 1,
                     max: 2

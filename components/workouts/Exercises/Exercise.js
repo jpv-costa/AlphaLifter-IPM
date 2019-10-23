@@ -1,9 +1,6 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { color, space, layout, size, typography } from "styled-system";
+import React from "react";
 import { List } from "../../List/List";
 import { round } from "../../../utils";
-import { Icon } from "../../Icon/Icon";
 
 //Constants that enumerate the available exercise equipment types
 export const EquipmentTypes = Object.freeze({
@@ -11,35 +8,6 @@ export const EquipmentTypes = Object.freeze({
     cables: 2,
     barbell: 3
 });
-
-const ListItem = styled.TouchableOpacity`
-    ${space}
-    ${layout}
-    flex-direction: row;
-    align-items: center;
-    background-color: ${props =>
-        props.selected ? props.theme.colors.secondaryTints[4] : "transparent"};
-`;
-
-const Text = styled.Text`
-    ${space}
-    ${layout}
-    ${color}
-    ${typography}
-    ${size}
-`;
-
-const ListContent = styled.View`
-    ${space}
-    ${layout}
-    flex-direction: column;
-    flex-grow: 1;
-`;
-
-const ListHeader = styled.View`
-    flex-direction: row;
-    justify_content: space-between;
-`;
 
 export const ConfiguredExerciseList = props => {
     const { data } = props;
@@ -77,7 +45,7 @@ export const ConfiguredExerciseList = props => {
 
         return {
             id: id,
-            iconId: "dumbbell-with-circle",
+            iconId: "caret-left",
             title: name,
             extraInfo: estimatedDuration,
             description: description
