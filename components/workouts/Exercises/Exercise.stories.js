@@ -1,10 +1,15 @@
 import React from "react";
 import { storiesOf } from "@storybook/react-native";
 import { withKnobs, object } from "@storybook/addon-knobs/react";
-import { ConfiguredExercise, EquipmentTypes } from "./Exercise";
+import {
+    ConfiguredExercise,
+    ConfiguredExerciseList,
+    EquipmentTypes
+} from "./Exercise";
 import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
 import theme from "../../theme";
+import { SafeAreaView } from "react-native";
 
 const CenteredView = styled.View`
     flex: 1;
@@ -17,20 +22,109 @@ storiesOf("Exercise", module)
     // (therefore the component can use them),
     // and centers the component in the screen
     .addDecorator(story => (
-        <ThemeProvider theme={theme}>
-            <CenteredView>{story()}</CenteredView>
-        </ThemeProvider>
+        <SafeAreaView style={{ flex: 1 }}>
+            <ThemeProvider theme={theme}>
+                <CenteredView>{story()}</CenteredView>
+            </ThemeProvider>
+        </SafeAreaView>
     ))
     .addDecorator(withKnobs)
-    .add("one_configuration - incompleted", () => (
-        <ConfiguredExercise
-            name={object("name", "Bench Press")}
-            completed={false}
-            estimatedDuration={object("duration", "+/- 30min")}
-            equipment={EquipmentTypes.dumbbell}
-            configuration={object(
-                "configuration",
-                "3 sets x 8 - 12 reps x 75% 1RM @ 1-3 RIR"
-            )}
-        />
+    .add("Configured Exercise List", () => (
+        <ConfiguredExerciseList data={data} />
     ));
+
+const data = [
+    {
+        id: 1,
+        name: "Bench Press",
+        completed: true,
+        estimatedDuration: "+/- 30min",
+        equipment: EquipmentTypes.dumbbell,
+        configuration: {
+            1: {
+                sets: 1,
+                reps: 3,
+                intensity: 0.85,
+                RIR: {
+                    min: 1,
+                    max: 2
+                }
+            },
+            2: {
+                sets: 4,
+                reps: 5,
+                intensity: 0.825,
+                RIR: {
+                    min: 1,
+                    max: 3
+                }
+            }
+        }
+    },
+    {
+        id: 2,
+        name: "Lateral Raises",
+        completed: false,
+        estimatedDuration: "+/- 22min",
+        equipment: EquipmentTypes.cable,
+        configuration: {
+            1: {
+                sets: 3,
+                reps: 7,
+                intensity: 0.75,
+                RIR: {
+                    min: 1,
+                    max: 4
+                }
+            }
+        }
+    },
+    {
+        id: 3,
+        name: "Row",
+        completed: false,
+        estimatedDuration: "+/- 14min",
+        equipment: EquipmentTypes.barbell,
+        configuration: {
+            1: {
+                sets: {
+                    min: 3,
+                    max: 4
+                },
+                reps: 3,
+                intensity: 0.85,
+                RIR: {
+                    min: 1,
+                    max: 2
+                }
+            }
+        }
+    },
+    {
+        id: 4,
+        name: "Back Squat",
+        completed: false,
+        estimatedDuration: "+/- 19min",
+        equipment: EquipmentTypes.barbell,
+        configuration: {
+            1: {
+                sets: 1,
+                reps: 3,
+                intensity: 0.85,
+                RIR: {
+                    min: 1,
+                    max: 2
+                }
+            },
+            2: {
+                sets: 4,
+                reps: 5,
+                intensity: 0.825,
+                RIR: {
+                    min: 1,
+                    max: 3
+                }
+            }
+        }
+    }
+];

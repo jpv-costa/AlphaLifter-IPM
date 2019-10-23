@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { color, space, layout, size, typography } from "styled-system";
+import { List } from "../../List/List";
+import { round } from "../../../utils";
+import { Icon } from "../../Icon/Icon";
 
 //Constants that enumerate the available exercise equipment types
 export const EquipmentTypes = Object.freeze({
@@ -9,9 +12,13 @@ export const EquipmentTypes = Object.freeze({
     barbell: 3
 });
 
-const View = styled.View`
+const ListItem = styled.TouchableOpacity`
     ${space}
     ${layout}
+    flex-direction: row;
+    align-items: center;
+    background-color: ${props =>
+        props.selected ? props.theme.colors.secondaryTints[4] : "transparent"};
 `;
 
 const Text = styled.Text`
@@ -22,65 +29,60 @@ const Text = styled.Text`
     ${size}
 `;
 
-export const Card = styled.View`
-  ${color}
-  ${space}
-  ${layout}
-  border-radius: 6px;
-  elevation: 3;
-  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.16);
+const ListContent = styled.View`
+    ${space}
+    ${layout}
+    flex-direction: column;
+    flex-grow: 1;
 `;
-
-Card.defaultProps = {
-    bg: "white.1",
-    py: 3,
-    px: 4
-};
-
-const TagGroup = ({ tags }) => {
-    return (
-        <React.Fragment>
-            {Object.getOwnPropertyNames(tags).map(value => (
-                <Tag key={tags[value].tag} ml={2} bg={tags[value].color}>
-                    <Text
-                        color='white.1'
-                        fontSize={1}
-                        ellipsizeMode='tail'
-                        numberOfLines={1}>
-                        {tags[value].tag.toUpperCase()}
-                    </Text>
-                </Tag>
-            ))}
-        </React.Fragment>
-    );
-};
 
 const ListHeader = styled.View`
     flex-direction: row;
     justify_content: space-between;
 `;
 
-export const ConfiguredExercise = props => {
-    const {
-        name,
-        completed,
-        estimatedDuration,
-        equipment,
-        configuration
-    } = props;
-    return (
-        <View>
-            <ListHeader>
-                <Text fontSize={1} fontWeight='bold'>
-                    {name}
-                </Text>
-                <Text fontSize={1} color='#555'>
-                    {estimatedDuration}
-                </Text>
-            </ListHeader>
-            <Text mt={1} fontSize={1} color='#555'>
-                {configuration}
-            </Text>
-        </View>
-    );
+export const ConfiguredExerciseList = props => {
+    const { data } = props;
+
+    const parsedData = data.map(item => {
+        const { id, name, estimatedDuration, configuration } = item;
+
+        sets = isNaN(configuration["1"].sets)
+            ? configuration["1"].sets.min + "-" + configuration["1"].sets.max
+            : configuration["1"].sets;
+        reps = isNaN(configuration["1"].reps)
+            ? configuration["1"].reps.min + "-" + configuration["1"].reps.max
+            : configuration["1"].reps;
+        RIR = isNaN(configuration["1"].RIR)
+            ? configuration["1"].RIR.min + "-" + configuration["1"].RIR.max
+            : configuration["1"].RIR;
+        intensity = isNaN(configuration["1"].intensity)
+            ? round(100 * configuration["1"].intensity.min, 2) +
+              "-" +
+              round(100 * configuration["1"].intensity.max, 2)
+            : round(100 * configuration["1"].intensity, 2);
+
+        const description =
+            sets +
+            (sets == 1 ? " set" : " sets") +
+            " x " +
+            reps +
+            (reps == 1 ? " rep" : " reps") +
+            " x " +
+            intensity +
+            "% @" +
+            RIR +
+            " RIR" +
+            (configuration.hasOwnProperty("2") ? ", ..." : "");
+
+        return {
+            id: id,
+            iconId: "dumbbell-with-circle",
+            title: name,
+            extraInfo: estimatedDuration,
+            description: description
+        };
+    });
+
+    return <List data={parsedData} />;
 };

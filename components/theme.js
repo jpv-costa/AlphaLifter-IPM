@@ -1,9 +1,9 @@
 export default {
     colors: {
-        text: "#000",
+        text: ["#000", "#555"],
         primary: "#ff8300",
         secondaryShades: ["#00a8e8", "#007ea7", "#003459"],
-        secondaryTints: ["#00a8e8", "33b9ed", "66cbf1", "99dcf6", "cceefa"],
+        secondaryTints: ["#00a8e8", "#33b9ed", "#66cbf1", "#99dcf6", "#cceefa"],
         black: "#00171f",
         white: ["#fff", "#fdfdfd"],
         modes: {
