@@ -65,7 +65,7 @@ const ListItem = props => {
             <IconCircle>
                 <Circle />
                 <CenterItem>
-                    <Icon id={iconId} size={28} fill='#00171f' />
+                    <Icon id={iconId} size={28} fill='#00171f' opacity={0.8} />
                 </CenterItem>
             </IconCircle>
             <ListContent ml={3}>

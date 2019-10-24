@@ -25,7 +25,7 @@ storiesOf("Icons", module)
     .add("Icon Component", () => (
         <Icon
             id={object("id", "dumbbell")}
-            size={object("size", 40)}
+            size={object("size", 140)}
             fill={object("fill", "#4C5C62")}
         />
     ));

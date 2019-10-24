@@ -30,7 +30,7 @@ storiesOf("Exercise", module)
     ))
     .addDecorator(withKnobs)
     .add("Configured Exercise List", () => (
-        <ConfiguredExerciseList data={data} />
+        <ConfiguredExerciseList data={object("data", data)} />
     ));
 
 const data = [

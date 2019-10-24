@@ -45,7 +45,7 @@ export const ConfiguredExerciseList = props => {
 
         return {
             id: id,
-            iconId: "caret-left",
+            iconId: "dumbbell",
             title: name,
             extraInfo: estimatedDuration,
             description: description
