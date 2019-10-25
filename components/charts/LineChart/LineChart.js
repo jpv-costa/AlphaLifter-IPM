@@ -45,12 +45,6 @@ export class LineChart extends React.PureComponent {
 
         const numDates = 4;
         const numSamples = this.props.dataTrend.length;
-        const dates = [];
-        for (let i = 0; i < numDates; i++) {
-            index = Math.floor(i * (numSamples / numDates));
-            console.log(index);
-            dates.push(this.props.dataTrend[index].date);
-        }
 
         return (
             <View style={{ height: this.props.height, flexDirection: "row" }}>
@@ -75,8 +69,8 @@ export class LineChart extends React.PureComponent {
                         style={{ marginHorizontal: 20, height: xAxisHeight }}
                         data={this.props.dataTrend}
                         scale={scaleTime}
-                        formatLabel={value =>
-                            dates.includes(value)
+                        formatLabel={(value, index) =>
+                            index % Math.floor(numSamples / numDates) == 0
                                 ? moment(value).format("MMM Do")
                                 : ""
                         }
