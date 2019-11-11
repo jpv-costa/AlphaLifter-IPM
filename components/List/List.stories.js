@@ -13,6 +13,10 @@ const CenteredView = styled.View`
     align-items: center;
 `;
 
+const onItemPress = item => {
+    console.log("You pressed item '" + item.title + "'");
+};
+
 storiesOf("Lists", module)
     // The ThemeProvider feeds the theme options to the components scope
     // (therefore the component can use them),
@@ -25,7 +29,9 @@ storiesOf("Lists", module)
         </SafeAreaView>
     ))
     .addDecorator(withKnobs)
-    .add("List", () => <List data={data} />);
+    .add("List", () => (
+        <List data={data} selectList onItemPress={onItemPress} />
+    ));
 
 const data = [
     {

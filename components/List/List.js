@@ -86,7 +86,7 @@ const ListItem = props => {
 };
 
 export const List = props => {
-    const { data } = props;
+    const { data, onItemPress, selectList } = props;
 
     const [selected, setSelected] = useState(null);
 
@@ -102,7 +102,14 @@ export const List = props => {
                     extraInfo={item.extraInfo}
                     description={item.description}
                     selected={selected == item.id}
-                    onPress={() => setSelected(item.id)}
+                    onPress={() => {
+                        if (onItemPress) {
+                            onItemPress(item);
+                        }
+                        if (selectList) {
+                            setSelected(item.id);
+                        }
+                    }}
                 />
             )}
             keyExtractor={item => item.id}

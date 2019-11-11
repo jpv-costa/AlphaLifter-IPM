@@ -10,7 +10,7 @@ export const EquipmentTypes = Object.freeze({
 });
 
 export const ConfiguredExerciseList = props => {
-    const { data } = props;
+    const { data, ...other } = props;
 
     const parsedData = data.map(item => {
         const { id, name, estimatedDuration, configuration } = item;
@@ -52,5 +52,5 @@ export const ConfiguredExerciseList = props => {
         };
     });
 
-    return <List data={parsedData} />;
+    return <List data={parsedData} {...other} />;
 };
