@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AreaChart } from "react-native-svg-charts";
-import { View } from "react-native";
+import { View, Animated, Easing } from "react-native";
 import * as shape from "d3-shape";
 import { scaleLinear, scaleTime } from "d3-scale";
 import Moment from "moment";
@@ -25,11 +25,9 @@ import {
 export class LineChart extends React.PureComponent {
     render() {
         const { dataTrend, dataPoints, height } = this.props;
-
-        const contentInset = { top: 30, bottom: 30, left: -2, right: -2 };
+        const contentInset = { top: 30, bottom: 30, left: -1, right: -1 };
         const yTicks = 3;
         const xTicks = 4;
-        const xMargin = 50;
         const Gradient = ({ index }) => (
             <Defs key={index}>
                 <LinearGradient
@@ -45,12 +43,26 @@ export class LineChart extends React.PureComponent {
         );
 
         const Decorator = ({ x, y }) => {
-            return dataPoints.map((value, index) => (
-                <Circle
+            const opacity = new Animated.Value(0);
+
+            useEffect(() => {
+                Animated.timing(opacity, {
+                    toValue: 1,
+                    duration: 300,
+                    easing: Easing.ease,
+                    useNativeDriver: true
+                }).start();
+            });
+
+            const AnimatedCircle = Animated.createAnimatedComponent(Circle);
+
+            return dataPoints.map(value => (
+                <AnimatedCircle
                     key={value.date}
                     cx={x(value.date)}
                     cy={y(value.y)}
                     r={3}
+                    opacity={opacity}
                     fill={"#007ea7"}
                 />
             ));
@@ -68,7 +80,6 @@ export class LineChart extends React.PureComponent {
 
             for (let i = 0; i < ticks.length; i++) {
                 const yCoord = ticks[i] + 2;
-                console.log(ticks);
                 lines.push(
                     <G key={`gridline-${i}`}>
                         <Line
@@ -136,9 +147,6 @@ export class LineChart extends React.PureComponent {
             return <G>{dates}</G>;
         };
 
-        const numDates = 4;
-        const numSamples = dataTrend.length;
-
         return (
             <View
                 style={{
@@ -159,8 +167,6 @@ export class LineChart extends React.PureComponent {
                         strokeWidth: 3
                     }}
                     contentInset={contentInset}>
-                    {/* <Grid /> */}
-                    {/* {this.drawHorizontalGrid(4)} */}
                     <HorizontalGrid />
                     <Gradient />
                     <Decorator />
