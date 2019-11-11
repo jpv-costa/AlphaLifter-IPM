@@ -26,9 +26,10 @@ export class LineChart extends React.PureComponent {
     render() {
         const { dataTrend, dataPoints, height } = this.props;
 
-        const contentInset = { top: 20, bottom: 20 };
-        const axesSvg = { fontSize: 10, fill: "grey" };
-        const xAxisHeight = 30;
+        const contentInset = { top: 30, bottom: 30, left: -2, right: -2 };
+        const yTicks = 3;
+        const xTicks = 4;
+        const xMargin = 50;
         const Gradient = ({ index }) => (
             <Defs key={index}>
                 <LinearGradient
@@ -43,12 +44,12 @@ export class LineChart extends React.PureComponent {
             </Defs>
         );
 
-        const Decorator = position => {
+        const Decorator = ({ x, y }) => {
             return dataPoints.map((value, index) => (
                 <Circle
-                    key={index}
-                    cx={position.x(index)}
-                    cy={position.y(value.y)}
+                    key={value.date}
+                    cx={x(value.date)}
+                    cy={y(value.y)}
                     r={3}
                     fill={"#007ea7"}
                 />
@@ -63,37 +64,76 @@ export class LineChart extends React.PureComponent {
 
             const lines = [];
 
-            const ticks = yBands.ticks(3);
+            const ticks = yBands.ticks(yTicks);
 
-            console.log(ticks[0]);
-
-            for (let i = 1; i < ticks.length; i++) {
+            for (let i = 0; i < ticks.length; i++) {
+                const yCoord = ticks[i] + 2;
+                console.log(ticks);
                 lines.push(
                     <G key={`gridline-${i}`}>
                         <Line
                             x1='0'
-                            y1={ticks[i]}
+                            y1={yCoord}
                             x2='100%'
-                            y2={ticks[i]}
+                            y2={yCoord}
                             stroke='#000'
-                            strokeDasharray={[3, 3]}
+                            strokeDasharray={[2, 4]}
                             strokeOpacity='0.5'
                             strokeWidth='0.5'
                         />
                         <Text
                             x={3}
                             textAnchor='start'
-                            y={ticks[i] + theme.space[3]}
+                            y={yCoord + theme.space[3]}
                             fontSize={theme.fontSizes[1]}
                             fill='black'
                             fillOpacity={0.4}>
-                            {y.invert(ticks[i]).toFixed(2) + " kg"}
+                            {y.invert(yCoord).toFixed(0) + " kg"}
                         </Text>
                     </G>
                 );
             }
 
             return <G>{lines}</G>;
+        };
+
+        const XAxis = ({ x, width, height }) => {
+            const xBands = scaleLinear().domain([0, width]);
+
+            const dates = [];
+
+            const ticks = xBands.ticks(xTicks);
+
+            dates.push(
+                <Line
+                    x1='0'
+                    y1={height}
+                    x2='100%'
+                    y2={height}
+                    stroke='#000'
+                    strokeDasharray={[2, 4]}
+                    strokeOpacity='0.5'
+                    strokeWidth='0.5'
+                />
+            );
+
+            for (let i = 0; i < ticks.length; i++) {
+                const xCoord = ticks[1] / 2 + ticks[i];
+                dates.push(
+                    <Text
+                        key={`date-${i}`}
+                        x={xCoord}
+                        textAnchor='middle'
+                        y={height - theme.space[2]}
+                        fontSize={theme.fontSizes[1]}
+                        fill='black'
+                        fillOpacity={0.4}>
+                        {moment(x.invert(xCoord)).format("MMM Do")}
+                    </Text>
+                );
+            }
+
+            return <G>{dates}</G>;
         };
 
         const numDates = 4;
@@ -110,6 +150,7 @@ export class LineChart extends React.PureComponent {
                     data={dataTrend}
                     curve={shape.curveBasis}
                     yAccessor={({ item }) => item.y}
+                    xAccessor={({ item }) => item.date}
                     xScale={scaleTime}
                     animate={true}
                     svg={{
@@ -123,19 +164,7 @@ export class LineChart extends React.PureComponent {
                     <HorizontalGrid />
                     <Gradient />
                     <Decorator />
-                    {/* <XAxis
-                        style={{ marginHorizontal: 20, height: xAxisHeight }}
-                        data={this.props.dataTrend}
-                        scale={scaleTime}
-                        formatLabel={(value, index) =>
-                            index % Math.floor(numSamples / numDates) == 0
-                                ? moment(value).format("MMM Do")
-                                : ""
-                        }
-                        xAccessor={({ item }) => item.date}
-                        contentInset={{ left: 20, right: 20 }}
-                        svg={axesSvg}
-                    /> */}
+                    <XAxis />
                 </AreaChart>
             </View>
         );
@@ -143,13 +172,17 @@ export class LineChart extends React.PureComponent {
 }
 
 LineChart.propTypes = {
-    dataPoints: PropTypes.shape({
-        date: PropTypes.instanceOf(Date),
-        y: PropTypes.number
-    }).isRequired,
-    dataTrend: PropTypes.shape({
-        date: PropTypes.instanceOf(Date),
-        y: PropTypes.number
-    }).isRequired,
+    dataPoints: PropTypes.arrayOf(
+        PropTypes.shape({
+            date: PropTypes.instanceOf(Date),
+            y: PropTypes.number
+        })
+    ).isRequired,
+    dataTrend: PropTypes.arrayOf(
+        PropTypes.shape({
+            date: PropTypes.instanceOf(Date),
+            y: PropTypes.number
+        })
+    ).isRequired,
     height: PropTypes.number.isRequired
 };
