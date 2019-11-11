@@ -21,8 +21,6 @@ const CenteredView = styled.View`
     align-items: center;
 `;
 
-const { width } = Dimensions.get("window");
-
 storiesOf("Charts", module)
     // The ThemeProvider feeds the theme options to the components scope
     // (therefore the component can use them),

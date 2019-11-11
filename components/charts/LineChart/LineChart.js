@@ -1,9 +1,10 @@
 import React from "react";
-import { XAxis, Grid, AreaChart, G, Line, Text } from "react-native-svg-charts";
+import { AreaChart } from "react-native-svg-charts";
 import { View } from "react-native";
 import * as shape from "d3-shape";
 import { scaleLinear, scaleTime } from "d3-scale";
 import Moment from "moment";
+import PropTypes from "prop-types";
 import theme from "../../theme";
 import {
     extendMoment,
@@ -11,47 +12,19 @@ import {
     MomentRangeStaticMethods
 } from "moment-range";
 const moment = extendMoment(Moment);
-import { Defs, LinearGradient, Stop, Circle } from "react-native-svg";
+import {
+    Defs,
+    LinearGradient,
+    Stop,
+    Circle,
+    Line,
+    G,
+    Text
+} from "react-native-svg";
 
 export class LineChart extends React.PureComponent {
-    drawHorizontalGrid(ticks, scaleX, scaleY, width, height) {
-        const yBands = scaleLinear()
-            .domain([1, ticks])
-            .range([0, height]);
-
-        const lines = [];
-
-        for (let i = 1; i <= ticks; i++) {
-            lines.push(
-                <G key={`gridline-${i}`}>
-                    <Line
-                        x1='0'
-                        y1={yBands(i)}
-                        x2={width}
-                        y2={yBands(i)}
-                        stroke='#000'
-                        strokeDasharray={[3, 3]}
-                        strokeOpacity='0.5'
-                        strokeWidth='0.5'
-                    />
-                    <Text
-                        x={3}
-                        textAnchor='start'
-                        y={yBands(i) + theme.space[4]}
-                        fontSize={theme.fontSizes[1]}
-                        fill='black'
-                        fillOpacity={0.4}>
-                        {scaleY.invert(yBands(i)).toFixed(2) + " kg"}
-                    </Text>
-                </G>
-            );
-        }
-
-        return <G>{lines}</G>;
-    }
-
     render() {
-        const { dataTrend, dataPoints, width, height } = this.props;
+        const { dataTrend, dataPoints, height } = this.props;
 
         const contentInset = { top: 20, bottom: 20 };
         const axesSvg = { fontSize: 10, fill: "grey" };
@@ -82,6 +55,47 @@ export class LineChart extends React.PureComponent {
             ));
         };
 
+        const HorizontalGrid = ({ y, height }) => {
+            const yBands = scaleLinear().domain([
+                0,
+                height - contentInset.bottom
+            ]);
+
+            const lines = [];
+
+            const ticks = yBands.ticks(3);
+
+            console.log(ticks[0]);
+
+            for (let i = 1; i < ticks.length; i++) {
+                lines.push(
+                    <G key={`gridline-${i}`}>
+                        <Line
+                            x1='0'
+                            y1={ticks[i]}
+                            x2='100%'
+                            y2={ticks[i]}
+                            stroke='#000'
+                            strokeDasharray={[3, 3]}
+                            strokeOpacity='0.5'
+                            strokeWidth='0.5'
+                        />
+                        <Text
+                            x={3}
+                            textAnchor='start'
+                            y={ticks[i] + theme.space[3]}
+                            fontSize={theme.fontSizes[1]}
+                            fill='black'
+                            fillOpacity={0.4}>
+                            {y.invert(ticks[i]).toFixed(2) + " kg"}
+                        </Text>
+                    </G>
+                );
+            }
+
+            return <G>{lines}</G>;
+        };
+
         const numDates = 4;
         const numSamples = dataTrend.length;
 
@@ -89,7 +103,6 @@ export class LineChart extends React.PureComponent {
             <View
                 style={{
                     height: height,
-                    width: width,
                     flexDirection: "row"
                 }}>
                 <AreaChart
@@ -99,7 +112,6 @@ export class LineChart extends React.PureComponent {
                     yAccessor={({ item }) => item.y}
                     xScale={scaleTime}
                     animate={true}
-                    numberOfTicks={4}
                     svg={{
                         stroke: "#00a8e8",
                         fill: "url(#gradient)",
@@ -108,6 +120,7 @@ export class LineChart extends React.PureComponent {
                     contentInset={contentInset}>
                     {/* <Grid /> */}
                     {/* {this.drawHorizontalGrid(4)} */}
+                    <HorizontalGrid />
                     <Gradient />
                     <Decorator />
                     {/* <XAxis
@@ -128,3 +141,15 @@ export class LineChart extends React.PureComponent {
         );
     }
 }
+
+LineChart.propTypes = {
+    dataPoints: PropTypes.shape({
+        date: PropTypes.instanceOf(Date),
+        y: PropTypes.number
+    }).isRequired,
+    dataTrend: PropTypes.shape({
+        date: PropTypes.instanceOf(Date),
+        y: PropTypes.number
+    }).isRequired,
+    height: PropTypes.number.isRequired
+};
