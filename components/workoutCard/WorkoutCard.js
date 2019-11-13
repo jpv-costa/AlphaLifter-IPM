@@ -31,14 +31,7 @@ const TrainedMusclesTitle = styled.Text`
     textAlign : center;
     opacity : 0.5;
     `; 
-    const TrainedMucles = styled.Text`
-    ${space}
-    ${layout}
-    ${color}
-    ${typography}
-    ${size}
-    textAlign : center;
-    `; 
+ 
 
 
     const Button = styled.TouchableOpacity`
@@ -77,31 +70,31 @@ const styles = StyleSheet.create({
 const WorkoutCard = props => {
     const {workoutName,exercises, time, muscles} = props;
     return(
-                <Card style = {styles.card}>
-                    <WorkoutName fontSize={4}
-                         color = "black"
-                         mt = {3}
-                         mb = {3}
-                         >{workoutName}</WorkoutName>
-                    <View style={styles.container}>
-                        <View flex = {1} width="50%">
-                            <Text 
-                                fontSize = {3}
-                                mt = {2}
-                                >{exercises} exercises
-                            </Text>
-                        </View>
-                        <Separator  mt = {2}/>   
-                        <View flex = {1} width="50%">
-                            <Text 
-                                fontSize = {3}
-                                mt = {2}>{time}
-                            </Text>
-                        </View>
-                    </View>
-                    <TrainedMusclesTitle fontSize = {2} mt = {3}>Trained Muscles</TrainedMusclesTitle>
-                    <TrainedMucles fontSize = {4} mb = {3}>{muscles}</TrainedMucles>
-                 </Card>)
+        <Card style = {styles.card}>
+            <WorkoutName fontSize={4}
+                    color = "black"
+                    mt = {3}
+                    mb = {3}
+                    >{workoutName}</WorkoutName>
+            <View style={styles.container}>
+                <View flex = {1} width="50%">
+                    <Text 
+                        fontSize = {3}
+                        mt = {2}
+                        >{exercises} exercises
+                    </Text>
+                </View>
+                <Separator  mt = {2}/>   
+                <View flex = {1} width="50%">
+                    <Text 
+                        fontSize = {3}
+                        mt = {2}>{time}
+                    </Text>
+                </View>
+            </View>
+            <TrainedMusclesTitle fontSize = {2} mt = {3}>Trained Muscles</TrainedMusclesTitle>
+            <Text fontSize = {4} mb = {3}>{muscles}</Text>
+            </Card>)
 }
 
 WorkoutCard.defaultProps = {
@@ -109,6 +102,7 @@ WorkoutCard.defaultProps = {
 }
 export const WorkoutCardList = props => {
     const  data = props.data;
+    
     return (
       <FlatList
         data={data}
