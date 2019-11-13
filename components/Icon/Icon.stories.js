@@ -34,7 +34,7 @@ storiesOf("Icons", module)
     <MuscleIcon
       primaryMuscles={primaryMuscles}
       secondaryMuscles={secondaryMuscles}
-      size={object("size", 340)}
+      size={340}
       view={object("view", "front-upper")}
     />
   ));

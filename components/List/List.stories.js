@@ -5,6 +5,7 @@ import { List } from "./List";
 import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
 import theme from "../theme";
+import { DashboardMuscleList } from "./DashboardMuscleList"
 import { SafeAreaView } from "react-native";
 
 const CenteredView = styled.View`
@@ -30,8 +31,11 @@ storiesOf("Lists", module)
     ))
     .addDecorator(withKnobs)
     .add("List", () => (
-        <List data={data} selectList onItemPress={onItemPress} />
-    ));
+        <List data={data} selectList muscleIcon={false} onItemPress={onItemPress} />
+    ))
+    .add("Dashboard List", () => (
+        <DashboardMuscleList data={musclesDashboardData} selectList onItemPress={onItemPress} />
+    ))
 
 const data = [
     {
@@ -65,5 +69,23 @@ const data = [
         extraInfo: "10min",
         description:
             "Velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint"
+    }
+];
+
+const musclesDashboardData = [
+    {
+        id: 1,
+        muscle: "Chest",
+        progress: "5%"
+    },
+    {
+        id: 2,
+        muscle: "Back",
+        progress: "7%"
+    },
+    {
+        id: 3,
+        muscle: "Shoulders",
+        progress: "7%"
     }
 ];

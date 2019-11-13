@@ -26,11 +26,11 @@ export const MuscleIcon = props => {
         switch (image[1]) {
           case "upper":
             cy = 160;
-            viewboxY = 0;
+            viewboxY = -95;
             break;
           case "lower":
             cy = 320;
-            viewboxY = 160;
+            viewboxY = 65;
             break;
         }
 
