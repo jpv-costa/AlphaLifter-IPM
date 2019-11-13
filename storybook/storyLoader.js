@@ -4,6 +4,8 @@
 // https://github.com/elderfo/react-native-storybook-loader.git
 
 function loadStories() {
+	require('../components/workoutCard/WorkoutCard.stories');
+	require('../components/button/Button.stories');
 	require('../components/Icon/Icon.stories');
 	require('../components/List/List.stories');
 	require('../components/charts/LineChart/LineChart.stories');
@@ -12,6 +14,8 @@ function loadStories() {
 }
 
 const stories = [
+	'../components/workoutCard/WorkoutCard.stories',
+	'../components/button/Button.stories',
 	'../components/Icon/Icon.stories',
 	'../components/List/List.stories',
 	'../components/charts/LineChart/LineChart.stories',
