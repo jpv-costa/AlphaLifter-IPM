@@ -55,16 +55,7 @@ const FixedFileds = styled.Text`
  
 `;
 
-const Separator = styled.View`
-        ${space}
-        ${layout}
-        ${color}
-        ${typography}
-        ${size}
-        width: 1;
-        height:20;
-        backgroundColor:black;
-`;
+
 
 
 

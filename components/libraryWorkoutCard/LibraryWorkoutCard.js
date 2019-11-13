@@ -46,24 +46,13 @@ const FixedFileds = styled.Text`
     opacity : 0.5;
     `; 
   
-    const Button = styled.TouchableOpacity`
-        ${space}
-        ${layout}
-        ${color}
-        ${typography}
-        ${size}
- 
-`;
 
-const Separator = styled.View`
-        ${space}
-        ${layout}
-        ${color}
-        ${typography}
-        ${size}
-        width: 1;
-        height:20;
-        backgroundColor:black;
+const CardContainer = styled.TouchableOpacity`
+  ${space}
+  ${layout}
+  align-items: center;
+  backgroundColor: blue;
+  position: absolute;
 `;
 
 
@@ -76,32 +65,35 @@ const styles = StyleSheet.create({
   });
 
 export const LibraryWorkoutCard = props => {
+    
     return(
-        <Card style = {styles.card}>
-            <Text fontSize={4}
-                    color = "black"
-                    mt = {3}
-                    mb = {3}>Lower Body Workout</Text>
-                <ColumnContainer flex = {1} width="50%" mt = {2}>
-                    <FixedFileds fontSize = {3} mt = {2}>Main Muscle Groups</FixedFileds>
-                    <Text fontSize = {4}>Quads and Back</Text>
-                </ColumnContainer>
+        <CardContainer py ={2}>
+            <Card style = {styles.card}>
+                <Text fontSize={4}
+                        color = "black"
+                        mt = {3}
+                        mb = {3}>Lower Body Workout</Text>
+                    <ColumnContainer flex = {1} width="50%" mt = {2}>
+                        <FixedFileds fontSize = {3} mt = {2}>Main Muscle Groups</FixedFileds>
+                        <Text fontSize = {4}>Quads and Back</Text>
+                    </ColumnContainer>
 
-           
-            <RowContainer mt = {4} >
-                <ColumnContainer flex = {1} width="50%">
-                    <FixedFileds fontSize = {3} mt = {2}>Number of Exercises</FixedFileds>
-                    <Text fontSize = {4}>4</Text>
-                </ColumnContainer>
-
-                <ColumnContainer flex = {1} width="50%">
-                    <FixedFileds fontSize = {3} mt = {2}>Average Duration</FixedFileds>
-                    <Text fontSize = {4}> 01:00:30 </Text>
-                </ColumnContainer>
-            </RowContainer>
             
-            <Text mt = {4} mb = {3}>Tags: Bicep; Tricep</Text>
-        </Card>)
+                <RowContainer mt = {4} >
+                    <ColumnContainer flex = {1} width="50%">
+                        <FixedFileds fontSize = {3} mt = {2}>Number of Exercises</FixedFileds>
+                        <Text fontSize = {4}>4</Text>
+                    </ColumnContainer>
+
+                    <ColumnContainer flex = {1} width="50%">
+                        <FixedFileds fontSize = {3} mt = {2}>Average Duration</FixedFileds>
+                        <Text fontSize = {4}> 01:00:30 </Text>
+                    </ColumnContainer>
+                </RowContainer>
+                
+                <Text mt = {4} mb = {3}>Tags: Bicep; Tricep</Text>
+            </Card>
+        </CardContainer>)
 }
 
 LibraryWorkoutCard.defaultProps = {
