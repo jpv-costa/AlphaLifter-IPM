@@ -56,35 +56,36 @@ const CenterItem = styled.View`
 `;
 
 const ListItem = props => {
-  const { iconId, title, description, extraInfo, selected, muscleIcon } = props;
+  const { iconId, title, description, extraInfo, selected, iconType } = props;
 
   let icon;
 
-  switch (muscleIcon) {
-    case true:
+  switch (iconType) {
+    case "muscles":
       console.log("true")
       icon = <MuscleIcon
-        primaryMuscles={[iconId]}
-        secondaryMuscles={[]}
+        primaryMuscles={iconId.primaryMuscles.map((m) => m.toLowerCase())}
+        secondaryMuscles={iconId.secondaryMuscles.map((m) => m.toLowerCase())}
         size={135}
         view={"front-upper"} //TODO
       />
       break;
+    case "id":
+      icon = <Icon id={iconId} size={28} fill="#00171f" opacity={0.8} />
     default:
       console.log("false")
-      icon = <Icon id={iconId} size={28} fill="#00171f" opacity={0.8} />
   }
 
   
 
   return (
     <ListContainer px={3} py={3} selected={selected} onPress={props.onPress}>
-      <IconCircle>
+      {icon && <IconCircle>
         <Circle />
         <CenterItem>
           {icon}
         </CenterItem>
-      </IconCircle>
+      </IconCircle>}
       <ListContent ml={3}>
         <ListHeader>
           <Text fontSize={2} fontWeight="bold">
@@ -118,7 +119,7 @@ export const List = props => {
           title={item.title}
           extraInfo={item.extraInfo}
           description={item.description}
-          muscleIcon={item.muscleIcon}
+          iconType={item.iconType}
           selected={selected == item.id}
           onPress={() => {
             if (onItemPress) {

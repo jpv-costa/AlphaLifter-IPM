@@ -1,22 +1,19 @@
 import React from "react";
 import { List } from "./List";
 
-export const DashboardMuscleList = props => {
+export const DashboardProgramList = props => {
     const { data, ...other } = props;
 
     const parsedData = data.map(item => {
-        const { id, muscle, progress, selected} = item;
+        const { id, name, isCurrent, cycles, workouts, progress, selected} = item;
         
         return {
             id: id,
-            iconId: 
-                {
-                    primaryMuscles: [muscle.toLowerCase()],
-                    secondaryMuscles: []
-                },
-            title: muscle,
+            iconId: {},
+            title: name + (isCurrent ? " (current)" : ""),
             extraInfo: progress,
-            iconType: "muscles",
+            description: cycles + " cycles of " + workouts + " workouts",
+            iconType: "none",
             selected: selected
         };
     });

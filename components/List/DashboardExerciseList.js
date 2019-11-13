@@ -1,21 +1,22 @@
 import React from "react";
 import { List } from "./List";
 
-export const DashboardMuscleList = props => {
+export const DashboardExerciseList = props => {
     const { data, ...other } = props;
 
     const parsedData = data.map(item => {
-        const { id, muscle, progress, selected} = item;
+        const { id, name, variations, primaryMuscles, secondaryMuscles, progress, selected} = item;
         
         return {
             id: id,
             iconId: 
-                {
-                    primaryMuscles: [muscle.toLowerCase()],
-                    secondaryMuscles: []
+                {   
+                    primaryMuscles: primaryMuscles,
+                    secondaryMuscles: secondaryMuscles
                 },
-            title: muscle,
+            title: name,
             extraInfo: progress,
+            description: variations.join(", ") + ", mainly " + primaryMuscles.join(" ") + " focused",
             iconType: "muscles",
             selected: selected
         };

@@ -52,5 +52,5 @@ export const ConfiguredExerciseList = props => {
         };
     });
 
-    return <List data={parsedData} muscleIcon {...other} />;
+    return <List data={parsedData} iconType={"id"} {...other} />;
 };

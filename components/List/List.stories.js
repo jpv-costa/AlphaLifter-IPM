@@ -6,6 +6,8 @@ import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
 import theme from "../theme";
 import { DashboardMuscleList } from "./DashboardMuscleList"
+import { DashboardExerciseList } from "./DashboardExerciseList"
+import { DashboardProgramList } from "./DashboardProgramList"
 import { SafeAreaView } from "react-native";
 
 const CenteredView = styled.View`
@@ -31,9 +33,15 @@ storiesOf("Lists", module)
     ))
     .addDecorator(withKnobs)
     .add("List", () => (
-        <List data={data} selectList muscleIcon={false} onItemPress={onItemPress} />
+        <List data={data} selectList iconType={"id"} onItemPress={onItemPress} />
     ))
-    .add("Dashboard List", () => (
+    .add("Dashboard Program List", () => (
+        <DashboardProgramList data={programDashboardData} selectList onItemPress={onItemPress} />
+    ))
+    .add("Dashboard Exercises List", () => (
+        <DashboardExerciseList data={exercisesDashboardData} selectList onItemPress={onItemPress} />
+    ))
+    .add("Dashboard Muscles List", () => (
         <DashboardMuscleList data={musclesDashboardData} selectList onItemPress={onItemPress} />
     ))
 
@@ -89,3 +97,58 @@ const musclesDashboardData = [
         progress: "7%"
     }
 ];
+
+const exercisesDashboardData = [
+    {
+        id: 1,
+        name: "Bench Press",
+        primaryMuscles: ["chest"],
+        secondaryMuscles: [],
+        variations: ["Incline, Dumbbell variation"],
+        progress: "10%"
+    },
+    {
+        id: 2,
+        name: "Bench Press",
+        primaryMuscles: ["chest"],
+        secondaryMuscles: [],
+        variations: ["Incline, Dumbbell variation"],
+        progress: "10%"
+    },
+    {
+        id: 3,
+        name: "Bench Press",
+        primaryMuscles: ["chest"],
+        secondaryMuscles: [],
+        variations: ["Incline, Dumbbell variation"],
+        progress: "10%"
+    }
+];
+
+const programDashboardData = [
+    {
+        id: 1,
+        name: "High Volume Program",
+        isCurrent: true,
+        cycles: 5,
+        workouts: 5,
+        progress: "5%"
+    },
+    {
+        id: 2,
+        name: "Low Volume Program",
+        isCurrent: false,
+        cycles: 4,
+        workouts: 3,
+        progress: "7%"
+    },
+    {
+        id: 3,
+        name: "High Volume Program",
+        isCurrent: false,
+        cycles: 5,
+        workouts: 5,
+        progress: "5%"
+    }
+]
+
