@@ -5,9 +5,9 @@
 
 function loadStories() {
 	require('../components/chooseProgretion/ChooseProgretion.stories');
-	require('../components/libraryWorkoutCard/LibraryWorkoutCard.stories');
-	require('../components/libraryProgramCard/LibraryProgramCard.stories');
-	require('../components/workoutCard/WorkoutCard.stories');
+	require('../components/cards/libraryWorkoutCard/LibraryWorkoutCard.stories');
+	require('../components/cards/libraryProgramCard/LibraryProgramCard.stories');
+	require('../components/cards/workoutCard/WorkoutCard.stories');
 	require('../components/button/Button.stories');
 	require('../components/Icon/Icon.stories');
 	require('../components/List/List.stories');
@@ -17,10 +17,10 @@ function loadStories() {
 }
 
 const stories = [
-	'../components/chooseProgretion/hooseProgretion.stories',
-	'../components/libraryWorkoutCard/LibraryWorkoutCard.stories',
-	'../components/libraryProgramCard/LibraryProgramCard.stories',
-	'../components/workoutCard/WorkoutCard.stories',
+	'../components/chooseProgretion/ChooseProgretion.stories',
+	'../components/cards/libraryWorkoutCard/LibraryWorkoutCard.stories',
+	'../components/cards/libraryProgramCard/LibraryProgramCard.stories',
+	'../components/cards/workoutCard/WorkoutCard.stories',
 	'../components/button/Button.stories',
 	'../components/Icon/Icon.stories',
 	'../components/List/List.stories',

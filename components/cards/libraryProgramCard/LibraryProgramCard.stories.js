@@ -1,10 +1,10 @@
 import React from "react";
 import { storiesOf } from "@storybook/react-native";
 import { withKnobs, object } from "@storybook/addon-knobs/react";
-import { LibraryWorkoutCard } from "./LibraryWorkoutCard";
+import { LibraryProgramCard } from "./LibraryProgramCard";
 import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
-import theme from "../theme";
+import theme from "../../theme";
 import { SafeAreaView } from "react-native";
 
 const CenteredView = styled.View`
@@ -29,8 +29,8 @@ storiesOf("Cards", module)
         </SafeAreaView>
     ))
     .addDecorator(withKnobs)
-    .add("LibraryWorkoutCard", () => (
-        <LibraryWorkoutCard/>
+    .add("LibraryProgramCard", () => (
+        <LibraryProgramCard/>
     ));
 
 

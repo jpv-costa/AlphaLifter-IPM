@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {StyleSheet, FlatList, Alert} from "react-native";
 import styled from "styled-components";
 import { color, space, layout, size, typography } from "styled-system";
-import {Card} from '../atoms' ;
+import {TouchableCard} from '../../atoms' ;
 
 const Text = styled.Text`
     ${space}
@@ -13,6 +13,8 @@ const Text = styled.Text`
     textAlign : center;
     flex:1;
     `;
+
+
 
     const RowContainer = styled.View`
     ${space}
@@ -68,7 +70,7 @@ const styles = StyleSheet.create({
 
 export const LibraryProgramCard = props => {
     return(
-        <Card style = {styles.card}>
+        <TouchableCard style = {styles.card}>
             <Text fontSize={4}
                     color = "black"
                     mt = {3}
@@ -102,7 +104,7 @@ export const LibraryProgramCard = props => {
             <Text fontSize = {4} mb = {3}>10:10:30</Text>
 
             <Text mt = {2} mb = {3}>Tags: Bicep; Tricep</Text>
-        </Card>)
+        </TouchableCard>)
 }
 
 LibraryProgramCard.defaultProps = {

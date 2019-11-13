@@ -4,7 +4,7 @@ import { withKnobs, object } from "@storybook/addon-knobs/react";
 import { WorkoutCardList } from "./WorkoutCard";
 import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
-import theme from "../theme";
+import theme from "../../theme";
 import { SafeAreaView } from "react-native";
 
 const CenteredView = styled.View`

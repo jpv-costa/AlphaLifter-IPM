@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {StyleSheet} from "react-native";
 import styled from "styled-components";
 import { color, space, layout, size, typography } from "styled-system";
-import {Card} from '../atoms' ;
+
 
 const Text = styled.Text`
     ${space}
@@ -50,7 +50,6 @@ const Image = styled.Image`
 ${space}
 ${layout}
 `;
-
 
 
 

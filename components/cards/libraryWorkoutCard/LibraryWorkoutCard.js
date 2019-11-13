@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {StyleSheet, FlatList, Alert} from "react-native";
 import styled from "styled-components";
 import { color, space, layout, size, typography } from "styled-system";
-import {Card} from '../atoms' ;
+import {TouchableCard} from '../../atoms' ;
 
 const Text = styled.Text`
     ${space}
@@ -47,15 +47,6 @@ const FixedFileds = styled.Text`
     `; 
   
 
-const CardContainer = styled.TouchableOpacity`
-  ${space}
-  ${layout}
-  align-items: center;
-  backgroundColor: blue;
-  position: absolute;
-`;
-
-
 
 const styles = StyleSheet.create({
     card: {
@@ -67,8 +58,8 @@ const styles = StyleSheet.create({
 export const LibraryWorkoutCard = props => {
     
     return(
-        <CardContainer py ={2}>
-            <Card style = {styles.card}>
+       
+            <TouchableCard style = {styles.card}>
                 <Text fontSize={4}
                         color = "black"
                         mt = {3}
@@ -92,8 +83,8 @@ export const LibraryWorkoutCard = props => {
                 </RowContainer>
                 
                 <Text mt = {4} mb = {3}>Tags: Bicep; Tricep</Text>
-            </Card>
-        </CardContainer>)
+            </TouchableCard>
+        )
 }
 
 LibraryWorkoutCard.defaultProps = {

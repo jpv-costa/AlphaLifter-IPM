@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {StyleSheet, View, FlatList, Alert} from "react-native";
 import styled from "styled-components";
 import { color, space, layout, size, typography } from "styled-system";
-import {Card} from '../atoms' 
+import {TouchableCard} from '../../atoms' 
 
 const WorkoutName = styled.Text`
     ${space}
@@ -33,16 +33,6 @@ const TrainedMusclesTitle = styled.Text`
     `; 
  
 
-
-    const Button = styled.TouchableOpacity`
-        ${space}
-        ${layout}
-        ${color}
-        ${typography}
-        ${size}
- 
-`;
-
 const Separator = styled.View`
         ${space}
         ${layout}
@@ -67,10 +57,10 @@ const styles = StyleSheet.create({
     
   });
 
-const WorkoutCard = props => {
+export const WorkoutCard = props => {
     const {workoutName,exercises, time, muscles} = props;
     return(
-        <Card style = {styles.card}>
+        <TouchableCard style = {styles.card}>
             <WorkoutName fontSize={4}
                     color = "black"
                     mt = {3}
@@ -94,7 +84,7 @@ const WorkoutCard = props => {
             </View>
             <TrainedMusclesTitle fontSize = {2} mt = {3}>Trained Muscles</TrainedMusclesTitle>
             <Text fontSize = {4} mb = {3}>{muscles}</Text>
-            </Card>)
+            </TouchableCard>)
 }
 
 WorkoutCard.defaultProps = {
@@ -109,7 +99,7 @@ export const WorkoutCardList = props => {
         style={{ width: "100%" }}
         renderItem={({ item }) => (
           <WorkoutCard
-            id={item.id}
+            id={item.id }
             workoutName={item.workoutName}
             exercises = {item.exercises}
             time={item.time}
