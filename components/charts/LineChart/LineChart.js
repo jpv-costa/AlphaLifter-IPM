@@ -9,8 +9,6 @@ import PropTypes from "prop-types";
 import theme from "../../theme";
 import { extendMoment } from "moment-range";
 import { PanGestureHandler, State } from "react-native-gesture-handler";
-import styled from "styled-components";
-import { layout, color, space } from "styled-system";
 import { clamp } from "../../../utils";
 import { Card } from "../../atoms";
 const moment = extendMoment(Moment);
