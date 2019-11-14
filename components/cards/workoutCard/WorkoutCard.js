@@ -4,14 +4,6 @@ import styled from "styled-components";
 import { color, space, layout, size, typography } from "styled-system";
 import {TouchableCard} from '../../atoms' 
 
-const WorkoutName = styled.Text`
-    ${space}
-    ${layout}
-    ${color}
-    ${typography}
-    ${size}
-    textAlign : center;
-`;
 const Text = styled.Text`
     ${space}
     ${layout}
@@ -61,11 +53,11 @@ export const WorkoutCard = props => {
     const {workoutName,exercises, time, muscles} = props;
     return(
         <TouchableCard style = {styles.card}>
-            <WorkoutName fontSize={4}
+            <Text fontSize={4}
                     color = "black"
                     mt = {3}
                     mb = {3}
-                    >{workoutName}</WorkoutName>
+                    >{workoutName}</Text>
             <View style={styles.container}>
                 <View flex = {1} width="50%">
                     <Text 

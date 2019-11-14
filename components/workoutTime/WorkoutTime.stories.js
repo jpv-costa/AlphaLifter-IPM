@@ -1,7 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react-native";
 import { withKnobs, object } from "@storybook/addon-knobs/react";
-import { ChooseProgretion } from "./ChooseProgretion";
+import { WorkoutTimer } from "./WorkoutTime";
 import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
 import theme from "../theme";
@@ -17,7 +17,7 @@ const onItemPress = item => {
     console.log("You pressed item '" + item.title + "'");
 };
 
-storiesOf("Configs", module)
+storiesOf("WorkoutPlayer", module)
     // The ThemeProvider feeds the theme options to the components scope
     // (therefore the component can use them),
     // and centers the component in the screen
@@ -29,8 +29,8 @@ storiesOf("Configs", module)
         </SafeAreaView>
     ))
     .addDecorator(withKnobs)
-    .add("ChooseProgretion", () => (
-        <ChooseProgretion/>
+    .add("WorkoutTimer", () => (
+        <WorkoutTimer/>
     ));
 
 

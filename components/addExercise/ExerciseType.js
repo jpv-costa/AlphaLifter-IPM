@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {StyleSheet, Dimensions} from "react-native";
 import styled from "styled-components";
 import { color, space, layout, size, typography } from "styled-system";
@@ -34,7 +34,7 @@ const Separator = styled.View`
         ${layout}
         ${color}
         ${typography}
-        ${size};
+        ${size}
         height:1;
         backgroundColor:black;
 `;
@@ -49,50 +49,38 @@ position: absolute;
 const Image = styled.Image`
 ${space}
 ${layout}
+opacity : 0.8;
 `;
 
 
 
 const styles = StyleSheet.create({
     card: {
-        height: 270
+        height: 135
 
     }  
   });
 
-export const ChooseProgretion = props => {
+export const ExerciseType = props => {
     return(
         <ColumnContainer style = {styles.card}>
-            <Separator width = {screenWidth}></Separator>
+            <Separator width= {screenWidth}></Separator>
             <RowContainer>
-                <Text fontSize = {5} ml = {2} >Load Progretion</Text>
+                <Text fontSize = {5} ml = {2} >Compound</Text>
                 <Image source={require('../../assets/images/arrow.png')}mr = {2}></Image>
             </RowContainer>
         
             <Separator></Separator>
             <RowContainer>
-                <Text fontSize = {5} ml = {2}>Linear Progretion</Text>
+                <Text fontSize = {5} ml = {2}>Isolated</Text>
                 <Image source={require('../../assets/images/arrow.png')}mr = {2}></Image>
             </RowContainer>
 
             <Separator></Separator>
-            <RowContainer>
-                <Text fontSize = {5} ml = {2}>Double Progretion</Text>
-                <Image source={require('../../assets/images/arrow.png')} mr = {2} ></Image>
-            </RowContainer>
-
-            <Separator></Separator>
-            <RowContainer>
-                <Text fontSize = {5} ml = {2}>No Progretion</Text>
-                <Image source={require('../../assets/images/arrow.png')}mr = {2}></Image>
-            </RowContainer>
-
-            <Separator></Separator>
-
         </ColumnContainer>)
 }
 
-ChooseProgretion.defaultProps = {
+ExerciseType.defaultProps = {
     height : 350
 }
 
