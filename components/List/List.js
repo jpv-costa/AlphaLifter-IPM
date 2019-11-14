@@ -4,6 +4,7 @@ import { color, space, layout, size, typography } from "styled-system";
 import { FlatList, View, StyleSheet } from "react-native";
 import { Icon } from "../Icon/Icon";
 import { text } from "@storybook/addon-knobs";
+import { MuscleIcon } from "../Icon/MuscleIcon";
 
 const ListContainer = styled.TouchableOpacity`
   ${space}
@@ -55,16 +56,36 @@ const CenterItem = styled.View`
 `;
 
 const ListItem = props => {
-  const { iconId, title, description, extraInfo, selected } = props;
+  const { iconId, title, description, extraInfo, selected, iconType } = props;
+
+  let icon;
+
+  switch (iconType) {
+    case "muscles":
+      console.log("true")
+      icon = <MuscleIcon
+        primaryMuscles={iconId.primaryMuscles.map((m) => m.toLowerCase())}
+        secondaryMuscles={iconId.secondaryMuscles.map((m) => m.toLowerCase())}
+        size={135}
+        view={"front-upper"} //TODO
+      />
+      break;
+    case "id":
+      icon = <Icon id={iconId} size={28} fill="#00171f" opacity={0.8} />
+    default:
+      console.log("false")
+  }
+
+  
 
   return (
     <ListContainer px={3} py={3} selected={selected} onPress={props.onPress}>
-      <IconCircle>
+      {icon && <IconCircle>
         <Circle />
         <CenterItem>
-          <Icon id={iconId} size={28} fill="#00171f" opacity={0.8} />
+          {icon}
         </CenterItem>
-      </IconCircle>
+      </IconCircle>}
       <ListContent ml={3}>
         <ListHeader>
           <Text fontSize={2} fontWeight="bold">
@@ -74,9 +95,9 @@ const ListItem = props => {
             {extraInfo}
           </Text>
         </ListHeader>
-        <Text mt={2} fontSize={2} color={"text.1"}>
+        {description && <Text mt={2} fontSize={2} color={"text.1"}>
           {description}
-        </Text>
+        </Text>}
       </ListContent>
     </ListContainer>
   );
@@ -98,6 +119,7 @@ export const List = props => {
           title={item.title}
           extraInfo={item.extraInfo}
           description={item.description}
+          iconType={item.iconType}
           selected={selected == item.id}
           onPress={() => {
             if (onItemPress) {

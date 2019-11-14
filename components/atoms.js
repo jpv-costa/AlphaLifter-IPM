@@ -35,6 +35,17 @@ export const Card = styled.View`
   position: absolute;
 `;
 
+
+export const TouchableCard = styled.TouchableOpacity`
+  ${color}
+  ${space}
+  ${layout}
+  border-radius: 9px;
+  elevation: 3;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
+  position: absolute;
+`;
+
 const H1 = styled.Text`
   font-size: ${theme.fontSizes[8]};
 `;
