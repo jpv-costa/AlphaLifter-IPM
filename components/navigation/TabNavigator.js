@@ -8,79 +8,33 @@ const { width } = Dimensions.get("window");
 
 export default class Navigator extends React.Component {
   state = {
-    currentTab: 0,
-    tabXs: [],
     translateX: new Animated.Value(0),
-    translateXTabs: [],
-    translateY: -1000
+    currentTab: 0,
+    tabXs: []
   };
 
   handleSlide = targetTabIdx => {
-    let { translateX, previousTab } = this.state;
+    let { translateX } = this.state;
 
     Animated.spring(translateX, {
       toValue: this.state.tabXs[targetTabIdx],
       duration: 100,
       useNativeDriver: true
     }).start();
-
-    // if (this.state.translateXTabs[targetTabIdx]._value > 0) {
-    //   Animated.parallel([
-    //     Animated.spring(this.state.translateXTabs[previousTab], {
-    //       toValue: -width,
-    //       duration: 100,
-    //       useNativeDriver: true
-    //     }).start(),
-    //     Animated.spring(this.state.translateXTabs[targetTabIdx], {
-    //       toValue: 0,
-    //       duration: 100,
-    //       useNativeDriver: true
-    //     }).start()
-    //   ]);
-    // } else {
-    //   Animated.parallel([
-    //     Animated.spring(this.state.translateXTabs[previousTab], {
-    //       toValue: width,
-    //       duration: 100,
-    //       useNativeDriver: true
-    //     }).start(),
-    //     Animated.spring(this.state.translateXTabs[targetTabIdx], {
-    //       toValue: 0,
-    //       duration: 100,
-    //       useNativeDriver: true
-    //     }).start()
-    //   ]);
-    // }
-
-    this.setState({
-      previousTab: targetTabIdx
-    });
   };
 
   render() {
-    let { translateX, translateY } = this.state;
+    let { translateX } = this.state;
 
     const { width, header, tabContent } = this.props;
-
-    tabContent.map((item, idx) => {
-      if (idx == 0) {
-        this.state.translateXTabs.push(new Animated.Value(0));
-      } else {
-        this.state.translateXTabs.push(new Animated.Value(width));
-      }
-    });
 
     return (
       <TabNavContainer width={width}>
         <TabNavHeader>
-          <Animated.View
+          <TabUnderline
+            bg={"secondaryShades.0"}
+            width={width / header.length}
             style={{
-              position: "absolute",
-              width: width / header.length,
-              height: 2,
-              bottom: 0,
-              left: 0,
-              backgroundColor: "#007aff",
               transform: [
                 {
                   translateX
@@ -108,7 +62,7 @@ export default class Navigator extends React.Component {
             );
           })}
         </TabNavHeader>
-        <Animated.View>{tabContent[this.state.currentTab]}</Animated.View>
+        {tabContent[this.state.currentTab]}
       </TabNavContainer>
     );
   }
@@ -133,6 +87,20 @@ const TabNavHeader = styled.View`
   margin-top: 40;
   margin-bottom: 20;
   position: relative;
+  border-style: solid;
+  border-bottom-color: #bbb;
+  border-bottom-width: 1px;
+`;
+
+const TabUnderline = styled(Animated.View)`
+  ${color}
+  ${layout}
+  ${space}
+  position: absolute;
+  width: ${props => props.width};
+  height: 2;
+  bottom: -2;
+  left: 0;
 `;
 
 const Tab = styled.TouchableOpacity`

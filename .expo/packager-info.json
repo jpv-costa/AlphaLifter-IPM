@@ -2,8 +2,9 @@
   "devToolsPort": 19002,
   "expoServerPort": 19000,
   "packagerPort": 19001,
-  "packagerPid": 3710,
-  "expoServerNgrokUrl": "https://v5-bcb.anonymous.alphalifter.exp.direct",
-  "packagerNgrokUrl": "https://packager.v5-bcb.anonymous.alphalifter.exp.direct",
-  "ngrokPid": 3731
+  "packagerPid": 44902,
+  "expoServerNgrokUrl": "https://k2-rmy.anonymous.alphalifter.exp.direct",
+  "packagerNgrokUrl": "https://packager.k2-rmy.anonymous.alphalifter.exp.direct",
+  "ngrokPid": 44918,
+  "webpackServerPort": null
 }
