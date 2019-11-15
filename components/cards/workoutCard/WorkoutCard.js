@@ -3,6 +3,7 @@ import {StyleSheet, View, FlatList, Alert} from "react-native";
 import styled from "styled-components";
 import { color, space, layout, size, typography } from "styled-system";
 import {TouchableCard} from '../../atoms' 
+import {List, ListItem} from 'react-native-elements';
 
 const Text = styled.Text`
     ${space}
@@ -49,57 +50,84 @@ const styles = StyleSheet.create({
     
   });
 
-export const WorkoutCard = props => {
-    const {workoutName,exercises, time, muscles} = props;
-    return(
-        <TouchableCard style = {styles.card}>
+/*export const WorkoutCardList = props => {
+    const data = props.data;
+    const listItems = data.map((element) =>
+    <ListItem>
+   <TouchableCard style = {styles.card}>
             <Text fontSize={4}
                     color = "black"
                     mt = {3}
                     mb = {3}
-                    >{workoutName}</Text>
+                    >{element.workoutName}</Text>
             <View style={styles.container}>
                 <View flex = {1} width="50%">
                     <Text 
                         fontSize = {3}
                         mt = {2}
-                        >{exercises} exercises
+                        >{element.exercises} exercises
                     </Text>
                 </View>
                 <Separator  mt = {2}/>   
                 <View flex = {1} width="50%">
                     <Text 
                         fontSize = {3}
-                        mt = {2}>{time}
+                        mt = {2}>{element.time}
                     </Text>
                 </View>
             </View>
             <TrainedMusclesTitle fontSize = {2} mt = {3}>Trained Muscles</TrainedMusclesTitle>
-            <Text fontSize = {4} mb = {3}>{muscles}</Text>
-            </TouchableCard>)
+            <Text fontSize = {3} mb = {3}>{element.muscles}</Text>
+            </TouchableCard>
+            </ListItem>
+           
+  );
+    return(<List>{listItems}</List>)
 }
 
-WorkoutCard.defaultProps = {
+WorkoutCardList.defaultProps = {
     width : 150
-}
+}*/
 export const WorkoutCardList = props => {
     const  data = props.data;
-    
     return (
       <FlatList
+        horizontal
         data={data}
-        style={{ width: "100%" }}
-        renderItem={({ item }) => (
-          <WorkoutCard
-            id={item.id }
-            workoutName={item.workoutName}
-            exercises = {item.exercises}
-            time={item.time}
-            muscles={item.muscles} 
-          />
-        )}
+        renderItem={({ item }) =>{ 
+          console.log(item.workoutName);
+          return (
+          
+            <TouchableCard style = {styles.card}>
+              <Text fontSize={4}
+                      color = "black"
+                      mt = {3}
+                      mb = {3}
+                      >{item.workoutName}</Text>
+              <View style={styles.container}>
+                  <View flex = {1} width="50%">
+                      <Text 
+                          fontSize = {3}
+                          mt = {2}
+                          >{item.exercises} exercises
+                      </Text>
+                  </View>
+                  <Separator  mt = {2}/>   
+                  <View flex = {1} width="50%">
+                      <Text 
+                          fontSize = {3}
+                          mt = {2}>{item.time}
+                      </Text>
+                  </View>
+              </View>
+              <TrainedMusclesTitle fontSize = {2} mt = {3}>Trained Muscles</TrainedMusclesTitle>
+              <Text fontSize = {3} mb = {3}>{item.muscles}</Text>
+            </TouchableCard>
+          );
+        }}
         keyExtractor={item => item.id}
       />
     );
+
   };
 

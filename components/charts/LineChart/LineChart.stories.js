@@ -1,6 +1,6 @@
 import React from "react";
 import { storiesOf } from "@storybook/react-native";
-import { withKnobs, object } from "@storybook/addon-knobs/react";
+import { withKnobs } from "@storybook/addon-knobs/react";
 import { LineChart } from "./LineChart";
 import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
