@@ -35,6 +35,9 @@ storiesOf("Lists", module)
     .add("List", () => (
         <List data={data} selectList onItemPress={onItemPress} />
     ))
+    .add("Numbered Bullet List", () => (
+        <List data={data} selectList onItemPress={onItemPress} numberedBullet />
+    ))
     .add("Dashboard Program List", () => (
         <DashboardProgramList
             data={programDashboardData}

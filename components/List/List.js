@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { color, space, layout, size, typography } from "styled-system";
 import { FlatList, View, StyleSheet } from "react-native";
 import { Icon } from "../Icon/Icon";
-import { text } from "@storybook/addon-knobs";
 import { MuscleIcon } from "../Icon/MuscleIcon";
 
 const ListContainer = styled.TouchableOpacity`
@@ -56,12 +55,30 @@ const CenterItem = styled.View`
 `;
 
 const ListItem = props => {
-    const { iconData, title, description, extraInfo, selected } = props;
+    const {
+        iconData,
+        index,
+        numberedBullet,
+        title,
+        description,
+        extraInfo,
+        selected
+    } = props;
 
     let icon;
 
     if (iconData) {
-        if (iconData.id.toLowerCase() == "muscles") {
+        if (numberedBullet) {
+            icon = (
+                <Text
+                    fill='#00171f'
+                    fontSize={4}
+                    fontWeight='bold'
+                    style={{ opacity: 0.8 }}>
+                    {index}
+                </Text>
+            );
+        } else if (iconData.id.toLowerCase() == "muscles") {
             icon = (
                 <MuscleIcon
                     primaryMuscles={iconData.primaryMuscles.map(m =>
@@ -93,7 +110,7 @@ const ListItem = props => {
                     <CenterItem>{icon}</CenterItem>
                 </IconCircle>
             )}
-            <ListContent ml={3}>
+            <ListContent ml={3} mr={3}>
                 <ListHeader>
                     <Text fontSize={2} fontWeight='bold'>
                         {title}
@@ -103,7 +120,13 @@ const ListItem = props => {
                     </Text>
                 </ListHeader>
                 {description && (
-                    <Text mt={2} fontSize={2} color={"text.1"}>
+                    <Text
+                        mt={2}
+                        mr={2}
+                        fontSize={2}
+                        color={"text.1"}
+                        ellipsizeMode='tail'
+                        numberOfLines={1}>
                         {description}
                     </Text>
                 )}
@@ -113,7 +136,7 @@ const ListItem = props => {
 };
 
 export const List = props => {
-    const { data, onItemPress, selectList } = props;
+    const { data, onItemPress, selectList, numberedBullet } = props;
 
     const [selected, setSelected] = useState(null);
 
@@ -121,7 +144,7 @@ export const List = props => {
         <FlatList
             data={data}
             style={{ width: "100%" }}
-            renderItem={({ item }) => (
+            renderItem={({ item, index }) => (
                 <ListItem
                     id={item.id}
                     iconData={item.icon}
@@ -130,6 +153,8 @@ export const List = props => {
                     description={item.description}
                     iconType={item.iconType}
                     selected={selected == item.id}
+                    index={index}
+                    numberedBullet={numberedBullet}
                     onPress={() => {
                         if (onItemPress) {
                             onItemPress(item);
