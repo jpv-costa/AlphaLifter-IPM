@@ -5,7 +5,7 @@ import { WorkoutTimer } from "./WorkoutTime";
 import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
 import theme from "../theme";
-import { SafeAreaView } from "react-native";
+import { SafeAreaView, Alert } from "react-native";
 
 const CenteredView = styled.View`
     flex: 1;
@@ -13,8 +13,18 @@ const CenteredView = styled.View`
     align-items: center;
 `;
 
-const onItemPress = item => {
-    console.log("You pressed item '" + item.title + "'");
+function onPlayPress(){
+    Alert.alert("You pressed play");
+}
+
+function onMinusPress() {
+    Alert.alert("You pressed minus");
+}
+function onPlusPress() {
+    Alert.alert("You pressed plus");
+};
+function onReplayPress() {
+    Alert.alert("You pressed replay");
 };
 
 storiesOf("WorkoutPlayer", module)
@@ -30,7 +40,7 @@ storiesOf("WorkoutPlayer", module)
     ))
     .addDecorator(withKnobs)
     .add("WorkoutTimer", () => (
-        <WorkoutTimer/>
+        <WorkoutTimer  onMinusPress= {onMinusPress} onPlusPress={onPlusPress} onPlayPress={onPlayPress} onReplayPress= {onReplayPress}/>
     ));
 
 

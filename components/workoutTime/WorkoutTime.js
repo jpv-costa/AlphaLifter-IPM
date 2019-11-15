@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import {StyleSheet, Dimensions} from "react-native";
+import {StyleSheet, Dimensions, Alert} from "react-native";
 import styled from "styled-components";
 import { color, space, layout, size, typography } from "styled-system";
 import { Icon } from "../Icon/Icon";
+import { Ionicons } from '@expo/vector-icons';
 
 export const Card = styled.View`
   ${color}
@@ -85,7 +86,7 @@ const styles = StyleSheet.create({
   position: absolute;
 `;
 
-const IconCircle = styled.View`
+const IconCircle = styled.TouchableOpacity`
     ${space}
     ${layout}
     width: 30;
@@ -112,54 +113,56 @@ const CirclesRowContainer = styled.View`
 `;
 
 
+
 export const WorkoutTimer = props => {
 
-    let icon = <Icon id= "../../assets/images/robot-dev.png" size={28}  opacity={0.8} />
+    let plus_icon = <Ionicons name="md-add" size={32} color="white" />
+    let minus_icon = <Ionicons name="md-remove" size={32} color="white" />
+    let play_icon = <Ionicons name="md-play" size={26} color="white" />
+    let replay_icon = <Ionicons name="md-skip-backward" size={24} color="white" />
     
+    const { onMinusPress,onPlusPress,onPlayPress,  onReplayPress, data} = props;
     return(
         <Card style = {styles.card}>
-          
-       
-      
             <RowContainer mt = {3} flex = {1}>
-                <ColumnContainer flex = {1} >
+                <ColumnContainer flex = {1}  >
                     <Text  color = "white.1" fontSize = {4}>Workout Name</Text>
                     <FixedFileds  color = "white.1" fontSize = {3}>80% complete</FixedFileds>
                 </ColumnContainer>
 
-                <ColumnContainer flex = {1}  >
+                <ColumnContainer flex = {1}   >
                     <Text  color = "white.1" fontSize = {4} > Elapsed Time </Text>
                     <FixedFileds  color = "white.1" fontSize = {3} >01:00:30</FixedFileds>
                 </ColumnContainer>
             </RowContainer>
 
             <Clock color = "white.1" fontSize = {8} mt = {3}>01:30min</Clock>
-           <CirclesRowContainer mb = {4} mt = {1}>
-                {icon && <IconCircle mx = {3}>
+           <CirclesRowContainer mb = {5} mt = {1}>
+                {minus_icon && <IconCircle mx = {3}  onPress={onMinusPress}>
                     <Circle  bg= {"primary"} />
                     <CenterItem>
-                    {icon}
+                    {minus_icon}
                     </CenterItem>
                 </IconCircle>}
 
-                {icon && <IconCircle mx = {3}>
+                {plus_icon && <IconCircle mx = {3} onPress={onPlusPress}>
                     <Circle  bg= {"primary"} />
                     <CenterItem>
-                    {icon}
+                    {plus_icon}
                     </CenterItem>
                 </IconCircle>}
 
-                {icon && <IconCircle mx = {3}>
+                {play_icon && <IconCircle mx = {3} onPress={onPlayPress}>
                     <Circle  bg= {"primary"}/>
                     <CenterItem>
-                    {icon}
+                    {play_icon}
                     </CenterItem>
                 </IconCircle>}
 
-                {icon && <IconCircle mx = {3} >
+                {replay_icon && <IconCircle mx = {3} onPress={onReplayPress}>
                     <Circle  bg= {"primary"} />
                     <CenterItem>
-                    {icon}
+                    {replay_icon}
                     </CenterItem>
                 </IconCircle>}
           

@@ -1,10 +1,10 @@
 {
-  "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 28294,
-  "expoServerNgrokUrl": "https://e7-d6t.anonymous.alphalifter.exp.direct",
-  "packagerNgrokUrl": "https://packager.e7-d6t.anonymous.alphalifter.exp.direct",
-  "ngrokPid": 28310,
-  "webpackServerPort": null
+    "devToolsPort": 19002,
+    "expoServerPort": 19000,
+    "packagerPort": null,
+    "packagerPid": null,
+    "expoServerNgrokUrl": null,
+    "packagerNgrokUrl": null,
+    "ngrokPid": null,
+    "webpackServerPort": null
 }
