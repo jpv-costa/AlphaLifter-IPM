@@ -5,21 +5,21 @@ import { LineChart } from "./LineChart";
 import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
 import theme from "../../theme";
-import { SafeAreaView, View } from "react-native";
+import { SafeAreaView, View, Dimensions } from "react-native";
 import { getDEMApoints } from "../../../utils";
 import { Store, State } from "@sambego/storybook-state";
-import { Text, Dimensions } from "react-native";
-import {
-    ConfiguredExercise,
-    ConfiguredExerciseList,
-    EquipmentTypes
-} from "../../workouts/Exercises/Exercise";
+import Navigator from "../../navigation/TabNavigator";
+import { DashboardExerciseList } from "../../List/DashboardExerciseList";
+import { DashboardMuscleList } from "../../List/DashboardMuscleList";
+import { DashboardProgramList } from "../../List/DashboardProgramList";
 
 const CenteredView = styled.View`
     flex: 1;
     justify-content: center;
     align-items: center;
 `;
+
+const { width } = Dimensions.get("window");
 
 storiesOf("Charts", module)
     // The ThemeProvider feeds the theme options to the components scope
@@ -41,13 +41,7 @@ storiesOf("Charts", module)
                     dataPoints={store.get("chartData")}
                     height={200}
                 />,
-                <ConfiguredExerciseList
-                    data={exerciseList}
-                    selectList
-                    onItemPress={item =>
-                        store.set({ chartData: oneRepMaxes[item.id] })
-                    }
-                />
+                <Navigator width={width} header={header} tabContent={content} />
             ]}
         </State>
     ));
@@ -98,19 +92,6 @@ const oneRepMaxes = {
         { date: new Date(2018, 10, 23), y: 105 },
         { date: new Date(2018, 10, 24), y: 115 },
         { date: new Date(2018, 10, 25), y: 120 }
-    ],
-    4: [
-        { date: new Date(2018, 10, 10), y: 75.1 },
-        { date: new Date(2018, 10, 11), y: 72.7 },
-        { date: new Date(2018, 10, 12), y: 73.2 },
-        { date: new Date(2018, 10, 13), y: 73.2 },
-        { date: new Date(2018, 10, 14), y: 72 },
-        { date: new Date(2018, 10, 15), y: 72 },
-        { date: new Date(2018, 10, 16), y: 73 },
-        { date: new Date(2018, 10, 17), y: 76 },
-        { date: new Date(2018, 10, 23), y: 125 },
-        { date: new Date(2018, 10, 24), y: 155 },
-        { date: new Date(2018, 10, 25), y: 130 }
     ]
 };
 
@@ -118,101 +99,100 @@ const store = new Store({
     chartData: oneRepMaxes["1"]
 });
 
-const exerciseList = [
+const musclesDashboardData = [
     {
         id: 1,
-        name: "Bench Press",
-        completed: true,
-        estimatedDuration: "+/- 30min",
-        equipment: EquipmentTypes.dumbbell,
-        configuration: {
-            1: {
-                sets: 1,
-                reps: {
-                    min: 4,
-                    max: 6
-                },
-                intensity: 0.8725,
-                RIR: {
-                    min: 1,
-                    max: 2
-                }
-            },
-            2: {
-                sets: 4,
-                reps: 5,
-                intensity: 0.825,
-                RIR: {
-                    min: 1,
-                    max: 3
-                }
-            }
-        }
+        muscle: "Chest",
+        view: "front-upper",
+        progress: "5%"
     },
     {
         id: 2,
-        name: "Lateral Raises",
-        completed: false,
-        estimatedDuration: "+/- 22min",
-        equipment: EquipmentTypes.cable,
-        configuration: {
-            1: {
-                sets: 3,
-                reps: 7,
-                intensity: 0.75,
-                RIR: {
-                    min: 1,
-                    max: 4
-                }
-            }
-        }
+        muscle: "Back",
+        view: "front-upper",
+        progress: "7%"
     },
     {
         id: 3,
-        name: "Row",
-        completed: false,
-        estimatedDuration: "+/- 14min",
-        equipment: EquipmentTypes.barbell,
-        configuration: {
-            1: {
-                sets: {
-                    min: 3,
-                    max: 4
-                },
-                reps: 3,
-                intensity: 0.85,
-                RIR: {
-                    min: 1,
-                    max: 2
-                }
-            }
-        }
+        muscle: "Shoulders",
+        view: "front-upper",
+        progress: "7%"
+    }
+];
+
+const exercisesDashboardData = [
+    {
+        id: 1,
+        name: "Bench Press",
+        primaryMuscles: ["chest"],
+        secondaryMuscles: [],
+        view: "front-upper",
+        variations: ["Incline, Dumbbell variation"],
+        progress: "10%"
     },
     {
-        id: 4,
-        name: "Back Squat",
-        completed: false,
-        estimatedDuration: "+/- 19min",
-        equipment: EquipmentTypes.barbell,
-        configuration: {
-            1: {
-                sets: 1,
-                reps: 3,
-                intensity: 0.85,
-                RIR: {
-                    min: 1,
-                    max: 2
-                }
-            },
-            2: {
-                sets: 4,
-                reps: 5,
-                intensity: 0.825,
-                RIR: {
-                    min: 1,
-                    max: 3
-                }
-            }
-        }
+        id: 2,
+        name: "Bench Press",
+        primaryMuscles: ["chest"],
+        secondaryMuscles: [],
+        view: "front-upper",
+        variations: ["Incline, Dumbbell variation"],
+        progress: "10%"
+    },
+    {
+        id: 3,
+        name: "Bench Press",
+        primaryMuscles: ["chest"],
+        secondaryMuscles: [],
+        view: "front-upper",
+        variations: ["Incline, Dumbbell variation"],
+        progress: "10%"
     }
+];
+
+const programDashboardData = [
+    {
+        id: 1,
+        name: "High Volume Program",
+        isCurrent: true,
+        cycles: 5,
+        workouts: 5,
+        progress: "5%"
+    },
+    {
+        id: 2,
+        name: "Low Volume Program",
+        isCurrent: false,
+        cycles: 4,
+        workouts: 3,
+        progress: "7%"
+    },
+    {
+        id: 3,
+        name: "High Volume Program",
+        isCurrent: false,
+        cycles: 5,
+        workouts: 5,
+        progress: "5%"
+    }
+];
+
+const header = ["Programs", "Muscles", "Exercises"];
+
+const content = [
+    <DashboardProgramList
+        data={programDashboardData}
+        selectList
+        onItemPress={item => store.set({ chartData: oneRepMaxes[item.id] })}
+    />,
+    <DashboardMuscleList
+        data={musclesDashboardData}
+        selectList
+        onItemPress={item => store.set({ chartData: oneRepMaxes[item.id] })}
+    />,
+    <DashboardExerciseList
+        data={exercisesDashboardData}
+        selectList
+        onItemPress={item => store.set({ chartData: oneRepMaxes[item.id] })}
+    />
 ];

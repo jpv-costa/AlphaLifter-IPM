@@ -5,9 +5,9 @@ import { List } from "./List";
 import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
 import theme from "../theme";
-import { DashboardMuscleList } from "./DashboardMuscleList"
-import { DashboardExerciseList } from "./DashboardExerciseList"
-import { DashboardProgramList } from "./DashboardProgramList"
+import { DashboardMuscleList } from "./DashboardMuscleList";
+import { DashboardExerciseList } from "./DashboardExerciseList";
+import { DashboardProgramList } from "./DashboardProgramList";
 import { SafeAreaView } from "react-native";
 
 const CenteredView = styled.View`
@@ -33,22 +33,34 @@ storiesOf("Lists", module)
     ))
     .addDecorator(withKnobs)
     .add("List", () => (
-        <List data={data} selectList iconType={"id"} onItemPress={onItemPress} />
+        <List data={data} selectList onItemPress={onItemPress} />
     ))
     .add("Dashboard Program List", () => (
-        <DashboardProgramList data={programDashboardData} selectList onItemPress={onItemPress} />
+        <DashboardProgramList
+            data={programDashboardData}
+            selectList
+            onItemPress={onItemPress}
+        />
     ))
     .add("Dashboard Exercises List", () => (
-        <DashboardExerciseList data={exercisesDashboardData} selectList onItemPress={onItemPress} />
+        <DashboardExerciseList
+            data={exercisesDashboardData}
+            selectList
+            onItemPress={onItemPress}
+        />
     ))
     .add("Dashboard Muscles List", () => (
-        <DashboardMuscleList data={musclesDashboardData} selectList onItemPress={onItemPress} />
-    ))
+        <DashboardMuscleList
+            data={musclesDashboardData}
+            selectList
+            onItemPress={onItemPress}
+        />
+    ));
 
 const data = [
     {
         id: 1,
-        iconId: "dumbbell",
+        icon: { id: "dumbbell" },
         title: "Lorem ipsum",
         extraInfo: "10min",
         description:
@@ -56,7 +68,7 @@ const data = [
     },
     {
         id: 2,
-        iconId: "dumbbell",
+        icon: { id: "dumbbell" },
         title: "Ut labore et",
         extraInfo: "10min",
         description:
@@ -64,7 +76,7 @@ const data = [
     },
     {
         id: 3,
-        iconId: "dumbbell",
+        icon: { id: "dumbbell" },
         title: "Exercitation ullamco laboris nisi",
         extraInfo: "10min",
         description:
@@ -72,7 +84,7 @@ const data = [
     },
     {
         id: 4,
-        iconId: "dumbbell",
+        icon: { id: "dumbbell" },
         title: "Reprehenderit in voluptate",
         extraInfo: "10min",
         description:
@@ -84,16 +96,19 @@ const musclesDashboardData = [
     {
         id: 1,
         muscle: "Chest",
+        view: "front-upper",
         progress: "5%"
     },
     {
         id: 2,
         muscle: "Back",
+        view: "front-upper",
         progress: "7%"
     },
     {
         id: 3,
         muscle: "Shoulders",
+        view: "front-upper",
         progress: "7%"
     }
 ];
@@ -104,6 +119,7 @@ const exercisesDashboardData = [
         name: "Bench Press",
         primaryMuscles: ["chest"],
         secondaryMuscles: [],
+        view: "front-upper",
         variations: ["Incline, Dumbbell variation"],
         progress: "10%"
     },
@@ -112,6 +128,7 @@ const exercisesDashboardData = [
         name: "Bench Press",
         primaryMuscles: ["chest"],
         secondaryMuscles: [],
+        view: "front-upper",
         variations: ["Incline, Dumbbell variation"],
         progress: "10%"
     },
@@ -120,6 +137,7 @@ const exercisesDashboardData = [
         name: "Bench Press",
         primaryMuscles: ["chest"],
         secondaryMuscles: [],
+        view: "front-upper",
         variations: ["Incline, Dumbbell variation"],
         progress: "10%"
     }
@@ -150,5 +168,4 @@ const programDashboardData = [
         workouts: 5,
         progress: "5%"
     }
-]
-
+];

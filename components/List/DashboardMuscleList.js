@@ -5,24 +5,21 @@ export const DashboardMuscleList = props => {
     const { data, ...other } = props;
 
     const parsedData = data.map(item => {
-        const { id, muscle, progress, selected} = item;
-        
+        const { id, muscle, progress, selected, view } = item;
+
         return {
             id: id,
-            iconId: 
-                {
-                    primaryMuscles: [muscle.toLowerCase()],
-                    secondaryMuscles: []
-                },
+            icon: {
+                id: "muscles",
+                primaryMuscles: [muscle.toLowerCase()],
+                secondaryMuscles: [],
+                view: view
+            },
             title: muscle,
             extraInfo: progress,
-            iconType: "muscles",
             selected: selected
         };
     });
 
-    console.log(parsedData)
     return <List data={parsedData} {...other} />;
 };
-
-
