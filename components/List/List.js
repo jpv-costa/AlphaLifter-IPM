@@ -70,7 +70,7 @@ const ListItem = props => {
                     secondaryMuscles={iconData.secondaryMuscles.map(m =>
                         m.toLowerCase()
                     )}
-                    size={120}
+                    size={105}
                     view={iconData.view}
                 />
             );

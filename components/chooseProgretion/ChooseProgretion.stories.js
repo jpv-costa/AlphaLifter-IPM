@@ -1,7 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react-native";
 import { withKnobs, object } from "@storybook/addon-knobs/react";
-import { ChooseProgretion } from "./ChooseProgretion";
+import { ChooseProgression } from "./ChooseProgretion";
 import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
 import theme from "../theme";
@@ -29,9 +29,4 @@ storiesOf("Configs", module)
         </SafeAreaView>
     ))
     .addDecorator(withKnobs)
-    .add("ChooseProgretion", () => (
-        <ChooseProgretion/>
-    ));
-
-
-
+    .add("ChooseProgression", () => <ChooseProgression />);

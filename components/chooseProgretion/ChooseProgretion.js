@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import {StyleSheet, Dimensions} from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import styled from "styled-components";
 import { color, space, layout, size, typography } from "styled-system";
+import { Icon } from "../Icon/Icon";
 
-const screenWidth = Math.round(Dimensions.get('window').width*0.8);
+const screenWidth = Math.round(Dimensions.get("window").width * 0.8);
 
 const Text = styled.Text`
     ${space}
@@ -15,7 +16,7 @@ const Text = styled.Text`
     flex:1;
     `;
 
-    const RowContainer = styled.TouchableOpacity`
+const RowContainer = styled.TouchableOpacity`
     ${space}
     ${layout}
     ${color}
@@ -28,14 +29,13 @@ const Text = styled.Text`
     alignItems: center;
 `;
 
-
 const Separator = styled.View`
         ${space}
         ${layout}
         ${color}
         ${typography}
         ${size};
-        height:1;
+        height:0.5;
         backgroundColor:black;
 `;
 const ColumnContainer = styled.View`
@@ -46,54 +46,52 @@ elevation: 3;
 position: absolute;
 `;
 
-const Image = styled.Image`
-${space}
-${layout}
-`;
-
-
-
 const styles = StyleSheet.create({
     card: {
         height: 270
+    }
+});
 
-    }  
-  });
-
-export const ChooseProgretion = props => {
-    return(
-        <ColumnContainer style = {styles.card}>
-            <Separator width = {screenWidth}></Separator>
+export const ChooseProgression = props => {
+    return (
+        <ColumnContainer style={styles.card}>
+            <Separator width={screenWidth}></Separator>
             <RowContainer>
-                <Text fontSize = {5} ml = {2} >Load Progretion</Text>
-                <Image source={require('../../assets/images/arrow.png')}mr = {2}></Image>
-            </RowContainer>
-        
-            <Separator></Separator>
-            <RowContainer>
-                <Text fontSize = {5} ml = {2}>Linear Progretion</Text>
-                <Image source={require('../../assets/images/arrow.png')}mr = {2}></Image>
+                <Text fontSize={3} ml={2}>
+                    Load Progression
+                </Text>
+                <Icon id='arrow-right' size={20} fill='#aaa' mr={2} />
             </RowContainer>
 
             <Separator></Separator>
             <RowContainer>
-                <Text fontSize = {5} ml = {2}>Double Progretion</Text>
-                <Image source={require('../../assets/images/arrow.png')} mr = {2} ></Image>
+                <Text fontSize={3} ml={2}>
+                    Linear Progression
+                </Text>
+                <Icon id='arrow-right' size={20} fill='#aaa' mr={2} />
             </RowContainer>
 
             <Separator></Separator>
             <RowContainer>
-                <Text fontSize = {5} ml = {2}>No Progretion</Text>
-                <Image source={require('../../assets/images/arrow.png')}mr = {2}></Image>
+                <Text fontSize={3} ml={2}>
+                    Double Progretion
+                </Text>
+                <Icon id='arrow-right' size={20} fill='#aaa' mr={2} />
             </RowContainer>
 
             <Separator></Separator>
+            <RowContainer>
+                <Text fontSize={3} ml={2}>
+                    No Progretion
+                </Text>
+                <Icon id='arrow-right' size={20} fill='#aaa' mr={2} />
+            </RowContainer>
 
-        </ColumnContainer>)
-}
+            <Separator />
+        </ColumnContainer>
+    );
+};
 
-ChooseProgretion.defaultProps = {
-    height : 350
-}
-
-
+ChooseProgression.defaultProps = {
+    height: 350
+};

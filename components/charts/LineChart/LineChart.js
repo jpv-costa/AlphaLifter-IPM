@@ -76,8 +76,6 @@ export class LineChart extends React.PureComponent {
         // Add ghost data points at end and start of graph, to increase visibility of end points
         this.addGhostData(dataTrend);
 
-        console.log(dataTrend);
-
         const Gradient = ({ index }) => (
             <Defs key={index}>
                 <LinearGradient
