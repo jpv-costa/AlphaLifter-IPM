@@ -36,20 +36,19 @@ storiesOf("Cards", module)
 
     const data = [
         {
-            id: 1,
+            id: "1",
             workoutName: "Push Workout",
             time: "+/- 1h30",
             exercises: "6",
             muscles:"Chest, Shoulders, Triceps"
-        }        
-    ];
-  
-  
-    /* {
-            id: 2,
+        } , {
+            id: "2",
             workoutName: "Pull Workout",
             time: "1h30",
-            muscles:["Back,Bicep"]
-        }*/
+            exercises: "5",
+            muscles:"Back, Bicep"
+        }      
+    ];
+  
 
 
