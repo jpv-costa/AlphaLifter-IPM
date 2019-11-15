@@ -36,6 +36,11 @@ storiesOf("Exercise", module)
 const data = [
     {
         id: 1,
+        icon: {
+            primaryMuscles: ["chest"],
+            secondaryMuscles: ["abs"],
+            view: "front-upper"
+        },
         name: "Bench Press",
         completed: true,
         estimatedDuration: "+/- 30min",
@@ -66,6 +71,11 @@ const data = [
     },
     {
         id: 2,
+        icon: {
+            primaryMuscles: ["chest"],
+            secondaryMuscles: ["abs"],
+            view: "front-upper"
+        },
         name: "Lateral Raises",
         completed: false,
         estimatedDuration: "+/- 22min",
@@ -84,6 +94,11 @@ const data = [
     },
     {
         id: 3,
+        icon: {
+            primaryMuscles: ["chest"],
+            secondaryMuscles: ["abs"],
+            view: "front-upper"
+        },
         name: "Row",
         completed: false,
         estimatedDuration: "+/- 14min",
@@ -105,6 +120,11 @@ const data = [
     },
     {
         id: 4,
+        icon: {
+            primaryMuscles: ["chest"],
+            secondaryMuscles: ["abs"],
+            view: "front-upper"
+        },
         name: "Back Squat",
         completed: false,
         estimatedDuration: "+/- 19min",

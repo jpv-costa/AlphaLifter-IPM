@@ -13,7 +13,7 @@ export const ConfiguredExerciseList = props => {
     const { data, ...other } = props;
 
     const parsedData = data.map(item => {
-        const { id, name, estimatedDuration, configuration } = item;
+        const { id, icon, name, estimatedDuration, configuration } = item;
 
         sets = isNaN(configuration["1"].sets)
             ? configuration["1"].sets.min + "-" + configuration["1"].sets.max
@@ -45,7 +45,16 @@ export const ConfiguredExerciseList = props => {
 
         return {
             id: id,
-            iconId: "dumbbell",
+            icon: {
+                id: "muscles",
+                primaryMuscles: icon.primaryMuscles.map(muscle =>
+                    muscle.toLowerCase()
+                ),
+                secondaryMuscles: icon.secondaryMuscles.map(muscle =>
+                    muscle.toLowerCase()
+                ),
+                view: icon.view
+            },
             title: name,
             extraInfo: estimatedDuration,
             description: description
