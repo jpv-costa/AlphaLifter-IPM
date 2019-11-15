@@ -96,19 +96,25 @@ const musclesDashboardData = [
     {
         id: 1,
         muscle: "Chest",
-        view: "front-upper",
+        icon: {
+            view: "front-upper"
+        },
         progress: "5%"
     },
     {
         id: 2,
-        muscle: "Back",
-        view: "front-upper",
+        muscle: "Chest",
+        icon: {
+            view: "front-upper"
+        },
         progress: "7%"
     },
     {
         id: 3,
-        muscle: "Shoulders",
-        view: "front-upper",
+        muscle: "Chest",
+        icon: {
+            view: "front-upper"
+        },
         progress: "7%"
     }
 ];
@@ -116,28 +122,34 @@ const musclesDashboardData = [
 const exercisesDashboardData = [
     {
         id: 1,
+        icon: {
+            primaryMuscles: ["chest"],
+            secondaryMuscles: [],
+            view: "front-upper"
+        },
         name: "Bench Press",
-        primaryMuscles: ["chest"],
-        secondaryMuscles: [],
-        view: "front-upper",
         variations: ["Incline, Dumbbell variation"],
         progress: "10%"
     },
     {
         id: 2,
+        icon: {
+            primaryMuscles: ["chest"],
+            secondaryMuscles: [],
+            view: "front-upper"
+        },
         name: "Bench Press",
-        primaryMuscles: ["chest"],
-        secondaryMuscles: [],
-        view: "front-upper",
         variations: ["Incline, Dumbbell variation"],
         progress: "10%"
     },
     {
         id: 3,
+        icon: {
+            primaryMuscles: ["chest"],
+            secondaryMuscles: [],
+            view: "front-upper"
+        },
         name: "Bench Press",
-        primaryMuscles: ["chest"],
-        secondaryMuscles: [],
-        view: "front-upper",
         variations: ["Incline, Dumbbell variation"],
         progress: "10%"
     }

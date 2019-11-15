@@ -5,7 +5,7 @@ export const DashboardMuscleList = props => {
     const { data, ...other } = props;
 
     const parsedData = data.map(item => {
-        const { id, muscle, progress, selected, view } = item;
+        const { id, progress, selected, muscle, icon } = item;
 
         return {
             id: id,
@@ -13,7 +13,7 @@ export const DashboardMuscleList = props => {
                 id: "muscles",
                 primaryMuscles: [muscle.toLowerCase()],
                 secondaryMuscles: [],
-                view: view
+                view: icon.view
             },
             title: muscle,
             extraInfo: progress,

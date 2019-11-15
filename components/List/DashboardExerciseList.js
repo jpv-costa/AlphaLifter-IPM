@@ -5,31 +5,22 @@ export const DashboardExerciseList = props => {
     const { data, ...other } = props;
 
     const parsedData = data.map(item => {
-        const {
-            id,
-            name,
-            variations,
-            primaryMuscles,
-            secondaryMuscles,
-            progress,
-            selected,
-            view
-        } = item;
+        const { id, name, variations, progress, selected, icon } = item;
 
         return {
             id: id,
             icon: {
                 id: "muscles",
-                primaryMuscles: primaryMuscles,
-                secondaryMuscles: secondaryMuscles,
-                view: view
+                primaryMuscles: icon.primaryMuscles,
+                secondaryMuscles: icon.secondaryMuscles,
+                view: icon.view
             },
             title: name,
             extraInfo: progress,
             description:
                 variations.join(", ") +
                 ", mainly " +
-                primaryMuscles.join(" ") +
+                icon.primaryMuscles.join(" ") +
                 " focused",
             selected: selected
         };
