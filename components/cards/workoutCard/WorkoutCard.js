@@ -52,8 +52,10 @@ const styles = StyleSheet.create({
 
 /*export const WorkoutCardList = props => {
     const data = props.data;
-    const listItems = data.map((element) =>
-    <ListItem>
+    const Test = ({data}) => (
+      <View>
+      {data.map((element) =>(
+   
    <TouchableCard style = {styles.card}>
             <Text fontSize={4}
                     color = "black"
@@ -78,27 +80,27 @@ const styles = StyleSheet.create({
             </View>
             <TrainedMusclesTitle fontSize = {2} mt = {3}>Trained Muscles</TrainedMusclesTitle>
             <Text fontSize = {3} mb = {3}>{element.muscles}</Text>
-            </TouchableCard>
-            </ListItem>
+           </TouchableCard>
+        
            
-  );
-    return(<List>{listItems}</List>)
+  ))}
+  </View>)
+    return(Test)
 }
 
 WorkoutCardList.defaultProps = {
     width : 150
-}*/
+}
+*/
 export const WorkoutCardList = props => {
     const  data = props.data;
     return (
       <FlatList
-        horizontal
-        data={data}
-        renderItem={({ item }) =>{ 
-          console.log(item.workoutName);
-          return (
-          
-            <TouchableCard style = {styles.card}>
+          data={data}
+          style={{ width: "100%" }}
+          renderItem={({ item, index}) =>
+          (
+              <TouchableCard style = {styles.card}>
               <Text fontSize={4}
                       color = "black"
                       mt = {3}
@@ -123,11 +125,9 @@ export const WorkoutCardList = props => {
               <TrainedMusclesTitle fontSize = {2} mt = {3}>Trained Muscles</TrainedMusclesTitle>
               <Text fontSize = {3} mb = {3}>{item.muscles}</Text>
             </TouchableCard>
-          );
-        }}
-        keyExtractor={item => item.id}
+          )}
+          keyExtractor={item => item.id}
       />
-    );
-
+  );
   };
 
