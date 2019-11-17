@@ -28,7 +28,7 @@ ${color}
 ${typography}
 ${size}
 backgroundColor: #B0E0F6;
-borderRadius:10;
+borderRadius:8;
 
 `;
 

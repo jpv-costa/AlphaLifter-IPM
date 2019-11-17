@@ -1,9 +1,9 @@
 {
   "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://hy-3hb.anonymous.alphalifter-prot.exp.direct",
-  "packagerNgrokUrl": "https://packager.hy-3hb.anonymous.alphalifter-prot.exp.direct",
-  "ngrokPid": 18811,
+  "expoServerNgrokUrl": "https://a3-bef.anonymous.alphalifter.exp.direct",
+  "packagerNgrokUrl": "https://packager.a3-bef.anonymous.alphalifter.exp.direct",
+  "ngrokPid": 19520,
   "devToolsPort": 19002,
-  "packagerPort": 19003,
-  "packagerPid": 18799
+  "packagerPort": 19001,
+  "packagerPid": 10924
 }

@@ -33,7 +33,7 @@ storiesOf("Buttons", module)
         <RoundButton text = "MyButton"/>
     )
     ).add("RoundCornersButton", () => (
-        <RoundCornersButton text = "myButton" />)
+        <RoundCornersButton text = "MyButton" />)
     )
     
 
