@@ -15,7 +15,8 @@ function loadStories() {
 	require('../components/form/Form.stories');
 	require('../components/navigation/TabNavigator.stories');
 	require('../components/workoutTime/WorkoutTime.stories');
-	require('../components/workouts/Exercises/Exercise.stories');
+	require('../components/workoutTime/ExerciseInput.stories');
+
 }
 
 const stories = [
@@ -30,6 +31,7 @@ const stories = [
 	'../components/form/Form.stories',
 	'../components/navigation/TabNavigator.stories',
 	'../components/workoutTime/WorkoutTime.stories',
+	'../components/workoutTime/ExerciseInput.stories',
 	'../components/workouts/Exercises/Exercise.stories'
 ];
 
