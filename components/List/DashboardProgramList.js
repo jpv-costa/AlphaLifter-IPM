@@ -2,7 +2,7 @@ import React from "react";
 import { List } from "./List";
 
 export const DashboardProgramList = props => {
-    const { data, ...other } = props;
+    const { data, selectedId, ...other } = props;
 
     const parsedData = data.map(item => {
         const {
@@ -24,5 +24,5 @@ export const DashboardProgramList = props => {
         };
     });
 
-    return <List data={parsedData} {...other} />;
+    return <List data={parsedData} selectedId={selectedId} {...other} />;
 };

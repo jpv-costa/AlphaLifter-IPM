@@ -98,7 +98,7 @@ const data = [
 const musclesDashboardData = [
     {
         id: 1,
-        muscle: "Chest",
+        muscle: "Biceps",
         icon: {
             view: "front-upper"
         },
@@ -127,7 +127,7 @@ const exercisesDashboardData = [
         id: 1,
         icon: {
             primaryMuscles: ["chest"],
-            secondaryMuscles: [],
+            secondaryMuscles: ["biceps"],
             view: "front-upper"
         },
         name: "Bench Press",

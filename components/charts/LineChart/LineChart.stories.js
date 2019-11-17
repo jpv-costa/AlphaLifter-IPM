@@ -2,8 +2,8 @@ import React from "react";
 import { storiesOf } from "@storybook/react-native";
 import { withKnobs } from "@storybook/addon-knobs/react";
 import { LineChart } from "./LineChart";
-import styled from "styled-components";
-import { ThemeProvider } from "styled-components";
+import { PaginatedLineChart } from "../PaginatedLineChart/PaginatedLineChart";
+import styled, { ThemeProvider } from "styled-components";
 import theme from "../../theme";
 import { SafeAreaView, View, Dimensions } from "react-native";
 import { getDEMApoints } from "../../../utils";
@@ -33,13 +33,15 @@ storiesOf("Charts", module)
         </SafeAreaView>
     ))
     .addDecorator(withKnobs)
-    .add("LineChart with DEMA", () => (
+    .add("PaginatedLineChart", () => (
         <State store={store}>
             {state => [
-                <LineChart
-                    dataTrend={getDEMApoints(store.get("chartData"), 7)}
-                    dataPoints={store.get("chartData")}
+                <PaginatedLineChart
+                    dataTrendFunction={points => getDEMApoints(points, 7)}
+                    dataPoints={store.get("chartData").data}
                     height={200}
+                    pageSize={7}
+                    pageNumber={1}
                 />,
                 <Navigator width={width} header={header} tabContent={content} />
             ]}
@@ -96,7 +98,10 @@ const oneRepMaxes = {
 };
 
 const store = new Store({
-    chartData: oneRepMaxes["1"]
+    chartData: {
+        id: 1,
+        data: oneRepMaxes["1"]
+    }
 });
 
 const musclesDashboardData = [
@@ -193,18 +198,33 @@ const header = ["Programs", "Muscles", "Exercises"];
 
 const content = [
     <DashboardProgramList
+        selectedId={1}
         data={programDashboardData}
         selectList
-        onItemPress={item => store.set({ chartData: oneRepMaxes[item.id] })}
+        onItemPress={item =>
+            store.set({
+                chartData: { id: item.id, data: oneRepMaxes[item.id] }
+            })
+        }
     />,
     <DashboardMuscleList
+        selectedId={1}
         data={musclesDashboardData}
         selectList
-        onItemPress={item => store.set({ chartData: oneRepMaxes[item.id] })}
+        onItemPress={item =>
+            store.set({
+                chartData: { id: item.id, data: oneRepMaxes[item.id] }
+            })
+        }
     />,
     <DashboardExerciseList
+        selectedId={1}
         data={exercisesDashboardData}
         selectList
-        onItemPress={item => store.set({ chartData: oneRepMaxes[item.id] })}
+        onItemPress={item =>
+            store.set({
+                chartData: { id: item.id, data: oneRepMaxes[item.id] }
+            })
+        }
     />
 ];

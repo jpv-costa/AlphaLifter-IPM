@@ -13,6 +13,7 @@ function loadStories() {
 	require('../components/cards/workoutCard/WorkoutCard.stories');
 	require('../components/charts/LineChart/LineChart.stories');
 	require('../components/chooseProgretion/ChooseProgretion.stories');
+	require('../components/inputs/HorizontalSelect/HorizontalSelect.stories');
 	require('../components/navigation/TabNavigator.stories');
 	require('../components/workoutTime/WorkoutTime.stories');
 	require('../components/workouts/Exercises/Exercise.stories');
@@ -28,6 +29,7 @@ const stories = [
 	'../components/cards/workoutCard/WorkoutCard.stories',
 	'../components/charts/LineChart/LineChart.stories',
 	'../components/chooseProgretion/ChooseProgretion.stories',
+	'../components/inputs/HorizontalSelect/HorizontalSelect.stories',
 	'../components/navigation/TabNavigator.stories',
 	'../components/workoutTime/WorkoutTime.stories',
 	'../components/workouts/Exercises/Exercise.stories'
