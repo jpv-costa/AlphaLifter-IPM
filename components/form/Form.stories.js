@@ -1,7 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react-native";
 import { withKnobs, object } from "@storybook/addon-knobs/react";
-import { ChooseProgression } from "./ChooseProgretion";
+import { SelectList } from "./SelectList";
 import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
 import theme from "../theme";
@@ -17,7 +17,7 @@ const onItemPress = item => {
     console.log("You pressed item '" + item.title + "'");
 };
 
-storiesOf("Configs", module)
+storiesOf("Form", module)
     // The ThemeProvider feeds the theme options to the components scope
     // (therefore the component can use them),
     // and centers the component in the screen
@@ -29,4 +29,17 @@ storiesOf("Configs", module)
         </SafeAreaView>
     ))
     .addDecorator(withKnobs)
-    .add("ChooseProgression", () => <ChooseProgression />);
+    .add("Choose Progression", () => (
+            <SelectList data={chooseProgressionData} onItemPress={onItemPress} />
+    ));
+
+const chooseProgressionData = [
+    {
+        id: 1,
+        title: "Load Progression"
+    },
+    {
+        id: 2,
+        title: "Double Progression"
+    }
+]
