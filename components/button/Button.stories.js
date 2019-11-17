@@ -1,7 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react-native";
 import { withKnobs, object } from "@storybook/addon-knobs/react";
-import { MyButton } from "./Button";
+import { RoundButton,RoundCornersButton } from "./Button";
 import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
 import theme from "../theme";
@@ -29,8 +29,12 @@ storiesOf("Buttons", module)
         </SafeAreaView>
     ))
     .addDecorator(withKnobs)
-    .add("MyButton", () => (
-        <MyButton />
-    ));
+    .add("RoundButton", () => (
+        <RoundButton text = "MyButton"/>
+    )
+    ).add("RoundCornersButton", () => (
+        <RoundCornersButton text = "myButton" />)
+    )
+    
 
 

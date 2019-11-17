@@ -63,7 +63,7 @@ const CenterItem = styled.View`
 `;
 
 export const ExerciseInput = props => {
-  const {defaultReps, defaultKG, defaultRIR} = props;
+  const {defaultReps, defaultKG, defaultRIR,exIndex} = props;
 
     let  icon = (
                 <Text
@@ -71,7 +71,7 @@ export const ExerciseInput = props => {
                     fontSize={4}
                     fontWeight='bold'
                     style={{ opacity: 0.8 }}>
-                    1
+                    {exIndex}
                 </Text>
             );
        
