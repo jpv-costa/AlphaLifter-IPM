@@ -59,8 +59,3 @@ export const RoundCornersButton = props => {
         color = "#1E90FF">{props.text}</Text>
     </RoundCorners>)
 }
-
-
-
-
-
