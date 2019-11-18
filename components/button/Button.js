@@ -32,13 +32,14 @@ borderRadius:8;
 
 `;
 
-
   export const RoundButton = props => {
-    return(<Round  style ={{width : props.width} }
-    bg= {props.secondaryDark?"secondaryShades.1": props.secondaryLight? "secondaryTints.0":"primary"}
-    py = {3}
-    px ={2}
-    >
+    return(
+    <Round 
+        onPress = {props.buttonPress} 
+        style ={{width : props.width} }
+        bg= {props.secondaryDark?"secondaryShades.1": props.secondaryLight? "secondaryTints.0":"primary"}
+        py = {3}
+        px ={2}>
         <Text style={{fontWeight: 'bold'}} fontSize={4}
         color = "white.1">{props.text}</Text>
     </Round>)
@@ -49,10 +50,11 @@ RoundButton.defaultProps = {
 }
 
 export const RoundCornersButton = props => {
-    return(<RoundCorners 
-    py = {2}
-    px ={2}
-    >
+    return(
+    <RoundCorners 
+        onPress = {props.buttonPress}
+        py = {2}
+        px ={2}>
         <Text style={{fontWeight: 'bold'}} fontSize={1}
         color = "#1E90FF">{props.text}</Text>
     </RoundCorners>)
