@@ -4,6 +4,8 @@
 // https://github.com/elderfo/react-native-storybook-loader.git
 
 function loadStories() {
+	require('../components/inputs/InputQuestions/InputQuestions.stories');
+	require('../components/inputs/HorizontalSelect/HorizontalSelect.stories');
 	require('../components/Search/Search.stories');
 	require('../components/button/Button.stories');
 	require('../components/Icon/Icon.stories');
@@ -22,6 +24,8 @@ function loadStories() {
 }
 
 const stories = [
+	'../components/inputs/InputQuestions/InputQuestions.stories',
+	'../components/inputs/HorizontalSelect/HorizontalSelect.stories',
 	'../components/Search/Search.stories',
 	'../components/button/Button.stories',
 	'../components/Icon/Icon.stories',

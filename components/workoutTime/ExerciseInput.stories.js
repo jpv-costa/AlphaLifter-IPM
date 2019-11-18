@@ -27,7 +27,7 @@ storiesOf("WorkoutPlayer", module)
     ))
     .addDecorator(withKnobs)
     .add("ExerciseInput", () => (
-        <ExerciseInput defaultReps = "12" defaultKG= "40" defaultRIR= "1-3" exIndex = "1"/>
+        <ExerciseInput defaultReps = "12" defaultKG= "40" defaultRIRMin= "1" defaultRIRMax= "3" exIndex = "1"/>
     ));
 
     

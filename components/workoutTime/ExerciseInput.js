@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { color, space, layout, size, typography } from "styled-system";
 import { FlatList, View, StyleSheet , Dimensions} from "react-native";
+import {RangeInput} from "../inputs/InputQuestions/InputRanges";
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 
@@ -19,6 +20,8 @@ const Text = styled.Text`
     ${typography}
     ${size}
     opacity : 0.5;
+    justifyContent: center;
+    alignItems: center;
 `;
 
 const TextInput = styled.TextInput`
@@ -27,14 +30,6 @@ const TextInput = styled.TextInput`
     ${color}
     ${typography}
     ${size}
-`;
-
-
-const ListContent = styled.View`
-    ${space}
-    ${layout}
-    flex-direction: column;
-    flex-grow: 1;
 `;
 
 const ListHeader = styled.View`
@@ -62,8 +57,16 @@ const CenterItem = styled.View`
     align-items: center;
 `;
 
+
+const UserInput = styled.View`
+flexWrap: wrap
+
+flexDirection: row;
+justify-content: flex-start;
+`;
+
 export const ExerciseInput = props => {
-  const {defaultReps, defaultKG, defaultRIR,exIndex} = props;
+  const {defaultReps, defaultKG, defaultRIRMin,defaultRIRMax,exIndex} = props;
 
     let  icon = (
                 <Text
@@ -98,7 +101,20 @@ export const ExerciseInput = props => {
             </ListHeader>
         
             <ListHeader>
-                <TextInput fontSize = {4} placeholder = {defaultRIR}></TextInput>
+                <UserInput>
+                    <TextInput fontSize = {4} 
+                        placeholder={defaultRIRMin}
+                        /* keyboardType = {keyboardType}*/ >
+                    </TextInput>
+                    <Text fontSize = {4} mr={1} mt = {2}>
+                     -
+                    </Text>
+                    <TextInput fontSize = {4} ml={1}
+                    placeholder={defaultRIRMax}
+                    /* keyboardType = {keyboardType}*/ >
+                    </TextInput>
+            </UserInput>
+
                 <Text mt = {3}>RIR</Text>
             </ListHeader>
 
