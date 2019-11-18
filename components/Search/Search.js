@@ -15,8 +15,6 @@ export  class Search extends React.Component {
         this.state = {search: '', dataSource: props.data};
         this.arrayholder = props.data;
       }
-   
-
   SearchFilterFunction(text) {
     //passing the inserted text in textinput
     const newData = this.arrayholder.filter(function(item) {
@@ -51,11 +49,11 @@ export  class Search extends React.Component {
       const arrayholder = this.props.data;
     return (
       //ListView to show with textinput used as search bar
-      <View style={styles.viewStyle}>
+      <View style={styles.viewStyle} >
         <SearchBar
-        containerStyle = {{width: 350}}
+        containerStyle = {styles.searchStyle}
           round
-     
+          lightTheme
           searchIcon={{ size: 24 }}
           onChangeText={text => this.SearchFilterFunction(text)}
           onClear={text => this.SearchFilterFunction('')}
@@ -82,13 +80,16 @@ export  class Search extends React.Component {
 const styles = StyleSheet.create({
   viewStyle: {
     justifyContent: 'center',
-    flex: 1,
     backgroundColor: 'white',
-    marginTop: Platform.OS == 'ios' ? 30 : 0,
   },
   textStyle: {
     padding: 10,
   },
+  searchStyle: {
+    backgroundColor: 'white',
+    width: 350
+  }
+
 });
 
 
