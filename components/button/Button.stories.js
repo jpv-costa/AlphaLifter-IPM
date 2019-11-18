@@ -5,7 +5,7 @@ import { RoundButton,RoundCornersButton } from "./Button";
 import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
 import theme from "../theme";
-import { SafeAreaView } from "react-native";
+import { SafeAreaView, Alert } from "react-native";
 
 const CenteredView = styled.View`
     flex: 1;
@@ -30,11 +30,16 @@ storiesOf("Buttons", module)
     ))
     .addDecorator(withKnobs)
     .add("RoundButton", () => (
-        <RoundButton text = "MyButton"/>
+        <RoundButton buttonPress = {ButtonPress} text = "MyButton"/>
     )
     ).add("RoundCornersButton", () => (
-        <RoundCornersButton text = "MyButton" />)
+        <RoundCornersButton buttonPress = {ButtonPress} text = "MyButton" />)
     )
+
+
+    function ButtonPress() {
+        Alert.alert("You pressed the button");
+    };
     
 
 
