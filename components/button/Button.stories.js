@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
 import theme from "../theme";
 import { SafeAreaView } from "react-native";
+import { FormButtons } from "./FormButtons";
 
 const CenteredView = styled.View`
     flex: 1;
@@ -30,7 +31,10 @@ storiesOf("Buttons", module)
     ))
     .addDecorator(withKnobs)
     .add("MyButton", () => (
-        <MyButton />
+        <MyButton name={'My Button'} secondaryLight />
+    ))
+    .add("Form Buttons", () => (
+        <FormButtons />
     ));
 
 

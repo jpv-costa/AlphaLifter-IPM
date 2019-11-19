@@ -6,7 +6,6 @@
 function loadStories() {
 	require('../components/Icon/Icon.stories');
 	require('../components/List/List.stories');
-	require('../components/addExercise/ExerciseType.stories');
 	require('../components/button/Button.stories');
 	require('../components/cards/libraryProgramCard/LibraryProgramCard.stories');
 	require('../components/cards/libraryWorkoutCard/LibraryWorkoutCard.stories');
@@ -21,7 +20,6 @@ function loadStories() {
 const stories = [
 	'../components/Icon/Icon.stories',
 	'../components/List/List.stories',
-	'../components/addExercise/ExerciseType.stories',
 	'../components/button/Button.stories',
 	'../components/cards/libraryProgramCard/LibraryProgramCard.stories',
 	'../components/cards/libraryWorkoutCard/LibraryWorkoutCard.stories',

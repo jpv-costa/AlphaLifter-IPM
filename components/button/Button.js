@@ -8,7 +8,7 @@ const Text = styled.Text`
     ${color}
     ${typography}
     ${size}
-    textAlign : center;
+    text-align: center;
 `;
 
 const Button = styled.TouchableOpacity`
@@ -17,18 +17,20 @@ const Button = styled.TouchableOpacity`
     ${color}
     ${typography}
     ${size}
-    borderRadius: 25;
-
 `;
 
 export const MyButton = props => {
-    return(<Button style ={{width : props.width} }
-    bg= {props.secondaryDark?"secondaryShades.1": props.secondaryLight? "secondaryTints.0":"primary"}
-    py = {3}
-    px ={2}
+    return(
+    <Button style = {{width : props.width, opacity: (props.disabled)?0.3:1} }
+        onPress={props.onPress}
+        bg= {props.secondaryDark ? "secondaryShades.1" : props.secondaryLight? "secondaryTints.0": "primary"}
+        py = {3}
+        px ={2}
+        disabled={props.disabled}
     >
+            
         <Text style={{fontWeight: 'bold'}} fontSize={4}
-        color = "white.1">My Button</Text>
+            color = "white.1">{props.name}</Text>
     </Button>)
 }
 
