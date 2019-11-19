@@ -18,7 +18,6 @@ const halfScreen = 400 / 2.0; //TODO buscar screen dinamicamente o tamanho
 let dividerSize = halfScreen - halfScreen * (1 - dividerPercentage);
 const buttonSize = halfScreen - dividerSize / 2.0;
 dividerSize = dividerSize;
-console.log(dividerSize);
 
 export const FormButtons = props => {
     const { onNext, onPrevious, disableNext, disablePrevious } = props;
@@ -35,7 +34,7 @@ export const FormButtons = props => {
             />
             <View style={{ color: "white", width: dividerSize }} />
             <MyButton
-                name={(disableNext)?"Finish":"Next"}
+                name={disableNext ? "Finish" : "Next"}
                 secondaryLight
                 width={buttonSize}
                 onPress={onNext}

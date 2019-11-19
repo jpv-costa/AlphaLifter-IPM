@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-import { FlatList, View, Dimensions } from "react-native";
-import { ListItem } from "react-native-elements";
+import { Dimensions } from "react-native";
 import { color, space, layout, size, typography } from "styled-system";
-import { SingleSelectList } from "./SingleSelectList";
-import { FormButtons } from "../button/FormButtons";
 import styled from "styled-components";
 
 const screenWidth = Dimensions.get("window").width;
@@ -33,7 +30,7 @@ export const InputForm = props => {
     return (
         <Center
             style={{
-                width: screenWidth,
+                width: screenWidth
             }}>
             <QuestionItem>
                 <Text fontSize={6}>{props.question}</Text>

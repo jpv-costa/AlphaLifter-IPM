@@ -18,6 +18,7 @@ const ListContainer = styled.View`
     ${space}
     ${layout}
     flex-direction: row;
+    justify-content: center;
     align-items: center;
     background-color: ${props =>
         props.selected ? props.theme.colors.secondaryTints[4] : "transparent"};
@@ -35,6 +36,7 @@ const ListContent = styled.View`
     ${space}
     ${layout}
     flex-direction: column;
+    justify-content: center;
     flex-grow: 1;
 `;
 
@@ -63,6 +65,22 @@ const CenterItem = styled.View`
     align-items: center;
 `;
 
+const SelectContainer = styled.View`
+    ${space}
+    ${layout}
+    width: 25;
+    height: 25;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #555;
+    border: 1px solid
+        ${props =>
+            props.selected ? props.theme.colors.secondaryShades[0] : "#555"};
+    border-radius: ${44 / 2};
+    background-color: ${props =>
+        props.selected ? props.theme.colors.secondaryShades[0] : "transparent"};
+`;
+
 const ListItem = props => {
     const {
         iconData,
@@ -72,7 +90,8 @@ const ListItem = props => {
         description,
         extraInfo,
         selected,
-        touchable
+        touchable,
+        radialSelect
     } = props;
 
     let icon;
@@ -113,8 +132,15 @@ const ListItem = props => {
             <TouchableListContainer
                 px={3}
                 py={3}
-                selected={selected}
+                selected={radialSelect ? false : selected}
                 onPress={props.onPress}>
+                {radialSelect && (
+                    <SelectContainer mr={3} selected={selected}>
+                        {selected && (
+                            <Icon size={15} id={"check"} fill={"#fff"} />
+                        )}
+                    </SelectContainer>
+                )}
                 {icon && (
                     <IconCircle>
                         <Circle />
@@ -123,14 +149,18 @@ const ListItem = props => {
                 )}
                 <ListContent ml={3} mr={3}>
                     <ListHeader>
-                        <Text fontSize={2} fontWeight='bold'>
-                            {title}
-                        </Text>
-                        <Text fontSize={2} color='text.1'>
-                            {extraInfo}
-                        </Text>
+                        {title && (
+                            <Text fontSize={2} fontWeight='bold'>
+                                {title}
+                            </Text>
+                        )}
+                        {extraInfo && (
+                            <Text fontSize={2} color='text.1'>
+                                {extraInfo}
+                            </Text>
+                        )}
                     </ListHeader>
-                    {description && (
+                    {description && typeof description == "string" ? (
                         <Text
                             mt={2}
                             mr={2}
@@ -140,6 +170,8 @@ const ListItem = props => {
                             numberOfLines={1}>
                             {description}
                         </Text>
+                    ) : (
+                        description
                     )}
                 </ListContent>
             </TouchableListContainer>
@@ -155,14 +187,18 @@ const ListItem = props => {
                 )}
                 <ListContent ml={3} mr={3}>
                     <ListHeader>
-                        <Text fontSize={2} fontWeight='bold'>
-                            {title}
-                        </Text>
-                        <Text fontSize={2} color='text.1'>
-                            {extraInfo}
-                        </Text>
+                        {title && (
+                            <Text fontSize={2} fontWeight='bold'>
+                                {title}
+                            </Text>
+                        )}
+                        {extraInfo && (
+                            <Text fontSize={2} color='text.1'>
+                                {extraInfo}
+                            </Text>
+                        )}
                     </ListHeader>
-                    {description && (
+                    {description && description instanceof String ? (
                         <Text
                             mt={2}
                             mr={2}
@@ -172,6 +208,8 @@ const ListItem = props => {
                             numberOfLines={1}>
                             {description}
                         </Text>
+                    ) : (
+                        description
                     )}
                 </ListContent>
             </ListContainer>
@@ -184,7 +222,7 @@ export class List extends React.Component {
         super(props);
 
         this.state = {
-            selected: this.props.selectedId ? this.props.selectedId : null
+            selected: [this.props.selectedId] ? [this.props.selectedId] : []
         };
     }
 
@@ -194,7 +232,8 @@ export class List extends React.Component {
             onItemPress,
             selectList,
             numberedBullet,
-            selectedId
+            selectId,
+            multiselect
         } = this.props;
 
         return (
@@ -208,24 +247,53 @@ export class List extends React.Component {
                     if (selectList) {
                         return (
                             <ListItem
+                                radialSelect={multiselect}
                                 id={item.id}
                                 iconData={item.icon}
                                 title={item.title}
                                 extraInfo={item.extraInfo}
                                 description={item.description}
                                 iconType={item.iconType}
-                                selected={this.state.selected == item.id}
+                                selected={this.state.selected.includes(item.id)}
                                 index={index}
                                 numberedBullet={numberedBullet}
                                 touchable
                                 onPress={() => {
-                                    if (onItemPress) {
-                                        onItemPress(item);
-                                    }
-                                    if (selectList) {
-                                        this.setState({
-                                            selected: item.id
-                                        });
+                                    if (multiselect) {
+                                        if (
+                                            this.state.selected.includes(
+                                                item.id
+                                            )
+                                        ) {
+                                            let index = this.state.selected.indexOf(
+                                                item.id
+                                            );
+                                            if (index > -1) {
+                                                this.state.selected.splice(
+                                                    index,
+                                                    1
+                                                );
+                                            }
+                                        } else {
+                                            this.state.selected.push(item.id);
+                                        }
+                                        this.setState(previousState => ({
+                                            selected: [
+                                                ...previousState.selected
+                                            ]
+                                        }));
+                                    } else {
+                                        if (onItemPress) {
+                                            onItemPress(item);
+                                        }
+                                        this.state.selected.pop();
+                                        this.state.selected.push(item.id);
+
+                                        this.setState(previousState => ({
+                                            selected: [
+                                                ...previousState.selected
+                                            ]
+                                        }));
                                     }
                                 }}
                             />
@@ -239,7 +307,10 @@ export class List extends React.Component {
                                 extraInfo={item.extraInfo}
                                 description={item.description}
                                 iconType={item.iconType}
-                                selected={this.state.selected == item.id}
+                                selected={
+                                    this.state.selected == item.id ||
+                                    selectId == item.id
+                                }
                                 index={index}
                                 numberedBullet={numberedBullet}
                             />

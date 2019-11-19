@@ -1,15 +1,11 @@
 import { Dimensions } from "react-native";
 import React, { useState } from "react";
-import { FlatList, View, Text, SafeAreaView } from "react-native";
-import { SingleSelectList } from "./SingleSelectList";
-import { InputForm } from "./InputForm";
+import { View } from "react-native";
 import Dots from "react-native-dots-pagination";
-import { FormButtons } from "../button/FormButtons";
+import { FormButtons } from "../Button/FormButtons";
 import styled from "styled-components";
 
-const ScrollView = styled.ScrollView`
-    
-`;
+const ScrollView = styled.ScrollView``;
 
 export class Form extends React.Component {
     state = {
@@ -19,20 +15,25 @@ export class Form extends React.Component {
     scrollview = React.createRef();
 
     render() {
-        const nChildren = React.Children.count(this.props.children);
         const screenWidth = Dimensions.get("window").width;
-        const screenHeight = Dimensions.get("window").height;
 
-        //const screens =  props.childern.map((item) => {
         const previousPage = () => {
-            this.scrollview.current.scrollTo({x: (this.state.pageNum - 1)*screenWidth, y: 0, animated: true});
+            this.scrollview.current.scrollTo({
+                x: (this.state.pageNum - 1) * screenWidth,
+                y: 0,
+                animated: true
+            });
             this.setState(previousState => ({
                 pageNum: previousState.pageNum - 1
             }));
         };
 
         const nextPage = () => {
-            this.scrollview.current.scrollTo({x: (this.state.pageNum + 1)*screenWidth, y: 0, animated: true});
+            this.scrollview.current.scrollTo({
+                x: (this.state.pageNum + 1) * screenWidth,
+                y: 0,
+                animated: true
+            });
             this.setState(previousState => ({
                 pageNum: previousState.pageNum + 1
             }));
@@ -60,32 +61,13 @@ export class Form extends React.Component {
                 <FormButtons
                     onNext={nextPage}
                     onPrevious={previousPage}
-                    disableNext={this.state.pageNum == this.props.children.length - 1}
-                    disablePrevious={
-                        this.state.pageNum == 0
+                    disableNext={
+                        this.state.pageNum == this.props.children.length - 1
                     }
+                    disablePrevious={this.state.pageNum == 0}
                 />
             </View>
         );
         //})
     }
 }
-
-const chooseProgressionData = [
-    {
-        id: 1,
-        title: "Load Progression"
-    },
-    {
-        id: 2,
-        title: "Double Progression"
-    },
-    {
-        id: 3,
-        title: "Linear Periodization"
-    },
-    {
-        id: 4,
-        title: "Set Progression"
-    }
-];
