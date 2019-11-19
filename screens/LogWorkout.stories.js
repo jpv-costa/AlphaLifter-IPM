@@ -1,11 +1,11 @@
 import React from "react";
 import { storiesOf } from "@storybook/react-native";
 import { withKnobs, object } from "@storybook/addon-knobs/react";
-import { ExerciseType } from "./ExerciseType";
+import  LogWorkout  from "./LogWorkout";
 import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
-import theme from "../theme";
-import { SafeAreaView } from "react-native";
+import theme from "../components/theme";
+import { SafeAreaView, Alert } from "react-native";
 
 const CenteredView = styled.View`
     flex: 1;
@@ -13,11 +13,7 @@ const CenteredView = styled.View`
     align-items: center;
 `;
 
-const onItemPress = item => {
-    console.log("You pressed item '" + item.title + "'");
-};
-
-storiesOf("AddExerciseQuests", module)
+storiesOf("Screens", module)
     // The ThemeProvider feeds the theme options to the components scope
     // (therefore the component can use them),
     // and centers the component in the screen
@@ -29,9 +25,9 @@ storiesOf("AddExerciseQuests", module)
         </SafeAreaView>
     ))
     .addDecorator(withKnobs)
-    .add("ExerciseType", () => (
-        <ExerciseType/>
+    .add("LogWorkout", () => (
+        <LogWorkout />
     ));
 
-
+    
 

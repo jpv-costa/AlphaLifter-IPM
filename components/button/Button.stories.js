@@ -5,6 +5,7 @@ import { RoundButton,RoundCornersButton } from "./Button";
 import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
 import theme from "../theme";
+import { FormButtons } from "./FormButtons";
 import { SafeAreaView, Alert } from "react-native";
 
 const CenteredView = styled.View`
@@ -29,6 +30,12 @@ storiesOf("Buttons", module)
         </SafeAreaView>
     ))
     .addDecorator(withKnobs)
+    .add("MyButton", () => (
+        <MyButton name={'My Button'} secondaryLight />
+    ))
+    .add("Form Buttons", () => (
+        <FormButtons />
+    ))
     .add("RoundButton", () => (
         <RoundButton buttonPress = {ButtonPress} text = "MyButton"/>
     )
