@@ -12,7 +12,7 @@ function loadStories() {
 	require('../components/cards/libraryWorkoutCard/LibraryWorkoutCard.stories');
 	require('../components/cards/workoutCard/WorkoutCard.stories');
 	require('../components/charts/LineChart/LineChart.stories');
-	require('../components/form/Form.stories');
+	//require('../components/form/Form.stories');
 	require('../components/inputs/HorizontalSelect/HorizontalSelect.stories');
 	require('../components/inputs/InputQuestions/InputQuestions.stories');
 	require('../components/navigation/TabNavigator.stories');
@@ -30,7 +30,7 @@ const stories = [
 	'../components/cards/libraryWorkoutCard/LibraryWorkoutCard.stories',
 	'../components/cards/workoutCard/WorkoutCard.stories',
 	'../components/charts/LineChart/LineChart.stories',
-	'../components/form/Form.stories',
+	//'../components/form/Form.stories',
 	'../components/inputs/HorizontalSelect/HorizontalSelect.stories',
 	'../components/inputs/InputQuestions/InputQuestions.stories',
 	'../components/navigation/TabNavigator.stories',

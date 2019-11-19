@@ -2,12 +2,14 @@ import * as React from 'react';
 import {
   StyleSheet,
   FlatList,
+  Alert,
+  View, Dimensions
 } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 
 import styled from "styled-components";
 import { color, space, layout, size, typography } from "styled-system";
-
+const screenWidth = Math.round(Dimensions.get('window').width);
 
 const Text = styled.Text`
 ${space}
@@ -18,10 +20,13 @@ ${size}
 justifyContent: center;
 alignItems: center;
 `;
-const View = styled.TouchableOpacity`
+const ViewTouch = styled.TouchableOpacity`
     ${space}
     ${layout}
-   
+    background-color: ${props =>
+      props.selected ? props.theme.colors.secondaryTints[4] : "transparent"};
+      borderRadius:10;
+     
 `;
 
 const TextDescription = styled.Text`
@@ -34,20 +39,21 @@ justifyContent: center;
 alignItems: center;
 opacity: 0.7;
 `;
-
-export  class Search extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {search: '', dataSource: props.data};
-        this.arrayholder = props.data;
-      }
+ 
 
 
-     
-  SearchFilterFunction(text) {
-    //passing the inserted text in textinput
-    const newData = this.arrayholder.filter(function(item) {
-      //applying filter for the inserted text in search bar
+export default function Search (props) { 
+ 
+  const { data,  selectedId, Workouts } = props;
+   [search, Setsearch] = React.useState('');
+   [dataSource,SetdataSource]= React.useState(data); 
+   [currentEx, SetcurrentEx] = React.useState('');
+   const arrayholder = data;
+   const [selected, setSelected] = React.useState(selectedId);
+  
+   
+  function SearchFilterFunction(text, array)  {
+   return array.filter(function(item) {
       const itemName = item.name ? item.name.toUpperCase() : '';
       const itemPMuscle = item.primaryMuscles ? item.primaryMuscles.toUpperCase() : '';
       const itemSMuscle = item.secondaryMuscles ? item.secondaryMuscles.toUpperCase() : '';
@@ -58,29 +64,9 @@ export  class Search extends React.Component {
              itemSMuscle.indexOf(textData) > -1||
              itemType.indexOf(textData)>-1 ;
     });
-
-    this.setState({
-      //setting the filtered newData on datasource
-      //After setting the data it will automatically re-render the view
-      dataSource: newData,
-      search: text,
-    });
   }
 
-  ListViewItemSeparator = () => {
-    //Item sparator view
-    return (
-      <View
-        style={{
-          height: 0.3,
-          width: '90%',
-          backgroundColor: '#080808',
-        }}
-      />
-    );
-  };
-
-  render() {
+ 
     return (
       //ListView to show with textinput used as search bar
       <View style={styles.viewStyle} >
@@ -89,22 +75,24 @@ export  class Search extends React.Component {
           round
           lightTheme
           searchIcon={{ size: 24 }}
-          onChangeText={text => this.SearchFilterFunction(text)}
-          onClear={text => this.SearchFilterFunction('')}
+          onChangeText={text => {SetdataSource(SearchFilterFunction(text, array = arrayholder));Setsearch(text)}}
+          onClear={text =>{ SetdataSource(SearchFilterFunction('',array = arrayholder));Setsearch('')}}
           placeholder="Type Here..."
-          value={this.state.search}
+          value={search}
         />
         <FlatList
-          data={this.state.dataSource}
-          
-          //Item Separator View
-          renderItem={({ item }) => (
-            // Single Comes here which will be repeatative for the FlatListItems
-            <View>
-              <Text fontSize = {4} pt = {2}>{item.name}</Text>
-              <TextDescription fontSize = {3} ml = {2}>
-                 {item.type} exercise wich involve {item.primaryMuscles} and {item.secondaryMuscles}</TextDescription>
-            </View>
+          data={dataSource}
+          renderItem={({ item }) => ( 
+            <ViewTouch selected={selected == item.id} 
+            onPress={() => { setSelected(item.id);SetcurrentEx(item.name);console.log(item.name)}}
+            px = {2} py = {2} mx = {1}>
+              <Text fontSize = {4} >{item.name}</Text>
+             
+             {Workouts==true ? <TextDescription fontSize = {3} ml = {2} >
+           {item.exercises} exercises wich involve {item.primaryMuscles}</TextDescription> : 
+          <TextDescription fontSize = {3} ml = {2} >   {item.type} exercise wich involve {item.primaryMuscles}
+                   and {item.secondaryMuscles}</TextDescription>}
+            </ViewTouch>
           )}
           enableEmptySections={true}
           style={{ marginTop: 10 }}
@@ -113,19 +101,26 @@ export  class Search extends React.Component {
       </View>
     );
   }
-}
+
 
 const styles = StyleSheet.create({
   viewStyle: {
     justifyContent: 'center',
-    backgroundColor: 'white',
+    width : screenWidth,
+     justifyContent: 'center',
+    alignItems: 'center'
   },
   searchStyle: {
     backgroundColor: 'white',
-    width: 350
+    width: 350, 
+
   }
 
 });
+
+
+
+
 
 
 

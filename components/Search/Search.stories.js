@@ -2,7 +2,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react-native";
 import { withKnobs, object } from "@storybook/addon-knobs/react";
-import {Search} from './Search';
+import Search from './Search';
 import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
 import theme from "../theme";
@@ -26,8 +26,11 @@ storiesOf("Search", module)
         </SafeAreaView>
     ))
     .addDecorator(withKnobs)
-    .add("SearchBar", () => (
-        <Search data = {data} />
+    .add("SearchBarExercises", () => (
+        <Search data = {data} selectList Workouts = {false}/>
+    ))
+    .add("SearchBarWorkouts",() => (
+        <Search data = {workouts} selectList Workouts = {true}/>
     ));
 
 const data = [
@@ -62,4 +65,28 @@ const data = [
         type: "Compound"
                          
     }
+];
+
+const workouts = [
+    {
+        id: 1,
+        primaryMuscles: "Chest, Tricep",
+        name: "Chest Workout",
+        exercises: "3"
+        
+    },
+    {
+        id: 2,
+        primaryMuscles: "Back, Biceps",
+        name: "Back Workout",
+        exercises: "4"
+    },
+    {
+        id: 3,
+        primaryMuscles: "Chest, Quads, Back",
+        name: "Full body",
+        exercises: "6"
+                         
+    },
+   
 ];
