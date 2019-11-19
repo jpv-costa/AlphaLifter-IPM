@@ -1,7 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react-native";
 import { withKnobs, object } from "@storybook/addon-knobs/react";
-import { LogWorkout } from "./LogWorkout";
+import  LogWorkout  from "./LogWorkout";
 import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
 import theme from "../components/theme";

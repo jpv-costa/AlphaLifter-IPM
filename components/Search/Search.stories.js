@@ -33,114 +33,33 @@ storiesOf("Search", module)
 const data = [
     {
         id: 1,
-        icon: {
-            primaryMuscles: ["chest"],
-            secondaryMuscles: ["abs"],
-            view: "front-upper"
-        },
+        primaryMuscles: "Chest",
+        secondaryMuscles: "Shoulders",
         name: "Bench Press",
-        completed: true,
-        estimatedDuration: "+/- 30min",
-        configuration: {
-            1: {
-                sets: 1,
-                reps: {
-                    min: 4,
-                    max: 6
-                },
-                intensity: 0.8725,
-                RIR: {
-                    min: 1,
-                    max: 2
-                }
-            },
-            2: {
-                sets: 4,
-                reps: 5,
-                intensity: 0.825,
-                RIR: {
-                    min: 1,
-                    max: 3
-                }
-            }
-        }
+        type: "Isolated"
+        
     },
     {
         id: 2,
-        icon: {
-            primaryMuscles: ["chest"],
-            secondaryMuscles: ["abs"],
-            view: "front-upper"
-        },
-        name: "Lateral Raises",
-        completed: false,
-        estimatedDuration: "+/- 22min",
-        configuration: {
-            1: {
-                sets: 3,
-                reps: 7,
-                intensity: 0.75,
-                RIR: {
-                    min: 1,
-                    max: 4
-                }
-            }
-        }
+        primaryMuscles: "Back",
+        secondaryMuscles: "Bicep",
+        name: "Pull up",
+        type: "Isolated"
     },
     {
         id: 3,
-        icon: {
-            primaryMuscles: ["chest"],
-            secondaryMuscles: ["abs"],
-            view: "front-upper"
-        },
-        name: "Row",
-        completed: false,
-        estimatedDuration: "+/- 14min",
-        configuration: {
-            1: {
-                sets: {
-                    min: 3,
-                    max: 4
-                },
-                reps: 3,
-                intensity: 0.85,
-                RIR: {
-                    min: 1,
-                    max: 2
-                }
-            }
-        }
+        primaryMuscles: "Chest",
+        secondaryMuscles: "Tricep",
+        name: "Push up",
+        type : "Isolated"
+                         
     },
     {
         id: 4,
-        icon: {
-            primaryMuscles: ["chest"],
-            secondaryMuscles: ["abs"],
-            view: "front-upper"
-        },
-        name: "Back Squat",
-        completed: false,
-        estimatedDuration: "+/- 19min",
-        configuration: {
-            1: {
-                sets: 1,
-                reps: 3,
-                intensity: 0.85,
-                RIR: {
-                    min: 1,
-                    max: 2
-                }
-            },
-            2: {
-                sets: 4,
-                reps: 5,
-                intensity: 0.825,
-                RIR: {
-                    min: 1,
-                    max: 3
-                }
-            }
-        }
+        primaryMuscles: "Legs",
+        secondaryMuscles: "Lower Back",
+        name: "Romanian DeadLift",
+        type: "Compound"
+                         
     }
 ];

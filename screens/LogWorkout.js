@@ -1,28 +1,95 @@
 import React,{Component} from 'react';
-import {
-  Alert,
-  Image,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import styled from "styled-components";
+import { color, space, layout, size, typography } from "styled-system";
+import {Alert,StyleSheet,View} from 'react-native';
 import {WorkoutTimer}from '../components/workoutTime/WorkoutTime'
 import {ExerciseInput} from '../components/workoutTime/ExerciseInput'
 import {RoundButton} from '../components/button/Button'
-import { EquipmentTypes} from '../components/workouts/Exercises/Exercise'
+import {EquipmentTypes,ConfiguredExerciseList} from '../components/workouts/Exercises/Exercise'
+import { object } from "@storybook/addon-knobs/react";
 
-
- class LogWorkout extends Component {
+ export default class LogWorkout extends Component {
     constructor(props){
         super(props);
-        this.state = {log: false}
+        this.state = {log: true}
     }
     toggleLog = () => this.setState(prevState => ({ log: !prevState.log }))
    
-   
+    onPlayPress(){
+        Alert.alert("You pressed play");
+    }
+    
+     onMinusPress() {
+        Alert.alert("You pressed minus");
+    }
+     onPlusPress() {
+        Alert.alert("You pressed plus");
+    };
+     onReplayPress() {
+        Alert.alert("You pressed replay");
+    };
+    ButtonPress(){
+        Alert.alert("Press");
+    }
+    data = [
+        {   id: "1",
+            time: "01:30min",
+            percentage: "77",
+            elapsed:"00:44:34"
+        }
+        ];
+    
+        styles = StyleSheet.create({
+        timer: {
+            justifyContent: 'center',
+            alignSelf: 'center'
+        }, view: {
+            flex : 1,
+            flexDirection: 'column' ,
+            justifyContent: 'space-between',
+        }    
+      });
+
+    render(){
+    return (
+        <View style = {this.styles.view} >
+            <WorkoutTimer  style = {this.styles.timer}
+                           onMinusPress = {this.onMinusPress} 
+                           onPlusPress = {this.onPlusPress} 
+                           onPlayPress = {this.onPlayPress} 
+                           onReplayPress = {this.onReplayPress} 
+                           data = {this.data}/>
+          
+         {this.state.log ? <ExerciseInputFinal toggleLog = {this.toggleLog}/> 
+           : <ConfiguredExerciseListFinal toggleLog = {this.toggleLog} />}
+          
+           <RoundButton buttonPress = {this.ButtonPress} 
+                        text = "Finish"/>
+         
+        </View>
+    );
+
+    }
+}
+
+class ExerciseInputFinal extends Component {
+
+    render() {
+        return (
+            <ExerciseInput defaultReps = "12"
+                            defaultKG = "40"
+                            defaultRIRMin = "1" 
+                            defaultRIRMax = "3" 
+                            exIndex = "1"
+                           onPress = {this.props.toggleLog}/>
+        );
+    }
+
+}
+
+class ConfiguredExerciseListFinal extends Component {
+
+
     exercise = [
         {
             id: 1,
@@ -46,79 +113,17 @@ import { EquipmentTypes} from '../components/workouts/Exercises/Exercise'
                     RIR: {
                         min: 1,
                         max: 2
-                    }
-                }
-            }
-        }
+                    }  }  }  }
               
     ];
-    
-     data = [
-    {
-        id: "1",
-        time: "01:30min",
-        percentage: "77",
-        elapsed:"00:44:34"
-    }
-    ];
-    
-    onPlayPress(){
-        Alert.alert("You pressed play");
-    }
-    
-     onMinusPress() {
-        Alert.alert("You pressed minus");
-    }
-     onPlusPress() {
-        Alert.alert("You pressed plus");
-    };
-     onReplayPress() {
-        Alert.alert("You pressed replay");
-    };
-    ButtonPress(){
-        Alert.alert("Press");
-    }
-    
-
-    render(){
-    return (
-        <View>
-            <WorkoutTimer  onMinusPress= {onMinusPress} onPlusPress={onPlusPress} 
-            onPlayPress={onPlayPress} onReplayPress= {onReplayPress} data= {data}/>
-          
-           {this.state.log ? <ExerciseInputFinal defaultReps = "12" defaultKG= "40"
-            defaultRIRMin= "1" defaultRIRMax= "3" exIndex = "1"
-            toggleLogin={this.toggleLog}/> :
-            <ConfiguredExerciseListFinal data={object("data", exercise)} 
-            toggleLogin={this.toggleLog} />}
-          
-           <RoundButton buttonPress = {ButtonPress} text = "MyButton"/>
-         
-        </View>
-    );
-
-    }
-}
-
-class ExerciseInputFinal extends Component {
-
     render() {
         return (
-            <ExerciseInput  onPress={this.props.toggleLog}/>
-        );
-    }
-
-}
-
-class ConfiguredExerciseListFinal extends Component {
-
-    render() {
-        return (
-            <ConfiguredExerciseList  onPress={this.props.toggleLog} />
+            <ConfiguredExerciseList data = {object("data", this.exercise)} 
+                                    onPress = {this.props.toggleLog} />
         );
     }
 }
 
-export default LogWorkout;
+
 
 
