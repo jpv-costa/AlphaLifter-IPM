@@ -75,7 +75,7 @@ const ListItem = props => {
                     fontSize={4}
                     fontWeight='bold'
                     style={{ opacity: 0.8 }}>
-                    {index}
+                    {index + 1}
                 </Text>
             );
         } else if (iconData.id.toLowerCase() == "muscles") {
@@ -136,35 +136,41 @@ const ListItem = props => {
 };
 
 export const List = props => {
-    const { data, onItemPress, selectList, numberedBullet } = props;
+    const { data, onItemPress, selectList, numberedBullet, selectedId } = props;
 
-    const [selected, setSelected] = useState(null);
+    const [selected, setSelected] = useState(selectedId);
 
     return (
         <FlatList
             data={data}
             style={{ width: "100%" }}
-            renderItem={({ item, index }) => (
-                <ListItem
-                    id={item.id}
-                    iconData={item.icon}
-                    title={item.title}
-                    extraInfo={item.extraInfo}
-                    description={item.description}
-                    iconType={item.iconType}
-                    selected={selected == item.id}
-                    index={index}
-                    numberedBullet={numberedBullet}
-                    onPress={() => {
-                        if (onItemPress) {
-                            onItemPress(item);
-                        }
-                        if (selectList) {
-                            setSelected(item.id);
-                        }
-                    }}
-                />
-            )}
+            renderItem={({ item, index }) => {
+                // if (selectedId == item.id) {
+                //     onItemPress(item);
+                // }
+
+                return (
+                    <ListItem
+                        id={item.id}
+                        iconData={item.icon}
+                        title={item.title}
+                        extraInfo={item.extraInfo}
+                        description={item.description}
+                        iconType={item.iconType}
+                        selected={selected == item.id}
+                        index={index}
+                        numberedBullet={numberedBullet}
+                        onPress={() => {
+                            if (onItemPress) {
+                                onItemPress(item);
+                            }
+                            if (selectList) {
+                                setSelected(item.id);
+                            }
+                        }}
+                    />
+                );
+            }}
             keyExtractor={item => item.id}
         />
     );

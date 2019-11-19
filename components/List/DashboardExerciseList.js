@@ -2,7 +2,7 @@ import React from "react";
 import { List } from "./List";
 
 export const DashboardExerciseList = props => {
-    const { data, ...other } = props;
+    const { data, selectedId, ...other } = props;
 
     const parsedData = data.map(item => {
         const { id, name, variations, progress, selected, icon } = item;
@@ -26,5 +26,5 @@ export const DashboardExerciseList = props => {
         };
     });
 
-    return <List data={parsedData} {...other} />;
+    return <List data={parsedData} {...other} selectedId={selectedId} />;
 };

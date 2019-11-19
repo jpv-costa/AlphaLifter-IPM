@@ -1,9 +1,1 @@
-{
-  "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://hy-3hb.anonymous.alphalifter-prot.exp.direct",
-  "packagerNgrokUrl": "https://packager.hy-3hb.anonymous.alphalifter-prot.exp.direct",
-  "ngrokPid": 55333,
-  "devToolsPort": 19002,
-  "packagerPort": 19003,
-  "packagerPid": 55323
-}
+{}

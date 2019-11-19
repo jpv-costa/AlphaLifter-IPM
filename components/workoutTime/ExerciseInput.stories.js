@@ -1,11 +1,10 @@
 import React from "react";
 import { storiesOf } from "@storybook/react-native";
 import { withKnobs, object } from "@storybook/addon-knobs/react";
-import { RoundButton,RoundCornersButton } from "./Button";
+import { ExerciseInput } from "./ExerciseInput";
 import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
 import theme from "../theme";
-import { FormButtons } from "./FormButtons";
 import { SafeAreaView, Alert } from "react-native";
 
 const CenteredView = styled.View`
@@ -14,11 +13,8 @@ const CenteredView = styled.View`
     align-items: center;
 `;
 
-const onItemPress = item => {
-    console.log("You pressed item '" + item.title + "'");
-};
 
-storiesOf("Buttons", module)
+storiesOf("WorkoutPlayer", module)
     // The ThemeProvider feeds the theme options to the components scope
     // (therefore the component can use them),
     // and centers the component in the screen
@@ -30,23 +26,9 @@ storiesOf("Buttons", module)
         </SafeAreaView>
     ))
     .addDecorator(withKnobs)
-    .add("MyButton", () => (
-        <MyButton name={'My Button'} secondaryLight />
-    ))
-    .add("Form Buttons", () => (
-        <FormButtons />
-    ))
-    .add("RoundButton", () => (
-        <RoundButton buttonPress = {ButtonPress} text = "MyButton"/>
-    )
-    ).add("RoundCornersButton", () => (
-        <RoundCornersButton buttonPress = {ButtonPress} text = "MyButton" />)
-    )
+    .add("ExerciseInput", () => (
+        <ExerciseInput defaultReps = "12" defaultKG= "40" defaultRIRMin= "1" defaultRIRMax= "3" exIndex = "1"/>
+    ));
 
-
-    function ButtonPress() {
-        Alert.alert("You pressed the button");
-    };
     
-
 

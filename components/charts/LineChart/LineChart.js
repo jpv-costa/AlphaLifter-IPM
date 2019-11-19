@@ -11,6 +11,7 @@ import { extendMoment } from "moment-range";
 import { PanGestureHandler, State } from "react-native-gesture-handler";
 import { clamp } from "../../../utils";
 import { Card } from "../../atoms";
+import { extent, max, min, ascending } from "d3-array";
 const moment = extendMoment(Moment);
 import {
     Defs,
@@ -63,7 +64,7 @@ export class LineChart extends React.PureComponent {
     }
 
     render() {
-        const { dataTrend, dataPoints, height } = this.props;
+        const { dataTrend, dataPoints, height, xMin, xMax } = this.props;
         const contentInset = {
             top: 30,
             bottom: 30,
@@ -73,8 +74,25 @@ export class LineChart extends React.PureComponent {
         const yTicks = 3;
         const xTicks = 4;
 
+        yPointsExtent = extent(dataPoints, point => point.y);
+        yTrendExtent = extent(dataTrend, point => point.y);
+
+        yMin = Math.min(yPointsExtent[0], yTrendExtent[0]);
+        yMax = Math.max(yPointsExtent[1], yTrendExtent[1]);
+
+        let xMinimum = xMin;
+        let xMaximum = xMax;
+
+        if (typeof xMin == "undefined" || xMin == null) {
+            xMinimum = addDays(dataTrend[0].date, -1);
+        }
+
+        if (typeof xMax == "undefined" || xMin == null) {
+            xMaximum = addDays(dataTrend[dataTrend.length - 1].date, 1);
+        }
+
         // Add ghost data points at end and start of graph, to increase visibility of end points
-        this.addGhostData(dataTrend);
+        // this.addGhostData(dataTrend);
 
         const Gradient = ({ index }) => (
             <Defs key={index}>
@@ -147,7 +165,7 @@ export class LineChart extends React.PureComponent {
                             fontSize={theme.fontSizes[1]}
                             fill='black'
                             fillOpacity={0.4}>
-                            {y.invert(yCoord).toFixed(0) + " kg"}
+                            {y.invert(yCoord).toFixed(1) + " kg"}
                         </Text>
                     </G>
                 );
@@ -161,8 +179,10 @@ export class LineChart extends React.PureComponent {
 
             const dates = [];
 
-            const ticks = xBands.ticks(xTicks);
-
+            let ticks = x.ticks(xTicks);
+            if (ticks.length > xTicks) {
+                ticks = ticks.slice(1, ticks.length - 1);
+            }
             dates.push(
                 <Line
                     x1='0'
@@ -177,17 +197,17 @@ export class LineChart extends React.PureComponent {
             );
 
             for (let i = 0; i < ticks.length; i++) {
-                const xCoord = ticks[1] / 2 + ticks[i];
+                const xCoord = x(ticks[1]) / 2 + x(ticks[i]);
                 dates.push(
                     <Text
                         key={`date-${i}`}
-                        x={xCoord}
+                        x={x(ticks[i])}
                         textAnchor='middle'
                         y={height - theme.space[2]}
                         fontSize={theme.fontSizes[1]}
                         fill='black'
                         fillOpacity={0.4}>
-                        {moment(x.invert(xCoord)).format(dateFormat)}
+                        {moment(ticks[i]).format(dateFormat)}
                     </Text>
                 );
             }
@@ -195,7 +215,13 @@ export class LineChart extends React.PureComponent {
             return <G>{dates}</G>;
         };
 
-        const Tooltip = ({ width, path }) => {
+        let dateToValue = {};
+
+        dataPoints.forEach(element => {
+            dateToValue[moment(element.date).format(dateFormat)] = element.y;
+        });
+
+        const Tooltip = ({ width, x: xScale }) => {
             let cardWidth = 0;
 
             moveTooltip = x => {
@@ -209,20 +235,24 @@ export class LineChart extends React.PureComponent {
                         ),
                         opacity: 1
                     });
+
                 this._tooltip.current &&
-                    setLabel(scaleLabelDate(x), scaleLabelValue(x));
+                    setLabel(
+                        moment(xScale.invert(x)).format(dateFormat),
+                        dateToValue[moment(xScale.invert(x)).format(dateFormat)]
+                    );
             };
 
             setNativeProps = nativeProps => {
                 this._tooltip.setNativeProps(nativeProps);
             };
-
+            // Fix
             const scaleLabelDate = scaleQuantile()
                 .domain([0, width])
                 .range(dataPoints.map(d => moment(d.date).format(dateFormat)));
 
             const scaleLabelValue = scaleQuantile()
-                .domain([0, width])
+                .domain(dataPoints.map(d => d.date))
                 .range(dataPoints.map(d => d.y));
 
             setLabel = (title, value) => {
@@ -301,6 +331,10 @@ export class LineChart extends React.PureComponent {
                         style={{ flex: 1 }}
                         data={dataTrend}
                         curve={shape.curveBasis}
+                        yMin={yMin}
+                        yMax={yMax}
+                        xMin={xMinimum}
+                        xMax={xMaximum}
                         yAccessor={({ item }) => item.y}
                         xAccessor={({ item }) => item.date}
                         xScale={scaleTime}
