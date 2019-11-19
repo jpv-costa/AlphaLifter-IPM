@@ -5,7 +5,16 @@ import { FlatList, View, StyleSheet } from "react-native";
 import { Icon } from "../Icon/Icon";
 import { MuscleIcon } from "../Icon/MuscleIcon";
 
-const ListContainer = styled.TouchableOpacity`
+const TouchableListContainer = styled.TouchableOpacity`
+    ${space}
+    ${layout}
+    flex-direction: row;
+    align-items: center;
+    background-color: ${props =>
+        props.selected ? props.theme.colors.secondaryTints[4] : "transparent"};
+`;
+
+const ListContainer = styled.View`
     ${space}
     ${layout}
     flex-direction: row;
@@ -62,7 +71,8 @@ const ListItem = props => {
         title,
         description,
         extraInfo,
-        selected
+        selected,
+        touchable
     } = props;
 
     let icon;
@@ -98,80 +108,146 @@ const ListItem = props => {
         }
     }
 
-    return (
-        <ListContainer
-            px={3}
-            py={3}
-            selected={selected}
-            onPress={props.onPress}>
-            {icon && (
-                <IconCircle>
-                    <Circle />
-                    <CenterItem>{icon}</CenterItem>
-                </IconCircle>
-            )}
-            <ListContent ml={3} mr={3}>
-                <ListHeader>
-                    <Text fontSize={2} fontWeight='bold'>
-                        {title}
-                    </Text>
-                    <Text fontSize={2} color='text.1'>
-                        {extraInfo}
-                    </Text>
-                </ListHeader>
-                {description && (
-                    <Text
-                        mt={2}
-                        mr={2}
-                        fontSize={2}
-                        color={"text.1"}
-                        ellipsizeMode='tail'
-                        numberOfLines={1}>
-                        {description}
-                    </Text>
+    if (touchable) {
+        return (
+            <TouchableListContainer
+                px={3}
+                py={3}
+                selected={selected}
+                onPress={props.onPress}>
+                {icon && (
+                    <IconCircle>
+                        <Circle />
+                        <CenterItem>{icon}</CenterItem>
+                    </IconCircle>
                 )}
-            </ListContent>
-        </ListContainer>
-    );
+                <ListContent ml={3} mr={3}>
+                    <ListHeader>
+                        <Text fontSize={2} fontWeight='bold'>
+                            {title}
+                        </Text>
+                        <Text fontSize={2} color='text.1'>
+                            {extraInfo}
+                        </Text>
+                    </ListHeader>
+                    {description && (
+                        <Text
+                            mt={2}
+                            mr={2}
+                            fontSize={2}
+                            color={"text.1"}
+                            ellipsizeMode='tail'
+                            numberOfLines={1}>
+                            {description}
+                        </Text>
+                    )}
+                </ListContent>
+            </TouchableListContainer>
+        );
+    } else {
+        return (
+            <ListContainer px={3} py={3} selected={selected}>
+                {icon && (
+                    <IconCircle>
+                        <Circle />
+                        <CenterItem>{icon}</CenterItem>
+                    </IconCircle>
+                )}
+                <ListContent ml={3} mr={3}>
+                    <ListHeader>
+                        <Text fontSize={2} fontWeight='bold'>
+                            {title}
+                        </Text>
+                        <Text fontSize={2} color='text.1'>
+                            {extraInfo}
+                        </Text>
+                    </ListHeader>
+                    {description && (
+                        <Text
+                            mt={2}
+                            mr={2}
+                            fontSize={2}
+                            color={"text.1"}
+                            ellipsizeMode='tail'
+                            numberOfLines={1}>
+                            {description}
+                        </Text>
+                    )}
+                </ListContent>
+            </ListContainer>
+        );
+    }
 };
 
-export const List = props => {
-    const { data, onItemPress, selectList, numberedBullet, selectedId } = props;
+export class List extends React.Component {
+    constructor(props) {
+        super(props);
 
-    const [selected, setSelected] = useState(selectedId);
+        this.state = {
+            selected: this.props.selectedId ? this.props.selectedId : null
+        };
+    }
 
-    return (
-        <FlatList
-            data={data}
-            style={{ width: "100%" }}
-            renderItem={({ item, index }) => {
-                // if (selectedId == item.id) {
-                //     onItemPress(item);
-                // }
+    render() {
+        const {
+            data,
+            onItemPress,
+            selectList,
+            numberedBullet,
+            selectedId
+        } = this.props;
 
-                return (
-                    <ListItem
-                        id={item.id}
-                        iconData={item.icon}
-                        title={item.title}
-                        extraInfo={item.extraInfo}
-                        description={item.description}
-                        iconType={item.iconType}
-                        selected={selected == item.id}
-                        index={index}
-                        numberedBullet={numberedBullet}
-                        onPress={() => {
-                            if (onItemPress) {
-                                onItemPress(item);
-                            }
-                            if (selectList) {
-                                setSelected(item.id);
-                            }
-                        }}
-                    />
-                );
-            }}
-            keyExtractor={item => item.id}
-        />
-    );
-};
+        return (
+            <FlatList
+                data={data}
+                style={{ width: "100%" }}
+                renderItem={({ item, index }) => {
+                    // if (selectedId == item.id) {
+                    //     onItemPress(item);
+                    // }
+                    if (selectList) {
+                        return (
+                            <ListItem
+                                id={item.id}
+                                iconData={item.icon}
+                                title={item.title}
+                                extraInfo={item.extraInfo}
+                                description={item.description}
+                                iconType={item.iconType}
+                                selected={this.state.selected == item.id}
+                                index={index}
+                                numberedBullet={numberedBullet}
+                                touchable
+                                onPress={() => {
+                                    if (onItemPress) {
+                                        onItemPress(item);
+                                    }
+                                    if (selectList) {
+                                        this.setState({
+                                            selected: item.id
+                                        });
+                                    }
+                                }}
+                            />
+                        );
+                    } else {
+                        return (
+                            <ListItem
+                                id={item.id}
+                                iconData={item.icon}
+                                title={item.title}
+                                extraInfo={item.extraInfo}
+                                description={item.description}
+                                iconType={item.iconType}
+                                selected={this.state.selected == item.id}
+                                index={index}
+                                numberedBullet={numberedBullet}
+                            />
+                        );
+                    }
+                }}
+                keyExtractor={item => item.id}
+            />
+        );
+    }
+}
