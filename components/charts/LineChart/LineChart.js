@@ -197,7 +197,6 @@ export class LineChart extends React.PureComponent {
             );
 
             for (let i = 0; i < ticks.length; i++) {
-                const xCoord = x(ticks[1]) / 2 + x(ticks[i]);
                 dates.push(
                     <Text
                         key={`date-${i}`}

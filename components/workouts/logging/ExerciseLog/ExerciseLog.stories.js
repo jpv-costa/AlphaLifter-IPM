@@ -1,11 +1,11 @@
 import React from "react";
 import { storiesOf } from "@storybook/react-native";
-import { withKnobs, object } from "@storybook/addon-knobs/react";
-import { ExerciseInput } from "./ExerciseInput";
+import { withKnobs } from "@storybook/addon-knobs/react";
 import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
-import theme from "../theme";
-import { SafeAreaView, Alert } from "react-native";
+import theme from "../../../theme";
+import { ExerciseLog } from "./ExerciseLog";
+import { SafeAreaView } from "react-native";
 
 const CenteredView = styled.View`
     flex: 1;
@@ -13,8 +13,7 @@ const CenteredView = styled.View`
     align-items: center;
 `;
 
-
-storiesOf("WorkoutPlayer", module)
+storiesOf("Lists", module)
     // The ThemeProvider feeds the theme options to the components scope
     // (therefore the component can use them),
     // and centers the component in the screen
@@ -26,9 +25,19 @@ storiesOf("WorkoutPlayer", module)
         </SafeAreaView>
     ))
     .addDecorator(withKnobs)
-    .add("ExerciseInput", () => (
-        <ExerciseInput defaultReps = "12" defaultKG= "40" defaultRIRMin= "1" defaultRIRMax= "3" exIndex = "1"/>
-    ));
+    .add("ExerciseLog", () => <ExerciseLog data={data} />);
 
-    
-
+const data = {
+    1: {
+        sets: 3,
+        weight: 120,
+        reps: {
+            min: 6,
+            max: 8
+        },
+        rpe: {
+            min: 1,
+            max: 3
+        }
+    }
+};
