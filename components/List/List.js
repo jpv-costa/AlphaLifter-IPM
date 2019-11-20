@@ -308,7 +308,7 @@ export class List extends React.Component {
                                 description={item.description}
                                 iconType={item.iconType}
                                 selected={
-                                    this.state.selected == item.id ||
+                                    this.state.selected.includes(item.id) ||
                                     selectId == item.id
                                 }
                                 index={index}

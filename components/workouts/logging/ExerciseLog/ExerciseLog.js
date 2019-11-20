@@ -60,7 +60,7 @@ export const ExerciseLog = props => {
                         onSubmitEditing={() => {
                             inputs[i * 3 + 1].current.focus();
                         }}
-                        placeholder={data["1"].weight}></TextInput>
+                        placeholder={"" + data["1"].weight}></TextInput>
                     <Text ml={1}>Kg</Text>
                 </ListHeader>
                 <ListHeader>
@@ -68,7 +68,7 @@ export const ExerciseLog = props => {
                         ref={inputs[i * 3 + 1]}
                         fontSize={4}
                         blurOnSubmit={false}
-                        keyboardType='number.pad'
+                        keyboardType='number-pad'
                         onFocus={() => {
                             setCurrentSet(i);
                         }}
@@ -84,7 +84,7 @@ export const ExerciseLog = props => {
                     <TextInput
                         ref={inputs[i * 3 + 2]}
                         fontSize={4}
-                        keyboardType='number.pad'
+                        keyboardType='number-pad'
                         blurOnSubmit={false}
                         onFocus={() => {
                             console.log("boas");

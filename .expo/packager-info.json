@@ -1,9 +1,9 @@
 {
   "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://8f-82y.anonymous.alphalifter-323a633ae5f7e394fcdb41a932c247b9c1ff12c4-copy.exp.direct",
-  "packagerNgrokUrl": "https://packager.8f-82y.anonymous.alphalifter-323a633ae5f7e394fcdb41a932c247b9c1ff12c4-copy.exp.direct",
-  "ngrokPid": 27201,
-  "devToolsPort": 19003,
-  "packagerPort": 19004,
-  "packagerPid": 27173
+  "expoServerNgrokUrl": "https://8f-82y.anonymous.alphalifter.exp.direct",
+  "packagerNgrokUrl": "https://packager.8f-82y.anonymous.alphalifter.exp.direct",
+  "ngrokPid": 34396,
+  "devToolsPort": 19002,
+  "packagerPort": 19001,
+  "packagerPid": 34381
 }
