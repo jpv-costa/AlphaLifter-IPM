@@ -94,10 +94,10 @@ export default function Search(props) {
                 inputContainerStyle={{
                     backgroundColor: "#fff",
                     width: "100%",
-                    size: theme.fontSizes[4]
+                    fontSize: theme.fontSizes[1]
                 }}
                 lightTheme
-                searchIcon={{ size: theme.fontSizes[4] }}
+                searchIcon={{ size: theme.fontSizes[5] }}
                 onChangeText={text => {
                     SetDataSource(
                         SearchFilterFunction(text, (array = arrayholder))

@@ -41,26 +41,29 @@ storiesOf("Lists", module)
     .add("Numbered Bullet List", () => (
         <List data={data} selectList onItemPress={onItemPress} numberedBullet />
     ))
-    .add("Dashboard Program List", () => (
+    .add("Program List", () => (
         <DashboardProgramList
             data={programDashboardData}
             selectList
             onItemPress={onItemPress}
         />
     ))
-    .add("Dashboard Exercises List", () => (
+    .add("Exercises List", () => (
         <DashboardExerciseList
             data={exercisesDashboardData}
             selectList
             onItemPress={onItemPress}
         />
     ))
-    .add("Dashboard Muscles List", () => (
+    .add("Muscles List", () => (
         <DashboardMuscleList
             data={musclesDashboardData}
             selectList
             onItemPress={onItemPress}
         />
+    ))
+    .add("Draggable Exercises List", () => (
+        <DashboardExerciseList data={draggableExercisesData} draggable />
     ));
 
 const data = [
@@ -158,6 +161,39 @@ const exercisesDashboardData = [
         name: "Bench Press",
         variations: ["Incline, Dumbbell variation"],
         progress: "10%"
+    }
+];
+
+const draggableExercisesData = [
+    {
+        id: 1,
+        icon: {
+            primaryMuscles: ["chest"],
+            secondaryMuscles: ["biceps"],
+            view: "front-upper"
+        },
+        name: "Bench Press",
+        variations: ["Incline, Dumbbell variation"]
+    },
+    {
+        id: 2,
+        icon: {
+            primaryMuscles: ["chest"],
+            secondaryMuscles: [],
+            view: "front-upper"
+        },
+        name: "Bench Press",
+        variations: ["Incline, Dumbbell variation"]
+    },
+    {
+        id: 3,
+        icon: {
+            primaryMuscles: ["chest"],
+            secondaryMuscles: [],
+            view: "front-upper"
+        },
+        name: "Bench Press",
+        variations: ["Incline, Dumbbell variation"]
     }
 ];
 
