@@ -6,7 +6,7 @@
 function loadStories() {
 	require('../components/Icon/Icon.stories');
 	require('../components/List/List.stories');
-	require('../components/Search/Search.stories');
+	require('../components/search/Search.stories');
 	require('../components/button/Button.stories');
 	require('../components/cards/libraryProgramCard/LibraryProgramCard.stories');
 	require('../components/cards/libraryWorkoutCard/LibraryWorkoutCard.stories');
@@ -24,7 +24,7 @@ function loadStories() {
 const stories = [
 	'../components/Icon/Icon.stories',
 	'../components/List/List.stories',
-	'../components/Search/Search.stories',
+	'../components/search/Search.stories',
 	'../components/button/Button.stories',
 	'../components/cards/libraryProgramCard/LibraryProgramCard.stories',
 	'../components/cards/libraryWorkoutCard/LibraryWorkoutCard.stories',

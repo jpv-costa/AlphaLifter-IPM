@@ -11,6 +11,15 @@ import styled from "styled-components";
 import { color, space, layout, size, typography } from "styled-system";
 const screenWidth = Math.round(Dimensions.get('window').width);
 
+
+const ViewTouch = styled.TouchableOpacity`
+    ${space}
+    ${layout}
+ 
+      borderRadius:10;
+     
+`;
+
 const Text = styled.Text`
 ${space}
 ${layout}
@@ -19,16 +28,9 @@ ${typography}
 ${size}
 justifyContent: center;
 alignItems: center;
-`;
-const ViewTouch = styled.TouchableOpacity`
-    ${space}
-    ${layout}
-    background-color: ${props =>
-      props.selected ? props.theme.colors.secondaryTints[4] : "transparent"};
-      borderRadius:10;
-     
-`;
 
+  color: ${props =>props.selected ? props.theme.colors.secondaryTints[1] : "black"};
+`;
 const TextDescription = styled.Text`
 ${space}
 ${layout}
@@ -38,6 +40,8 @@ ${size}
 justifyContent: center;
 alignItems: center;
 opacity: 0.7;
+
+  color: ${props =>props.selected ? props.theme.colors.secondaryTints[1] : "black"};
 `;
  
 
@@ -86,12 +90,12 @@ export default function Search (props) {
             <ViewTouch selected={selected == item.id} 
             onPress={() => { setSelected(item.id);SetcurrentEx(item.name);console.log(item.name)}}
             px = {2} py = {2} mx = {1}>
-              <Text fontSize = {4} >{item.name}</Text>
+              <Text fontSize = {4} selected={selected == item.id}>{item.name}  </Text>
              
              {Workouts==true ? <TextDescription fontSize = {3} ml = {2} >
            {item.exercises} exercises wich involve {item.primaryMuscles}</TextDescription> : 
-          <TextDescription fontSize = {3} ml = {2} >   {item.type} exercise wich involve {item.primaryMuscles}
-                   and {item.secondaryMuscles}</TextDescription>}
+          <TextDescription fontSize = {3} ml = {2}  selected={selected == item.id} >
+               {item.type} exercise wich involve {item.primaryMuscles} and {item.secondaryMuscles}</TextDescription>}
             </ViewTouch>
           )}
           enableEmptySections={true}

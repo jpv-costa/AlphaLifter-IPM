@@ -64,6 +64,21 @@ const data = [
         name: "Romanian DeadLift",
         type: "Compound"
                          
+    },
+    {
+        id: 5,
+        primaryMuscles: "Shoulder",
+        secondaryMuscles: "Chest",
+        name: "Shoulder Pres",
+        type: "Compound"
+                         
+    },{
+        id: 6,
+        primaryMuscles: "Legs",
+        secondaryMuscles: "Lower Back",
+        name: "Squats",
+        type: "Compound"
+                         
     }
 ];
 
@@ -83,7 +98,7 @@ const workouts = [
     },
     {
         id: 3,
-        primaryMuscles: "Chest, Quads, Back",
+        primaryMuscles: "Chest, Leg, Back",
         name: "Full body",
         exercises: "6"
                          
