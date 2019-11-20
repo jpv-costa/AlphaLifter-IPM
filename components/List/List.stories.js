@@ -64,6 +64,14 @@ storiesOf("Lists", module)
     ))
     .add("Draggable Exercises List", () => (
         <DashboardExerciseList data={draggableExercisesData} draggable />
+    ))
+    .add("Draggable Numbered List", () => (
+        <List
+            data={draggableNumberedData}
+            selectList
+            numberedBullet
+            draggable
+        />
     ));
 
 const data = [
@@ -96,6 +104,37 @@ const data = [
         icon: { id: "dumbbell" },
         title: "Reprehenderit in voluptate",
         extraInfo: "10min",
+        description:
+            "Velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint"
+    }
+];
+
+const draggableNumberedData = [
+    {
+        id: 1,
+        icon: { id: "dumbbell" },
+        title: "Lorem ipsum",
+        description:
+            "Dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
+    },
+    {
+        id: 2,
+        icon: { id: "dumbbell" },
+        title: "Ut labore et",
+        description:
+            "Dolore magna aliqua. Ut enim ad minim veniam, quis nostrud"
+    },
+    {
+        id: 3,
+        icon: { id: "dumbbell" },
+        title: "Exercitation ullamco laboris nisi",
+        description:
+            "Ut aliquip ex ea commodo consequat. Duis aute irure dolor in"
+    },
+    {
+        id: 4,
+        icon: { id: "dumbbell" },
+        title: "Reprehenderit in voluptate",
         description:
             "Velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint"
     }
