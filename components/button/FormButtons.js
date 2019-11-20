@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { color, space, layout, size, typography } from "styled-system";
-import { MyButton } from "./Button";
+import { Button } from "./Button";
 import { View } from "react-native";
 
 const CenterButtons = styled.View`
@@ -25,7 +25,7 @@ export const FormButtons = props => {
 
     return (
         <CenterButtons>
-            <MyButton
+            <Button
                 name={"Back"}
                 secondaryLight
                 width={buttonSize}
@@ -33,7 +33,7 @@ export const FormButtons = props => {
                 disabled={disablePrevious}
             />
             <View style={{ color: "white", width: dividerSize }} />
-            <MyButton
+            <Button
                 name={disableNext ? "Finish" : "Next"}
                 secondaryLight
                 width={buttonSize}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { color, space, layout, size, typography } from "styled-system";
-import { FlatList, View, StyleSheet } from "react-native";
+import { color, space, layout, size, typography, flexbox } from "styled-system";
+import { FlatList, View, StyleSheet, Dimensions } from "react-native";
 import { Icon } from "../Icon/Icon";
 import { MuscleIcon } from "../Icon/MuscleIcon";
 
@@ -30,6 +30,7 @@ const Text = styled.Text`
     ${color}
     ${typography}
     ${size}
+    ${flexbox}
 `;
 
 const ListContent = styled.View`
@@ -37,7 +38,7 @@ const ListContent = styled.View`
     ${layout}
     flex-direction: column;
     justify-content: center;
-    flex-grow: 1;
+    flex: 1;
 `;
 
 const ListHeader = styled.View`
@@ -150,7 +151,12 @@ const ListItem = props => {
                 <ListContent ml={3} mr={3}>
                     <ListHeader>
                         {title && (
-                            <Text fontSize={2} fontWeight='bold'>
+                            <Text
+                                fontSize={2}
+                                fontWeight='bold'
+                                numberOfLines={1}
+                                flex={1}
+                                ellipsizeMode='tail'>
                                 {title}
                             </Text>
                         )}
@@ -164,6 +170,9 @@ const ListItem = props => {
                         <Text
                             mt={2}
                             mr={2}
+                            style={{
+                                flex: 1
+                            }}
                             fontSize={2}
                             color={"text.1"}
                             ellipsizeMode='tail'
@@ -233,17 +242,18 @@ export class List extends React.Component {
             selectList,
             numberedBullet,
             selectId,
-            multiselect
+            multiselect,
+            width
         } = this.props;
 
         return (
             <FlatList
                 data={data}
-                style={{ width: "100%" }}
+                style={{
+                    width: width
+                }}
+                key={item => item.id}
                 renderItem={({ item, index }) => {
-                    // if (selectedId == item.id) {
-                    //     onItemPress(item);
-                    // }
                     if (selectList) {
                         return (
                             <ListItem
@@ -322,3 +332,7 @@ export class List extends React.Component {
         );
     }
 }
+
+List.defaultProps = {
+    width: Dimensions.get("window").width
+};

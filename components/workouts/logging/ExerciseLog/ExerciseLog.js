@@ -50,6 +50,8 @@ export const ExerciseLog = props => {
             <ListContainer px={3} py={2}>
                 <ListHeader>
                     <TextInput
+                        returnKeyType='done'
+                        maxLength={3}
                         ref={inputs[i * 3]}
                         fontSize={4}
                         blurOnSubmit={false}
@@ -57,6 +59,7 @@ export const ExerciseLog = props => {
                         onFocus={() => {
                             setCurrentSet(i);
                         }}
+                        selectTextOnFocus
                         onSubmitEditing={() => {
                             inputs[i * 3 + 1].current.focus();
                         }}
@@ -65,6 +68,9 @@ export const ExerciseLog = props => {
                 </ListHeader>
                 <ListHeader>
                     <TextInput
+                        selectTextOnFocus
+                        returnKeyType='done'
+                        maxLength={3}
                         ref={inputs[i * 3 + 1]}
                         fontSize={4}
                         blurOnSubmit={false}
@@ -82,12 +88,14 @@ export const ExerciseLog = props => {
                 </ListHeader>
                 <ListHeader>
                     <TextInput
+                        selectTextOnFocus
+                        returnKeyType='done'
+                        maxLength={3}
                         ref={inputs[i * 3 + 2]}
                         fontSize={4}
                         keyboardType='number-pad'
                         blurOnSubmit={false}
                         onFocus={() => {
-                            console.log("boas");
                             setCurrentSet(i);
                         }}
                         onSubmitEditing={() => {

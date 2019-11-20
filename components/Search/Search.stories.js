@@ -1,18 +1,23 @@
-
 import React from "react";
 import { storiesOf } from "@storybook/react-native";
 import { withKnobs, object } from "@storybook/addon-knobs/react";
-import Search from './Search';
+import Search from "./Search";
 import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
 import theme from "../theme";
-import { SafeAreaView } from "react-native";
+import { SafeAreaView, Dimensions } from "react-native";
+import { DashboardMuscleList } from "../List/DashboardMuscleList";
+import { DashboardExerciseList } from "../List/DashboardExerciseList";
 
 const CenteredView = styled.View`
     flex: 1;
     justify-content: center;
     align-items: center;
 `;
+
+const onItemPress = item => {
+    console.log("You pressed item '" + item.title + "'");
+};
 
 storiesOf("Search", module)
     // The ThemeProvider feeds the theme options to the components scope
@@ -26,67 +31,87 @@ storiesOf("Search", module)
         </SafeAreaView>
     ))
     .addDecorator(withKnobs)
-    .add("SearchBarExercises", () => (
-        <Search data = {data} selectList Workouts = {false}/>
+    .add("Searchable Muscle List", () => (
+        <Search
+            mt={0}
+            data={musclesDashboardData}
+            placeholder={"Type the muscle..."}
+            searchProperties={["muscle"]}>
+            <DashboardMuscleList
+                selectList
+                multiselect
+                onItemPress={onItemPress}
+            />
+        </Search>
     ))
-    .add("SearchBarWorkouts",() => (
-        <Search data = {workouts} selectList Workouts = {true}/>
+    .add("Searchable Exercise List", () => (
+        <Search
+            mt={0}
+            data={exercisesDashboardData}
+            placeholder={"Type the exercise..."}
+            searchProperties={[
+                "name",
+                "array@icon.primaryMuscles",
+                "array@icon.secondaryMuscles",
+                "array@variations"
+            ]}>
+            <DashboardExerciseList selectList onItemPress={onItemPress} />
+        </Search>
     ));
 
-const data = [
+const musclesDashboardData = [
     {
         id: 1,
-        primaryMuscles: "Chest",
-        secondaryMuscles: "Shoulders",
-        name: "Bench Press",
-        type: "Isolated"
-        
+        muscle: "Biceps",
+        icon: {
+            view: "front-upper"
+        }
     },
     {
         id: 2,
-        primaryMuscles: "Back",
-        secondaryMuscles: "Bicep",
-        name: "Pull up",
-        type: "Isolated"
+        muscle: "Chest",
+        icon: {
+            view: "front-upper"
+        }
     },
     {
         id: 3,
-        primaryMuscles: "Chest",
-        secondaryMuscles: "Tricep",
-        name: "Push up",
-        type : "Isolated"
-                         
-    },
-    {
-        id: 4,
-        primaryMuscles: "Legs",
-        secondaryMuscles: "Lower Back",
-        name: "Romanian DeadLift",
-        type: "Compound"
-                         
+        muscle: "Chest",
+        icon: {
+            view: "front-upper"
+        }
     }
 ];
 
-const workouts = [
+const exercisesDashboardData = [
     {
         id: 1,
-        primaryMuscles: "Chest, Tricep",
-        name: "Chest Workout",
-        exercises: "3"
-        
+        icon: {
+            primaryMuscles: ["chest"],
+            secondaryMuscles: ["biceps"],
+            view: "front-upper"
+        },
+        name: "Bench Press",
+        variations: ["Incline, Dumbbell variation"]
     },
     {
         id: 2,
-        primaryMuscles: "Back, Biceps",
-        name: "Back Workout",
-        exercises: "4"
+        icon: {
+            primaryMuscles: ["biceps"],
+            secondaryMuscles: [],
+            view: "front-upper"
+        },
+        name: "Barbell Rows",
+        variations: ["Decline, Dumbbell variation"]
     },
     {
         id: 3,
-        primaryMuscles: "Chest, Quads, Back",
-        name: "Full body",
-        exercises: "6"
-                         
-    },
-   
+        icon: {
+            primaryMuscles: ["abs"],
+            secondaryMuscles: [],
+            view: "front-upper"
+        },
+        name: "Shoulder Press",
+        variations: ["Standing, Dumbbell variation"]
+    }
 ];

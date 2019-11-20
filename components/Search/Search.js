@@ -1,128 +1,123 @@
-import * as React from 'react';
-import {
-  StyleSheet,
-  FlatList,
-  Alert,
-  View, Dimensions
-} from 'react-native';
-import { SearchBar } from 'react-native-elements';
-
+import * as React from "react";
+import { StyleSheet, FlatList, Alert, View, Dimensions } from "react-native";
+import { SearchBar } from "react-native-elements";
+import theme from "../theme";
 import styled from "styled-components";
-import { color, space, layout, size, typography } from "styled-system";
-const screenWidth = Math.round(Dimensions.get('window').width);
+import { color, space, layout, flexbox, size, typography } from "styled-system";
 
-const Text = styled.Text`
-${space}
-${layout}
-${color}
-${typography}
-${size}
-justifyContent: center;
-alignItems: center;
-`;
-const ViewTouch = styled.TouchableOpacity`
-    ${space}
-    ${layout}
-    background-color: ${props =>
-      props.selected ? props.theme.colors.secondaryTints[4] : "transparent"};
-      borderRadius:10;
-     
+const Container = styled.View`
+  ${space}
+  ${layout}
+  ${flexbox}
 `;
 
-const TextDescription = styled.Text`
-${space}
-${layout}
-${color}
-${typography}
-${size}
-justifyContent: center;
-alignItems: center;
-opacity: 0.7;
-`;
- 
+export default function Search(props) {
+    const { data, placeholder, children, searchProperties, ...other } = props;
+    [search, Setsearch] = React.useState("");
+    [dataSource, SetDataSource] = React.useState(data);
+    const arrayholder = data;
 
+    const getProperty = (element, path) => {
+        if (typeof element == "undefined") {
+            return "";
+        }
 
-export default function Search (props) { 
- 
-  const { data,  selectedId, Workouts } = props;
-   [search, Setsearch] = React.useState('');
-   [dataSource,SetdataSource]= React.useState(data); 
-   [currentEx, SetcurrentEx] = React.useState('');
-   const arrayholder = data;
-   const [selected, setSelected] = React.useState(selectedId);
-  
-   
-  function SearchFilterFunction(text, array)  {
-   return array.filter(function(item) {
-      const itemName = item.name ? item.name.toUpperCase() : '';
-      const itemPMuscle = item.primaryMuscles ? item.primaryMuscles.toUpperCase() : '';
-      const itemSMuscle = item.secondaryMuscles ? item.secondaryMuscles.toUpperCase() : '';
-      const itemType = item.type? item.type.toUpperCase(): '';
-      const textData = text.toUpperCase();
-      return itemName.indexOf(textData) > -1||
-             itemPMuscle.indexOf(textData) > -1||
-             itemSMuscle.indexOf(textData) > -1||
-             itemType.indexOf(textData)>-1 ;
-    });
-  }
+        if (path.length > 1) {
+            return getProperty(element[path[0]], path.slice(1, path.length));
+        } else {
+            const propertyValue = element[path[0]];
+            return typeof propertyValue == "undefined" ? "" : element[path[0]];
+        }
+    };
 
- 
+    function SearchFilterFunction(text, array) {
+        const valueExistsInArray = (searchValue, array) => {
+            let found = false;
+            array.forEach(value => {
+                if (
+                    value.toUpperCase().indexOf(searchValue.toUpperCase()) != -1
+                ) {
+                    found = true;
+                }
+            });
+            return found;
+        };
+
+        return array.filter(function(item) {
+            let found = true;
+
+            const searchTerms = text.split(" ");
+
+            searchTerms.forEach(searchTerm => {
+                let foundInProperties = false;
+                searchProperties.forEach(propertyPath => {
+                    const splitProperty = propertyPath.split("@");
+
+                    let pathIndex;
+
+                    if (splitProperty.length == 1) {
+                        pathIndex = 0;
+                    } else {
+                        pathIndex = 1;
+                    }
+
+                    const splitPath = splitProperty[pathIndex].split(".");
+                    let propertyItems = getProperty(item, splitPath);
+
+                    if (!Array.isArray(propertyItems)) {
+                        propertyItems = [propertyItems];
+                    }
+
+                    if (valueExistsInArray(searchTerm, propertyItems)) {
+                        foundInProperties = true;
+                    }
+                });
+                found = found && foundInProperties;
+            });
+
+            return found;
+        });
+    }
+
     return (
-      //ListView to show with textinput used as search bar
-      <View style={styles.viewStyle} >
-        <SearchBar
-        containerStyle = {styles.searchStyle}
-          round
-          lightTheme
-          searchIcon={{ size: 24 }}
-          onChangeText={text => {SetdataSource(SearchFilterFunction(text, array = arrayholder));Setsearch(text)}}
-          onClear={text =>{ SetdataSource(SearchFilterFunction('',array = arrayholder));Setsearch('')}}
-          placeholder="Type Here..."
-          value={search}
-        />
-        <FlatList
-          data={dataSource}
-          renderItem={({ item }) => ( 
-            <ViewTouch selected={selected == item.id} 
-            onPress={() => { setSelected(item.id);SetcurrentEx(item.name);console.log(item.name)}}
-            px = {2} py = {2} mx = {1}>
-              <Text fontSize = {4} >{item.name}</Text>
-             
-             {Workouts==true ? <TextDescription fontSize = {3} ml = {2} >
-           {item.exercises} exercises wich involve {item.primaryMuscles}</TextDescription> : 
-          <TextDescription fontSize = {3} ml = {2} >   {item.type} exercise wich involve {item.primaryMuscles}
-                   and {item.secondaryMuscles}</TextDescription>}
-            </ViewTouch>
-          )}
-          enableEmptySections={true}
-          style={{ marginTop: 10 }}
-          keyExtractor={(item, index) => index.toString()}
-        />
-      </View>
+        <Container {...other}>
+            <SearchBar
+                containerStyle={{
+                    backgroundColor: "#fff",
+                    paddingBottom: theme.space[0],
+                    borderTopColor: "transparent",
+                    paddingTop: theme.space[0],
+                    paddingLeft: theme.space[1],
+                    paddingRight: theme.space[1],
+                    width: "100%"
+                }}
+                inputContainerStyle={{
+                    backgroundColor: "#fff",
+                    width: "100%",
+                    size: theme.fontSizes[4]
+                }}
+                lightTheme
+                searchIcon={{ size: theme.fontSizes[4] }}
+                onChangeText={text => {
+                    SetDataSource(
+                        SearchFilterFunction(text, (array = arrayholder))
+                    );
+                    Setsearch(text);
+                }}
+                onClear={text => {
+                    SetDataSource(
+                        SearchFilterFunction("", (array = arrayholder))
+                    );
+                    Setsearch("");
+                }}
+                placeholder={placeholder ? placeholder : "Type Here..."}
+                value={search}
+            />
+            {React.Children.map(children, child => {
+                return React.cloneElement(child, {
+                    data: dataSource
+                });
+            })}
+        </Container>
     );
-  }
-
-
-const styles = StyleSheet.create({
-  viewStyle: {
-    justifyContent: 'center',
-    width : screenWidth,
-     justifyContent: 'center',
-    alignItems: 'center'
-  },
-  searchStyle: {
-    backgroundColor: 'white',
-    width: 350, 
-
-  }
-
-});
-
-
-
-
-
-
-
-
-
+}
