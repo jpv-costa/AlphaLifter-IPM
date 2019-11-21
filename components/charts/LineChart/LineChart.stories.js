@@ -198,6 +198,7 @@ const header = ["Programs", "Muscles", "Exercises"];
 
 const content = [
     <DashboardProgramList
+        key={"programs"}
         selectedId={1}
         data={programDashboardData}
         selectList
@@ -208,6 +209,7 @@ const content = [
         }
     />,
     <DashboardMuscleList
+        key={"muscles"}
         selectedId={1}
         data={musclesDashboardData}
         selectList
@@ -218,6 +220,7 @@ const content = [
         }
     />,
     <DashboardExerciseList
+        key={"exercises"}
         selectedId={1}
         data={exercisesDashboardData}
         selectList

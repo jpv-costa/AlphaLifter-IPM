@@ -3,14 +3,14 @@ import { color, space, layout, typography, flexbox } from "styled-system";
 import theme from "./theme";
 
 export const Row = styled.View`
-  ${space}
-  ${flexbox}
+    ${space}
+    ${flexbox}
   flexDirection: row;
 `;
 
 Row.defaultProps = {
-  alignItems: "center",
-  justifyContent: "flex-start"
+    alignItems: "center",
+    justifyContent: "flex-start"
 };
 
 export const Text = styled.Text`
@@ -21,67 +21,68 @@ export const Text = styled.Text`
 `;
 
 Text.defaultProps = {
-  color: "text",
-  fontSize: 3
+    color: "text",
+    fontSize: 3
 };
 
 export const Card = styled.View`
   ${color}
   ${space}
   ${layout}
+  background-color: #fff;
   border-radius: 9px;
   elevation: 3;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
   position: absolute;
 `;
-
 
 export const TouchableCard = styled.TouchableOpacity`
   ${color}
   ${space}
   ${layout}
   border-radius: 9px;
+  background-color: #fff;
   elevation: 3;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
   position: absolute;
 `;
 
 const H1 = styled.Text`
-  font-size: ${theme.fontSizes[8]};
+    font-size: ${theme.fontSizes[8]};
 `;
 
 const H2 = styled.Text`
-  font-size: ${theme.fontSizes[7]};
+    font-size: ${theme.fontSizes[7]};
 `;
 
 const H3 = styled.Text`
-  font-size: ${theme.fontSizes[6]};
+    font-size: ${theme.fontSizes[6]};
 `;
 
 const H4 = styled.Text`
-  font-size: ${theme.fontSizes[5]};
+    font-size: ${theme.fontSizes[5]};
 `;
 
 const H5 = styled.Text`
-  font-size: ${theme.fontSizes[4]};
+    font-size: ${theme.fontSizes[4]};
 `;
 
 const H6 = styled.Text`
-  font-size: ${theme.fontSizes[3]};
+    font-size: ${theme.fontSizes[3]};
 `;
 
 const H7 = styled.Text`
-  font-size: ${theme.fontSizes[2]};
+    font-size: ${theme.fontSizes[2]};
 `;
 
 const H8 = styled.Text`
-  font-size: ${theme.fontSizes[1]};
+    font-size: ${theme.fontSizes[1]};
 `;
 
 const H9 = styled.Text`
-  font-size: ${theme.fontSizes[0]};
+    font-size: ${theme.fontSizes[0]};
 `;
 
 export const View = styled.View`
-  align-items: center;
+    align-items: center;
 `;

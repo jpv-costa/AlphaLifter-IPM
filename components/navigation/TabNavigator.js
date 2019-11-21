@@ -45,6 +45,7 @@ export default class Navigator extends React.Component {
                     {header.map((title, idx) => {
                         return (
                             <Tab
+                                key={title}
                                 onLayout={event => {
                                     this.state.tabXs[idx] =
                                         event.nativeEvent.layout.x;
