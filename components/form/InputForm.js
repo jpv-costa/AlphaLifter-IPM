@@ -6,11 +6,7 @@ import styled from "styled-components";
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
 
-const Center = styled.View``;
-
 const QuestionItem = styled.Text`
-    text-align: center;
-    margin: 10% 0;
     ${space}
     ${layout}
     ${color}
@@ -26,16 +22,24 @@ const Text = styled.Text`
     ${size}
 `;
 
+const Answer = styled.View`
+    width: 100%;
+    minHeight: 300;
+    ${space}
+    ${layout}
+    ${color}
+    ${typography}
+    ${size}
+`;
 export const InputForm = props => {
     return (
-        <Center
-            style={{
-                width: screenWidth
-            }}>
-            <QuestionItem>
-                <Text fontSize={6}>{props.question}</Text>
+        <View style={{width: screenWidth}}>
+            <QuestionItem pt={5} mx={4}>
+                <Text fontSize={7} opacity={0.2}>{props.question}</Text>
             </QuestionItem>
-            {props.children}
-        </Center>
+            <Answer style={{width: '100%' }} mt={5} mx={4}>
+                {props.children}
+            </Answer>
+        </View>
     );
 };

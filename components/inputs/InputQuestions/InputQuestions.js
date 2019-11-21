@@ -17,9 +17,8 @@ const CenterItem = styled.View`
 `;
 
 const UserInput = styled.View`
-flexWrap: wrap
-top: 30;
-flexDirection: row;
+  flexDirection: row;
+  align-items: flex-end;
 `;
 
 const TextInput = styled.TextInput`
@@ -30,19 +29,21 @@ const TextInput = styled.TextInput`
   ${size}
 `;
 
+
 export const SingleInput = props => {
-    const {question, placeholder, units} = props;
+    const {placeholder, units} = props;
 return(
   <CenterItem>
-        <Text fontSize = {5} mt = {6}>
-          {question} 
-        </Text>
       <UserInput>
-        <TextInput fontSize = {5} 
+        <TextInput fontSize = {8} 
           placeholder={placeholder}
-         /* keyboardType = {keyboardType}*/ >
+          autoCorrect={false}
+          keyboardType={'numeric'}
+          maxFontSizeMultiplier={6}
+          maxLength={6}
+          multiline={false} >
         </TextInput>
-        <Text fontSize = {5} ml={3}>
+        <Text fontSize = {5} ml={3} opacity = {0.5} style={{marginBottom: 7}}>
           {units}
         </Text>
       </UserInput>

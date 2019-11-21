@@ -5,9 +5,11 @@ import { SingleSelectList } from "./SingleSelectList";
 import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
 import theme from "../theme";
-import { SafeAreaView } from "react-native";
+import { SafeAreaView} from "react-native";
 import { InputForm } from "./InputForm";
 import { Form } from "./Form";
+import {SingleInput} from "../inputs/InputQuestions/InputQuestions";
+import {RangeInput} from "../inputs/InputQuestions/InputRanges";
 
 const CenteredView = styled.View`
     flex: 1;
@@ -35,16 +37,19 @@ storiesOf("Form", module)
         <SingleSelectList data={chooseProgressionData} onItemPress={onItemPress} />
     ))
     .add("Form Select List", () => (
-        <InputForm question={"What is the progression scheme?"} nPages={3} page={0}>
+        <InputForm question={"What is the progression scheme?"}>
             <SingleSelectList data={chooseProgressionData} onItemPress={onItemPress} />
         </InputForm>
     ))
     .add("Form", () => (
         <Form>
-            <InputForm question={"q1"}>
-                <SingleSelectList data={chooseProgressionData} onItemPress={onItemPress}/>
+            <InputForm question={"What should be the increase per cycle?"}>
+                <SingleInput placeholder = {'2.5'} units = {'Kg'}/> 
             </InputForm>
-            <InputForm question={"q2"}>
+            <InputForm question={"How heavy do you want to start?"}>
+                <RangeInput placeholder1 = {"1"} rangeDivision = {"-"} placeholder2 = {"2"}/> 
+            </InputForm>
+            <InputForm question={"What is the progression scheme?"}>
                 <SingleSelectList data={chooseProgressionData} onItemPress={onItemPress}/>
             </InputForm>
         </Form>

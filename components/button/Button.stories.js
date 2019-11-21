@@ -1,12 +1,12 @@
 import React from "react";
 import { storiesOf } from "@storybook/react-native";
 import { withKnobs, object } from "@storybook/addon-knobs/react";
-import { RoundButton, RoundCornersButton, Button } from "./Button";
+import { MyButton, RoundButton,RoundCornersButton } from "./Button";
 import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
 import theme from "../theme";
 import { FormButtons } from "./FormButtons";
-import { SafeAreaView, Alert } from "react-native";
+import { SafeAreaView, Alert, View } from "react-native";
 
 const CenteredView = styled.View`
     flex: 1;
@@ -30,8 +30,14 @@ storiesOf("Buttons", module)
         </SafeAreaView>
     ))
     .addDecorator(withKnobs)
-    .add("Button", () => <Button name={"My Button"} secondaryLight />)
-    .add("Form Buttons", () => <FormButtons />)
+    .add("MyButton", () => (
+        <View style={{height: 50, width: 200}}>
+            <MyButton name={'My Button'} secondaryLight height={50} width={200}/>
+        </View>
+    ))
+    .add("Form Buttons", () => (
+        <FormButtons />
+    ))
     .add("RoundButton", () => (
         <RoundButton buttonPress={ButtonPress} text='MyButton' />
     ))

@@ -1,7 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react-native";
 import { withKnobs, object } from "@storybook/addon-knobs/react";
-import { WorkoutCardList } from "./WorkoutCard";
+import { WorkoutCard } from "./WorkoutCard";
 import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
 import theme from "../../theme";
@@ -29,26 +29,28 @@ storiesOf("Cards", module)
         </SafeAreaView>
     ))
     .addDecorator(withKnobs)
-    .add("WorkoutCardList", () => (
-        <WorkoutCardList data = {data} />
+    .add("LibraryWorkoutCard", () => (
+        <WorkoutCard workoutCardData = {workoutCardData} onPress = {onItemPress}/>
     ));
 
+    const workoutCardData = 
+    {
+        title: "Lower Body Workout",
+        mainMuscles: "Main Muscle Groups",
+        mainMusclesValue: "Quads and Back",
+        value: [
+            {
+                id: 1,
+                title: "Number of Exercises",
+                value: "4"
+            },
 
-    const data = [
-        {
-            id: "1",
-            workoutName: "Push Workout",
-            time: "+/- 1h30",
-            exercises: "6",
-            muscles:"Chest, Shoulders, Triceps"
-        } , {
-            id: "2",
-            workoutName: "Pull Workout",
-            time: "1h30",
-            exercises: "5",
-            muscles:"Back, Bicep"
-        }      
-    ];
-  
-
-
+            {
+                id: 2,
+                title: "Average Duration",
+                value: "01:00:30"
+            }
+        ]
+    };
+    
+    

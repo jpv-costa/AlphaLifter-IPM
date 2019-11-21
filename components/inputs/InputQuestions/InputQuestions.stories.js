@@ -4,9 +4,9 @@ import { withKnobs, object } from "@storybook/addon-knobs/react";
 import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
 import theme from "../../theme";
-import {SingleInput} from "../InputQuestions/InputQuestions";
-import {RangeInput} from "../InputQuestions/InputRanges";
-import { SafeAreaView } from "react-native";
+import { SingleInput } from "../InputQuestions/InputQuestions";
+import { RangeInput } from "../InputQuestions/InputRanges";
+import { SafeAreaView, View } from "react-native";
 
 const CenteredView = styled.View`
   flex: 1;
@@ -27,14 +27,15 @@ storiesOf("Inputs", module)
   ))
   .addDecorator(withKnobs)
   .add("Single Input", () => (
-  <SingleInput question = {question} placeholder = {placeholder} units = {units}/> 
+    <CenteredView>
+      <SingleInput placeholder = {placeholder} units = {units}/> 
+    </CenteredView>
   ))
   .add("Range Input", () => (
-  <RangeInput question = {rangeEnter} placeholder1 = {placeholder1} rangeDivision = {rangeDivision} placeholder2 = {placeholder2}/> 
-    ));
-
-
-  const question = "What should be the increase per cycle?"
+    <CenteredView>
+      <RangeInput placeholder1 = {placeholder1} rangeDivision = {rangeDivision} placeholder2 = {placeholder2}/> 
+    </CenteredView>
+  ));
 
   const placeholder = "2.5"
 

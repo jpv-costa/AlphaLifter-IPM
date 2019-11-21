@@ -41,17 +41,8 @@ storiesOf("WorkoutPlayer", module)
     .addDecorator(withKnobs)
     .add("WorkoutTimer", () => (
         <WorkoutTimer  onMinusPress= {onMinusPress} onPlusPress={onPlusPress} 
-        onPlayPress={onPlayPress} onReplayPress= {onReplayPress} data= {data}/>
+        onPlayPress={onPlayPress} onReplayPress= {onReplayPress} currentWorkout={currentWorkout}
+        startMins={2} startSecs={5} />
     ));
 
-
-
-    const data = [
-        {
-            id: "1",
-            time: "01:30min",
-            percentage: "77",
-            elapsed:"00:44:34"
-        }
-    ];
-
+    const currentWorkout = "boas";
