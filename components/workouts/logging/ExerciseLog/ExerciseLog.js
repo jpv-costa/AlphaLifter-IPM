@@ -124,6 +124,7 @@ export const ExerciseLog = props => {
         <List
             data={parsedData}
             numberedBullet
+            swipeable
             selectId={currentSet}
             {...other}
         />
