@@ -29,28 +29,25 @@ storiesOf("Cards", module)
         </SafeAreaView>
     ))
     .addDecorator(withKnobs)
-    .add("LibraryWorkoutCard", () => (
-        <WorkoutCard workoutCardData = {workoutCardData} onPress = {onItemPress}/>
+    .add("Workout Card", () => (
+        <WorkoutCard workoutCardData={workoutCardData} onPress={onItemPress} />
     ));
 
-    const workoutCardData = 
-    {
-        title: "Lower Body Workout",
-        mainMuscles: "Main Muscle Groups",
-        mainMusclesValue: "Quads and Back",
-        value: [
-            {
-                id: 1,
-                title: "Number of Exercises",
-                value: "4"
-            },
+const workoutCardData = {
+    title: "Lower Body Workout",
+    mainMuscles: "Main Muscle Groups",
+    mainMusclesValue: "Quads and Back",
+    value: [
+        {
+            id: 1,
+            title: "Number of Exercises",
+            value: "4"
+        },
 
-            {
-                id: 2,
-                title: "Average Duration",
-                value: "01:00:30"
-            }
-        ]
-    };
-    
-    
+        {
+            id: 2,
+            title: "Average Duration",
+            value: "01:00:30"
+        }
+    ]
+};

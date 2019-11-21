@@ -45,6 +45,7 @@ export const TouchableCard = styled.TouchableOpacity`
   elevation: 3;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
   position: absolute;
+  ${props => (props.width ? "width:" + props.width + ";" : "")}
 `;
 
 const H1 = styled.Text`

@@ -29,9 +29,4 @@ storiesOf("Cards", module)
         </SafeAreaView>
     ))
     .addDecorator(withKnobs)
-    .add("LibraryWorkoutCard", () => (
-        <LibraryWorkoutCard/>
-    ));
-
-
-
+    .add("Library WorkoutCard", () => <LibraryWorkoutCard />);
