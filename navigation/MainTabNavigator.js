@@ -1,78 +1,108 @@
-import React from 'react';
-import { Platform } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import React from "react";
+import { Platform } from "react-native";
+import {
+    createStackNavigator,
+    createBottomTabNavigator
+} from "react-navigation";
 
-import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import TabBarIcon from "../components/TabBarIcon";
+import { Icon } from "../components/Icon/Icon";
+import HomeScreen from "../screens/HomeScreen";
+import LinksScreen from "../screens/LinksScreen";
+import SettingsScreen from "../screens/SettingsScreen";
+import theme from "../components/theme";
 
 const config = Platform.select({
-  web: { headerMode: 'screen' },
-  default: {},
+    web: { headerMode: "screen" },
+    default: {}
 });
 
 const HomeStack = createStackNavigator(
-  {
-    Home: HomeScreen,
-  },
-  config
+    {
+        Home: HomeScreen
+    },
+    config
 );
 
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
-  ),
+    tabBarLabel: "Progress",
+    tabBarIcon: ({ focused }) => (
+        <Icon
+            id={"bar-chart"}
+            size={20}
+            fill={focused ? theme.colors.secondaryShades[0] : "#aaa"}
+        />
+    )
 };
 
-HomeStack.path = '';
+HomeStack.path = "";
 
-const LinksStack = createStackNavigator(
-  {
-    Links: LinksScreen,
-  },
-  config
+const LibraryScreen = createStackNavigator(
+    {
+        Links: LinksScreen
+    },
+    config
 );
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
-  ),
+LibraryScreen.navigationOptions = {
+    tabBarLabel: "Library",
+    tabBarIcon: ({ focused }) => (
+        <Icon
+            id={"dumbbell"}
+            size={30}
+            fill={focused ? theme.colors.secondaryShades[0] : "#aaa"}
+        />
+    )
 };
 
-LinksStack.path = '';
+LibraryScreen.path = "";
+
+const SocialScreen = createStackNavigator(
+    {
+        Links: LinksScreen
+    },
+    config
+);
+
+SocialScreen.navigationOptions = {
+    tabBarLabel: "Social",
+    tabBarIcon: ({ focused }) => (
+        <Icon
+            id={"users"}
+            size={20}
+            fill={focused ? theme.colors.secondaryShades[0] : "#aaa"}
+        />
+    )
+};
+
+SocialScreen.path = "";
 
 const SettingsStack = createStackNavigator(
-  {
-    Settings: SettingsScreen,
-  },
-  config
+    {
+        Settings: SettingsScreen
+    },
+    config
 );
 
 SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
-  ),
+    tabBarLabel: "Settings",
+    tabBarIcon: ({ focused }) => (
+        <TabBarIcon
+            focused={focused}
+            name={Platform.OS === "ios" ? "ios-options" : "md-options"}
+        />
+    )
 };
 
-SettingsStack.path = '';
+SettingsStack.path = "";
 
 const tabNavigator = createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
-  SettingsStack,
+    HomeStack,
+    LibraryScreen,
+    SocialScreen,
+    SettingsStack
 });
 
-tabNavigator.path = '';
+tabNavigator.path = "";
 
 export default tabNavigator;

@@ -92,7 +92,7 @@ export class HorizontalSelect extends React.PureComponent {
                         top: 0,
                         left: 0,
                         bottom: 0,
-                        right: itemSize + theme.space[6]
+                        right: itemSize + theme.space[6] - 4
                     }}
                     snapToInterval={snapInterval}
                     showsHorizontalScrollIndicator={false}>

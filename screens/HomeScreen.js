@@ -1,198 +1,271 @@
-import * as WebBrowser from 'expo-web-browser';
-import React from 'react';
+import React, { useState } from "react";
 import {
-  Image,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+    Image,
+    Platform,
+    ScrollView,
+    StyleSheet,
+    TouchableOpacity,
+    SafeAreaView,
+    Dimensions
+} from "react-native";
+import { DashboardExerciseList } from "../components/List/DashboardExerciseList";
+import { DashboardMuscleList } from "../components/List/DashboardMuscleList";
+import { DashboardProgramList } from "../components/List/DashboardProgramList";
+import { getDEMApoints } from "../utils";
+import { PaginatedLineChart } from "../components/charts/PaginatedLineChart/PaginatedLineChart";
+import Navigator from "../components/navigation/TabNavigator";
+import styled from "styled-components";
+import { HorizontalSelect } from "../components/inputs/HorizontalSelect/HorizontalSelect";
+import { color, space, layout, size, typography, flexbox } from "styled-system";
+import { extent, max, min, ascending } from "d3-array";
 
-import { MonoText } from '../components/StyledText';
+const { width } = Dimensions.get("window");
 
-export default function HomeScreen() {
-  return (
-    <View style={styles.container}>
-      <ScrollView
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}>
-        <View style={styles.welcomeContainer}>
-          <Image
-            source={
-              __DEV__
-                ? require('../assets/images/robot-dev.png')
-                : require('../assets/images/robot-prod.png')
+const View = styled.View`
+    ${space}
+    ${layout}
+    ${flexbox}
+    ${color}
+`;
+
+const ChangeContainer = styled.View`
+    ${space}
+    ${layout}
+    justify-content: center;
+    align-items: center;
+`;
+
+const Text = styled.Text`
+    ${space}
+    ${layout}
+    ${color}
+    ${typography}
+    ${size}
+    opacity : ${props => (props.opacity ? props.opacity : 1)};
+`;
+
+export default function HomeScreen(props) {
+    const [data, setData] = useState({
+        id: 1,
+        data: oneRepMaxes["1"]
+    });
+
+    const content = [
+        <DashboardProgramList
+            key={"programs"}
+            selectedId={1}
+            data={programDashboardData}
+            selectList
+            onItemPress={item =>
+                setData({ id: item.id, data: oneRepMaxes[item.id] })
             }
-            style={styles.welcomeImage}
-          />
-        </View>
+        />,
+        <DashboardMuscleList
+            key={"muscles"}
+            selectedId={1}
+            data={musclesDashboardData}
+            selectList
+            onItemPress={item =>
+                setData({ id: item.id, data: oneRepMaxes[item.id] })
+            }
+        />,
+        <DashboardExerciseList
+            key={"exercises"}
+            selectedId={1}
+            data={exercisesDashboardData}
+            selectList
+            onItemPress={item =>
+                setData({ id: item.id, data: oneRepMaxes[item.id] })
+            }
+        />
+    ];
 
-        <View style={styles.getStartedContainer}>
-          <DevelopmentModeNotice />
+    const startingValue = data.data[0].y;
+    const endingValue = data.data[data.data.length - 1].y;
 
-          <Text style={styles.getStartedText}>Get started by opening</Text>
+    const percentGain = ((endingValue / startingValue - 1) * 100).toFixed(1);
 
-          <View
-            style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-            <MonoText>screens/HomeScreen.js</MonoText>
-          </View>
-
-          <Text style={styles.getStartedText}>
-            Change this text and your app will automatically reload.
-          </Text>
-        </View>
-
-        <View style={styles.helpContainer}>
-          <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-            <Text style={styles.helpLinkText}>
-              Help, it didn’t automatically reload!
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-
-      <View style={styles.tabBarInfoContainer}>
-        <Text style={styles.tabBarInfoText}>
-          This is a tab bar. You can edit it in:
-        </Text>
-
-        <View
-          style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-          <MonoText style={styles.codeHighlightText}>
-            navigation/MainTabNavigator.js
-          </MonoText>
-        </View>
-      </View>
-    </View>
-  );
+    return (
+        <React.Fragment>
+            <View mt={3} justifyContent='center' alignItems='center'>
+                <HorizontalSelect
+                    width={300}
+                    selectedValue={1}
+                    onSelected={value =>
+                        setData({ id: value, data: oneRepMaxes[value] })
+                    }>
+                    <HorizontalSelect.SelectItem
+                        label='Volume Load'
+                        value={1}
+                    />
+                    <HorizontalSelect.SelectItem
+                        label='Alloc Scalling'
+                        value={2}
+                    />
+                    <HorizontalSelect.SelectItem label='1 RM' value={3} />
+                </HorizontalSelect>
+            </View>
+            <ChangeContainer my={3}>
+                <Text fontSize={5} opacity={0.5} fontWeight='bold'>
+                    {percentGain + " %" + (percentGain > 0 ? " gain" : " loss")}
+                </Text>
+                <Text mt={1} fontSize={2} opacity={0.5}>
+                    {startingValue + "kg - " + endingValue + "kg"}
+                </Text>
+            </ChangeContainer>
+            <PaginatedLineChart
+                dataTrendFunction={points => getDEMApoints(points, 7)}
+                dataPoints={data.data}
+                height={200}
+                pageSize={7}
+                pageNumber={1}
+            />
+            <Navigator width={width} header={header} tabContent={content} />
+        </React.Fragment>
+    );
 }
 
 HomeScreen.navigationOptions = {
-  header: null,
+    title: "Progress"
 };
 
-function DevelopmentModeNotice() {
-  if (__DEV__) {
-    const learnMoreButton = (
-      <Text onPress={handleLearnMorePress} style={styles.helpLinkText}>
-        Learn more
-      </Text>
-    );
+const oneRepMaxes = {
+    1: [
+        { date: new Date(2018, 10, 10), y: 74.1 },
+        { date: new Date(2018, 10, 11), y: 72.7 },
+        { date: new Date(2018, 10, 12), y: 73.2 },
+        { date: new Date(2018, 10, 13), y: 73.2 },
+        { date: new Date(2018, 10, 14), y: 72 },
+        { date: new Date(2018, 10, 15), y: 72 },
+        { date: new Date(2018, 10, 20), y: 100 },
+        { date: new Date(2018, 10, 21), y: 102 },
+        { date: new Date(2018, 10, 22), y: 108 },
+        { date: new Date(2018, 10, 23), y: 105 },
+        { date: new Date(2018, 10, 24), y: 115 },
+        { date: new Date(2018, 10, 25), y: 120 }
+    ],
+    2: [
+        { date: new Date(2018, 10, 14), y: 72 },
+        { date: new Date(2018, 10, 15), y: 72 },
+        { date: new Date(2018, 10, 16), y: 71 },
+        { date: new Date(2018, 10, 17), y: 72 },
+        { date: new Date(2018, 10, 18), y: 98 },
+        { date: new Date(2018, 10, 19), y: 110 },
+        { date: new Date(2018, 10, 20), y: 100 },
+        { date: new Date(2018, 10, 21), y: 122 },
+        { date: new Date(2018, 10, 22), y: 108 },
+        { date: new Date(2018, 10, 23), y: 135 },
+        { date: new Date(2018, 10, 24), y: 115 },
+        { date: new Date(2018, 10, 25), y: 150 }
+    ],
+    3: [
+        { date: new Date(2018, 10, 10), y: 76.1 },
+        { date: new Date(2018, 10, 11), y: 72.7 },
+        { date: new Date(2018, 10, 12), y: 73.2 },
+        { date: new Date(2018, 10, 13), y: 73.2 },
+        { date: new Date(2018, 10, 14), y: 72 },
+        { date: new Date(2018, 10, 15), y: 72 },
+        { date: new Date(2018, 10, 16), y: 73 },
+        { date: new Date(2018, 10, 17), y: 72 },
+        { date: new Date(2018, 10, 18), y: 98 },
+        { date: new Date(2018, 10, 19), y: 110 },
+        { date: new Date(2018, 10, 20), y: 100 },
+        { date: new Date(2018, 10, 21), y: 102 },
+        { date: new Date(2018, 10, 22), y: 108 },
+        { date: new Date(2018, 10, 23), y: 105 },
+        { date: new Date(2018, 10, 24), y: 115 },
+        { date: new Date(2018, 10, 25), y: 120 }
+    ]
+};
 
-    return (
-      <Text style={styles.developmentModeText}>
-        Development mode is enabled: your app will be slower but you can use
-        useful development tools. {learnMoreButton}
-      </Text>
-    );
-  } else {
-    return (
-      <Text style={styles.developmentModeText}>
-        You are not in development mode: your app will run at full speed.
-      </Text>
-    );
-  }
-}
+const musclesDashboardData = [
+    {
+        id: 1,
+        muscle: "Biceps",
+        icon: {
+            view: "front-upper"
+        },
+        progress: "+5%"
+    },
+    {
+        id: 2,
+        muscle: "Chest",
+        icon: {
+            view: "front-upper"
+        },
+        progress: "+7%"
+    },
+    {
+        id: 3,
+        muscle: "Abs",
+        icon: {
+            view: "front-upper"
+        },
+        progress: "+7%"
+    }
+];
 
-function handleLearnMorePress() {
-  WebBrowser.openBrowserAsync(
-    'https://docs.expo.io/versions/latest/workflow/development-mode/'
-  );
-}
+const exercisesDashboardData = [
+    {
+        id: 1,
+        icon: {
+            primaryMuscles: ["chest"],
+            secondaryMuscles: [],
+            view: "front-upper"
+        },
+        name: "Bench Press",
+        variations: ["Incline, Dumbbell variation"],
+        progress: "+10%"
+    },
+    {
+        id: 2,
+        icon: {
+            primaryMuscles: ["chest"],
+            secondaryMuscles: [],
+            view: "front-upper"
+        },
+        name: "Bench Press",
+        variations: ["Incline, Dumbbell variation"],
+        progress: "+10%"
+    },
+    {
+        id: 3,
+        icon: {
+            primaryMuscles: ["chest"],
+            secondaryMuscles: [],
+            view: "front-upper"
+        },
+        name: "Bench Press",
+        variations: ["Incline, Dumbbell variation"],
+        progress: "+10%"
+    }
+];
 
-function handleHelpPress() {
-  WebBrowser.openBrowserAsync(
-    'https://docs.expo.io/versions/latest/workflow/up-and-running/#cant-see-your-changes'
-  );
-}
+const programDashboardData = [
+    {
+        id: 1,
+        name: "High Volume Program",
+        isCurrent: true,
+        cycles: 5,
+        workouts: 5,
+        progress: "+5%"
+    },
+    {
+        id: 2,
+        name: "Low Volume Program",
+        isCurrent: false,
+        cycles: 4,
+        workouts: 3,
+        progress: "+7%"
+    },
+    {
+        id: 3,
+        name: "High Volume Program",
+        isCurrent: false,
+        cycles: 5,
+        workouts: 5,
+        progress: "+5%"
+    }
+];
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  developmentModeText: {
-    marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: 'center',
-  },
-  contentContainer: {
-    paddingTop: 30,
-  },
-  welcomeContainer: {
-    alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
-  },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
-  },
-  getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
-  },
-  homeScreenFilename: {
-    marginVertical: 7,
-  },
-  codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)',
-  },
-  codeHighlightContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
-    borderRadius: 3,
-    paddingHorizontal: 4,
-  },
-  getStartedText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    lineHeight: 24,
-    textAlign: 'center',
-  },
-  tabBarInfoContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-      },
-      android: {
-        elevation: 20,
-      },
-    }),
-    alignItems: 'center',
-    backgroundColor: '#fbfbfb',
-    paddingVertical: 20,
-  },
-  tabBarInfoText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    textAlign: 'center',
-  },
-  navigationFilename: {
-    marginTop: 5,
-  },
-  helpContainer: {
-    marginTop: 15,
-    alignItems: 'center',
-  },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  helpLinkText: {
-    fontSize: 14,
-    color: '#2e78b7',
-  },
-});
+const header = ["Programs", "Muscles", "Exercises"];
