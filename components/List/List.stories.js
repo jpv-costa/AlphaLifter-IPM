@@ -72,6 +72,13 @@ storiesOf("Lists", module)
             numberedBullet
             draggable
         />
+    ))
+    .add("Swipeable Exercise List", () => (
+        <DashboardExerciseList
+            swipeable
+            selectList
+            data={draggableExercisesData}
+        />
     ));
 
 const data = [

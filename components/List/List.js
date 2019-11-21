@@ -1,10 +1,18 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { color, space, layout, size, typography, flexbox } from "styled-system";
-import { FlatList, Dimensions, TouchableWithoutFeedback } from "react-native";
+import {
+    FlatList,
+    Animated,
+    Dimensions,
+    TouchableWithoutFeedback
+} from "react-native";
+import { RectButton } from "react-native-gesture-handler";
 import { Icon } from "../Icon/Icon";
 import DraggableFlatList from "react-native-draggable-flatlist";
 import { MuscleIcon } from "../Icon/MuscleIcon";
+import Swipeable from "react-native-gesture-handler/Swipeable";
+import { SwipeableRow } from "./SwipeableRow";
 
 const TouchableListContainer = styled.TouchableOpacity`
     ${space}
@@ -12,7 +20,7 @@ const TouchableListContainer = styled.TouchableOpacity`
     flex-direction: row;
     align-items: center;
     background-color: ${props =>
-        props.selected ? props.theme.colors.secondaryTints[4] : "transparent"};
+        props.selected ? props.theme.colors.secondaryTints[4] : "#fff"};
 `;
 
 const ListContainer = styled.View`
@@ -266,8 +274,10 @@ class NonDraggableList extends React.Component {
             numberedBullet,
             selectId,
             multiselect,
-            width
+            width,
+            swipeable
         } = this.props;
+
         return (
             <FlatList
                 data={data}
@@ -277,7 +287,7 @@ class NonDraggableList extends React.Component {
                 keyExtractor={item => item.id.toString()}
                 renderItem={({ item, index }) => {
                     if (selectList) {
-                        return (
+                        const listItem = (
                             <ListItem
                                 radialSelect={multiselect}
                                 id={item.id}
@@ -330,8 +340,13 @@ class NonDraggableList extends React.Component {
                                 }}
                             />
                         );
+                        if (swipeable) {
+                            return <SwipeableRow>{listItem}</SwipeableRow>;
+                        } else {
+                            return listItem;
+                        }
                     } else {
-                        return (
+                        const listItem = (
                             <ListItem
                                 id={item.id}
                                 iconData={item.icon}
@@ -347,6 +362,11 @@ class NonDraggableList extends React.Component {
                                 numberedBullet={numberedBullet}
                             />
                         );
+                        if (swipeable) {
+                            return <SwipeableRow>{listItem}</SwipeableRow>;
+                        } else {
+                            return listItem;
+                        }
                     }
                 }}
             />
