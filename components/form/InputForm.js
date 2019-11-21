@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Dimensions } from "react-native";
+import { Dimensions, View } from "react-native";
 import { color, space, layout, size, typography } from "styled-system";
 import styled from "styled-components";
 
@@ -33,11 +33,13 @@ const Answer = styled.View`
 `;
 export const InputForm = props => {
     return (
-        <View style={{width: screenWidth}}>
+        <View style={{ width: screenWidth }}>
             <QuestionItem pt={5} mx={4}>
-                <Text fontSize={7} opacity={0.2}>{props.question}</Text>
+                <Text fontSize={7} opacity={0.2}>
+                    {props.question}
+                </Text>
             </QuestionItem>
-            <Answer style={{width: '100%' }} mt={5} mx={4}>
+            <Answer style={{ width: "100%" }} mt={5} mx={4}>
                 {props.children}
             </Answer>
         </View>

@@ -5,11 +5,11 @@ import { SingleSelectList } from "./SingleSelectList";
 import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
 import theme from "../theme";
-import { SafeAreaView} from "react-native";
+import { SafeAreaView } from "react-native";
 import { InputForm } from "./InputForm";
 import { Form } from "./Form";
-import {SingleInput} from "../inputs/InputQuestions/InputQuestions";
-import {RangeInput} from "../inputs/InputQuestions/InputRanges";
+import { SingleInput } from "../inputs/InputQuestions/InputQuestions";
+import { RangeInput } from "../inputs/InputQuestions/InputRanges";
 
 const CenteredView = styled.View`
     flex: 1;
@@ -33,24 +33,37 @@ storiesOf("Form", module)
         </SafeAreaView>
     ))
     .addDecorator(withKnobs)
-    .add("Choose Progression", () => (
-        <SingleSelectList data={chooseProgressionData} onItemPress={onItemPress} />
+    .add("SingleSelectList", () => (
+        <SingleSelectList
+            data={chooseProgressionData}
+            onItemPress={onItemPress}
+        />
     ))
-    .add("Form Select List", () => (
+    .add("Form Select List with question", () => (
         <InputForm question={"What is the progression scheme?"}>
-            <SingleSelectList data={chooseProgressionData} onItemPress={onItemPress} />
+            <SingleSelectList
+                data={chooseProgressionData}
+                onItemPress={onItemPress}
+            />
         </InputForm>
     ))
     .add("Form", () => (
         <Form>
             <InputForm question={"What should be the increase per cycle?"}>
-                <SingleInput placeholder = {'2.5'} units = {'Kg'}/> 
+                <SingleInput placeholder={"2.5"} units={"Kg"} />
             </InputForm>
             <InputForm question={"How heavy do you want to start?"}>
-                <RangeInput placeholder1 = {"1"} rangeDivision = {"-"} placeholder2 = {"2"}/> 
+                <RangeInput
+                    placeholder1={"1"}
+                    rangeDivision={"-"}
+                    placeholder2={"2"}
+                />
             </InputForm>
             <InputForm question={"What is the progression scheme?"}>
-                <SingleSelectList data={chooseProgressionData} onItemPress={onItemPress}/>
+                <SingleSelectList
+                    data={chooseProgressionData}
+                    onItemPress={onItemPress}
+                />
             </InputForm>
         </Form>
     ));
@@ -72,4 +85,4 @@ const chooseProgressionData = [
         id: 4,
         title: "Set Progression"
     }
-]
+];

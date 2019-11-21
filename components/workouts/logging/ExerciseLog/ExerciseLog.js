@@ -63,7 +63,9 @@ export const ExerciseLog = props => {
                         onSubmitEditing={() => {
                             inputs[i * 3 + 1].current.focus();
                         }}
-                        placeholder={"" + data["1"].weight}></TextInput>
+                        placeholder={"" + data["1"].weight}
+                        defaultValue={"" + data["1"].weight}
+                    />
                     <Text ml={1}>Kg</Text>
                 </ListHeader>
                 <ListHeader>
@@ -83,7 +85,8 @@ export const ExerciseLog = props => {
                         }}
                         placeholder={
                             data["1"].reps.min + "-" + data["1"].reps.max
-                        }></TextInput>
+                        }
+                    />
                     <Text ml={1}>Reps</Text>
                 </ListHeader>
                 <ListHeader>

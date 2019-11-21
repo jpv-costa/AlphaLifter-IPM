@@ -1,9 +1,9 @@
 {
   "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://gm-xrq.anonymous.alphalifter-prot.exp.direct",
-  "packagerNgrokUrl": "https://packager.gm-xrq.anonymous.alphalifter-prot.exp.direct",
-  "ngrokPid": 64958,
+  "expoServerNgrokUrl": "https://8f-82y.anonymous.alphalifter.exp.direct",
+  "packagerNgrokUrl": "https://packager.8f-82y.anonymous.alphalifter.exp.direct",
+  "ngrokPid": 28952,
   "devToolsPort": 19002,
-  "packagerPort": 19005,
-  "packagerPid": 64950
+  "packagerPort": 19001,
+  "packagerPid": 28928
 }
