@@ -7,7 +7,7 @@ import {
 
 import TabBarIcon from "../components/TabBarIcon";
 import { Icon } from "../components/Icon/Icon";
-import HomeScreen from "../screens/HomeScreen";
+import ProgressScreen from "../screens/ProgressScreen";
 import LinksScreen from "../screens/LinksScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import theme from "../components/theme";
@@ -17,14 +17,14 @@ const config = Platform.select({
     default: {}
 });
 
-const HomeStack = createStackNavigator(
+const ProgressStack = createStackNavigator(
     {
-        Home: HomeScreen
+        Home: ProgressScreen
     },
     config
 );
 
-HomeStack.navigationOptions = {
+ProgressStack.navigationOptions = {
     tabBarLabel: "Progress",
     tabBarIcon: ({ focused }) => (
         <Icon
@@ -35,16 +35,16 @@ HomeStack.navigationOptions = {
     )
 };
 
-HomeStack.path = "";
+ProgressStack.path = "";
 
-const LibraryScreen = createStackNavigator(
+const LibraryStack = createStackNavigator(
     {
         Links: LinksScreen
     },
     config
 );
 
-LibraryScreen.navigationOptions = {
+LibraryStack.navigationOptions = {
     tabBarLabel: "Library",
     tabBarIcon: ({ focused }) => (
         <Icon
@@ -55,16 +55,16 @@ LibraryScreen.navigationOptions = {
     )
 };
 
-LibraryScreen.path = "";
+LibraryStack.path = "";
 
-const SocialScreen = createStackNavigator(
+const SocialStack = createStackNavigator(
     {
         Links: LinksScreen
     },
     config
 );
 
-SocialScreen.navigationOptions = {
+SocialStack.navigationOptions = {
     tabBarLabel: "Social",
     tabBarIcon: ({ focused }) => (
         <Icon
@@ -75,7 +75,7 @@ SocialScreen.navigationOptions = {
     )
 };
 
-SocialScreen.path = "";
+SocialStack.path = "";
 
 const SettingsStack = createStackNavigator(
     {
@@ -96,12 +96,19 @@ SettingsStack.navigationOptions = {
 
 SettingsStack.path = "";
 
-const tabNavigator = createBottomTabNavigator({
-    HomeStack,
-    LibraryScreen,
-    SocialScreen,
-    SettingsStack
-});
+const tabNavigator = createBottomTabNavigator(
+    {
+        ProgressStack,
+        LibraryStack,
+        SocialStack,
+        SettingsStack
+    },
+    {
+        tabBarOptions: {
+            showLabel: false
+        }
+    }
+);
 
 tabNavigator.path = "";
 

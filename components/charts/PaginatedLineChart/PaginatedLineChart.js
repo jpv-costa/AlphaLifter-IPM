@@ -4,14 +4,26 @@ import Moment from "moment";
 import { extendMoment } from "moment-range";
 import styled from "styled-components";
 import { Icon } from "../../Icon/Icon";
-import { color, flexbox, space, layout } from "styled-system";
+import { color, flexbox, space, layout, typography, size } from "styled-system";
 import { extent } from "d3-array";
 const moment = extendMoment(Moment);
 import { LineChart } from "../LineChart/LineChart";
 
+const dateFormat = "MMM Do";
+
 const View = styled.View`
     ${space}
     ${layout}
+`;
+
+const Text = styled.Text`
+    ${space}
+    ${layout}
+    ${flexbox}
+    ${color}
+    ${typography}
+    ${size}
+    opacity : ${props => (props.opacity ? props.opacity : 1)};
 `;
 
 const NavContainer = styled.View`
@@ -176,7 +188,8 @@ export class PaginatedLineChart extends React.PureComponent {
                     <NavContainer
                         mb={3}
                         mx={3}
-                        justifyContent={"space-between"}>
+                        justifyContent={"space-between"}
+                        alignItems='center'>
                         <TouchableOpacity
                             disabled={startDate <= xExtent[0]}
                             onPress={handleNextPage}
@@ -185,7 +198,11 @@ export class PaginatedLineChart extends React.PureComponent {
                             }}>
                             <Icon id='chevron-left' size={20} fill='#555' />
                         </TouchableOpacity>
-
+                        <Text opacity={0.5} fontSize={2}>
+                            {moment(startDate).format(dateFormat) +
+                                " - " +
+                                moment(endDate).format(dateFormat)}
+                        </Text>
                         <TouchableOpacity
                             onPress={handlePreviousPage}
                             disabled={this.state.pageNumber <= 1}

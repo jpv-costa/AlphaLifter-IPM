@@ -52,17 +52,6 @@ export class LineChart extends React.PureComponent {
         }
     };
 
-    addGhostData(dataTrend) {
-        dataTrend.unshift({
-            date: addDays(dataTrend[0].date, -1),
-            y: dataTrend[0].y
-        });
-        dataTrend.push({
-            date: addDays(dataTrend[dataTrend.length - 1].date, 1),
-            y: dataTrend[dataTrend.length - 1].y
-        });
-    }
-
     render() {
         const { dataTrend, dataPoints, height, xMin, xMax } = this.props;
         const contentInset = {

@@ -105,7 +105,7 @@ export default function HomeScreen(props) {
                     <HorizontalSelect.SelectItem label='1 RM' value={3} />
                 </HorizontalSelect>
             </View>
-            <ChangeContainer my={3}>
+            <ChangeContainer mt={3} mb={4}>
                 <Text fontSize={5} opacity={0.5} fontWeight='bold'>
                     {percentGain + " %" + (percentGain > 0 ? " gain" : " loss")}
                 </Text>
@@ -175,6 +175,43 @@ const oneRepMaxes = {
         { date: new Date(2018, 10, 23), y: 105 },
         { date: new Date(2018, 10, 24), y: 115 },
         { date: new Date(2018, 10, 25), y: 120 }
+    ],
+    4: [
+        { date: new Date(2018, 10, 10), y: 74.1 },
+        { date: new Date(2018, 10, 11), y: 72.7 },
+        { date: new Date(2018, 10, 20), y: 100 },
+        { date: new Date(2018, 10, 21), y: 102 },
+        { date: new Date(2018, 10, 22), y: 108 },
+        { date: new Date(2018, 10, 23), y: 105 },
+        { date: new Date(2018, 10, 24), y: 115 },
+        { date: new Date(2018, 10, 25), y: 120 }
+    ],
+    5: [
+        { date: new Date(2018, 10, 14), y: 72 },
+        { date: new Date(2018, 10, 15), y: 72 },
+        { date: new Date(2018, 10, 16), y: 71 },
+        { date: new Date(2018, 10, 17), y: 72 },
+        { date: new Date(2018, 10, 18), y: 98 },
+        { date: new Date(2018, 10, 19), y: 110 },
+        { date: new Date(2018, 10, 20), y: 100 },
+        { date: new Date(2018, 10, 21), y: 122 },
+        { date: new Date(2018, 10, 22), y: 108 },
+        { date: new Date(2018, 10, 25), y: 150 }
+    ],
+    6: [
+        { date: new Date(2018, 10, 10), y: 76.1 },
+        { date: new Date(2018, 10, 11), y: 72.7 },
+        { date: new Date(2018, 10, 12), y: 73.2 },
+        { date: new Date(2018, 10, 13), y: 73.2 },
+        { date: new Date(2018, 10, 14), y: 72 },
+        { date: new Date(2018, 10, 15), y: 72 },
+        { date: new Date(2018, 10, 16), y: 73 },
+        { date: new Date(2018, 10, 17), y: 72 },
+        { date: new Date(2018, 10, 18), y: 98 },
+        { date: new Date(2018, 10, 22), y: 108 },
+        { date: new Date(2018, 10, 23), y: 105 },
+        { date: new Date(2018, 10, 24), y: 115 },
+        { date: new Date(2018, 10, 25), y: 120 }
     ]
 };
 
@@ -209,13 +246,13 @@ const exercisesDashboardData = [
     {
         id: 1,
         icon: {
-            primaryMuscles: ["chest"],
+            primaryMuscles: ["biceps"],
             secondaryMuscles: [],
             view: "front-upper"
         },
-        name: "Bench Press",
-        variations: ["Incline, Dumbbell variation"],
-        progress: "+10%"
+        name: "Bicep Curls",
+        variations: ["Standing, Dumbbell variation"],
+        progress: "+15%"
     },
     {
         id: 2,
@@ -231,12 +268,12 @@ const exercisesDashboardData = [
     {
         id: 3,
         icon: {
-            primaryMuscles: ["chest"],
+            primaryMuscles: ["quads"],
             secondaryMuscles: [],
-            view: "front-upper"
+            view: "front-lower"
         },
-        name: "Bench Press",
-        variations: ["Incline, Dumbbell variation"],
+        name: "Leg Extension",
+        variations: ["Machine variation"],
         progress: "+10%"
     }
 ];
@@ -260,7 +297,31 @@ const programDashboardData = [
     },
     {
         id: 3,
-        name: "High Volume Program",
+        name: "German Volume Program",
+        isCurrent: false,
+        cycles: 5,
+        workouts: 5,
+        progress: "+5%"
+    },
+    {
+        id: 4,
+        name: "Beginner Powerlifting Program",
+        isCurrent: false,
+        cycles: 5,
+        workouts: 5,
+        progress: "+5%"
+    },
+    {
+        id: 5,
+        name: "Advanced Bodybuilding Program",
+        isCurrent: false,
+        cycles: 4,
+        workouts: 3,
+        progress: "+7%"
+    },
+    {
+        id: 6,
+        name: "Intermediate Powerlifting Program",
         isCurrent: false,
         cycles: 5,
         workouts: 5,
