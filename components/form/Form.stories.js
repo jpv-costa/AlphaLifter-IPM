@@ -1,13 +1,11 @@
 import React from "react";
 import { storiesOf } from "@storybook/react-native";
 import { withKnobs, object } from "@storybook/addon-knobs/react";
-import { SingleSelectList } from "./SingleSelectList";
+import { SelectList } from "./SelectList";
 import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
 import theme from "../theme";
 import { SafeAreaView } from "react-native";
-import { InputForm } from "./InputForm";
-import { Form } from "./Form";
 
 const CenteredView = styled.View`
     flex: 1;
@@ -32,22 +30,7 @@ storiesOf("Form", module)
     ))
     .addDecorator(withKnobs)
     .add("Choose Progression", () => (
-        <SingleSelectList data={chooseProgressionData} onItemPress={onItemPress} />
-    ))
-    .add("Form Select List", () => (
-        <InputForm question={"What is the progression scheme?"} nPages={3} page={0}>
-            <SingleSelectList data={chooseProgressionData} onItemPress={onItemPress} />
-        </InputForm>
-    ))
-    .add("Form", () => (
-        <Form>
-            <InputForm question={"q1"}>
-                <SingleSelectList data={chooseProgressionData} onItemPress={onItemPress}/>
-            </InputForm>
-            <InputForm question={"q2"}>
-                <SingleSelectList data={chooseProgressionData} onItemPress={onItemPress}/>
-            </InputForm>
-        </Form>
+            <SelectList data={chooseProgressionData} onItemPress={onItemPress} />
     ));
 
 const chooseProgressionData = [
@@ -58,13 +41,5 @@ const chooseProgressionData = [
     {
         id: 2,
         title: "Double Progression"
-    },
-    {
-        id: 3,
-        title: "Linear Periodization"
-    },
-    {
-        id: 4,
-        title: "Set Progression"
     }
 ]

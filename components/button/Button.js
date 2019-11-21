@@ -8,7 +8,7 @@ const Text = styled.Text`
     ${color}
     ${typography}
     ${size}
-    text-align: center;
+    textAlign : center;
 `;
 
 const Round = styled.TouchableOpacity`
@@ -17,71 +17,50 @@ const Round = styled.TouchableOpacity`
     ${color}
     ${typography}
     ${size}
-`;
+    borderRadius: 25;
 
-export const Button = props => {
-    return (
-        <Button
-            style={{ width: props.width, opacity: props.disabled ? 0.3 : 1 }}
-            onPress={props.onPress}
-            bg={
-                props.secondaryDark
-                    ? "secondaryShades.1"
-                    : props.secondaryLight
-                    ? "secondaryTints.0"
-                    : "primary"
-            }
-            py={3}
-            px={2}
-            disabled={props.disabled}>
-            <Text style={{ fontWeight: "bold" }} fontSize={4} color='white.1'>
-                {props.name}
-            </Text>
-        </Button>
-    );
-};
+`;
 
 const RoundCorners = styled.TouchableOpacity`
-    ${space}
-    ${layout}
-    ${color}
-    ${typography}
-    ${size}
-    backgroundColor: #B0E0F6;
-    borderRadius:8;
+${space}
+${layout}
+${color}
+${typography}
+${size}
+backgroundColor: #B0E0F6;
+borderRadius:8;
+
 `;
 
-export const RoundButton = props => {
-    return (
-        <Round
-            onPress={props.buttonPress}
-            style={{ width: props.width }}
-            bg={
-                props.secondaryDark
-                    ? "secondaryShades.1"
-                    : props.secondaryLight
-                    ? "secondaryTints.0"
-                    : "primary"
-            }
-            py={3}
-            px={2}>
-            <Text style={{ fontWeight: "bold" }} fontSize={4} color='white.1'>
-                {props.text}
-            </Text>
-        </Round>
-    );
-};
+  export const RoundButton = props => {
+    return(
+    <Round 
+        onPress = {props.buttonPress} 
+        style ={{width : props.width} }
+        bg= {props.secondaryDark?"secondaryShades.1": props.secondaryLight? "secondaryTints.0":"primary"}
+        py = {3}
+        px ={2}>
+        <Text style={{fontWeight: 'bold'}} fontSize={4}
+        color = "white.1">{props.text}</Text>
+    </Round>)
+}
 
 RoundButton.defaultProps = {
-    width: 350
-};
+    width : 350
+}
 
 export const RoundCornersButton = props => {
-    return (
-        <RoundCorners onPress={props.buttonPress} py={2} px={2}>
-            <Text style={{ fontWeight: "bold" }} fontSize={1} color='#1E90FF'>
-                {props.text}
-            </Text>
-        </RoundCorners>
-    );
-};
+    return(
+    <RoundCorners 
+        onPress = {props.buttonPress}
+        py = {2}
+        px ={2}>
+        <Text style={{fontWeight: 'bold'}} fontSize={1}
+        color = "#1E90FF">{props.text}</Text>
+    </RoundCorners>)
+}
+
+
+
+
+
