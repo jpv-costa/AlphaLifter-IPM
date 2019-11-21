@@ -30,8 +30,41 @@ storiesOf("Cards", module)
     ))
     .addDecorator(withKnobs)
     .add("LibraryProgramCard", () => (
-        <LibraryProgramCard/>
+        <LibraryProgramCard programCardData = {programCardData} onPress = {onItemPress}/>
     ));
 
+    const programCardData = 
+    {
+        title: "High Volume Program",
+        value: [
+            {
+                id: 1,
+                title: "Avg set p/muscle",
+                value: "7.6+/-0.5"
+            },
 
+            {
+                id: 2,
+                title: "Avg set frequency",
+                value: "3"
 
+            },
+
+            {
+                id: 3,
+                title: "Number of cycles",
+                value: "4"
+            },
+
+            {
+                id: 4,
+                title: "Workours p/ciclo",
+                value: "7"
+            }
+        ], 
+
+        avgWorkout: "Avg Workout duration",
+        time: "01:10:24"
+    };
+    
+    

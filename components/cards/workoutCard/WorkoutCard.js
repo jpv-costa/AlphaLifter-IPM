@@ -1,9 +1,8 @@
-import React, { useState } from "react";
-import {StyleSheet, View, FlatList, Alert} from "react-native";
+import React from "react";
+import {StyleSheet} from "react-native";
 import styled from "styled-components";
 import { color, space, layout, size, typography } from "styled-system";
-import {TouchableCard} from '../../atoms' 
-import {List, ListItem} from 'react-native-elements';
+import {TouchableCard} from '../../atoms' ;
 
 const Text = styled.Text`
     ${space}
@@ -15,119 +14,63 @@ const Text = styled.Text`
     flex:1;
     `;
 
-const TrainedMusclesTitle = styled.Text`
+    const RowContainer = styled.View`
     ${space}
     ${layout}
     ${color}
     ${typography}
     ${size}
-    textAlign : center;
-    opacity : 0.5;
-    `; 
- 
-
-const Separator = styled.View`
-        ${space}
-        ${layout}
-        ${color}
-        ${typography}
-        ${size}
-        width: 1;
-        height:20;
-        backgroundColor:black;
+    justifyContent: space-around;
+    flexDirection: row;
+    flex: 1;
 `;
 
-
+const ColumnContainer = styled.View`
+    ${space}
+    ${layout}
+    ${color}
+    ${typography}
+    ${size}
+    justifyContent: space-between;
+    flexDirection: column;
+    flex: 1;
+`;
 
 const styles = StyleSheet.create({
-    container: {
-      justifyContent: 'space-between',
-      flexDirection: 'row'
-    },
     card: {
-        width: 220
-    } 
-    
+        width: 350
+
+    }  
   });
 
-/*export const WorkoutCardList = props => {
-    const data = props.data;
-    const Test = ({data}) => (
-      <View>
-      {data.map((element) =>(
-   
-   <TouchableCard style = {styles.card}>
-            <Text fontSize={4}
-                    color = "black"
-                    mt = {3}
-                    mb = {3}
-                    >{element.workoutName}</Text>
-            <View style={styles.container}>
-                <View flex = {1} width="50%">
-                    <Text 
-                        fontSize = {3}
-                        mt = {2}
-                        >{element.exercises} exercises
-                    </Text>
-                </View>
-                <Separator  mt = {2}/>   
-                <View flex = {1} width="50%">
-                    <Text 
-                        fontSize = {3}
-                        mt = {2}>{element.time}
-                    </Text>
-                </View>
-            </View>
-            <TrainedMusclesTitle fontSize = {2} mt = {3}>Trained Muscles</TrainedMusclesTitle>
-            <Text fontSize = {3} mb = {3}>{element.muscles}</Text>
-           </TouchableCard>
-        
-           
-  ))}
-  </View>)
-    return(Test)
+export const LibraryWorkoutCard = props => {
+    const {workoutCardData, onPress} = props;
+    return(
+            <TouchableCard style = {styles.card} onPress = {onPress}>
+                <Text fontSize={4}
+                        mt = {3}
+                        mb = {3}> {workoutCardData.title} </Text>
+                    <ColumnContainer width = "50%" mt = {2} textAlign = "center">
+                        <Text fontSize = {3} mt = {2} opacity = {0.5}> {workoutCardData.mainMuscles} </Text>
+                        <Text fontSize = {4}> {workoutCardData.mainMusclesValue} </Text>
+                    </ColumnContainer>
+
+                <RowContainer mt = {3}>
+                   {workoutCardData.value.map(item => {
+                        <ColumnContainer key = {item.id} width = "50%">
+                            <Text fontSize = {3} mt = {2} opacity = {0.5} > {item.title} </Text>
+                            <Text fontSize = {4}> {item.value} </Text>
+                        </ColumnContainer>
+                         }
+                    )}
+                </RowContainer>
+
+            </TouchableCard>
+        )
 }
 
-WorkoutCardList.defaultProps = {
-    width : 150
+LibraryWorkoutCard.defaultProps = {
+    width : 350
 }
-*/
-export const WorkoutCardList = props => {
-    const  data = props.data;
-    return (
-      <FlatList
-          data={data}
-          style={{ width: "100%" }}
-          renderItem={({ item, index}) =>
-          (
-              <TouchableCard style = {styles.card}>
-              <Text fontSize={4}
-                      color = "black"
-                      mt = {3}
-                      mb = {3}
-                      >{item.workoutName}</Text>
-              <View style={styles.container}>
-                  <View flex = {1} width="50%">
-                      <Text 
-                          fontSize = {3}
-                          mt = {2}
-                          >{item.exercises} exercises
-                      </Text>
-                  </View>
-                  <Separator  mt = {2}/>   
-                  <View flex = {1} width="50%">
-                      <Text 
-                          fontSize = {3}
-                          mt = {2}>{item.time}
-                      </Text>
-                  </View>
-              </View>
-              <TrainedMusclesTitle fontSize = {2} mt = {3}>Trained Muscles</TrainedMusclesTitle>
-              <Text fontSize = {3} mb = {3}>{item.muscles}</Text>
-            </TouchableCard>
-          )}
-          keyExtractor={item => item.id}
-      />
-  );
-  };
+
 
