@@ -51,11 +51,6 @@ export default class LibraryScreen extends React.Component {
             headerTitle: "Library",
             headerRight: (
                 <TouchableOpacity mr={4}>
-                    <Icon id={"search"} size={18} fill={"#000"} opacity={0.7} />
-                </TouchableOpacity>
-            ),
-            headerLeft: (
-                <TouchableOpacity ml={4}>
                     <Icon id={"plus"} size={18} fill={"#000"} opacity={0.7} />
                 </TouchableOpacity>
             )
@@ -70,7 +65,12 @@ export default class LibraryScreen extends React.Component {
                         <Text fontSize={3} opacity={0.7} fontWeight='bold'>
                             Training Programs
                         </Text>
-                        <RoundCornersButton text='View All' />
+                        <View flexDirection = 'row' justifyContent='flex-end'>
+                        <RoundCornersButton text='View All'/>
+                        <TouchableOpacity ml = {3}>
+                    <Icon id={"search"} size={18} fill={"#000"} opacity={0.7}/>
+                       </TouchableOpacity>
+                       </View>
                     </View>
                     <Text fontSize={2} opacity={0.5} mt={3}>
                         Recent
@@ -105,7 +105,12 @@ export default class LibraryScreen extends React.Component {
                         <Text fontSize={3} opacity={0.7} fontWeight='bold'>
                             Workouts
                         </Text>
-                        <RoundCornersButton text='View All' />
+                        <View flexDirection = 'row' justifyContent='flex-end'>
+                        <RoundCornersButton text='View All'/>
+                        <TouchableOpacity ml = {3}>
+                    <Icon id={"search"} size={18} fill={"#000"} opacity={0.7}/>
+                       </TouchableOpacity>
+                       </View>
                     </View>
                     <Text fontSize={2} opacity={0.5} my={3}>
                         Recent
