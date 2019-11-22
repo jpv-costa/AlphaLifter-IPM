@@ -5,16 +5,14 @@ import {
     StyleSheet,
     SafeAreaView,
     Dimensions,
-    StatusBar
+    TouchableHighlight,
+    Modal
 } from "react-native";
 import styled from "styled-components";
 import { color, space, layout, size, typography, flexbox } from "styled-system";
 import { Icon } from "../components/Icon/Icon";
-import { LibraryProgramCard } from "../components/cards/libraryProgramCard/LibraryProgramCard";
-import { RoundCornersButton } from "../components/button/Button";
 import { ActionButton } from "../components/button/Button";
 import { WorkoutTimer } from "../components/workoutTime/WorkoutTime";
-import { ExerciseLog } from "../components/workouts/logging/ExerciseLog/ExerciseLog";
 import {
     ConfiguredExerciseList,
     EquipmentTypes
@@ -51,7 +49,6 @@ const Text = styled.Text`
     ${size}
     opacity : ${props => (props.opacity ? props.opacity : 1)};
 `;
-
 export default class WorkoutLoggingScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
@@ -59,9 +56,44 @@ export default class WorkoutLoggingScreen extends React.Component {
         };
     };
 
+    FinishModal() {
+        return (
+            <Modal
+                animationType='slide'
+                transparent={false}
+                visible={this.state.modalVisible}
+                presentationStyle='formSheet'
+                onRequestClose={() => {
+                    Alert.alert("Modal has been closed.");
+                }}>
+                <View style={{ marginTop: 22 }}>
+                    <View>
+                        <Text>Hello World!</Text>
+
+                        <TouchableHighlight
+                            onPress={() => {
+                                this.setModalVisible(!this.state.modalVisible);
+                            }}>
+                            <Text>Hide Modal</Text>
+                        </TouchableHighlight>
+                    </View>
+                </View>
+            </Modal>
+        );
+    }
+
+    state = {
+        modalVisible: false
+    };
+
+    setModalVisible(visible) {
+        this.setState({ modalVisible: visible });
+    }
+
     render() {
         return (
             <View flex={1}>
+                {this.FinishModal()}
                 <WorkoutTimer
                     onBackPress={() => this.props.navigation.goBack()}
                     startMins={2}
@@ -86,9 +118,9 @@ export default class WorkoutLoggingScreen extends React.Component {
                         mt={3}
                         secondaryDark
                         text='Finish Workout'
-                        onPress={() =>
-                            this.props.navigation.navigate("Logging")
-                        }
+                        onPress={() => {
+                            this.setModalVisible(true);
+                        }}
                     />
                 </View>
             </View>

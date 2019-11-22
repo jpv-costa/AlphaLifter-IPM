@@ -165,7 +165,7 @@ const ListItem = props => {
                         <CenterItem>{icon}</CenterItem>
                     </IconCircle>
                 )}
-                <ListContent ml={3} mr={3}>
+                <ListContent ml={icon ? 3 : ""}>
                     <ListHeader>
                         {title && (
                             <Text
@@ -216,7 +216,7 @@ const ListItem = props => {
                             <CenterItem>{icon}</CenterItem>
                         </IconCircle>
                     )}
-                    <ListContent ml={3} mr={3}>
+                    <ListContent ml={icon ? 3 : ""}>
                         <ListHeader>
                             {title && (
                                 <Text fontSize={2} fontWeight='bold'>
