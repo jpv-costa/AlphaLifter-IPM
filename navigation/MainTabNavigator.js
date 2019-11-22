@@ -9,6 +9,7 @@ import TabBarIcon from "../components/TabBarIcon";
 import { Icon } from "../components/Icon/Icon";
 import ProgressScreen from "../screens/ProgressScreen";
 import LinksScreen from "../screens/LinksScreen";
+import LibraryScreen from "../screens/LibraryScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import theme from "../components/theme";
 
@@ -39,7 +40,7 @@ ProgressStack.path = "";
 
 const LibraryStack = createStackNavigator(
     {
-        Links: LinksScreen
+        Links: LibraryScreen
     },
     config
 );

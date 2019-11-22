@@ -1,7 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react-native";
 import { withKnobs, object } from "@storybook/addon-knobs/react";
-import { MyButton, RoundButton,RoundCornersButton } from "./Button";
+import { MyButton, RoundButton, RoundCornersButton } from "./Button";
 import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
 import theme from "../theme";
@@ -31,18 +31,21 @@ storiesOf("Buttons", module)
     ))
     .addDecorator(withKnobs)
     .add("MyButton", () => (
-        <View style={{height: 50, width: 200}}>
-            <MyButton name={'My Button'} secondaryLight height={50} width={200}/>
+        <View style={{ height: 50, width: 200 }}>
+            <MyButton
+                name={"My Button"}
+                secondaryLight
+                height={50}
+                width={200}
+            />
         </View>
     ))
-    .add("Form Buttons", () => (
-        <FormButtons />
-    ))
+    .add("Form Buttons", () => <FormButtons />)
     .add("RoundButton", () => (
-        <RoundButton buttonPress={ButtonPress} text='MyButton' />
+        <RoundButton onPress={ButtonPress} text='MyButton' />
     ))
     .add("RoundCornersButton", () => (
-        <RoundCornersButton buttonPress={ButtonPress} text='MyButton' />
+        <RoundCornersButton onPress={ButtonPress} text='MyButton' />
     ));
 
 function ButtonPress() {

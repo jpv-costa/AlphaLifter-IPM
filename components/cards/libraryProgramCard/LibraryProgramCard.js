@@ -23,7 +23,7 @@ const RowContainer = styled.View`
         flexDirection: row;
         flexWrap: wrap;
         justifyContent: space-around;
-        flex: 1;
+        flex-grow: 1;
     `;
 
 const TitleContainer = styled.View`
@@ -49,10 +49,10 @@ const ColumnContainer = styled.View`
     `;
 
 export const LibraryProgramCard = props => {
-    const { programCardData, onPress, width } = props;
+    const { programCardData, onPress, width, ...other } = props;
 
     return (
-        <TouchableCard onPress={onPress} width={width} px={2} py={3}>
+        <TouchableCard onPress={onPress} width={width} px={2} py={3} {...other}>
             <TitleContainer pb={3}>
                 <Text fontSize={2} opacity={0.5} fontWeight='bold'>
                     {programCardData.title}

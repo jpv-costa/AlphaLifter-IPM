@@ -29,20 +29,63 @@ const Button = styled.TouchableOpacity`
 `;
 
 export const MyButton = props => {
-    console.log("mybutton width " + props.width)
-    return(
-    <Button style = {{opacity: (props.disabled)?0.3:1, width: props.width} }
-        onPress={props.onPress}
-        bg= {props.secondaryDark ? "secondaryShades.1" : props.secondaryLight? "secondaryTints.0": "primary"}
-        py = {3}
-        px = {2}
-        disabled={props.disabled}
-    >
-            
-        <Text style={{fontWeight: 'bold'}} fontSize={4}
-            color = "white.1">{props.name}</Text>
-    </Button>)
-}
+    console.log("mybutton width " + props.width);
+    return (
+        <Button
+            style={{ opacity: props.disabled ? 0.3 : 1, width: props.width }}
+            onPress={props.onPress}
+            bg={
+                props.secondaryDark
+                    ? "secondaryShades.1"
+                    : props.secondaryLight
+                    ? "secondaryTints.0"
+                    : "primary"
+            }
+            py={3}
+            px={2}
+            disabled={props.disabled}>
+            <Text style={{ fontWeight: "bold" }} fontSize={4} color='white.1'>
+                {props.name}
+            </Text>
+        </Button>
+    );
+};
+
+export const ActionButton = props => {
+    const {
+        width,
+        secondaryDark,
+        secondaryLight,
+        disabled,
+        text,
+        onPress,
+        ...other
+    } = props;
+    return (
+        <Button
+            style={{
+                opacity: disabled ? 0.3 : 1,
+                width: width,
+                borderRadius: "50%"
+            }}
+            {...other}
+            onPress={onPress}
+            bg={
+                secondaryDark
+                    ? "secondaryShades.1"
+                    : secondaryLight
+                    ? "secondaryTints.0"
+                    : "primary"
+            }
+            py={3}
+            px={2}
+            disabled={disabled}>
+            <Text style={{ fontWeight: "bold" }} fontSize={4} color='white.1'>
+                {text}
+            </Text>
+        </Button>
+    );
+};
 
 const RoundCorners = styled.TouchableOpacity`
     ${space}
@@ -54,18 +97,26 @@ const RoundCorners = styled.TouchableOpacity`
     borderRadius:8;
 `;
 
-  export const RoundButton = props => {
-    return(
-    <Round 
-        onPress = {props.buttonPress} 
-        style ={{width : props.width} }
-        bg= {props.secondaryDark?"secondaryShades.1": props.secondaryLight? "secondaryTints.0":"primary"}
-        py = {3}
-        px = {2}>
-        <Text style={{fontWeight: 'bold'}} fontSize={4}
-        color = "white.1">{props.text}</Text>
-    </Round>)
-}
+export const RoundButton = props => {
+    return (
+        <Round
+            onPress={props.onPress}
+            style={{ width: props.width }}
+            bg={
+                props.secondaryDark
+                    ? "secondaryShades.1"
+                    : props.secondaryLight
+                    ? "secondaryTints.0"
+                    : "primary"
+            }
+            py={3}
+            px={2}>
+            <Text style={{ fontWeight: "bold" }} fontSize={4} color='white.1'>
+                {props.text}
+            </Text>
+        </Round>
+    );
+};
 
 RoundButton.defaultProps = {
     width: 350
@@ -73,8 +124,11 @@ RoundButton.defaultProps = {
 
 export const RoundCornersButton = props => {
     return (
-        <RoundCorners onPress={props.buttonPress} py={2} px={2}>
-            <Text style={{ fontWeight: "bold" }} fontSize={1} color='#1E90FF'>
+        <RoundCorners onPress={props.buttonPress} py={2} px={3}>
+            <Text
+                style={{ fontWeight: "bold" }}
+                fontSize={1}
+                color={"secondaryShades.1"}>
                 {props.text}
             </Text>
         </RoundCorners>
