@@ -42,7 +42,7 @@ ProgressStack.path = "";
 
 const LibraryStack = createStackNavigator(
     {
-        Links: LibraryScreen,
+        Library: LibraryScreen,
         Logging: WorkoutLoggingScreen,
         Exercise: WorkoutExerciseLogScreen
     },

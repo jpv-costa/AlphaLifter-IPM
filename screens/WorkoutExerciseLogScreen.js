@@ -4,7 +4,8 @@ import {
     Platform,
     StyleSheet,
     SafeAreaView,
-    Dimensions
+    Dimensions,
+    Alert
 } from "react-native";
 import styled from "styled-components";
 import { color, space, layout, size, typography, flexbox } from "styled-system";
@@ -73,7 +74,25 @@ export default class WorkoutExerciseLogScreen extends React.Component {
                 });
             };
         } else {
-            actionOnPress = () => this.props.navigation.navigate("Logging");
+            actionOnPress = () => {
+                Alert.alert(
+                    "Are you sure you want to finish the workout?",
+                    "",
+                    [
+                        {
+                            text: "Finish",
+                            onPress: () =>
+                                this.props.navigation.navigate("Library")
+                        },
+                        {
+                            text: "Cancel",
+                            onPress: () => console.log("Cancel Pressed"),
+                            style: "cancel"
+                        }
+                    ],
+                    { cancelable: true }
+                );
+            };
             buttonText = "Finish Workout";
         }
 

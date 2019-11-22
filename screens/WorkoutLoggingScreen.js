@@ -6,6 +6,7 @@ import {
     SafeAreaView,
     Dimensions,
     TouchableHighlight,
+    Alert,
     Modal
 } from "react-native";
 import styled from "styled-components";
@@ -56,44 +57,9 @@ export default class WorkoutLoggingScreen extends React.Component {
         };
     };
 
-    FinishModal() {
-        return (
-            <Modal
-                animationType='slide'
-                transparent={false}
-                visible={this.state.modalVisible}
-                presentationStyle='formSheet'
-                onRequestClose={() => {
-                    Alert.alert("Modal has been closed.");
-                }}>
-                <View style={{ marginTop: 22 }}>
-                    <View>
-                        <Text>Hello World!</Text>
-
-                        <TouchableHighlight
-                            onPress={() => {
-                                this.setModalVisible(!this.state.modalVisible);
-                            }}>
-                            <Text>Hide Modal</Text>
-                        </TouchableHighlight>
-                    </View>
-                </View>
-            </Modal>
-        );
-    }
-
-    state = {
-        modalVisible: false
-    };
-
-    setModalVisible(visible) {
-        this.setState({ modalVisible: visible });
-    }
-
     render() {
         return (
             <View flex={1}>
-                {this.FinishModal()}
                 <WorkoutTimer
                     onBackPress={() => this.props.navigation.goBack()}
                     startMins={2}
@@ -119,7 +85,26 @@ export default class WorkoutLoggingScreen extends React.Component {
                         secondaryDark
                         text='Finish Workout'
                         onPress={() => {
-                            this.setModalVisible(true);
+                            Alert.alert(
+                                "Are you sure you want to finish the workout?",
+                                "",
+                                [
+                                    {
+                                        text: "Finish",
+                                        onPress: () =>
+                                            this.props.navigation.navigate(
+                                                "Library"
+                                            )
+                                    },
+                                    {
+                                        text: "Cancel",
+                                        onPress: () =>
+                                            console.log("Cancel Pressed"),
+                                        style: "cancel"
+                                    }
+                                ],
+                                { cancelable: true }
+                            );
                         }}
                     />
                 </View>
