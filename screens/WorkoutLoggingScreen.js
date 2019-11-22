@@ -4,7 +4,8 @@ import {
     Platform,
     StyleSheet,
     SafeAreaView,
-    Dimensions
+    Dimensions,
+    StatusBar
 } from "react-native";
 import styled from "styled-components";
 import { color, space, layout, size, typography, flexbox } from "styled-system";
@@ -13,7 +14,11 @@ import { LibraryProgramCard } from "../components/cards/libraryProgramCard/Libra
 import { RoundCornersButton } from "../components/button/Button";
 import { ActionButton } from "../components/button/Button";
 import { WorkoutTimer } from "../components/workoutTime/WorkoutTime";
-import { ExerciseLog } from "../components/workouts/logging/ExerciseLog/ExerciseLog"
+import { ExerciseLog } from "../components/workouts/logging/ExerciseLog/ExerciseLog";
+import {
+    ConfiguredExerciseList,
+    EquipmentTypes
+} from "../components/workouts/Exercises/Exercise";
 
 const { width } = Dimensions.get("window");
 
@@ -50,41 +55,149 @@ const Text = styled.Text`
 export default class WorkoutLoggingScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
-            headerTitle: "Library",
-            headerRight: (
-                <TouchableOpacity mr={4}>
-                    <Icon id={"search"} size={18} fill={"#000"} opacity={0.7} />
-                </TouchableOpacity>
-            ),
-            headerLeft: (
-                <TouchableOpacity ml={4}>
-                    <Icon id={"plus"} size={18} fill={"#000"} opacity={0.7} />
-                </TouchableOpacity>
-            )
+            header: null
         };
     };
 
     render() {
         return (
             <View>
-                <WorkoutTimer startMins={2} startSecs={30} />
-                <ExerciseLog data={workoutData} />
+                <WorkoutTimer
+                    onBackPress={() => this.props.navigation.goBack()}
+                    startMins={2}
+                    startSecs={30}
+                    currentWorkout={"Push Workout"}
+                />
+                <ConfiguredExerciseList
+                    selectList
+                    data={data}
+                    style={{ flex: 1 }}
+                    onItemPress={item => {
+                        this.props.navigation.navigate("Exercise", {
+                            name: item.name,
+                            data: {
+                                1: item.configuration["1"]
+                            }
+                        });
+                    }}
+                />
             </View>
         );
     }
 }
 
-const workoutData = {
-    1: {
-        sets: 3,
-        weight: 120,
-        reps: {
-            min: 6,
-            max: 8
+const data = [
+    {
+        id: 1,
+        icon: {
+            primaryMuscles: ["chest"],
+            secondaryMuscles: ["abs"],
+            view: "front-upper"
         },
-        rpe: {
-            min: 1,
-            max: 3
+        name: "Bench Press",
+        completed: true,
+        estimatedDuration: "+/- 30min",
+        equipment: EquipmentTypes.dumbbell,
+        configuration: {
+            1: {
+                sets: 1,
+                reps: {
+                    min: 4,
+                    max: 6
+                },
+                weight: 120,
+                RIR: {
+                    min: 1,
+                    max: 2
+                }
+            },
+            2: {
+                sets: 4,
+                reps: 5,
+                weight: 130,
+                RIR: {
+                    min: 1,
+                    max: 3
+                }
+            }
+        }
+    },
+    {
+        id: 2,
+        icon: {
+            primaryMuscles: ["chest"],
+            secondaryMuscles: ["abs"],
+            view: "front-upper"
+        },
+        name: "Lateral Raises",
+        completed: false,
+        estimatedDuration: "+/- 22min",
+        equipment: EquipmentTypes.cable,
+        configuration: {
+            1: {
+                sets: 3,
+                reps: 7,
+                weight: 20,
+                RIR: {
+                    min: 1,
+                    max: 4
+                }
+            }
+        }
+    },
+    {
+        id: 3,
+        icon: {
+            primaryMuscles: ["chest"],
+            secondaryMuscles: ["abs"],
+            view: "front-upper"
+        },
+        name: "Row",
+        completed: false,
+        estimatedDuration: "+/- 14min",
+        equipment: EquipmentTypes.barbell,
+        configuration: {
+            1: {
+                sets: 2,
+                reps: 3,
+                weight: 30,
+                RIR: {
+                    min: 1,
+                    max: 2
+                }
+            }
+        }
+    },
+    {
+        id: 4,
+        icon: {
+            primaryMuscles: ["chest"],
+            secondaryMuscles: ["abs"],
+            view: "front-upper"
+        },
+        name: "Back Squat",
+        completed: false,
+        estimatedDuration: "+/- 19min",
+        equipment: EquipmentTypes.barbell,
+        configuration: {
+            1: {
+                sets: 1,
+                reps: 3,
+                weight: 85,
+                RIR: {
+                    min: 1,
+                    max: 2
+                }
+            },
+            2: {
+                sets: 4,
+                reps: 5,
+                weight: 25,
+                RIR: {
+                    min: 1,
+                    max: 3
+                }
+            }
         }
     }
-};
+];

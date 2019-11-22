@@ -65,78 +65,85 @@ export default class LibraryScreen extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <View px={4} py={4}>
-                    <View flexDirection='row' justifyContent='space-between'>
-                        <Text fontSize={3} opacity={0.7} fontWeight='bold'>
-                            Training Programs
+                <ScrollView>
+                    <View px={4} mt={4}>
+                        <View
+                            flexDirection='row'
+                            justifyContent='space-between'>
+                            <Text fontSize={3} opacity={0.7} fontWeight='bold'>
+                                Training Programs
+                            </Text>
+                            <RoundCornersButton text='View All' />
+                        </View>
+                        <Text fontSize={2} opacity={0.5} mt={2}>
+                            Recent
                         </Text>
-                        <RoundCornersButton text='View All' />
                     </View>
-                    <Text fontSize={2} opacity={0.5} mt={3}>
-                        Recent
-                    </Text>
-                </View>
-                <View>
-                    <ScrollView
-                        showsHorizontalScrollIndicator={false}
-                        horizontal
-                        px={2}
-                        py={2}
-                        contentInset={{
-                            top: 0,
-                            left: 0,
-                            bottom: 0,
-                            right: 24
-                        }}>
-                        {programCardData.map(program => (
-                            <LibraryProgramCard
-                                programCardData={program}
-                                ml={4}
-                            />
-                        ))}
-                    </ScrollView>
-                </View>
+                    <View>
+                        <ScrollView
+                            showsHorizontalScrollIndicator={false}
+                            horizontal
+                            pt={4}
+                            pb={2}
+                            contentInset={{
+                                top: 0,
+                                left: 0,
+                                bottom: 0,
+                                right: 24
+                            }}>
+                            {programCardData.map(program => (
+                                <LibraryProgramCard
+                                    programCardData={program}
+                                    ml={4}
+                                />
+                            ))}
+                        </ScrollView>
+                    </View>
 
-                <View px={4} py={4}>
-                    <View
-                        mt={4}
-                        flexDirection='row'
-                        justifyContent='space-between'>
-                        <Text fontSize={3} opacity={0.7} fontWeight='bold'>
-                            Workouts
+                    <View px={4} mt={3}>
+                        <View
+                            mt={4}
+                            flexDirection='row'
+                            justifyContent='space-between'>
+                            <Text fontSize={3} opacity={0.7} fontWeight='bold'>
+                                Workouts
+                            </Text>
+                            <RoundCornersButton text='View All' />
+                        </View>
+                        <Text fontSize={2} opacity={0.5} mt={2}>
+                            Recent
                         </Text>
-                        <RoundCornersButton text='View All' />
                     </View>
-                    <Text fontSize={2} opacity={0.5} my={3}>
-                        Recent
-                    </Text>
-                </View>
-                <View>
-                    <ScrollView
-                        showsHorizontalScrollIndicator={false}
-                        horizontal
-                        px={2}
-                        py={2}
-                        contentInset={{
-                            top: 0,
-                            left: 0,
-                            bottom: 0,
-                            right: 24
-                        }}>
-                        {workoutCardData.map(program => (
-                            <LibraryProgramCard
-                                programCardData={program}
-                                ml={4}
-                            />
-                        ))}
-                    </ScrollView>
-                </View>
-                <View px={4} py={4}>
+                    <View>
+                        <ScrollView
+                            showsHorizontalScrollIndicator={false}
+                            horizontal
+                            px={2}
+                            pt={4}
+                            pb={2}
+                            contentInset={{
+                                top: 0,
+                                left: 0,
+                                bottom: 0,
+                                right: 24
+                            }}>
+                            {workoutCardData.map(program => (
+                                <LibraryProgramCard
+                                    programCardData={program}
+                                    ml={4}
+                                />
+                            ))}
+                        </ScrollView>
+                    </View>
+                </ScrollView>
+                <View px={4} mb={4}>
                     <ActionButton
-                        mt={4}
+                        mt={3}
                         secondaryDark
                         text='Start Next Workout'
-                        onPress={() => this.props.navigation.navigate('Logging')}
+                        onPress={() =>
+                            this.props.navigation.navigate("Logging")
+                        }
                     />
                 </View>
             </React.Fragment>

@@ -2,7 +2,7 @@ import React from "react";
 import { List } from "./List";
 
 export const DashboardProgramList = props => {
-    const { data, selectedId, ...other } = props;
+    const { data, selectedId, onItemPress, ...other } = props;
 
     const parsedData = data.map(item => {
         const {
@@ -24,5 +24,12 @@ export const DashboardProgramList = props => {
         };
     });
 
-    return <List data={parsedData} selectedId={selectedId} {...other} />;
+    return (
+        <List
+            onItemPress={index => onItemPress(data[index])}
+            data={parsedData}
+            selectedId={selectedId}
+            {...other}
+        />
+    );
 };

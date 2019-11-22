@@ -35,7 +35,7 @@ const data = {
             min: 6,
             max: 8
         },
-        rpe: {
+        RIR: {
             min: 1,
             max: 3
         }

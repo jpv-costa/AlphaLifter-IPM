@@ -13,6 +13,7 @@ import LibraryScreen from "../screens/LibraryScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import theme from "../components/theme";
 import WorkoutLoggingScreen from "../screens/WorkoutLoggingScreen";
+import WorkoutExerciseLogScreen from "../screens/WorkoutExerciseLogScreen";
 
 const config = Platform.select({
     web: { headerMode: "screen" },
@@ -39,10 +40,21 @@ ProgressStack.navigationOptions = {
 
 ProgressStack.path = "";
 
+const WorkoutLoggingStack = createStackNavigator(
+    {
+        Logging: WorkoutLoggingScreen,
+        Exercise: WorkoutExerciseLogScreen
+    },
+    config
+);
+
+WorkoutLoggingStack.path = "";
+
 const LibraryStack = createStackNavigator(
     {
         Links: LibraryScreen,
-        Logging: WorkoutLoggingScreen
+        Logging: WorkoutLoggingScreen,
+        Exercise: WorkoutExerciseLogScreen
     },
     config
 );
@@ -104,7 +116,8 @@ const tabNavigator = createBottomTabNavigator(
         ProgressStack,
         LibraryStack,
         SocialStack,
-        SettingsStack
+        SettingsStack,
+        WorkoutLoggingStack
     },
     {
         tabBarOptions: {

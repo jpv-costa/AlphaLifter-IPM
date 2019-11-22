@@ -10,7 +10,7 @@ export const EquipmentTypes = Object.freeze({
 });
 
 export const ConfiguredExerciseList = props => {
-    const { data, ...other } = props;
+    const { data, onItemPress, ...other } = props;
 
     const parsedData = data.map(item => {
         const { id, icon, name, estimatedDuration, configuration } = item;
@@ -24,11 +24,11 @@ export const ConfiguredExerciseList = props => {
         RIR = isNaN(configuration["1"].RIR)
             ? configuration["1"].RIR.min + "-" + configuration["1"].RIR.max
             : configuration["1"].RIR;
-        intensity = isNaN(configuration["1"].intensity)
-            ? round(100 * configuration["1"].intensity.min, 2) +
+        weight = isNaN(configuration["1"].weight)
+            ? configuration["1"].weight.min +
               "-" +
-              round(100 * configuration["1"].intensity.max, 2)
-            : round(100 * configuration["1"].intensity, 2);
+              configuration["1"].weight.max
+            : configuration["1"].weight;
 
         const description =
             sets +
@@ -37,8 +37,8 @@ export const ConfiguredExerciseList = props => {
             reps +
             (reps == 1 ? " rep" : " reps") +
             " x " +
-            intensity +
-            "% @" +
+            weight +
+            "kg @" +
             RIR +
             " RIR" +
             (configuration.hasOwnProperty("2") ? ", ..." : "");
@@ -61,5 +61,14 @@ export const ConfiguredExerciseList = props => {
         };
     });
 
-    return <List data={parsedData} iconType={"id"} {...other} />;
+    // console.log(data[0]);
+
+    return (
+        <List
+            onItemPress={index => onItemPress(data[index])}
+            data={parsedData}
+            iconType={"id"}
+            {...other}
+        />
+    );
 };

@@ -45,6 +45,10 @@ export const ExerciseLog = props => {
 
     const parsedData = [];
 
+    const reps = isNaN(data["1"].reps)
+        ? data["1"].reps.min + "-" + data["1"].reps.max
+        : data["1"].reps;
+
     for (let i = 0; i < data["1"].sets; i++) {
         const set = (
             <ListContainer px={3} py={2}>
@@ -83,9 +87,7 @@ export const ExerciseLog = props => {
                         onSubmitEditing={() => {
                             inputs[i * 3 + 2].current.focus();
                         }}
-                        placeholder={
-                            data["1"].reps.min + "-" + data["1"].reps.max
-                        }
+                        placeholder={reps}
                     />
                     <Text ml={1}>Reps</Text>
                 </ListHeader>
@@ -107,7 +109,7 @@ export const ExerciseLog = props => {
                             ].current.focus();
                         }}
                         placeholder={
-                            data["1"].rpe.min + "-" + data["1"].rpe.max
+                            data["1"].RIR.min + "-" + data["1"].RIR.max
                         }></TextInput>
                     <Text ml={1}>RIR</Text>
                 </ListHeader>

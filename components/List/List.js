@@ -326,7 +326,7 @@ class NonDraggableList extends React.Component {
                                         }));
                                     } else {
                                         if (onItemPress) {
-                                            onItemPress(item);
+                                            onItemPress(index);
                                         }
                                         this.state.selected.pop();
                                         this.state.selected.push(item.id);
