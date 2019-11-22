@@ -56,8 +56,29 @@ export default class WorkoutExerciseLogScreen extends React.Component {
 
     render() {
         const { navigation } = this.props;
+        const remainingExercises = navigation.getParam("rest");
+
+        let actionOnPress;
+        let buttonText;
+
+        if (remainingExercises.length > 0) {
+            buttonText = "Next Exercise";
+            actionOnPress = () => {
+                this.props.navigation.navigate("Exercise", {
+                    name: remainingExercises[0].name,
+                    data: {
+                        1: remainingExercises[0].configuration["1"]
+                    },
+                    rest: remainingExercises.slice(1, remainingExercises.length)
+                });
+            };
+        } else {
+            actionOnPress = () => this.props.navigation.navigate("Logging");
+            buttonText = "Finish Workout";
+        }
+
         return (
-            <View>
+            <View flex={1}>
                 <WorkoutTimer
                     onBackPress={() =>
                         this.props.navigation.navigate("Logging")
@@ -72,10 +93,8 @@ export default class WorkoutExerciseLogScreen extends React.Component {
                     <ActionButton
                         mt={3}
                         secondaryDark
-                        text='Finish Workout'
-                        onPress={() =>
-                            this.props.navigation.navigate("Logging")
-                        }
+                        text={buttonText}
+                        onPress={actionOnPress}
                     />
                 </View>
             </View>

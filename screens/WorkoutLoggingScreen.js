@@ -61,7 +61,7 @@ export default class WorkoutLoggingScreen extends React.Component {
 
     render() {
         return (
-            <View>
+            <View flex={1}>
                 <WorkoutTimer
                     onBackPress={() => this.props.navigation.goBack()}
                     startMins={2}
@@ -71,12 +71,13 @@ export default class WorkoutLoggingScreen extends React.Component {
                 <ConfiguredExerciseList
                     selectList
                     data={data}
-                    onItemPress={item => {
+                    onItemPress={(item, index) => {
                         this.props.navigation.navigate("Exercise", {
                             name: item.name,
                             data: {
                                 1: item.configuration["1"]
-                            }
+                            },
+                            rest: data.slice(index + 1, data.length)
                         });
                     }}
                 />

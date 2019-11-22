@@ -204,7 +204,7 @@ const ListItem = props => {
         );
     } else {
         return (
-            <TouchableWithoutFeedback {...other}>
+            <TouchableWithoutFeedback {...other} style={{ flexGrow: 1 }}>
                 <ListContainer
                     px={3}
                     py={3}
@@ -280,103 +280,98 @@ class NonDraggableList extends React.Component {
         } = this.props;
 
         return (
-            <View style={{ flexGrow: 1 }}>
-                <FlatList
-                    data={data}
-                    style={{
-                        width: width
-                    }}
-                    keyExtractor={item => item.id.toString()}
-                    renderItem={({ item, index }) => {
-                        if (selectList) {
-                            const listItem = (
-                                <ListItem
-                                    radialSelect={multiselect}
-                                    id={item.id}
-                                    iconData={item.icon}
-                                    title={item.title}
-                                    extraInfo={item.extraInfo}
-                                    description={item.description}
-                                    iconType={item.iconType}
-                                    selected={this.state.selected.includes(
-                                        item.id
-                                    )}
-                                    index={index}
-                                    numberedBullet={numberedBullet}
-                                    touchable
-                                    onPress={() => {
-                                        if (multiselect) {
-                                            if (
-                                                this.state.selected.includes(
-                                                    item.id
-                                                )
-                                            ) {
-                                                let index = this.state.selected.indexOf(
-                                                    item.id
-                                                );
-                                                if (index > -1) {
-                                                    this.state.selected.splice(
-                                                        index,
-                                                        1
-                                                    );
-                                                }
-                                            } else {
-                                                this.state.selected.push(
-                                                    item.id
+            <FlatList
+                data={data}
+                style={{
+                    width: width,
+                    flex: 1
+                }}
+                keyExtractor={item => item.id.toString()}
+                renderItem={({ item, index }) => {
+                    if (selectList) {
+                        const listItem = (
+                            <ListItem
+                                radialSelect={multiselect}
+                                id={item.id}
+                                iconData={item.icon}
+                                title={item.title}
+                                extraInfo={item.extraInfo}
+                                description={item.description}
+                                iconType={item.iconType}
+                                selected={this.state.selected.includes(item.id)}
+                                index={index}
+                                numberedBullet={numberedBullet}
+                                touchable
+                                onPress={() => {
+                                    if (multiselect) {
+                                        if (
+                                            this.state.selected.includes(
+                                                item.id
+                                            )
+                                        ) {
+                                            let index = this.state.selected.indexOf(
+                                                item.id
+                                            );
+                                            if (index > -1) {
+                                                this.state.selected.splice(
+                                                    index,
+                                                    1
                                                 );
                                             }
-                                            this.setState(previousState => ({
-                                                selected: [
-                                                    ...previousState.selected
-                                                ]
-                                            }));
                                         } else {
-                                            if (onItemPress) {
-                                                onItemPress(index);
-                                            }
-                                            this.state.selected.pop();
                                             this.state.selected.push(item.id);
-
-                                            this.setState(previousState => ({
-                                                selected: [
-                                                    ...previousState.selected
-                                                ]
-                                            }));
                                         }
-                                    }}
-                                />
-                            );
-                            if (swipeable) {
-                                return <SwipeableRow>{listItem}</SwipeableRow>;
-                            } else {
-                                return listItem;
-                            }
-                        } else {
-                            const listItem = (
-                                <ListItem
-                                    id={item.id}
-                                    iconData={item.icon}
-                                    title={item.title}
-                                    extraInfo={item.extraInfo}
-                                    description={item.description}
-                                    iconType={item.iconType}
-                                    selected={
-                                        this.state.selected.includes(item.id) ||
-                                        selectId == item.id
+                                        this.setState(previousState => ({
+                                            selected: [
+                                                ...previousState.selected
+                                            ]
+                                        }));
+                                    } else {
+                                        if (onItemPress) {
+                                            onItemPress(index);
+                                        }
+                                        this.state.selected.pop();
+                                        this.state.selected.push(item.id);
+
+                                        this.setState(previousState => ({
+                                            selected: [
+                                                ...previousState.selected
+                                            ]
+                                        }));
                                     }
-                                    index={index}
-                                    numberedBullet={numberedBullet}
-                                />
-                            );
-                            if (swipeable) {
-                                return <SwipeableRow>{listItem}</SwipeableRow>;
-                            } else {
-                                return listItem;
-                            }
+                                }}
+                            />
+                        );
+                        if (swipeable) {
+                            return <SwipeableRow>{listItem}</SwipeableRow>;
+                        } else {
+                            return listItem;
                         }
-                    }}
-                />
-            </View>
+                    } else {
+                        const listItem = (
+                            <ListItem
+                                id={item.id}
+                                iconData={item.icon}
+                                title={item.title}
+                                extraInfo={item.extraInfo}
+                                description={item.description}
+                                iconType={item.iconType}
+                                selected={
+                                    this.state.selected.includes(item.id) ||
+                                    selectId == item.id
+                                }
+                                index={index}
+                                numberedBullet={numberedBullet}
+                            />
+                        );
+                        if (swipeable) {
+                            return <SwipeableRow>{listItem}</SwipeableRow>;
+                        } else {
+                            return listItem;
+                        }
+                    }
+                }}
+            />
         );
     }
 }
