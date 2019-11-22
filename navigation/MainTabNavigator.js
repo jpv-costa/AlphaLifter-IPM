@@ -40,16 +40,6 @@ ProgressStack.navigationOptions = {
 
 ProgressStack.path = "";
 
-const WorkoutLoggingStack = createStackNavigator(
-    {
-        Logging: WorkoutLoggingScreen,
-        Exercise: WorkoutExerciseLogScreen
-    },
-    config
-);
-
-WorkoutLoggingStack.path = "";
-
 const LibraryStack = createStackNavigator(
     {
         Links: LibraryScreen,
@@ -116,8 +106,7 @@ const tabNavigator = createBottomTabNavigator(
         ProgressStack,
         LibraryStack,
         SocialStack,
-        SettingsStack,
-        WorkoutLoggingStack
+        SettingsStack
     },
     {
         tabBarOptions: {

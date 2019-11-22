@@ -68,6 +68,16 @@ export default class WorkoutExerciseLogScreen extends React.Component {
                     style={{ position: "absolute" }}
                 />
                 <ExerciseLog data={navigation.getParam("data")} />
+                <View px={4} mb={4}>
+                    <ActionButton
+                        mt={3}
+                        secondaryDark
+                        text='Finish Workout'
+                        onPress={() =>
+                            this.props.navigation.navigate("Logging")
+                        }
+                    />
+                </View>
             </View>
         );
     }

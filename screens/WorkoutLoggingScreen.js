@@ -71,7 +71,6 @@ export default class WorkoutLoggingScreen extends React.Component {
                 <ConfiguredExerciseList
                     selectList
                     data={data}
-                    style={{ flex: 1 }}
                     onItemPress={item => {
                         this.props.navigation.navigate("Exercise", {
                             name: item.name,
@@ -81,6 +80,16 @@ export default class WorkoutLoggingScreen extends React.Component {
                         });
                     }}
                 />
+                <View px={4} mb={4}>
+                    <ActionButton
+                        mt={3}
+                        secondaryDark
+                        text='Finish Workout'
+                        onPress={() =>
+                            this.props.navigation.navigate("Logging")
+                        }
+                    />
+                </View>
             </View>
         );
     }

@@ -269,25 +269,27 @@ export class WorkoutTimer extends React.Component {
                             flexGrow={1}
                             alignItems='flex-start'
                             justifyContent={"center"}>
-                            <View flexDirection='row'>
+                            <View>
                                 {onBackPress && (
-                                    <TouchableOpacity onPress={onBackPress}>
+                                    <TouchableOpacity
+                                        onPress={onBackPress}
+                                        style={{ flexDirection: "row" }}>
                                         <Icon
                                             id='arrow-left'
                                             size={18}
                                             fill='#FFF'
                                             opacity={0.7}
                                         />
+                                        <Text
+                                            ml={2}
+                                            color='white.1'
+                                            fontSize={3}
+                                            opacity={0.7}
+                                            fontWeight={"bold"}>
+                                            {currentWorkout}
+                                        </Text>
                                     </TouchableOpacity>
                                 )}
-                                <Text
-                                    ml={2}
-                                    color='white.1'
-                                    fontSize={3}
-                                    opacity={0.7}
-                                    fontWeight={"bold"}>
-                                    {currentWorkout}
-                                </Text>
                             </View>
 
                             <FixedFields
