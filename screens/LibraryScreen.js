@@ -73,6 +73,7 @@ export default class LibraryScreen extends React.Component {
                         <Text fontSize={2} opacity={0.5} mt={2}>
                             Recent
                         </Text>
+<<<<<<< HEAD
                         <View flexDirection = 'row' justifyContent='flex-end'>
                         <RoundCornersButton text='View All'/>
                         <TouchableOpacity ml = {3}>
@@ -100,6 +101,29 @@ export default class LibraryScreen extends React.Component {
                             ))}
                         </ScrollView>
                     </View>
+=======
+                    </View>
+                    <View>
+                        <ScrollView
+                            showsHorizontalScrollIndicator={false}
+                            horizontal
+                            pt={4}
+                            pb={2}
+                            contentInset={{
+                                top: 0,
+                                left: 0,
+                                bottom: 0,
+                                right: 24
+                            }}>
+                            {programCardData.map(program => (
+                                <LibraryProgramCard
+                                    programCardData={program}
+                                    ml={4}
+                                />
+                            ))}
+                        </ScrollView>
+                    </View>
+>>>>>>> e0bd06560b79aabc36a47d9d17229e8e16caf4ce
 
                     <View px={4} mt={3}>
                         <View
@@ -114,12 +138,15 @@ export default class LibraryScreen extends React.Component {
                         <Text fontSize={2} opacity={0.5} mt={2}>
                             Recent
                         </Text>
+<<<<<<< HEAD
                         <View flexDirection = 'row' justifyContent='flex-end'>
                         <RoundCornersButton text='View All'/>
                         <TouchableOpacity ml = {3}>
                     <Icon id={"search"} size={18} fill={"#000"} opacity={0.7}/>
                        </TouchableOpacity>
                        </View>
+=======
+>>>>>>> e0bd06560b79aabc36a47d9d17229e8e16caf4ce
                     </View>
                     <View>
                         <ScrollView
