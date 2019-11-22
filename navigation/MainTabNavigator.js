@@ -12,6 +12,7 @@ import LinksScreen from "../screens/LinksScreen";
 import LibraryScreen from "../screens/LibraryScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import theme from "../components/theme";
+import WorkoutLoggingScreen from "../screens/WorkoutLoggingScreen";
 
 const config = Platform.select({
     web: { headerMode: "screen" },
@@ -40,7 +41,8 @@ ProgressStack.path = "";
 
 const LibraryStack = createStackNavigator(
     {
-        Links: LibraryScreen
+        Links: LibraryScreen,
+        Logging: WorkoutLoggingScreen
     },
     config
 );

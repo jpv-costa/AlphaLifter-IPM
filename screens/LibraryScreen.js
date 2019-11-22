@@ -136,6 +136,7 @@ export default class LibraryScreen extends React.Component {
                         mt={4}
                         secondaryDark
                         text='Start Next Workout'
+                        onPress={() => this.props.navigation.navigate('Logging')}
                     />
                 </View>
             </React.Fragment>
