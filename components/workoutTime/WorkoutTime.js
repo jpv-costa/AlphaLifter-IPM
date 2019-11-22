@@ -9,6 +9,7 @@ import {
 import styled from "styled-components";
 import { color, space, layout, size, typography, flexbox } from "styled-system";
 import { Icon } from "../Icon/Icon";
+import { default as MdIcon } from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export const Card = styled.View`
   ${color}
@@ -86,10 +87,12 @@ const Circle = styled.View`
 const IconCircle = styled.TouchableOpacity`
     ${space}
     ${layout}
-    opacity: ${props => (props.disabled ? "0.5" : "1")}
+    opacity: ${props => (props.disabled ? "0.5" : "0.9")}
     width: 32;
     height: 32;
-    
+    border-radius: 100;
+    backgroundColor: #ff8300;
+    text-align:center;
 `;
 
 const CenterItem = styled.View`
@@ -128,7 +131,7 @@ export class WorkoutTimer extends React.Component {
             mins: props.startMins,
             secs: props.startSecs,
             play: false,
-            play_icon: <Icon id='play' size={27} fill='#FFF' />
+            play_icon: <MdIcon name='play' size={27} color='#FFF' />
         };
 
         this.onPlayPress = this.onPlayPress.bind(this);
@@ -155,9 +158,9 @@ export class WorkoutTimer extends React.Component {
 
     // console.log(props)
 
-    plus_icon = (<Icon id='plus' size={27} fill='#FFF' />);
-    minus_icon = (<Icon id='minus' size={27} fill='#FFF' />);
-    replay_icon = (<Icon id='replay' size={27} fill='#FFF' />);
+    plus_icon = (<MdIcon name='plus' size={24} color='#FFF' />);
+    minus_icon = (<MdIcon name='minus' size={24} color='#FFF' />);
+    replay_icon = (<MdIcon name='replay' size={24} color='#FFF' />);
 
     onPlayPress() {
         if (this.state.play) {
@@ -167,7 +170,7 @@ export class WorkoutTimer extends React.Component {
                 return {
                     ...prevState,
                     play: !prevState.play,
-                    play_icon: <Icon id='play' size={27} fill='#FFF' />
+                    play_icon: <MdIcon name='play' size={24} color='#FFF' />
                 };
             });
         } else {
@@ -179,7 +182,7 @@ export class WorkoutTimer extends React.Component {
                 return {
                     ...prevState,
                     play: !prevState.play,
-                    play_icon: <Icon id='pause' size={27} fill='#FFF' />
+                    play_icon: <MdIcon name='pause' size={24} color='#FFF' />
                 };
             });
         }
@@ -332,14 +335,12 @@ export class WorkoutTimer extends React.Component {
                                     this.state.mins == 0 && this.state.secs == 0
                                 }
                                 onPress={this.onMinusPress}>
-                                <Circle bg={"#ff8300"} />
                                 <CenterItem>{this.minus_icon}</CenterItem>
                             </IconCircle>
                         )}
 
                         {this.plus_icon && (
                             <IconCircle mx={3} onPress={this.onPlusPress}>
-                                <Circle bg={"#ff8300"} />
                                 <CenterItem>{this.plus_icon}</CenterItem>
                             </IconCircle>
                         )}
@@ -351,14 +352,12 @@ export class WorkoutTimer extends React.Component {
                                 disabled={
                                     this.state.mins == 0 && this.state.secs == 0
                                 }>
-                                <Circle bg={"#ff8300"} />
                                 <CenterItem>{this.state.play_icon}</CenterItem>
                             </IconCircle>
                         )}
 
                         {this.replay_icon && (
                             <IconCircle mx={3} onPress={this.onReplayPress}>
-                                <Circle bg={"#ff8300"} />
                                 <CenterItem>{this.replay_icon}</CenterItem>
                             </IconCircle>
                         )}
