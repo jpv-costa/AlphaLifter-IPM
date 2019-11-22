@@ -1,19 +1,11 @@
-import React, { useState } from "react";
-import {
-    Image,
-    Platform,
-    StyleSheet,
-    SafeAreaView,
-    Dimensions
-} from "react-native";
+import React from "react";
+import { RefreshControl } from "react-native";
 import styled from "styled-components";
 import { color, space, layout, size, typography, flexbox } from "styled-system";
 import { Icon } from "../components/Icon/Icon";
 import { LibraryProgramCard } from "../components/cards/libraryProgramCard/LibraryProgramCard";
 import { RoundCornersButton } from "../components/button/Button";
 import { ActionButton } from "../components/button/Button";
-
-const { width } = Dimensions.get("window");
 
 const ScrollView = styled.ScrollView`
     ${space}
@@ -45,6 +37,12 @@ const Text = styled.Text`
     opacity : ${props => (props.opacity ? props.opacity : 1)};
 `;
 
+function wait(timeout) {
+    return new Promise(resolve => {
+        setTimeout(resolve, timeout);
+    });
+}
+
 export default class LibraryScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
@@ -55,17 +53,39 @@ export default class LibraryScreen extends React.Component {
                 </TouchableOpacity>
             ),
             headerLeft: (
-                <TouchableOpacity ml={4}>
+                <TouchableOpacity ml={4} onPress={() => console.log()}>
                     <Icon id={"plus"} size={18} fill={"#000"} opacity={0.7} />
                 </TouchableOpacity>
             )
         };
     };
 
+    state = {
+        refreshing: false
+    };
+
     render() {
+        const onRefresh = () => {
+            this.setState({
+                refreshing: true
+            });
+
+            wait(2000).then(() =>
+                this.setState({
+                    refreshing: false
+                })
+            );
+        };
+
         return (
             <React.Fragment>
-                <ScrollView>
+                <ScrollView
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={this.state.refreshing}
+                            onRefresh={onRefresh}
+                        />
+                    }>
                     <View px={4} mt={4}>
                         <View
                             flexDirection='row'
