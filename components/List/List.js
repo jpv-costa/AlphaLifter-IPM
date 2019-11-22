@@ -4,6 +4,7 @@ import { color, space, layout, size, typography, flexbox } from "styled-system";
 import {
     FlatList,
     Animated,
+    View,
     Dimensions,
     TouchableWithoutFeedback
 } from "react-native";
@@ -164,7 +165,7 @@ const ListItem = props => {
                         <CenterItem>{icon}</CenterItem>
                     </IconCircle>
                 )}
-                <ListContent ml={3} mr={3}>
+                <ListContent ml={icon ? 3 : ""}>
                     <ListHeader>
                         {title && (
                             <Text
@@ -203,7 +204,7 @@ const ListItem = props => {
         );
     } else {
         return (
-            <TouchableWithoutFeedback {...other}>
+            <TouchableWithoutFeedback {...other} style={{ flexGrow: 1 }}>
                 <ListContainer
                     px={3}
                     py={3}
@@ -215,7 +216,7 @@ const ListItem = props => {
                             <CenterItem>{icon}</CenterItem>
                         </IconCircle>
                     )}
-                    <ListContent ml={3} mr={3}>
+                    <ListContent ml={icon ? 3 : ""}>
                         <ListHeader>
                             {title && (
                                 <Text fontSize={2} fontWeight='bold'>
@@ -282,7 +283,8 @@ class NonDraggableList extends React.Component {
             <FlatList
                 data={data}
                 style={{
-                    width: width
+                    width: width,
+                    flex: 1
                 }}
                 keyExtractor={item => item.id.toString()}
                 renderItem={({ item, index }) => {
@@ -326,7 +328,7 @@ class NonDraggableList extends React.Component {
                                         }));
                                     } else {
                                         if (onItemPress) {
-                                            onItemPress(item);
+                                            onItemPress(index);
                                         }
                                         this.state.selected.pop();
                                         this.state.selected.push(item.id);

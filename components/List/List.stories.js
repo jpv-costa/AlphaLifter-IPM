@@ -17,7 +17,7 @@ const CenteredView = styled.View`
 `;
 
 const onItemPress = item => {
-    console.log("You pressed item '" + item.title + "'");
+    console.log("You pressed item '" + item.id + "'");
 };
 
 storiesOf("Lists", module)
