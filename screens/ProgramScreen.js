@@ -147,16 +147,23 @@ export default class ProgramScreen extends React.Component {
 
         content = [
             <ScrollView>
-                <View px={4} my={3}>
-                    <TouchableOpacity
+                <View px={4} my={3} flexDirection='row' alignItems='center'>
+                        <IconCircle>
+                        <TouchableOpacity
                         flexDirection='row'
                         alignItems='center'
                         onPress={this.props.navigation.getParam(
                             "showActionSheet"
                         )}>
-                        <IconCircle>
                             <MatIcon name={"add"} size={20} color={"#fff"} />
+                            </TouchableOpacity>
                         </IconCircle>
+                        <TouchableOpacity
+                        flexDirection='row'
+                        alignItems='center'
+                        onPress={this.props.navigation.getParam(
+                            "showActionSheet"
+                        )}>              
                         <Text
                             color={"secondaryShades.0"}
                             ml={4}
