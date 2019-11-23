@@ -60,7 +60,3 @@ export default class CreateProgramForm extends React.Component {
         );
     }
 }
-
-const onItemPress = item => {
-    console.log("You pressed item '" + item.title + "'");
-};

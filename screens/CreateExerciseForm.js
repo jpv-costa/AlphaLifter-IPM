@@ -71,7 +71,8 @@ export default class CreateExerciseForm extends React.Component {
                             <DashboardMuscleList
                                 selectList
                                 multiselect
-                                onItemPress={onItemPress}
+                                onItemPress={(item, index, selected) =>
+                                    {this.setState({primaryMuscles: index.slice(1)})}}
                             />
                         </Search>
                     </InputForm>
@@ -85,7 +86,8 @@ export default class CreateExerciseForm extends React.Component {
                             <DashboardMuscleList
                                 selectList
                                 multiselect
-                                onItemPress={onItemPress}
+                                onItemPress={(item, index, selected) =>
+                                    {this.setState({secondaryMuscles: index.slice(1)})}}
                             />
                         </Search>
                     </InputForm>
@@ -96,10 +98,6 @@ export default class CreateExerciseForm extends React.Component {
         );
     }
 }
-
-const onItemPress = item => {
-    console.log("You pressed item '" + item.title + "'");
-};
 
 const exerciseType = [
     {

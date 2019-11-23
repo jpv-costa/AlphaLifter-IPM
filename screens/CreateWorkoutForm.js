@@ -61,8 +61,8 @@ export default class CreateWorkoutForm extends React.Component {
                             data={chooseNumberCycles}
                             selectList
                             multiselect
-                            onItemPress={onItemPress}
-                            onChange={() => (console.log())} //TODO
+                            onItemPress={(item, index, selected) =>
+                                {this.setState({cycles: index.slice(1)})}}
                         />
                     </InputForm>
                 </Form>
@@ -70,10 +70,6 @@ export default class CreateWorkoutForm extends React.Component {
         );
     }
 }
-
-const onItemPress = item => {
-    console.log("You pressed item '" + item.title + "'");
-};
 
 const chooseNumberCycles = [
     {
