@@ -13,7 +13,7 @@ import {
 import { RangeInput } from "../components/inputs/InputQuestions/InputRanges";
 import { FormButtons } from "../components/button/FormButtons";
 import { SingleSelectList } from "../components/form/SingleSelectList";
-import {List} from "../components/List/List";
+import { List } from "../components/List/List";
 
 const { width } = Dimensions.get("window");
 
@@ -47,16 +47,20 @@ export default class CreateWorkoutForm extends React.Component {
         };
     };
 
-    
     render() {
         return (
             <View flex={1}>
                 <Form>
-                    <InputForm question={"Insert a name"}>
-                         <SingleInput placeholder={"Choose a name"}/>
+                    <InputForm question={"What should it be named?"}>
+                        <SingleInput placeholder={"Upper Workout"} />
                     </InputForm>
                     <InputForm question={"Select the cycles"}>
-                    <List data={chooseNumberCycles} selectList onItemPress={onItemPress}/>
+                        <List
+                            data={chooseNumberCycles}
+                            selectList
+                            multiselect
+                            onItemPress={onItemPress}
+                        />
                     </InputForm>
                 </Form>
             </View>
@@ -69,20 +73,17 @@ const onItemPress = item => {
 };
 
 const chooseNumberCycles = [
-   {
-       id: 1,
-       tittle: "1"
-   } ,
-   {
-       id: 2,
-       tittle: "2"
-   },
+    {
+        id: 1,
+        title: "1 cycle"
+    },
+    {
+        id: 2,
+        title: "2 cycle"
+    },
 
-   {
-       id: 3,
-       tittle: "3"
-   }
-     
+    {
+        id: 3,
+        title: "3 cycle"
+    }
 ];
-
-

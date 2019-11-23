@@ -14,8 +14,8 @@ const Container = styled.View`
 export default function Search(props) {
     const { data, placeholder, children, searchProperties, ...other } = props;
     [search, Setsearch] = React.useState("");
+
     [dataSource, SetDataSource] = React.useState(data);
-    const arrayholder = data;
 
     const getProperty = (element, path) => {
         if (typeof element == "undefined") {
@@ -99,15 +99,11 @@ export default function Search(props) {
                 lightTheme
                 searchIcon={{ size: theme.fontSizes[5] }}
                 onChangeText={text => {
-                    SetDataSource(
-                        SearchFilterFunction(text, (array = arrayholder))
-                    );
+                    SetDataSource(SearchFilterFunction(text, data));
                     Setsearch(text);
                 }}
                 onClear={text => {
-                    SetDataSource(
-                        SearchFilterFunction("", (array = arrayholder))
-                    );
+                    SetDataSource(SearchFilterFunction("", data));
                     Setsearch("");
                 }}
                 placeholder={placeholder ? placeholder : "Type Here..."}

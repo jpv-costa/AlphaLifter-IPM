@@ -11,14 +11,14 @@ const Text = styled.Text`
 `;
 
 const CenterItem = styled.View`
-  align-items: flex-start;
-  flex: 1;
-  justify-content: flex-start;
+    align-items: flex-start;
+    flex: 1;
+    justify-content: flex-start;
 `;
 
 const UserInput = styled.View`
-  flexDirection: row;
-  align-items: flex-end;
+    flex-direction: row;
+    align-items: flex-end;
 `;
 
 const TextInput = styled.TextInput`
@@ -28,7 +28,6 @@ const TextInput = styled.TextInput`
   ${typography}
   ${size}
 `;
-
 
 export const SingleInputNumeric = props => {
   const {placeholder, units, onChange} = props;
@@ -69,5 +68,3 @@ return(
 </CenterItem>
 );
 };
-
-

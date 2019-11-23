@@ -312,8 +312,7 @@ export class LineChart extends React.PureComponent {
                 <Animated.View
                     style={{
                         height: height,
-                        flexDirection: "row",
-                        marginBottom: -35
+                        flexDirection: "row"
                     }}>
                     <AreaChart
                         style={{ flex: 1 }}

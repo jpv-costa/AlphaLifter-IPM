@@ -3,7 +3,7 @@ import { List } from "./List";
 
 export const DashboardExerciseList = props => {
     const { data, selectedId, onItemPress, ...other } = props;
-
+    // console.log(data);
     const parsedData = data.map(item => {
         const { id, name, variations, progress, selected, icon } = item;
 
@@ -25,10 +25,11 @@ export const DashboardExerciseList = props => {
             selected: selected
         };
     });
+    // console.log(data);
 
     return (
         <List
-            onItemPress={index => onItemPress(data[index])}
+            onItemPress={index => onItemPress(data[index], index)}
             data={parsedData}
             {...other}
             selectedId={selectedId}
