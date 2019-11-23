@@ -13,6 +13,7 @@ import Search from "../components/Search/Search";
 import { DashboardProgramList } from "../components/List/DashboardProgramList";
 import { DashboardWorkoutList } from "../components/List/DashboardWorkoutList";
 import { ActionButton } from "../components/button/Button";
+import { ReOrderScreen } from "./SearchLibraryScreen";
 
 const { width } = Dimensions.get("window");
 
@@ -46,7 +47,7 @@ const Text = styled.Text`
     opacity : ${props => (props.opacity ? props.opacity : 1)};
 `;
 
-export default class SearchLibraryScreen extends React.Component {
+export class SearchLibraryScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
             headerTitle: "Edit Workout Order",
@@ -81,6 +82,14 @@ export default class SearchLibraryScreen extends React.Component {
                 </View>
             </View>
         );
+    }
+}
+
+export default connect(mapStateToProps,null)(ReOrderScreen);
+
+const mapStateToProps = state => {
+    return {
+        
     }
 }
 

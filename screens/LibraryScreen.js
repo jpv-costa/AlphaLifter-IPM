@@ -7,6 +7,7 @@ import { LibraryProgramCard } from "../components/cards/libraryProgramCard/Libra
 import { RoundCornersButton, RoundButton } from "../components/button/Button";
 import { ActionButton } from "../components/button/Button";
 import ActionSheet from "react-native-actionsheet";
+import { connect } from "react-redux";
 
 const ScrollView = styled.ScrollView`
     ${space}
@@ -44,7 +45,7 @@ function wait(timeout) {
     });
 }
 
-export default class LibraryScreen extends React.Component {
+export class LibraryScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
             headerTitle: "Library",
@@ -232,6 +233,14 @@ export default class LibraryScreen extends React.Component {
                 </View>
             </React.Fragment>
         );
+    }
+}
+
+export default connect(mapStateToProps,null)(LibraryScreen);
+
+const mapStateToProps = state => {
+    return {
+
     }
 }
 

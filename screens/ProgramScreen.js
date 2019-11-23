@@ -56,7 +56,7 @@ const Text = styled.Text`
     opacity : ${props => (props.opacity ? props.opacity : 1)};
 `;
 
-export default class ProgramScreen extends React.Component {
+export class ProgramScreen extends React.Component {
     program = this.props.navigation.state.params.program;
     header = ["Workouts", "Analysis"];
     cycles = 2;
@@ -213,6 +213,14 @@ export default class ProgramScreen extends React.Component {
                 {/* {this.content} */}
             </React.Fragment>
         );
+    }
+}
+
+export default connect(mapStateToProps,null)(ProgramScreen);
+
+const mapStateToProps = state => {
+    return {
+        
     }
 }
 

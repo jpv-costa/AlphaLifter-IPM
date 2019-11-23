@@ -51,7 +51,10 @@ export class CreateProgramForm extends React.Component {
     render() {
         return (
             <View flex={1}>
-                <Form onFinish={() => this.props.onProgramCreated(this.state.name,this.state.cycles)}>
+                <Form onFinish={() => {
+                    this.props.onProgramCreated(this.state.name,this.state.cycles);
+                    this.props.navigation.navigate("Program");
+                }}>
                     <InputForm question={"What should it be named?"}>
                         <SingleInput placeholder={"High Volume Program"} onChange={text => this.setState({name:text})} />
                     </InputForm>
