@@ -166,9 +166,7 @@ export default class LibraryScreen extends React.Component {
                             </Text>
                             <View flexDirection='row' justifyContent='flex-end'>
                                 <RoundCornersButton text='View All' />
-                                <TouchableOpacity
-                                    ml={3}
-                                    onPress={this.showActionSheet}>
+                                <TouchableOpacity ml={3}>
                                     <Icon
                                         id={"search"}
                                         size={18}
