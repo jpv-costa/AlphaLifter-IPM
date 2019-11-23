@@ -118,8 +118,21 @@ export default class ProgramScreen extends React.Component {
             <View px={4} my={3}>
                 <TouchableOpacity flexDirection='row' alignItems='center'>
                     <IconCircle>
+                    <TouchableOpacity flexDirection='row' alignItems='center'
+                  onPress={() =>
+                    this.props.navigation.navigate(
+                        "WorkoutForm"
+                    )
+                }>
                         <MatIcon name={"add"} size={20} color={"#fff"} />
+                        </TouchableOpacity>
                     </IconCircle>
+                    <TouchableOpacity flexDirection='row' 
+                  onPress={() =>
+                    this.props.navigation.navigate(
+                        "WorkoutForm"
+                    )
+                }>
                     <Text
                         color={"secondaryShades.0"}
                         ml={4}
@@ -127,6 +140,7 @@ export default class ProgramScreen extends React.Component {
                         fontSize={3}>
                         Add Workout
                     </Text>
+                    </TouchableOpacity>
                 </TouchableOpacity>
             </View>
             <View>{this.getCycles()}</View>
