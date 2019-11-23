@@ -95,14 +95,10 @@ export default class LibraryScreen extends React.Component {
                     onPress={index => {
                         switch (index) {
                             case 0:
-                                this.props.navigation.navigate(
-                                    "ProgretionForm"
-                                );
+                                this.props.navigation.navigate("ReOrder");
                                 break;
                             case 1:
-                                this.props.navigation.navigate(
-                                    "WorkoutForm"
-                                );
+                                this.props.navigation.navigate("WorkoutForm");
                                 break;
                         }
                     }}
@@ -160,7 +156,12 @@ export default class LibraryScreen extends React.Component {
                                 <LibraryProgramCard
                                     programCardData={program}
                                     ml={4}
-                                    onPress={() => this.props.navigation.navigate("Program", {program:program})}
+                                    onPress={() =>
+                                        this.props.navigation.navigate(
+                                            "Program",
+                                            { program: program }
+                                        )
+                                    }
                                 />
                             ))}
                         </ScrollView>

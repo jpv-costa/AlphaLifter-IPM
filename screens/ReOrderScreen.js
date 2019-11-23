@@ -12,6 +12,7 @@ import { Icon } from "../components/Icon/Icon";
 import Search from "../components/Search/Search";
 import { DashboardProgramList } from "../components/List/DashboardProgramList";
 import { DashboardWorkoutList } from "../components/List/DashboardWorkoutList";
+import { ActionButton } from "../components/button/Button";
 
 const { width } = Dimensions.get("window");
 
@@ -45,76 +46,43 @@ const Text = styled.Text`
     opacity : ${props => (props.opacity ? props.opacity : 1)};
 `;
 
-export default class ReOrderScreen extends React.Component {
+export default class SearchLibraryScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
-            header: null
+            headerTitle: "Edit Workout Order",
+            headerLeft: (
+                <TouchableOpacity ml={4} onPress={() => navigation.goBack()}>
+                    <Icon
+                        id={"arrow-left"}
+                        size={18}
+                        fill={"#000"}
+                        opacity={0.7}
+                    />
+                </TouchableOpacity>
+            )
         };
     };
-
     render() {
         const { navigation } = this.props;
 
-        const type = navigation.getParam("type");
-
-        let data;
-        let placeholder;
-        let searchProperties;
-        let listType;
-
-        if (type === "program") {
-            data = programData;
-            placeholder = "Type program name...";
-            searchProperties = ["name"];
-            listType = <DashboardProgramList data={data} selectList />;
-        }
-
-        if (type === "workout") {
-            data = workoutData;
-            placeholder = "Type workout name...";
-            searchProperties = ["name, muscles"];
-            listType = <DashboardWorkoutList data={data} selectList />;
-        }
-        console.log(data);
+        // const data = navigation.getParam("data");
+        // const onSavePress = navigation.getParam("onSavePress");
 
         return (
             <View style={{ flex: 1 }}>
-                <Search
-                    mt={5}
-                    style={{ flex: 1 }}
-                    data={data}
-                    placeholder={placeholder}
-                    searchProperties={searchProperties}>
-                    {listType}
-                </Search>
+                <DashboardWorkoutList data={workoutData} selectList draggable />
+                <View px={4} mb={4}>
+                    <ActionButton
+                        mt={3}
+                        secondaryDark
+                        text='Save'
+                        onPress={() => console.log("Pressed Save button")}
+                    />
+                </View>
             </View>
         );
     }
 }
-
-const programData = [
-    {
-        id: 1,
-        name: "High Volume Program",
-        isCurrent: true,
-        cycles: 5,
-        workouts: 5
-    },
-    {
-        id: 2,
-        name: "Low Volume Program",
-        isCurrent: false,
-        cycles: 4,
-        workouts: 3
-    },
-    {
-        id: 3,
-        name: "High Volume Program",
-        isCurrent: false,
-        cycles: 5,
-        workouts: 5
-    }
-];
 
 const workoutData = [
     {
