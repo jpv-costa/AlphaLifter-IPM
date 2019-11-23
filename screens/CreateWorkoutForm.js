@@ -57,9 +57,14 @@ export class CreateWorkoutForm extends React.Component {
             <View flex={1}>
                 <Form
                     onFinish={() =>
-                        this.props.navigation.navigate("Search", {
-                            type: "exercises"
-                        })
+                        {
+                            this.props.onWorkoutCreated(this.state.name);
+                            this.props.onAssignWorkoutsToProgram(this.props.program,this.state.name,this.state.cycles);
+                            this.props.navigation.navigate("Search", {
+                                type: "exercises"
+                            });
+                        }
+                        
                     }>
                     <InputForm question={"What should it be named?"}>
                         <SingleInput
@@ -86,7 +91,8 @@ export class CreateWorkoutForm extends React.Component {
 const mapDispatchToProps = dispatch => {
     //[{workout:name, exercises:[{exercise1ID, progression:type, targetweight: weight, targetreps: reps, targetrir1:rir1, targetrir2:rir2}]
     return {
-        onWorkoutCreated: (name) => dispatch({type: actionTypes.ADD_WORKOUT, payload:{workout:name}})
+        onWorkoutCreated: (name) => dispatch({type: actionTypes.ADD_WORKOUT, payload:{name:name}}),
+        onAssignWorkoutsToProgram: (program, workout, cycles) => dispatch({type: actionTypes.ASSIGN_WORKOUT_TO_PROGRAM, payload:{program:program, workoutName:workout, cycles:cycles}})
     }
 }
 

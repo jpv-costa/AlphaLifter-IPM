@@ -106,7 +106,7 @@ const mapDispatchToProps = dispatch => {
     
     return {
         onAssignExerciseProgression: (workout, exercise, progression, targetWeight, targetReps, targetRir1, targetRir2) => dispatch({
-            type: actionTypes.ASSIGN_PROGRESSION_TO_EXERCISE, payload:{
+                type: actionTypes.ASSIGN_PROGRESSION_TO_EXERCISE, payload:{
                 workout:workout,
                 exercise:exercise,
                 progression: progression,
