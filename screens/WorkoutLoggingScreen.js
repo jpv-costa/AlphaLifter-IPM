@@ -1,55 +1,19 @@
-import React, { useState } from "react";
-import {
-    Image,
-    Platform,
-    StyleSheet,
-    SafeAreaView,
-    Dimensions,
-    StatusBar
-} from "react-native";
+import React from "react";
 import styled from "styled-components";
 import { color, space, layout, size, typography, flexbox } from "styled-system";
-import { Icon } from "../components/Icon/Icon";
-import { LibraryProgramCard } from "../components/cards/libraryProgramCard/LibraryProgramCard";
-import { RoundCornersButton } from "../components/button/Button";
 import { ActionButton } from "../components/button/Button";
 import { WorkoutTimer } from "../components/workoutTime/WorkoutTime";
-import { ExerciseLog } from "../components/workouts/logging/ExerciseLog/ExerciseLog";
 import {
     ConfiguredExerciseList,
     EquipmentTypes
 } from "../components/workouts/Exercises/Exercise";
 
-const { width } = Dimensions.get("window");
-
-const ScrollView = styled.ScrollView`
-    ${space}
-    ${layout}
-    ${flexbox}
-    ${color}
-`;
-
-const TouchableOpacity = styled.TouchableOpacity`
-    ${space}
-    ${layout}
-    ${flexbox}
-    ${color}
-`;
 
 const View = styled.View`
     ${space}
     ${layout}
     ${flexbox}
     ${color}
-`;
-
-const Text = styled.Text`
-    ${space}
-    ${layout}
-    ${color}
-    ${typography}
-    ${size}
-    opacity : ${props => (props.opacity ? props.opacity : 1)};
 `;
 
 export default class WorkoutLoggingScreen extends React.Component {

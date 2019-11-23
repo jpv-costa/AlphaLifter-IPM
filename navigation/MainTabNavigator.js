@@ -14,6 +14,7 @@ import SettingsScreen from "../screens/SettingsScreen";
 import theme from "../components/theme";
 import WorkoutLoggingScreen from "../screens/WorkoutLoggingScreen";
 import WorkoutExerciseLogScreen from "../screens/WorkoutExerciseLogScreen";
+import ProgramScreen from "../screens/ProgramScreen";
 
 const config = Platform.select({
     web: { headerMode: "screen" },
@@ -44,7 +45,8 @@ const LibraryStack = createStackNavigator(
     {
         Links: LibraryScreen,
         Logging: WorkoutLoggingScreen,
-        Exercise: WorkoutExerciseLogScreen
+        Exercise: WorkoutExerciseLogScreen,
+        Program: ProgramScreen
     },
     config
 );
