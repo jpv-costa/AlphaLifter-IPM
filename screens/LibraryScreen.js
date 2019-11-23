@@ -53,7 +53,13 @@ export default class LibraryScreen extends React.Component {
             headerTitle: "Library",
             headerRight: (
                 <TouchableOpacity mr={4}>
-                    <Icon id={"plus"} size={18} fill={"#000"} opacity={0.7} />
+                    <Icon id={"search"} size={18} fill={"#000"} opacity={0.7} />
+                </TouchableOpacity>
+            ),
+            headerLeft: (
+                <TouchableOpacity ml={4} onPress={() =>
+                    navigation.navigate("ProgretionForm")}>
+                    <Icon id={"plus"} size={18} fill={"#000"} opacity={0.7}/>
                 </TouchableOpacity>
             )
         };
