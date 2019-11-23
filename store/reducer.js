@@ -70,8 +70,14 @@ const reducer = (state = initialState, action) => {
             };
         }
         case actionTypes.REORDER: { //TODO
+              let {workouts} = action.payload
+              let newWorkouts = {...state.workouts};
+              for(i = 0; i < workouts.length; i++)
+                  newWorkouts[i] = workouts[i]; 
+
             return {
                 ...state,
+                 workouts: newWorkouts
                 
             };
         }
