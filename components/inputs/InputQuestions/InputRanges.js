@@ -67,6 +67,7 @@ export class RangeInput extends React.Component {
                                 nextInput();
                                 this.setState({ opacity: 1 });
                             }
+                            this.props.onChange1(text);
                         }}></TextInput>
                     <Text fontSize={8} mx={3} opacity={this.state.opacity}>
                         {rangeDivision}
@@ -85,6 +86,7 @@ export class RangeInput extends React.Component {
                                 previousInput();
                                 this.setState({ opacity: 0.2 });
                             }
+                            this.props.onChange2(text);
                         }}></TextInput>
                 </UserInput>
             </CenterItem>

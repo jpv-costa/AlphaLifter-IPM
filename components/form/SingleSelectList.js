@@ -15,36 +15,40 @@ const CenterList = styled.View`
     ${size}
 `;
 
-export const SingleSelectList = props => {
-    const { data, onItemPress, ...other } = props;
+export class SingleSelectList extends React.Component {
 
-    const [selected, setSelected] = useState(null);
+    state = {
+        selected: null
+    }
 
-    return (
-        <CenterList fontSize={8}>
-            <FlatList
-                data={data}
-                style={{ flexGrow: 1, width: "100%" }}
-                renderItem={({ item, index }) => (
-                    <ListItem
-                        id={item.id}
-                        style={{ flex: 1, width: "100%" }}
-                        title={item.title}
-                        selected={selected == item.id}
-                        index={index}
-                        description={item.description}
-                        onPress={() => {
-                            if (onItemPress) {
-                                onItemPress(item);
-                            }
-                        }}
-                        topDivider
-                        bottomDivider
-                        chevron
-                    />
-                )}
-                keyExtractor={item => item.id}
-            />
-        </CenterList>
-    );
+    render() {
+        return (
+            <CenterList fontSize={8}>
+                <FlatList
+                    data={this.props.data}
+                    style={{ flexGrow: 1, width: "100%" }}
+                    renderItem={({ item, index }) => (
+                        <ListItem
+                            id={item.id}
+                            style={{ flex: 1, width: "100%" }}
+                            title={item.title}
+                            selected={this.selected == item.title}
+                            index={index}
+                            description={item.description}
+                            onPress={() => {
+                                if (this.props.onItemPress) {
+                                    this.setState({selected: item.title});
+                                    this.props.onItemPress(item);
+                                }
+                            }}
+                            topDivider
+                            bottomDivider
+                            chevron
+                        />
+                    )}
+                    keyExtractor={item => item.id}
+                />
+            </CenterList>
+        );
+    }
 };

@@ -31,7 +31,7 @@ const TextInput = styled.TextInput`
 
 
 export const SingleInputNumeric = props => {
-  const {placeholder, units} = props;
+  const {placeholder, units, onChange} = props;
 return(
 <CenterItem>
     <UserInput>
@@ -41,7 +41,8 @@ return(
         keyboardType={'numeric'}
         maxFontSizeMultiplier={6}
         maxLength={6}
-        multiline={false} >
+        multiline={false} 
+        onTextChange={(text) => onChange(text)}>
       </TextInput>
       <Text fontSize = {5} ml={3} opacity = {0.5} style={{marginBottom: 7}}>
         {units}
@@ -52,12 +53,13 @@ return(
 };
 
 export const SingleInput = props => {
-  const {placeholder} = props;
+  const {placeholder, onChange} = props;
 return(
 <CenterItem>
     <UserInput>
       <TextInput fontSize = {8} 
         placeholder={placeholder}
+        onTextChange={(text) => onChange(text)}
         autoCorrect={false}
         maxFontSizeMultiplier={6}
         maxLength={6}
