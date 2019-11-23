@@ -2,8 +2,8 @@
   "expoServerPort": 19000,
   "expoServerNgrokUrl": "https://x8-kqt.anonymous.alphalifter.exp.direct",
   "packagerNgrokUrl": "https://packager.x8-kqt.anonymous.alphalifter.exp.direct",
-  "ngrokPid": 62641,
+  "ngrokPid": 17347,
   "devToolsPort": 19002,
   "packagerPort": 19003,
-  "packagerPid": 62617
+  "packagerPid": 17331
 }
