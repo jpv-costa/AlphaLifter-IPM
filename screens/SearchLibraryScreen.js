@@ -11,6 +11,7 @@ import { color, space, layout, size, typography, flexbox } from "styled-system";
 import { Icon } from "../components/Icon/Icon";
 import Search from "../components/Search/Search" 
 import {DashboardProgramList} from "../components/List/DashboardProgramList"
+import {DashboardWorkoutList} from "../components/List/DashboardWorkoutList"
 
 const { width } = Dimensions.get("window");
 
@@ -54,27 +55,45 @@ export default class SearchLibraryScreen extends React.Component {
     };
 
 render() {
+
+    const {navigation} = this.props
+
+    const type = navigation.getParam("type");
+
+    let data;
+    let placeholder;
+    let searchProperties;
+    let listType;
+
+    if(type === "program"){
+        data = programData;
+        placeholder = "Type program name...";
+        searchProperties = ["name"];
+        listType = <DashboardProgramList data = {data} selectList/>
+    }
+
+    if(type === "workout"){
+        data = workoutData;
+        placeholder = "Type workout name...";
+        searchProperties = ["name, muscles"];
+        listType = <DashboardWorkoutList data = {data} selectList/>
+    }
+
      return (
-        <Search
+       <Search
         mt={5}
-        data={programDashboardData}
-        placeholder={"Type the muscle..."}
-        searchProperties={["name"]}>
-         <DashboardProgramList
-            data={programDashboardData}
-            selectList
-        />
+        data={data}
+        placeholder={placeholder}
+        searchProperties={searchProperties}>
+        {listType}
     </Search>
      );
 
-
-
      }
-
 }
 
 
-const programDashboardData = [
+const programData = [
     {
         id: 1,
         name: "High Volume Program",
@@ -102,61 +121,29 @@ const programDashboardData = [
 ];
 
 
-const musclesDashboardData = [
+const workoutData = [
     {
         id: 1,
-        muscle: "Biceps",
-        icon: {
-            view: "front-upper"
-        }
+        name: "Chest Flex",
+        isCurrent: true,
+        exercises: 3,
+        muscles: "Chest, Shoulders",
+        progress: "5%"
     },
     {
         id: 2,
-        muscle: "Chest",
-        icon: {
-            view: "front-upper"
-        }
+        name: "Chest Build",
+        isCurrent: false,
+        exercises: 3,
+        muscles: "Chest, Triceps",
+        progress: "8%"
     },
     {
         id: 3,
-        muscle: "Chest",
-        icon: {
-            view: "front-upper"
-        }
+        name: "Chest Strech",
+        isCurrent: false,
+        exercises: 5,
+        muscles: "Chest, Shoulders",
+        progress: "10%"
     }
 ];
-
-const exercisesDashboardData = [
-    {
-        id: 1,
-        icon: {
-            primaryMuscles: ["chest"],
-            secondaryMuscles: ["biceps"],
-            view: "front-upper"
-        },
-        name: "Bench Press",
-        variations: ["Incline, Dumbbell variation"]
-    },
-    {
-        id: 2,
-        icon: {
-            primaryMuscles: ["biceps"],
-            secondaryMuscles: [],
-            view: "front-upper"
-        },
-        name: "Barbell Rows",
-        variations: ["Decline, Dumbbell variation"]
-    },
-    {
-        id: 3,
-        icon: {
-            primaryMuscles: ["abs"],
-            secondaryMuscles: [],
-            view: "front-upper"
-        },
-        name: "Shoulder Press",
-        variations: ["Standing, Dumbbell variation"]
-    }
-];
-
-

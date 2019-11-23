@@ -52,12 +52,7 @@ export default class LibraryScreen extends React.Component {
         return {
             headerTitle: "Library",
             headerRight: (
-                <TouchableOpacity mr={4}>
-                    <Icon id={"search"} size={18} fill={"#000"} opacity={0.7} />
-                </TouchableOpacity>
-            ),
-            headerLeft: (
-                <TouchableOpacity ml={4} onPress={() =>
+                <TouchableOpacity mr={4}onPress={() =>
                     navigation.navigate("ProgretionForm")}>
                     <Icon id={"plus"} size={18} fill={"#000"} opacity={0.7}/>
                 </TouchableOpacity>
@@ -80,7 +75,7 @@ export default class LibraryScreen extends React.Component {
                         <RoundCornersButton text='View All'/>
                         <TouchableOpacity ml = {3}     
                         onPress={() =>
-                            this.props.navigation.navigate("Search")
+                            this.props.navigation.navigate("Search", {type: "program"})
                         }>
                     <Icon id={"search"} size={18} fill={"#000"} opacity={0.7}/>
                        </TouchableOpacity>
@@ -121,7 +116,10 @@ export default class LibraryScreen extends React.Component {
                             </Text>
                             <View flexDirection = 'row' justifyContent='flex-end'>
                         <RoundCornersButton text='View All'/>
-                        <TouchableOpacity ml = {3}>
+                        <TouchableOpacity ml = {3}
+                          onPress={() =>
+                            this.props.navigation.navigate("Search", {type: "workout"})
+                        }>
                     <Icon id={"search"} size={18} fill={"#000"} opacity={0.7}/>
                        </TouchableOpacity>
                        </View>
