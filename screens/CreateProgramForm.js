@@ -72,4 +72,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapDispatchToProps)(CreateProgramForm);
+export default connect(null,mapDispatchToProps)(CreateProgramForm);

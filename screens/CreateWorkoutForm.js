@@ -86,11 +86,11 @@ export class CreateWorkoutForm extends React.Component {
 const mapDispatchToProps = dispatch => {
     //[{workout:name, exercises:[{exercise1ID, progression:type, targetweight: weight, targetreps: reps, targetrir1:rir1, targetrir2:rir2}]
     return {
-        onWorkoutCreated: (name, name) => dispatch({type: actionTypes.ADD_WORKOUT, payload:{workout:name}})
+        onWorkoutCreated: (name) => dispatch({type: actionTypes.ADD_WORKOUT, payload:{workout:name}})
     }
 }
 
-export default connect(mapDispatchToProps)(CreateWorkoutForm);
+export default connect(null, mapDispatchToProps)(CreateWorkoutForm);
 
 const chooseNumberCycles = [
     {

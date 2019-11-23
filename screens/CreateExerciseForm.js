@@ -115,7 +115,7 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapDispatchToProps)(CreateExerciseForm);
+export default connect(null,mapDispatchToProps)(CreateExerciseForm);
 
 const exerciseType = [
     {
