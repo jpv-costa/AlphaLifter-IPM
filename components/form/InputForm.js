@@ -6,7 +6,7 @@ import styled from "styled-components";
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
 
-const QuestionItem = styled.Text`
+const QuestionItem = styled.View`
     ${space}
     ${layout}
     ${color}
@@ -23,8 +23,6 @@ const Text = styled.Text`
 `;
 
 const Answer = styled.View`
-    width: 100%;
-    minHeight: 300;
     ${space}
     ${layout}
     ${color}
@@ -33,13 +31,17 @@ const Answer = styled.View`
 `;
 export const InputForm = props => {
     return (
-        <View style={{ width: screenWidth }}>
-            <QuestionItem pt={5} mx={4}>
+        <View
+            style={{
+                flex: 1,
+                width: screenWidth
+            }}>
+            <QuestionItem pt={3} px={4}>
                 <Text fontSize={7} opacity={0.2}>
                     {props.question}
                 </Text>
             </QuestionItem>
-            <Answer style={{ width: "100%" }} mt={5} mx={4}>
+            <Answer style={{ flex: 1, width: screenWidth }} pt={4} px={4}>
                 {props.children}
             </Answer>
         </View>

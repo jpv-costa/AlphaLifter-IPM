@@ -1,1 +1,9 @@
-{}
+{
+  "expoServerPort": 19000,
+  "expoServerNgrokUrl": "https://bb-ef6.anonymous.alphalifter.exp.direct",
+  "packagerNgrokUrl": "https://packager.bb-ef6.anonymous.alphalifter.exp.direct",
+  "ngrokPid": 11774,
+  "devToolsPort": 19002,
+  "packagerPort": 19003,
+  "packagerPid": 11758
+}

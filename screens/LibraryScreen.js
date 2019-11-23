@@ -96,7 +96,9 @@ export default class LibraryScreen extends React.Component {
                     onPress={index => {
                         switch (index) {
                             case 0:
-                                navigation.navigate("ProgretionForm");
+                                this.props.navigation.navigate(
+                                    "ProgretionForm"
+                                );
                                 break;
                             case 1:
                                 break;
