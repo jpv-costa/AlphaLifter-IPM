@@ -13,6 +13,7 @@ import {
 import { RangeInput } from "../components/inputs/InputQuestions/InputRanges";
 import { FormButtons } from "../components/button/FormButtons";
 import { SingleSelectList } from "../components/form/SingleSelectList";
+import List from "../components/List/List";
 
 const { width } = Dimensions.get("window");
 
@@ -40,6 +41,10 @@ const Text = styled.Text`
 `;
 
 export default class CreateProgretionForm extends React.Component {
+
+    state = {
+    }
+
     static navigationOptions = ({ navigation }) => {
         return {
             headerTitle: "Create Program"
@@ -49,24 +54,24 @@ export default class CreateProgretionForm extends React.Component {
     render() {
         return (
             <View flex={1}>
-                <Form>
+                <Form onFinish={() => console.log(this.state)}>
                     <InputForm question={"What is the progression scheme?"}>
                         <SingleSelectList
                             data={chooseProgressionData}
-                            onItemPress={onItemPress}
+                            onItemPress={(item) => {this.state.progression = item.title;}}
                         />
                     </InputForm>
 
                     <InputForm question={"How many target sets?"}>
-                        <SingleInputNumeric placeholder={"3"} />
+                        <SingleInputNumeric placeholder={"3"} onChange={(text) => {this.state.sets = text}}/>
                     </InputForm>
 
                     <InputForm question={"Enter the starting load?"}>
-                        <SingleInput placeholder={"50"} units={"% 1 RM"} />
+                        <SingleInput placeholder={"50"} units={"% 1 RM"} onChange={(text) => {this.state.startLoad = text}}/>
                     </InputForm>
 
                     <InputForm question={"What should be the load increase?"}>
-                        <SingleInput placeholder={"2.5"} units={"kg"} />
+                        <SingleInput placeholder={"2.5"} units={"kg"} onChange={(text) => {this.state.loadIncrease = text}}/>
                     </InputForm>
 
                     <InputForm question={"Enter the rep range:"}>
@@ -74,6 +79,8 @@ export default class CreateProgretionForm extends React.Component {
                             placeholder1={"10"}
                             rangeDivision={"-"}
                             placeholder2={"12"}
+                            onChange1={(text) => {this.state.reps1 = text}}
+                            onChange2={(text) => {this.state.reps2 = text}}
                         />
                     </InputForm>
                     <InputForm question={"Enter the RIR range:"}>
@@ -81,6 +88,8 @@ export default class CreateProgretionForm extends React.Component {
                             placeholder1={"1"}
                             rangeDivision={"-"}
                             placeholder2={"1"}
+                            onChange1={(text) => {this.state.rir1 = text}}
+                            onChange2={(text) => {this.state.rir2 = text}}
                         />
                     </InputForm>
                 </Form>
@@ -91,6 +100,7 @@ export default class CreateProgretionForm extends React.Component {
 
 const onItemPress = item => {
     console.log("You pressed item '" + item.title + "'");
+    this.state.progression
 };
 
 const chooseProgressionData = [

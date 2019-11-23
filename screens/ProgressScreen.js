@@ -50,6 +50,8 @@ export default function HomeScreen(props) {
         data: oneRepMaxes["1"]
     });
 
+    console.disableYellowBox = true; 
+
     const content = [
         <DashboardProgramList
             key={"programs"}

@@ -18,17 +18,6 @@ import styled from "styled-components";
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
 
-// const contentSizePercentage = 0.9;
-// const paginationSizePercentage = 0.03;
-
-// const paginationHeight = screenHeight * paginationSizePercentage;
-// const contentHeight = screenHeight * contentSizePercentage;
-// const formButtonsHeight = screenHeight - paginationHeight - contentHeight;
-
-// console.log("pagination height " + paginationHeight);
-// console.log("content height " + contentHeight);
-// console.log("form buttons height " + formButtonsHeight);
-
 const View = styled.View`
     ${space}
     ${layout}
@@ -102,6 +91,7 @@ export class Form extends React.Component {
                                     this.props.children.length - 1
                                 }
                                 disablePrevious={this.state.pageNum == 0}
+                                onFinish={this.props.onFinish}
                             />
                         </View>
                     </View>
