@@ -1,5 +1,6 @@
 {
   "expoServerPort": 19000,
+<<<<<<< HEAD
   "expoServerNgrokUrl": "https://4c-ts5.anonymous.alphalifter.exp.direct",
   "packagerNgrokUrl": "https://packager.4c-ts5.anonymous.alphalifter.exp.direct",
   "ngrokPid": 3668,
@@ -7,3 +8,12 @@
   "packagerPort": 19001,
   "packagerPid": 20420
 }
+=======
+  "expoServerNgrokUrl": "https://x8-kqt.anonymous.alphalifter.exp.direct",
+  "packagerNgrokUrl": "https://packager.x8-kqt.anonymous.alphalifter.exp.direct",
+  "ngrokPid": 17347,
+  "devToolsPort": 19002,
+  "packagerPort": 19003,
+  "packagerPid": 17331
+}
+>>>>>>> 71452ee81bf9279ce0d50617ff5d5d9ecc419fd3

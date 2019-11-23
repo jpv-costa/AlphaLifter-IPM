@@ -20,6 +20,7 @@ import CreateExerciseForm from "../screens/CreateExerciseForm";
 import CreateProgressionForm from "../screens/CreateProgressionForm";
 import CreateWorkoutForm from "../screens/CreateWorkoutForm";
 import ReOrderScreen from "../screens/ReOrderScreen";
+import CycleSelectionScreen from "../screens/CycleSelectionScreen";
 
 const config = Platform.select({
     web: { headerMode: "screen" },
@@ -56,7 +57,8 @@ const LibraryStack = createStackNavigator(
         ProgretionForm: CreateProgressionForm,
         WorkoutForm: CreateWorkoutForm,
         Exercise: WorkoutExerciseLogScreen,
-        ReOrder: ReOrderScreen
+        ReOrder: ReOrderScreen,
+        CycleSelection: CycleSelectionScreen
     },
     config
 );

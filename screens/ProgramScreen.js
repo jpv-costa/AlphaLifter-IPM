@@ -10,6 +10,8 @@ import { default as MatIcon } from "react-native-vector-icons/MaterialIcons";
 import Navigator from "../components/navigation/TabNavigator";
 import theme from "../components/theme";
 
+import ActionSheet from "react-native-actionsheet";
+
 const { width } = Dimensions.get("window");
 
 const ScrollView = styled.ScrollView`
@@ -59,60 +61,18 @@ export default class ProgramScreen extends React.Component {
     header = ["Workouts", "Analysis"];
     cycles = 2;
 
-    getCycles() {
-        const result = [];
+    showActionSheet = () => {
+        this.ActionSheet.show();
+    };
 
-        for (let i = 1; i <= this.cycles; i++) {
-            result.push(
-                <View mb={4}>
-                    <View
-                        flexDirection='row'
-                        alignItems='center'
-                        justifyContent='space-between'>
-                        <Text
-                            fontSize={4}
-                            opacity={0.5}
-                            mt={2}
-                            ml={4}
-                            fontWeight={"bold"}>
-                            {i} cycle
-                        </Text>
-                        <View mr={4}>
-                            <RoundCornersButton
-                                text='Re-order'
-                                mr={4}
-                                onPress={() =>
-                                    this.props.navigation.navigate("ReOrder")
-                                }
-                            />
-                        </View>
-                    </View>
-                    <ScrollView
-                        showsHorizontalScrollIndicator={false}
-                        horizontal
-                        px={2}
-                        pt={4}
-                        pb={2}
-                        contentInset={{
-                            top: 0,
-                            left: 0,
-                            bottom: 0,
-                            right: 24
-                        }}>
-                        {workoutsCardData.map(workout => (
-                            <LibraryProgramCard
-                                programCardData={workout}
-                                ml={4}
-                            />
-                        ))}
-                    </ScrollView>
-                </View>
-            );
-        }
-
-        return result;
+    componentDidMount() {
+        const { navigation } = this.props;
+        navigation.setParams({
+            showActionSheet: this.showActionSheet
+        });
     }
 
+<<<<<<< HEAD
     content = [
         <ScrollView>
             <View px={4} my={3}>
@@ -148,6 +108,8 @@ export default class ProgramScreen extends React.Component {
         <Text>Not implemented.</Text>
     ];
 
+=======
+>>>>>>> 71452ee81bf9279ce0d50617ff5d5d9ecc419fd3
     static navigationOptions = ({ navigation }) => {
         return {
             headerTitle: navigation.state.params.program.title,
@@ -165,15 +127,119 @@ export default class ProgramScreen extends React.Component {
     };
 
     render() {
+        const getCycles = () => {
+            const result = [];
+
+            for (let i = 1; i <= this.cycles; i++) {
+                result.push(
+                    <View mb={4}>
+                        <View
+                            flexDirection='row'
+                            alignItems='center'
+                            justifyContent='space-between'>
+                            <Text
+                                fontSize={4}
+                                opacity={0.5}
+                                mt={2}
+                                ml={4}
+                                fontWeight={"bold"}>
+                                {i} cycle
+                            </Text>
+                            <View mr={4}>
+                                <RoundCornersButton
+                                    text='Re-order'
+                                    mr={4}
+                                    onPress={() =>
+                                        this.props.navigation.navigate(
+                                            "ReOrder"
+                                        )
+                                    }
+                                />
+                            </View>
+                        </View>
+                        <ScrollView
+                            showsHorizontalScrollIndicator={false}
+                            horizontal
+                            px={2}
+                            pt={4}
+                            pb={2}
+                            contentInset={{
+                                top: 0,
+                                left: 0,
+                                bottom: 0,
+                                right: 24
+                            }}>
+                            {workoutsCardData.map(workout => (
+                                <LibraryProgramCard
+                                    programCardData={workout}
+                                    ml={4}
+                                />
+                            ))}
+                        </ScrollView>
+                    </View>
+                );
+            }
+
+            return result;
+        };
+
+        content = [
+            <ScrollView>
+                <View px={4} my={3}>
+                    <TouchableOpacity
+                        flexDirection='row'
+                        alignItems='center'
+                        onPress={this.props.navigation.getParam(
+                            "showActionSheet"
+                        )}>
+                        <IconCircle>
+                            <MatIcon name={"add"} size={20} color={"#fff"} />
+                        </IconCircle>
+                        <Text
+                            color={"secondaryShades.0"}
+                            ml={4}
+                            fontWeight='bold'
+                            fontSize={3}>
+                            Add Workout
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+                <View>{getCycles()}</View>
+            </ScrollView>,
+            <Text>Not implemented.</Text>
+        ];
+
         return (
             <React.Fragment>
+                <ActionSheet
+                    ref={o => (this.ActionSheet = o)}
+                    title={"Add Workout"}
+                    options={[
+                        "Create new workout",
+                        "Add from Library",
+                        "Cancel"
+                    ]}
+                    cancelButtonIndex={2}
+                    onPress={index => {
+                        switch (index) {
+                            case 0:
+                                this.props.navigation.navigate("WorkoutForm");
+                                break;
+                            case 1:
+                                this.props.navigation.navigate("Search", {
+                                    type: "workout"
+                                });
+                                break;
+                        }
+                    }}
+                />
                 <Text fontSize={2} my={3} mx={4} opacity={0.5}>
                     Length: {this.cycles} cycles.
                 </Text>
                 <Navigator
                     width={width}
                     header={this.header}
-                    tabContent={this.content}
+                    tabContent={content}
                 />
                 {/* {this.content} */}
             </React.Fragment>
