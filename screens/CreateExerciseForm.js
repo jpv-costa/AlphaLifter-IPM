@@ -52,7 +52,10 @@ export class CreateExerciseForm extends React.Component {
     render() {
         return (
             <View flex-grow = {1}>
-               <Form onFinish={() => this.props.onExerciseCreated(this.state.name, this.state.primaryMuscles, this.state.secondaryMuscles)}>
+                <Form onFinish={() => { 
+                    this.props.onExerciseCreated(this.state.name, this.state.primaryMuscles, this.state.secondaryMuscles);
+                    this.props.navigation.navigate("Library");
+                }}>
                     <InputForm question={"What should it be named?"}>
                         <SingleInput placeholder={"Exercise name"}  onChange={text => this.setState({name:text})}/>
                     </InputForm>
@@ -65,7 +68,7 @@ export class CreateExerciseForm extends React.Component {
                         />
                     </InputForm>
 
-                    <InputForm question={"What is the pimary muscle?"}>
+                    <InputForm question={"What is the primary muscle?"}>
                         <Search
                         mt={0}
                         data={musclesDashboardData}

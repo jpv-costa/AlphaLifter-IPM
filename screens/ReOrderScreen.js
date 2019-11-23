@@ -13,11 +13,9 @@ import Search from "../components/Search/Search";
 import { DashboardProgramList } from "../components/List/DashboardProgramList";
 import { DashboardWorkoutList } from "../components/List/DashboardWorkoutList";
 import { ActionButton } from "../components/button/Button";
-
 import { SearchLibraryScreen } from "./SearchLibraryScreen";
 
 import { connect } from "react-redux";
-
 import * as actionTypes from "../store/actions";
 
 const { width } = Dimensions.get("window");
@@ -53,8 +51,6 @@ const Text = styled.Text`
 `;
 
 export class ReOrderScreen extends React.Component {
-    state = {};
-
     static navigationOptions = ({ navigation }) => {
         return {
             headerTitle: "Edit Workout Order",
@@ -100,8 +96,6 @@ export class ReOrderScreen extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, null)(ReOrderScreen);
-
 const mapDispatchToProps = dispatch => {
     return {
         orderedWorkout: workouts =>
@@ -112,9 +106,7 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-const mapStateToProps = state => {
-    return {};
-};
+export default connect(null, mapDispatchToProps)(ReOrderScreen);
 
 const workoutData = [
     {
