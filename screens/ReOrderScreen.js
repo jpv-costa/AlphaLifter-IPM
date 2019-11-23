@@ -13,9 +13,11 @@ import Search from "../components/Search/Search";
 import { DashboardProgramList } from "../components/List/DashboardProgramList";
 import { DashboardWorkoutList } from "../components/List/DashboardWorkoutList";
 import { ActionButton } from "../components/button/Button";
+
 import { SearchLibraryScreen } from "./SearchLibraryScreen";
 
 import { connect } from "react-redux";
+
 import * as actionTypes from "../store/actions";
 
 const { width } = Dimensions.get("window");
@@ -51,6 +53,8 @@ const Text = styled.Text`
 `;
 
 export class ReOrderScreen extends React.Component {
+    state = {};
+
     static navigationOptions = ({ navigation }) => {
         return {
             headerTitle: "Edit Workout Order",
@@ -74,7 +78,11 @@ export class ReOrderScreen extends React.Component {
 
         return (
             <View style={{ flex: 1 }}>
-                <DashboardWorkoutList data={workoutData} selectList draggable />
+                <DashboardWorkoutList
+                    data={this.setState({ workouts: data })}
+                    selectList
+                    draggable
+                />
                 <View px={4} mb={4}>
                     <ActionButton
                         mt={3}
@@ -82,7 +90,8 @@ export class ReOrderScreen extends React.Component {
                         text='Save'
                         onPress={() => {
                             this.props.navigation.goBack();
-                            console.log("Pressed Save button");
+                            this.props.orderedWorkout(this.state.workouts),
+                                console.log("Pressed Save button");
                         }}
                     />
                 </View>
@@ -92,6 +101,16 @@ export class ReOrderScreen extends React.Component {
 }
 
 export default connect(mapStateToProps, null)(ReOrderScreen);
+
+const mapDispatchToProps = dispatch => {
+    return {
+        orderedWorkout: workouts =>
+            dispatch({
+                type: actionTypes.REORDER,
+                payload: { workouts: workouts }
+            })
+    };
+};
 
 const mapStateToProps = state => {
     return {};
