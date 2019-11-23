@@ -12,6 +12,9 @@ import theme from "../components/theme";
 
 import ActionSheet from "react-native-actionsheet";
 
+import {connect} from 'react-redux';
+import * as actionTypes from "../store/actions";
+
 const { width } = Dimensions.get("window");
 
 const ScrollView = styled.ScrollView`
@@ -56,7 +59,7 @@ const Text = styled.Text`
     opacity : ${props => (props.opacity ? props.opacity : 1)};
 `;
 
-export default class ProgramScreen extends React.Component {
+export class ProgramScreen extends React.Component {
     program = this.props.navigation.state.params.program;
     header = ["Workouts", "Analysis"];
     cycles = 2;
@@ -92,7 +95,7 @@ export default class ProgramScreen extends React.Component {
         const getCycles = () => {
             const result = [];
 
-            for (let i = 1; i <= this.cycles; i++) {
+            for (let i = 1; i <= this.props.cycles; i++) {
                 result.push(
                     <View mb={4}>
                         <View
@@ -131,7 +134,7 @@ export default class ProgramScreen extends React.Component {
                                 bottom: 0,
                                 right: 24
                             }}>
-                            {workoutsCardData.map(workout => (
+                            {this.props.workouts.map(workout => (
                                 <LibraryProgramCard
                                     programCardData={workout}
                                     ml={4}
@@ -225,6 +228,28 @@ export default class ProgramScreen extends React.Component {
                 )}
             </React.Fragment>
         );
+    }
+}
+
+export default connect(mapStateToProps,null)(ProgramScreen);
+
+const mapStateToProps = (state, ownProps) => {
+    let workouts = [];
+
+    state.workouts.map(w => {
+        workouts.push({id:w.id, name:w.name, value:
+            [
+                {id: 2, title: "Exercises", value: w.exercises.length},
+                {id: 3, title: "Duration", value: "1h30min"},
+                {id: 4, title: "Focus", value: "Chest and Biceps"}            ]
+        })
+    })
+
+    let program = state.programs.filter(p => p.id == ownProps.program);
+
+    return {
+        cycles: program.cycles,
+        workouts: workouts
     }
 }
 

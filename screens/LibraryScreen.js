@@ -8,6 +8,9 @@ import { RoundCornersButton, RoundButton } from "../components/button/Button";
 import { ActionButton } from "../components/button/Button";
 import ActionSheet from "react-native-actionsheet";
 
+import {connect} from 'react-redux';
+import * as actionTypes from "../store/actions";
+
 const ScrollView = styled.ScrollView`
     ${space}
     ${layout}
@@ -44,7 +47,7 @@ function wait(timeout) {
     });
 }
 
-export default class LibraryScreen extends React.Component {
+export class LibraryScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
             headerTitle: "Library",
@@ -153,7 +156,7 @@ export default class LibraryScreen extends React.Component {
                                 bottom: 0,
                                 right: 24
                             }}>
-                            {programCardData.map(program => (
+                            {this.props.programs.map(program => (
                                 <LibraryProgramCard
                                     programCardData={program}
                                     ml={4}
@@ -213,7 +216,7 @@ export default class LibraryScreen extends React.Component {
                                 bottom: 0,
                                 right: 24
                             }}>
-                            {workoutCardData.map(program => (
+                            {this.props.workouts.map(program => (
                                 <LibraryProgramCard
                                     programCardData={program}
                                     ml={4}
@@ -234,6 +237,36 @@ export default class LibraryScreen extends React.Component {
                 </View>
             </React.Fragment>
         );
+    }
+}
+
+export default connect(mapStateToProps,null)(LibraryScreen);
+
+const mapStateToProps = state => {
+    let programs = [], workouts = [];
+    state.programs.map(p => {
+        programs.push({id:p.id, name:p.name, value:
+            [
+                {id: 2, title: "Frequency", value: "3"},
+                {id: 3, title: "Cycles", value: p.cycles},
+                {id: 4, title: "Workouts/Cycle", value: p.workouts.length/p.cycles},
+                {id: 5, title: "Workout Duration", value: "1h10m"}
+            ]
+        })
+    })
+
+    state.workouts.map(w => {
+        workouts.push({id:w.id, name:w.name, value:
+            [
+                {id: 2, title: "Exercises", value: w.exercises.length},
+                {id: 3, title: "Duration", value: "1h30min"},
+                {id: 4, title: "Focus", value: "Chest and Biceps"}            ]
+        })
+    })
+
+    return {
+        programs: programs,
+        workouts: workouts
     }
 }
 
