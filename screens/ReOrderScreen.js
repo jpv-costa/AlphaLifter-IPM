@@ -13,11 +13,6 @@ import Search from "../components/Search/Search";
 import { DashboardProgramList } from "../components/List/DashboardProgramList";
 import { DashboardWorkoutList } from "../components/List/DashboardWorkoutList";
 import { ActionButton } from "../components/button/Button";
-<<<<<<< HEAD
-=======
-import { ReOrderScreen } from "./SearchLibraryScreen";
-
->>>>>>> 60363ef17fb447c58e1198019b424816cc960cf3
 import {connect} from 'react-redux';
 import * as actionTypes from "../store/actions";
 
