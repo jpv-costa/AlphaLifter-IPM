@@ -96,7 +96,7 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapDispatchToProps)(CreateWorkoutForm);
+export default connect(null, mapDispatchToProps)(CreateWorkoutForm);
 
 const chooseNumberCycles = [
     {

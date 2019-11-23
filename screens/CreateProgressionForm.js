@@ -119,7 +119,7 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapDispatchToProps)(CreateProgretionForm);
+export default connect(null,mapDispatchToProps)(CreateProgretionForm);
 
 const chooseProgressionData = [
     {
