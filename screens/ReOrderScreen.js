@@ -46,7 +46,7 @@ const Text = styled.Text`
     opacity : ${props => (props.opacity ? props.opacity : 1)};
 `;
 
-export default class SearchLibraryScreen extends React.Component {
+export default class ReOrderScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
             headerTitle: "Edit Workout Order",
@@ -76,7 +76,10 @@ export default class SearchLibraryScreen extends React.Component {
                         mt={3}
                         secondaryDark
                         text='Save'
-                        onPress={() => console.log("Pressed Save button")}
+                        onPress={() => {
+                            this.props.navigation.goBack();
+                            console.log("Pressed Save button");
+                        }}
                     />
                 </View>
             </View>
