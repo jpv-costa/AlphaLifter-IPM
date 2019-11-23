@@ -15,6 +15,9 @@ import { FormButtons } from "../components/button/FormButtons";
 import { SingleSelectList } from "../components/form/SingleSelectList";
 import { List } from "../components/List/List";
 
+import {connect} from 'react-redux';
+import * as actionTypes from "../store/actions";
+
 const { width } = Dimensions.get("window");
 
 const TouchableOpacity = styled.TouchableOpacity`
@@ -40,7 +43,7 @@ const Text = styled.Text`
     opacity : ${props => (props.opacity ? props.opacity : 1)};
 `;
 
-export default class CreateWorkoutForm extends React.Component {
+export class CreateWorkoutForm extends React.Component {
     state= {}
 
     static navigationOptions = ({ navigation }) => {
@@ -70,6 +73,15 @@ export default class CreateWorkoutForm extends React.Component {
         );
     }
 }
+
+const mapDispatchToProps = dispatch => {
+    //[{workout:name, exercises:[{exercise1ID, progression:type, targetweight: weight, targetreps: reps, targetrir1:rir1, targetrir2:rir2}]
+    return {
+        onWorkoutCreated: (name, name) => dispatch({type: actionTypes.ADD_WORKOUT, payload:{workout:name}})
+    }
+}
+
+export default connect(mapDispatchToProps)(CreateWorkoutForm);
 
 const chooseNumberCycles = [
     {

@@ -11,6 +11,9 @@ import { RangeInput } from "../components/inputs/InputQuestions/InputRanges";
 import {FormButtons} from "../components/button/FormButtons"
 import { SingleSelectList } from "../components/form/SingleSelectList";
 
+import {connect} from 'react-redux';
+import * as actionTypes from "../store/actions";
+
 const { width } = Dimensions.get("window");
 
 
@@ -37,7 +40,7 @@ const Text = styled.Text`
     opacity : ${props => (props.opacity ? props.opacity : 1)};
 `;
 
-export default class CreateExerciseForm extends React.Component {
+export class CreateExerciseForm extends React.Component {
     state = {}
 
     static navigationOptions = ({ navigation }) => {
@@ -49,7 +52,7 @@ export default class CreateExerciseForm extends React.Component {
     render() {
         return (
             <View flex-grow = {1}>
-               <Form onFinish={() => console.log(this.state)}>
+               <Form onFinish={() => this.props.onExerciseCreated(this.state.name, this.state.primaryMuscles, this.state.secondaryMuscles)}>
                     <InputForm question={"What should it be named?"}>
                         <SingleInput placeholder={"Exercise name"}  onChange={text => this.setState({name:text})}/>
                     </InputForm>
@@ -98,6 +101,21 @@ export default class CreateExerciseForm extends React.Component {
         );
     }
 }
+
+const mapDispatchToProps = dispatch => {
+    //[{exercise: id, name: name}]
+    return {
+        onExerciseCreated: (name, primaryMuscles, secondaryMuscles) => dispatch({
+            type: actionTypes.ADD_EXERCISE, 
+            payload:{
+                name:name,
+                primaryMuscles:primaryMuscles,
+                secondaryMuscles:secondaryMuscles
+            }})
+    }
+}
+
+export default connect(mapDispatchToProps)(CreateExerciseForm);
 
 const exerciseType = [
     {

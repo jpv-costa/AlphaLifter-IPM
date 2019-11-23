@@ -15,6 +15,9 @@ import { FormButtons } from "../components/button/FormButtons";
 import { SingleSelectList } from "../components/form/SingleSelectList";
 import List from "../components/List/List";
 
+import {connect} from 'react-redux';
+import * as actionTypes from "../store/actions";
+
 const { width } = Dimensions.get("window");
 
 const TouchableOpacity = styled.TouchableOpacity`
@@ -40,21 +43,21 @@ const Text = styled.Text`
     opacity : ${props => (props.opacity ? props.opacity : 1)};
 `;
 
-export default class CreateProgretionForm extends React.Component {
+export class CreateProgretionForm extends React.Component {
 
     state = {
     }
 
     static navigationOptions = ({ navigation }) => {
         return {
-            headerTitle: "Create Program"
+            headerTitle: "Assign Exercise Progression"
         };
     };
 
     render() {
         return (
             <View flex={1}>
-                <Form onFinish={() => console.log(this.state)}>
+                <Form onFinish={() => this.props.onAssignExerciseProgression(this.props.workout,this.props.exercise,this.state.progression,this.state.startLoad, this.state.reps1, this.state.reps2, this.state.rir1, this.state.rir2)}>
                     <InputForm question={"What is the progression scheme?"}>
                         <SingleSelectList
                             data={chooseProgressionData}
@@ -98,10 +101,25 @@ export default class CreateProgretionForm extends React.Component {
     }
 }
 
-const onItemPress = item => {
-    console.log("You pressed item '" + item.title + "'");
-    this.state.progression
-};
+const mapDispatchToProps = dispatch => {
+    //[{workout:name, exercises:[{exercise:name, progression, targetweight: weight, targetreps1: reps1,targetreps2:reps2, targetrir1:rir1, targetrir2:rir2}]    
+    
+    return {
+        onAssignExerciseProgression: (workout, exercise, progression, targetWeight, targetReps, targetRir1, targetRir2) => dispatch({
+            type: actionTypes.ASSIGN_PROGRESSION_TO_EXERCISE, payload:{
+                workout:workout,
+                exercise:exercise,
+                progression: progression,
+                targetWeight:targetWeight,
+                targetReps1:targetReps1,
+                targetRep2:targetReps2,
+                targetRir1:targetRir1,
+                targetRir2:targetRir2
+            }})
+    }
+}
+
+export default connect(mapDispatchToProps)(CreateProgretionForm);
 
 const chooseProgressionData = [
     {

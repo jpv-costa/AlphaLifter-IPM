@@ -11,6 +11,9 @@ import { RangeInput } from "../components/inputs/InputQuestions/InputRanges";
 import { FormButtons } from "../components/button/FormButtons";
 import { SingleSelectList } from "../components/form/SingleSelectList";
 
+import {connect} from 'react-redux';
+import * as actionTypes from "../store/actions";
+
 const { width } = Dimensions.get("window");
 
 const TouchableOpacity = styled.TouchableOpacity`
@@ -36,8 +39,9 @@ const Text = styled.Text`
     opacity : ${props => (props.opacity ? props.opacity : 1)};
 `;
 
-export default class CreateProgramForm extends React.Component {
-    state={}
+export class CreateProgramForm extends React.Component {
+    workout = this.props.workout;
+    state={};
     static navigationOptions = ({ navigation }) => {
         return {
             headerTitle: "Create Program"
@@ -47,7 +51,7 @@ export default class CreateProgramForm extends React.Component {
     render() {
         return (
             <View flex={1}>
-                <Form onFinish={() => console.log(this.state)}>
+                <Form onFinish={() => this.props.onProgramCreated(this.state.name,this.state.cycles)}>
                     <InputForm question={"What should it be named?"}>
                         <SingleInput placeholder={"High Volume Program"} onChange={text => this.setState({name:text})} />
                     </InputForm>
@@ -60,3 +64,12 @@ export default class CreateProgramForm extends React.Component {
         );
     }
 }
+
+const mapDispatchToProps = dispatch => {
+    //[{program: name, cycles:number, workouts:[{workout:id, cycle}]}]
+    return {
+        onProgramCreated: (name, cycles) => dispatch({type: actionTypes.ADD_PROGRAM, payload:{program:name,cycles:cycles}})
+    }
+}
+
+export default connect(mapDispatchToProps)(CreateProgramForm);
