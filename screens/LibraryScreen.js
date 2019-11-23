@@ -292,6 +292,7 @@ const programCardData = [
         ]
     },
     {
+        id: 3,
         title: "German Volume Program",
         value: [
             {
@@ -322,6 +323,7 @@ const programCardData = [
 
 const workoutCardData = [
     {
+        id: 1,
         title: "Upper Workout",
         value: [
             {
@@ -335,13 +337,14 @@ const workoutCardData = [
                 value: "1h30min"
             },
             {
-                id: 3,
+                id: 4,
                 title: "Focus",
                 value: "Chest and Triceps"
             }
         ]
     },
     {
+        id: 2,
         title: "Pull Workout",
         value: [
             {
@@ -355,7 +358,7 @@ const workoutCardData = [
                 value: "1h20min"
             },
             {
-                id: 3,
+                id: 4,
                 title: "Focus",
                 value: "Back and Biceps"
             }

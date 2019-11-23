@@ -12,7 +12,8 @@ import { Icon } from "../components/Icon/Icon";
 import { LibraryProgramCard } from "../components/cards/libraryProgramCard/LibraryProgramCard";
 import { RoundCornersButton } from "../components/button/Button";
 import { ActionButton } from "../components/button/Button";
-import { default as MdIcon } from 'react-native-vector-icons/MaterialCommunityIcons';
+import { default as MatIcon } from 'react-native-vector-icons/MaterialIcons';
+import Navigator from "../components/navigation/TabNavigator";
 
 const { width } = Dimensions.get("window");
 
@@ -49,25 +50,19 @@ const Text = styled.Text`
 export default class ProgramScreen extends React.Component {
     program = this.props.navigation.state.params.program;
     header = ["Workouts", "Analysis"];
-    content = [
-        (<ScrollView>
-            <View px={4} mt={4}>
-                <View
-                    flexDirection='row'
-                    justifyContent='space-between'>
-                    <Text fontSize={3} opacity={0.7} fontWeight='bold'>
-                        Workouts
-                    </Text>
-                    <RoundCornersButton text='View All' />
-                </View>
-                <Text fontSize={2} opacity={0.5} mt={2}>
-                    #1 cycle
-                </Text>
-            </View>
-            <View>
+    cycles = 6;
+
+    getCycles() {
+        const result = [];
+
+        for (let i = 1; i <= this.cycles; i++) {
+            result.push((
+            <View mb={4}>
+                <Text fontSize={4} opacity={0.5} mt={2} ml={3} fontWeight={'bold'}>#{i} cycle</Text>
                 <ScrollView
                     showsHorizontalScrollIndicator={false}
                     horizontal
+                    px={2}
                     pt={4}
                     pb={2}
                     contentInset={{
@@ -76,38 +71,61 @@ export default class ProgramScreen extends React.Component {
                         bottom: 0,
                         right: 24
                     }}>
-                    {programCardData.map(program => (
+                    {workoutsCardData.map(workout => (
                         <LibraryProgramCard
-                            programCardData={program}
+                            programCardData={workout}
                             ml={4}
                         />
                     ))}
                 </ScrollView>
             </View>
+            ));
+        }
+
+        return result;
+    }
+
+    content = [
+        (<ScrollView>
+            <View px={4} mt={1}>
+                <View
+                    flexDirection='row'
+                    justifyContent='space-between'
+                    mt={3}>
+                    <Text fontSize={2} mb={2}>
+                        Length: {this.cycles} cycles.
+                    </Text>
+                    <RoundCornersButton text='Add' />
+                </View>
+            </View>
+            <View>
+                {this.getCycles()}
+            </View>
         </ScrollView>),
 
-        (<View>
-
-        </View>)
+        (<Text>
+            Not implemented.
+        </Text>)
     ]
 
     static navigationOptions = ({ navigation }) => {
-        console.log(navigation)
         return {
-            headerTitle: program.title,
+            headerTitle: navigation.state.params.program.title,
             headerLeft: (
-                <TouchableOpacity mr={4}>
+                <TouchableOpacity ml={4} onPress={() => navigation.goBack()}>
                     <Icon
                         id='arrow-left'
                         size={18}
-                        fill='#FFF'
+                        fill='#000'
                         opacity={0.7}
                     />
                 </TouchableOpacity>
             ),
             headerRight: (
-                <TouchableOpacity ml={4}>
-                    <MdIcon name={"more-horiz"} size={18} color={"#000"} opacity={0.7} />
+                <TouchableOpacity
+                    mr={4}
+                    disabled opacity={0.4}>
+                    <MatIcon name={"more-horiz"} size={18} color={"#000"} />
                 </TouchableOpacity>
             )
         };
@@ -117,100 +135,18 @@ export default class ProgramScreen extends React.Component {
 
         return (
             <React.Fragment>
-                <Navigator width={width} header={header} tabContent={content} />
-                
+                <Navigator width={width} header={this.header} tabContent={this.content} />
+                {/* {this.content} */}
             </React.Fragment>
         );
     }
 }
 
-const programCardData = [
+
+const workoutsCardData = [
     {
-        title: "High Volume Program",
-        value: [
-            {
-                id: 2,
-                title: "Frequency",
-                value: "3"
-            },
-
-            {
-                id: 3,
-                title: "Cycles",
-                value: "4"
-            },
-
-            {
-                id: 4,
-                title: "Workouts/Cycle",
-                value: "7"
-            },
-            {
-                id: 5,
-                title: "Workout Duration",
-                value: "1h10m"
-            }
-        ]
-    },
-    {
-        title: "Low Volume Program",
-        value: [
-            {
-                id: 2,
-                title: "Frequency",
-                value: "3"
-            },
-
-            {
-                id: 3,
-                title: "Cycles",
-                value: "4"
-            },
-
-            {
-                id: 4,
-                title: "Workouts/Cycle",
-                value: "7"
-            },
-            {
-                id: 5,
-                title: "Workout Duration",
-                value: "1h10m"
-            }
-        ]
-    },
-    {
-        title: "German Volume Program",
-        value: [
-            {
-                id: 2,
-                title: "Frequency",
-                value: "3"
-            },
-
-            {
-                id: 3,
-                title: "Cycles",
-                value: "4"
-            },
-
-            {
-                id: 4,
-                title: "Workouts/Cycle",
-                value: "7"
-            },
-            {
-                id: 5,
-                title: "Workout Duration",
-                value: "1h10m"
-            }
-        ]
-    }
-];
-
-const workoutCardData = [
-    {
-        title: "Upper Workout",
+        id: 1,
+        title: "workout name",
         value: [
             {
                 id: 2,
@@ -223,30 +159,10 @@ const workoutCardData = [
                 value: "1h30min"
             },
             {
-                id: 3,
-                title: "Focus",
+                id: 4,
+                title: "Trained Muscles",
                 value: "Chest and Triceps"
             }
         ]
-    },
-    {
-        title: "Pull Workout",
-        value: [
-            {
-                id: 2,
-                title: "Exercises",
-                value: "3"
-            },
-            {
-                id: 3,
-                title: "Duration",
-                value: "1h20min"
-            },
-            {
-                id: 3,
-                title: "Focus",
-                value: "Back and Biceps"
-            }
-        ]
     }
-];
+]
