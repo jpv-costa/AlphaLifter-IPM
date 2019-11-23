@@ -41,6 +41,8 @@ const Text = styled.Text`
 `;
 
 export default class CreateWorkoutForm extends React.Component {
+    state= {}
+
     static navigationOptions = ({ navigation }) => {
         return {
             headerTitle: "Create Workout"
@@ -50,16 +52,17 @@ export default class CreateWorkoutForm extends React.Component {
     render() {
         return (
             <View flex={1}>
-                <Form>
+                <Form onFinish={() => console.log(this.state)}>
                     <InputForm question={"What should it be named?"}>
-                        <SingleInput placeholder={"Upper Workout"} />
+                        <SingleInput placeholder={"Upper Workout"} onChange={(text) => this.setState({name:text})}/>
                     </InputForm>
                     <InputForm question={"Select the cycles"}>
                         <List
                             data={chooseNumberCycles}
                             selectList
                             multiselect
-                            onItemPress={onItemPress}
+                            onItemPress={(item, index, selected) =>
+                                {this.setState({cycles: index.slice(1)})}}
                         />
                     </InputForm>
                 </Form>
@@ -67,10 +70,6 @@ export default class CreateWorkoutForm extends React.Component {
         );
     }
 }
-
-const onItemPress = item => {
-    console.log("You pressed item '" + item.title + "'");
-};
 
 const chooseNumberCycles = [
     {

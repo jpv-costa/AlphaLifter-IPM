@@ -38,6 +38,8 @@ const Text = styled.Text`
 `;
 
 export default class CreateExerciseForm extends React.Component {
+    state = {}
+
     static navigationOptions = ({ navigation }) => {
         return {
             headerTitle: "Add Workout",
@@ -47,56 +49,55 @@ export default class CreateExerciseForm extends React.Component {
     render() {
         return (
             <View flex-grow = {1}>
-               <Form>
-            <InputForm question={"What should it be named?"}>
-                <SingleInput placeholder={"Exercise name"}  />
-            </InputForm>
-            
-            <InputForm question={"What type is it?"}>
-                <SingleSelectList
-                    data={exerciseType}
-                    onItemPress={onItemPress}
-                />
-            </InputForm>
+               <Form onFinish={() => console.log(this.state)}>
+                    <InputForm question={"What should it be named?"}>
+                        <SingleInput placeholder={"Exercise name"}  onChange={text => this.setState({name:text})}/>
+                    </InputForm>
+                    
+                    <InputForm question={"What type is it?"}>
+                        <SingleSelectList
+                            data={exerciseType}
+                            onItemPress={onItemPress}
+                            onChange={text => this.setState({exerciseType:text})}
+                        />
+                    </InputForm>
 
-            <InputForm question={"What is the pimary muscle?"}>
-                <Search
-                mt={0}
-                data={musclesDashboardData}
-                placeholder={"Type the muscle..."}
-                searchProperties={["muscle"]}>
-                    <DashboardMuscleList
-                        selectList
-                        multiselect
-                        onItemPress={onItemPress}
-                    />
-                 </Search>
-            </InputForm>
+                    <InputForm question={"What is the pimary muscle?"}>
+                        <Search
+                        mt={0}
+                        data={musclesDashboardData}
+                        placeholder={"Type the muscle..."}
+                        searchProperties={["muscle"]}>
+                            <DashboardMuscleList
+                                selectList
+                                multiselect
+                                onItemPress={(item, index, selected) =>
+                                    {this.setState({primaryMuscles: index.slice(1)})}}
+                            />
+                        </Search>
+                    </InputForm>
 
-            <InputForm question={"What are the secondary muscle?"}>
-                <Search
-                    mt={0}
-                    data={musclesDashboardData}
-                    placeholder={"Type the muscle..."}
-                    searchProperties={["muscle"]}>
-                    <DashboardMuscleList
-                        selectList
-                        multiselect
-                        onItemPress={onItemPress}
-                    />
-                 </Search>
-            </InputForm>
+                    <InputForm question={"What are the secondary muscle?"}>
+                        <Search
+                            mt={0}
+                            data={musclesDashboardData}
+                            placeholder={"Type the muscle..."}
+                            searchProperties={["muscle"]}>
+                            <DashboardMuscleList
+                                selectList
+                                multiselect
+                                onItemPress={(item, index, selected) =>
+                                    {this.setState({secondaryMuscles: index.slice(1)})}}
+                            />
+                        </Search>
+                    </InputForm>
            
-        </Form>
-                <FormButtons flex = {1}/>
+                </Form>
+                {/* <FormButtons flex = {1}/> */}
             </View>
         );
     }
 }
-
-const onItemPress = item => {
-    console.log("You pressed item '" + item.title + "'");
-};
 
 const exerciseType = [
     {

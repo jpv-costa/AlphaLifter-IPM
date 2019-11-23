@@ -37,6 +37,7 @@ const Text = styled.Text`
 `;
 
 export default class CreateProgramForm extends React.Component {
+    state={}
     static navigationOptions = ({ navigation }) => {
         return {
             headerTitle: "Create Program"
@@ -46,20 +47,16 @@ export default class CreateProgramForm extends React.Component {
     render() {
         return (
             <View flex={1}>
-                <Form>
+                <Form onFinish={() => console.log(this.state)}>
                     <InputForm question={"What should it be named?"}>
-                        <SingleInput placeholder={"High Volume Program"} />
+                        <SingleInput placeholder={"High Volume Program"} onChange={text => this.setState({name:text})} />
                     </InputForm>
 
                     <InputForm question={"How long should it be?"}>
-                        <SingleInput placeholder={"3"} units={"cycles"} />
+                        <SingleInput placeholder={"3"} units={"cycles"} onChange={text => this.setState({cycles:text})}/>
                     </InputForm>
                 </Form>
             </View>
         );
     }
 }
-
-const onItemPress = item => {
-    console.log("You pressed item '" + item.title + "'");
-};

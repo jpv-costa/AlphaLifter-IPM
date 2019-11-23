@@ -11,9 +11,9 @@ const CenterButtons = styled.View`
 `;
 
 export const FormButtons = props => {
-    const { onNext, onPrevious, disableNext, disablePrevious } = props;
+    const { onFinish, onNext, onPrevious, disableNext, disablePrevious } = props;
 
-    console.log("botao width " + props.width);
+    console.log("disableNext " + props.width);
 
     return (
         <CenterButtons style={{ width: "100%" }}>
@@ -27,7 +27,7 @@ export const FormButtons = props => {
             <MyButton
                 name={disableNext ? "Finish" : "Next"}
                 secondaryLight
-                onPress={onNext}
+                onPress={() => {disableNext ? onFinish() : onNext()}}
                 width={props.width}
             />
         </CenterButtons>

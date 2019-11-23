@@ -30,43 +30,41 @@ const TextInput = styled.TextInput`
 `;
 
 export const SingleInputNumeric = props => {
-    const { placeholder, units } = props;
-    return (
-        <CenterItem>
-            <UserInput>
-                <TextInput
-                    fontSize={8}
-                    placeholder={placeholder}
-                    autoCorrect={false}
-                    keyboardType={"numeric"}
-                    maxFontSizeMultiplier={6}
-                    maxLength={6}
-                    multiline={false}></TextInput>
-                <Text
-                    fontSize={5}
-                    ml={3}
-                    opacity={0.5}
-                    style={{ marginBottom: 7 }}>
-                    {units}
-                </Text>
-            </UserInput>
-        </CenterItem>
-    );
+  const {placeholder, units, onChange} = props;
+return(
+<CenterItem>
+    <UserInput>
+      <TextInput fontSize = {8} 
+        placeholder={placeholder}
+        autoCorrect={false}
+        keyboardType={'numeric'}
+        maxFontSizeMultiplier={6}
+        maxLength={6}
+        multiline={false} 
+        onTextChange={(text) => onChange(text)}>
+      </TextInput>
+      <Text fontSize = {5} ml={3} opacity = {0.5} style={{marginBottom: 7}}>
+        {units}
+      </Text>
+    </UserInput>
+</CenterItem>
+);
 };
 
 export const SingleInput = props => {
-    const { placeholder } = props;
-    return (
-        <CenterItem>
-            <UserInput>
-                <TextInput
-                    fontSize={8}
-                    placeholder={placeholder}
-                    autoCorrect={false}
-                    adjustsFontSizeToFit
-                    maxFontSizeMultiplier={6}
-                    multiline={false}></TextInput>
-            </UserInput>
-        </CenterItem>
-    );
+  const {placeholder, onChange} = props;
+return(
+<CenterItem>
+    <UserInput>
+      <TextInput fontSize = {8} 
+        placeholder={placeholder}
+        onTextChange={(text) => onChange(text)}
+        autoCorrect={false}
+        maxFontSizeMultiplier={6}
+        maxLength={6}
+        multiline={false} >
+      </TextInput>
+    </UserInput>
+</CenterItem>
+);
 };
