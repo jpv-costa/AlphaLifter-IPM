@@ -29,7 +29,9 @@ export const DashboardExerciseList = props => {
 
     return (
         <List
-            onItemPress={index => onItemPress(data[index], index)}
+            onItemPress={(index, selected) =>
+                onItemPress(data[index], index, selected)
+            }
             data={parsedData}
             {...other}
             selectedId={selectedId}
