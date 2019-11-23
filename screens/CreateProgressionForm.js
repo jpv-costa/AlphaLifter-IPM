@@ -15,7 +15,7 @@ import { FormButtons } from "../components/button/FormButtons";
 import { SingleSelectList } from "../components/form/SingleSelectList";
 import List from "../components/List/List";
 
-import {connect} from 'react-redux';
+import { connect } from "react-redux";
 import * as actionTypes from "../store/actions";
 
 const { width } = Dimensions.get("window");
@@ -44,9 +44,7 @@ const Text = styled.Text`
 `;
 
 export class CreateProgretionForm extends React.Component {
-
-    state = {
-    }
+    state = {};
 
     static navigationOptions = ({ navigation }) => {
         return {
@@ -57,24 +55,55 @@ export class CreateProgretionForm extends React.Component {
     render() {
         return (
             <View flex={1}>
-                <Form onFinish={() => this.props.onAssignExerciseProgression(this.props.workout,this.props.exercise,this.state.progression,this.state.startLoad, this.state.reps1, this.state.reps2, this.state.rir1, this.state.rir2)}>
+                <Form
+                    onFinish={() =>
+                        this.props.onAssignExerciseProgression(
+                            this.props.workout,
+                            this.props.exercise,
+                            this.state.progression,
+                            this.state.startLoad,
+                            this.state.reps1,
+                            this.state.reps2,
+                            this.state.rir1,
+                            this.state.rir2
+                        )
+                    }>
                     <InputForm question={"What is the progression scheme?"}>
                         <SingleSelectList
                             data={chooseProgressionData}
-                            onItemPress={(item) => {this.state.progression = item.title;}}
+                            onItemPress={item => {
+                                this.state.progression = item.title;
+                            }}
                         />
                     </InputForm>
 
                     <InputForm question={"How many target sets?"}>
-                        <SingleInputNumeric placeholder={"3"} onChange={(text) => {this.state.sets = text}}/>
+                        <SingleInputNumeric
+                            placeholder={"3"}
+                            onChange={text => {
+                                this.state.sets = text;
+                            }}
+                        />
                     </InputForm>
 
                     <InputForm question={"Enter the starting load?"}>
-                        <SingleInput placeholder={"50"} units={"% 1 RM"} onChange={(text) => {this.state.startLoad = text}}/>
+                        <SingleInput
+                            placeholder={"50"}
+                            units={"% 1 RM"}
+                            onChange={text => {
+                                this.state.startLoad = text;
+                            }}
+                        />
                     </InputForm>
 
                     <InputForm question={"What should be the load increase?"}>
-                        <SingleInput placeholder={"2.5"} units={"kg"} onChange={(text) => {this.state.loadIncrease = text}}/>
+                        <SingleInput
+                            placeholder={"2.5"}
+                            units={"kg"}
+                            onChange={text => {
+                                this.state.loadIncrease = text;
+                            }}
+                        />
                     </InputForm>
 
                     <InputForm question={"Enter the rep range:"}>
@@ -82,8 +111,12 @@ export class CreateProgretionForm extends React.Component {
                             placeholder1={"10"}
                             rangeDivision={"-"}
                             placeholder2={"12"}
-                            onChange1={(text) => {this.state.reps1 = text}}
-                            onChange2={(text) => {this.state.reps2 = text}}
+                            onChange1={text => {
+                                this.state.reps1 = text;
+                            }}
+                            onChange2={text => {
+                                this.state.reps2 = text;
+                            }}
                         />
                     </InputForm>
                     <InputForm question={"Enter the RIR range:"}>
@@ -91,8 +124,12 @@ export class CreateProgretionForm extends React.Component {
                             placeholder1={"1"}
                             rangeDivision={"-"}
                             placeholder2={"1"}
-                            onChange1={(text) => {this.state.rir1 = text}}
-                            onChange2={(text) => {this.state.rir2 = text}}
+                            onChange1={text => {
+                                this.state.rir1 = text;
+                            }}
+                            onChange2={text => {
+                                this.state.rir2 = text;
+                            }}
                         />
                     </InputForm>
                 </Form>
@@ -102,24 +139,35 @@ export class CreateProgretionForm extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => {
-    //[{workout:name, exercises:[{exercise:name, progression, targetweight: weight, targetreps1: reps1,targetreps2:reps2, targetrir1:rir1, targetrir2:rir2}]    
-    
-    return {
-        onAssignExerciseProgression: (workout, exercise, progression, targetWeight, targetReps, targetRir1, targetRir2) => dispatch({
-                type: actionTypes.ASSIGN_PROGRESSION_TO_EXERCISE, payload:{
-                workout:workout,
-                exercise:exercise,
-                progression: progression,
-                targetWeight:targetWeight,
-                targetReps1:targetReps1,
-                targetRep2:targetReps2,
-                targetRir1:targetRir1,
-                targetRir2:targetRir2
-            }})
-    }
-}
+    //[{workout:name, exercises:[{exercise:name, progression, targetweight: weight, targetreps1: reps1,targetreps2:reps2, targetrir1:rir1, targetrir2:rir2}]
 
-export default connect(null,mapDispatchToProps)(CreateProgretionForm);
+    return {
+        onAssignExerciseProgression: (
+            workout,
+            exercise,
+            progression,
+            targetWeight,
+            targetReps,
+            targetRir1,
+            targetRir2
+        ) =>
+            dispatch({
+                type: actionTypes.ASSIGN_PROGRESSION_TO_EXERCISE,
+                payload: {
+                    workout: workout,
+                    exercise: exercise,
+                    progression: progression,
+                    targetWeight: targetWeight,
+                    targetReps1: targetReps1,
+                    targetRep2: targetReps2,
+                    targetRir1: targetRir1,
+                    targetRir2: targetRir2
+                }
+            })
+    };
+};
+
+export default connect(null, mapDispatchToProps)(CreateProgretionForm);
 
 const chooseProgressionData = [
     {

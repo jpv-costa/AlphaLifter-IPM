@@ -48,7 +48,7 @@ const Text = styled.Text`
     opacity : ${props => (props.opacity ? props.opacity : 1)};
 `;
 
-export default class WorkoutExerciseLogScreen extends React.Component {
+export class WorkoutExerciseLogScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
             header: null

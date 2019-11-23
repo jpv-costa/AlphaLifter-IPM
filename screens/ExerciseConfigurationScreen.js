@@ -37,7 +37,7 @@ const onItemPress = item => {
     console.log("You pressed item '" + item.id + "'");
 };
 
-export default class ExerciseConfigurationScreen extends React.Component {
+export class ExerciseConfigurationScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
             headerTitle: navigation.getParam("name")

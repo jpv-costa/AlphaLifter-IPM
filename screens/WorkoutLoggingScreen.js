@@ -19,7 +19,6 @@ import {
     EquipmentTypes
 } from "../components/workouts/Exercises/Exercise";
 
-
 const View = styled.View`
     ${space}
     ${layout}
@@ -35,7 +34,7 @@ const Text = styled.Text`
     ${size}
     opacity : ${props => (props.opacity ? props.opacity : 1)};
 `;
-export default class WorkoutLoggingScreen extends React.Component {
+export class WorkoutLoggingScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
             header: null
