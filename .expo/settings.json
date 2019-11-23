@@ -3,11 +3,5 @@
   "lanType": "ip",
   "dev": true,
   "minify": false,
-<<<<<<< HEAD
-  "urlRandomness": "i8-y9b",
-  "https": false
+  "urlRandomness": "7c-5mm"
 }
-=======
-  "urlRandomness": null
-}
->>>>>>> fff7b6072606151c80fb3a47295e875752e59dd4

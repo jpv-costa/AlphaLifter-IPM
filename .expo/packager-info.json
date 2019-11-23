@@ -1,13 +1,9 @@
-<<<<<<< HEAD
 {
   "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://i8-y9b.anonymous.alphalifter.exp.direct",
-  "packagerNgrokUrl": "https://packager.i8-y9b.anonymous.alphalifter.exp.direct",
-  "ngrokPid": 4936,
+  "expoServerNgrokUrl": "https://7c-5mm.anonymous.alphalifter.exp.direct",
+  "packagerNgrokUrl": "https://packager.7c-5mm.anonymous.alphalifter.exp.direct",
+  "ngrokPid": 38618,
   "devToolsPort": 19002,
-  "packagerPort": 19001,
-  "packagerPid": 17056
+  "packagerPort": 19004,
+  "packagerPid": 38602
 }
-=======
-{}
->>>>>>> fff7b6072606151c80fb3a47295e875752e59dd4

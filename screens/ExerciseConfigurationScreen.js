@@ -6,7 +6,7 @@ import { RoundCornersButton, RoundButton } from "../components/button/Button";
 import { ActionButton } from "../components/button/Button";
 import Navigator from "../components/navigation/TabNavigator";
 import theme from "../components/theme";
-import {DashboardExerciseList} from "../components/List/DashboardExerciseList"
+import { DashboardExerciseList } from "../components/List/DashboardExerciseList";
 
 const { width } = Dimensions.get("window");
 
@@ -37,114 +37,118 @@ const onItemPress = item => {
     console.log("You pressed item '" + item.id + "'");
 };
 
-export default class ProgramScreen extends React.Component {
+export default class ExerciseConfigurationScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
-            headerTitle: navigation.getParam("type")
-            
+            headerTitle: navigation.getParam("name")
+            // headerTitle: "Bench Press"
         };
-    }
+    };
 
     render() {
-        return(
-    <View>
-    <View mr={4} >
-        <View>
-        <Text fontSize={4} opacity={0.5} mt={4} ml={4} >
-             Rest
-        </Text>
-        <Text fontSize={4} mt={2} ml = {4}>
-             01:30
-        </Text>
-        </View>
-        <View flexDirection = 'row' mt = {6} justifyContent = 'space-between'>
-        <View flexDirection = 'row'  justifyContent = 'flex-start' ml = {4}>
-        <Text fontSize={4}>
-           Configuration
-       </Text>
-       </View>
-     <View flexDirection = 'row' justifyContent = 'flex-end'>
-     
-         <View mr = {2}>
-        <RoundCornersButton text='Add' 
-        /*onPress =   *//>
-         </View>
-        <RoundCornersButton text='Re-order'/>
-        </View>
-        </View>
-        </View>
+        // console.log(this.props.navigation.getParam("name"));
+        return (
+            <View flex={1}>
+                <View mr={4}>
+                    <View>
+                        <Text fontSize={3} opacity={0.5} mt={4} ml={4}>
+                            Rest
+                        </Text>
+                        <Text fontSize={4} mt={2} ml={4}>
+                            01:30
+                        </Text>
+                    </View>
+                    <View
+                        flexDirection='row'
+                        mt={3}
+                        justifyContent='space-between'>
+                        <View
+                            flexDirection='row'
+                            justifyContent='flex-start'
+                            ml={4}>
+                            <Text fontSize={4}>Configuration</Text>
+                        </View>
+                        <View flexDirection='row' justifyContent='flex-end'>
+                            <View mr={2}>
+                                <RoundCornersButton
+                                    text='Add'
+                                    /*onPress =   */
+                                />
+                            </View>
+                            <RoundCornersButton text='Re-order' />
+                        </View>
+                    </View>
+                </View>
 
-        <View mt= {1} flex = {1} mt = {1} >
-         <DashboardExerciseList
-            data={exercisesDashboardData}
-            selectList
-            onItemPress={onItemPress}
-          />
-          </View>
-          
-       <View mt = {7}>
-        <View ml = {4} mr = {4} mt = {6} >
-        <View flexDirection= 'row' justifyContent= 'space-between'>  
-        <Text fontSize={4}>
-             Weight units: Kg
-        </Text>
-         <RoundCornersButton text='Change'/>
-         </View>
-         <View flexDirection= 'row' justifyContent= 'space-between' mt = {2}>
-        <Text fontSize={4}>
-             Smallest Increment: 2.5 Kg         
-        </Text>
-        <RoundCornersButton text='Change'/>
-        </View>
-        </View>
-        <View px={4}>
-        <ActionButton
-                        mt = {5}
-                        secondaryDark
-                        text={"Finish"}
-                        onPress = {() =>
-                        this.props.navigation.navigate("Library")}
+                <View mt={1} flexGrow={1} mt={1}>
+                    <DashboardExerciseList
+                        data={exercisesDashboardData}
+                        selectList
+                        onItemPress={onItemPress}
                     />
-        </View>
-        </View> 
-        </View>
-            )
-         }
-     };
+                </View>
 
+                <View mt={5} flex={1}>
+                    <View ml={4} mr={4} flex={1}>
+                        <View
+                            flexDirection='row'
+                            justifyContent='space-between'>
+                            <Text fontSize={4}>Weight units: Kg</Text>
+                            <RoundCornersButton text='Change' />
+                        </View>
+                        <View
+                            flexDirection='row'
+                            justifyContent='space-between'
+                            mt={2}>
+                            <Text fontSize={4}>Smallest Increment: 2.5 Kg</Text>
+                            <RoundCornersButton text='Change' />
+                        </View>
+                    </View>
+                    <View px={4} flex={1}>
+                        <ActionButton
+                            mt={5}
+                            secondaryDark
+                            text={"Finish"}
+                            onPress={() =>
+                                this.props.navigation.navigate("Library")
+                            }
+                        />
+                    </View>
+                </View>
+            </View>
+        );
+    }
+}
 
-     const exercisesDashboardData = [
-        {
-            id: 1,
-            icon: {
-                primaryMuscles: ["chest"],
-                secondaryMuscles: ["biceps"],
-                view: "front-upper"
-            },
-            name: "Load Progression",
-            variations: ["Incline, Dumbbell variation"],
-            progress: "10%"
+const exercisesDashboardData = [
+    {
+        id: 1,
+        icon: {
+            primaryMuscles: ["chest"],
+            secondaryMuscles: ["biceps"],
+            view: "front-upper"
         },
-        {
-            id: 2,
-            icon: {
-                primaryMuscles: ["chest"],
-                secondaryMuscles: [],
-                view: "front-upper"
-            },
-            name: "Set Progression",
-            variations: ["Incline, Dumbbell variation"],
-            progress: "10%"
+        name: "Load Progression",
+        variations: ["Incline, Dumbbell variation"]
+    },
+    {
+        id: 2,
+        icon: {
+            primaryMuscles: ["chest"],
+            secondaryMuscles: [],
+            view: "front-upper"
         },
-        {
-            id: 3,
-            icon: {
-                primaryMuscles: ["chest"],
-                secondaryMuscles: [],
-                view: "front-upper"
-            },
-            name: "Set Progression",
-            variations: ["Incline, Dumbbell variation"],
-            progress: "10%"
-        }
-    ];
+        name: "Set Progression",
+        variations: ["Incline, Dumbbell variation"]
+    },
+    {
+        id: 3,
+        icon: {
+            primaryMuscles: ["chest"],
+            secondaryMuscles: [],
+            view: "front-upper"
+        },
+        name: "Set Progression",
+        variations: ["Incline, Dumbbell variation"]
+    }
+];
