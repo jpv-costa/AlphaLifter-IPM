@@ -1,15 +1,7 @@
 {
   "hostType": "lan",
   "lanType": "ip",
-<<<<<<< HEAD
   "dev": true,
   "minify": false,
-  "urlRandomness": "tx-pzy",
-  "https": false
+  "urlRandomness": null
 }
-=======
-  "dev": false,
-  "minify": true,
-  "urlRandomness": "8f-82y"
-}
->>>>>>> e0bd06560b79aabc36a47d9d17229e8e16caf4ce

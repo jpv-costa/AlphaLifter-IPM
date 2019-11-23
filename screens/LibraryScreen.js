@@ -6,6 +6,7 @@ import { Icon } from "../components/Icon/Icon";
 import { LibraryProgramCard } from "../components/cards/libraryProgramCard/LibraryProgramCard";
 import { RoundCornersButton } from "../components/button/Button";
 import { ActionButton } from "../components/button/Button";
+import ActionSheet from "react-native-actionsheet";
 
 const ScrollView = styled.ScrollView`
     ${space}
@@ -48,24 +49,28 @@ export default class LibraryScreen extends React.Component {
         return {
             headerTitle: "Library",
             headerRight: (
-                <TouchableOpacity mr={4}>
-<<<<<<< HEAD
-                    <Icon id={"search"} size={18} fill={"#000"} opacity={0.7} />
-                </TouchableOpacity>
-            ),
-            headerLeft: (
-                <TouchableOpacity ml={4} onPress={() => console.log()}>
-=======
->>>>>>> c909ae524f64c014b5360fbb0b463de72251b24f
+                <TouchableOpacity
+                    mr={4}
+                    onPress={navigation.getParam("showActionSheet")}>
                     <Icon id={"plus"} size={18} fill={"#000"} opacity={0.7} />
                 </TouchableOpacity>
             )
         };
     };
+    showActionSheet = () => {
+        this.ActionSheet.show();
+    };
 
     state = {
         refreshing: false
     };
+
+    componentDidMount() {
+        const { navigation } = this.props;
+        navigation.setParams({
+            showActionSheet: this.showActionSheet
+        });
+    }
 
     render() {
         const onRefresh = () => {
@@ -82,6 +87,16 @@ export default class LibraryScreen extends React.Component {
 
         return (
             <React.Fragment>
+                <ActionSheet
+                    ref={o => (this.ActionSheet = o)}
+                    title={"What do you wish to create?"}
+                    options={["Training Program", "Workout", "Cancel"]}
+                    cancelButtonIndex={2}
+                    destructiveButtonIndex={1}
+                    onPress={index => {
+                        /* do something */
+                    }}
+                />
                 <ScrollView
                     refreshControl={
                         <RefreshControl
@@ -96,12 +111,17 @@ export default class LibraryScreen extends React.Component {
                             <Text fontSize={3} opacity={0.7} fontWeight='bold'>
                                 Training Programs
                             </Text>
-                            <View flexDirection = 'row' justifyContent='flex-end'>
-                        <RoundCornersButton text='View All'/>
-                        <TouchableOpacity ml = {3}>
-                    <Icon id={"search"} size={18} fill={"#000"} opacity={0.7}/>
-                       </TouchableOpacity>
-                       </View>
+                            <View flexDirection='row' justifyContent='flex-end'>
+                                <RoundCornersButton text='View All' />
+                                <TouchableOpacity ml={3}>
+                                    <Icon
+                                        id={"search"}
+                                        size={18}
+                                        fill={"#000"}
+                                        opacity={0.7}
+                                    />
+                                </TouchableOpacity>
+                            </View>
                         </View>
                         <Text fontSize={2} opacity={0.5} mt={2}>
                             Recent
@@ -136,12 +156,19 @@ export default class LibraryScreen extends React.Component {
                             <Text fontSize={3} opacity={0.7} fontWeight='bold'>
                                 Workouts
                             </Text>
-                            <View flexDirection = 'row' justifyContent='flex-end'>
-                        <RoundCornersButton text='View All'/>
-                        <TouchableOpacity ml = {3}>
-                    <Icon id={"search"} size={18} fill={"#000"} opacity={0.7}/>
-                       </TouchableOpacity>
-                       </View>
+                            <View flexDirection='row' justifyContent='flex-end'>
+                                <RoundCornersButton text='View All' />
+                                <TouchableOpacity
+                                    ml={3}
+                                    onPress={this.showActionSheet}>
+                                    <Icon
+                                        id={"search"}
+                                        size={18}
+                                        fill={"#000"}
+                                        opacity={0.7}
+                                    />
+                                </TouchableOpacity>
+                            </View>
                         </View>
                         <Text fontSize={2} opacity={0.5} mt={2}>
                             Recent
