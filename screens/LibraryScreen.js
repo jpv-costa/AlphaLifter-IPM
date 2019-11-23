@@ -94,7 +94,13 @@ export default class LibraryScreen extends React.Component {
                     cancelButtonIndex={2}
                     destructiveButtonIndex={1}
                     onPress={index => {
-                        /* do something */
+                        switch (index) {
+                            case 0:
+                                navigation.navigate("ProgretionForm");
+                                break;
+                            case 1:
+                                break;
+                        }
                     }}
                 />
                 <ScrollView
