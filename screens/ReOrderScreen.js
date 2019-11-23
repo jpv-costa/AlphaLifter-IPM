@@ -13,6 +13,11 @@ import Search from "../components/Search/Search";
 import { DashboardProgramList } from "../components/List/DashboardProgramList";
 import { DashboardWorkoutList } from "../components/List/DashboardWorkoutList";
 import { ActionButton } from "../components/button/Button";
+<<<<<<< HEAD
+=======
+import { ReOrderScreen } from "./SearchLibraryScreen";
+
+>>>>>>> 60363ef17fb447c58e1198019b424816cc960cf3
 import {connect} from 'react-redux';
 import * as actionTypes from "../store/actions";
 
@@ -49,10 +54,13 @@ const Text = styled.Text`
 `;
 
 export class SearchLibraryScreen extends React.Component {
+<<<<<<< HEAD
 
     state = {}
     
 
+=======
+>>>>>>> 60363ef17fb447c58e1198019b424816cc960cf3
     static navigationOptions = ({ navigation }) => {
         return {
             headerTitle: "Edit Workout Order",
@@ -92,6 +100,7 @@ export class SearchLibraryScreen extends React.Component {
     }
 }
 
+<<<<<<< HEAD
 const mapDispatchToProps = dispatch => {
     return {
         orderedWorkout: (workouts) => dispatch({type: actionTypes.REORDER, payload: {workouts: workouts}})
@@ -100,6 +109,16 @@ const mapDispatchToProps = dispatch => {
 
 export default connect(null, mapDispatchToProps)(SearchLibraryScreen);
 
+=======
+// export default connect(mapStateToProps,null)(ReOrderScreen);
+
+const mapStateToProps = state => {
+    return {
+        
+    }
+}
+
+>>>>>>> 60363ef17fb447c58e1198019b424816cc960cf3
 const workoutData = [
     {
         id: 1,
