@@ -85,7 +85,6 @@ const TabNavContainer = styled.View`
 
 const TabNavHeader = styled.View`
     flex-direction: row;
-    margin-top: 40;
     position: relative;
     border-style: solid;
     border-bottom-color: #bbb;

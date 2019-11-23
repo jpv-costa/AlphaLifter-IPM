@@ -124,7 +124,7 @@ RoundButton.defaultProps = {
 
 export const RoundCornersButton = props => {
     return (
-        <RoundCorners onPress={props.buttonPress} py={2} px={3}>
+        <RoundCorners onPress={props.onPress} py={2} px={3}>
             <Text
                 style={{ fontWeight: "bold" }}
                 fontSize={1}
