@@ -10,7 +10,7 @@ import styled from "styled-components";
 import { color, space, layout, size, typography, flexbox } from "styled-system";
 import { Icon } from "../components/Icon/Icon";
 import { LibraryProgramCard } from "../components/cards/libraryProgramCard/LibraryProgramCard";
-import { RoundCornersButton } from "../components/button/Button";
+import { RoundCornersButton, RoundButton } from "../components/button/Button";
 import { ActionButton } from "../components/button/Button";
 
 const { width } = Dimensions.get("window");
@@ -45,6 +45,8 @@ const Text = styled.Text`
     opacity : ${props => (props.opacity ? props.opacity : 1)};
 `;
 
+
+
 export default class LibraryScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
@@ -70,7 +72,10 @@ export default class LibraryScreen extends React.Component {
                             </Text>
                             <View flexDirection = 'row' justifyContent='flex-end'>
                         <RoundCornersButton text='View All'/>
-                        <TouchableOpacity ml = {3}>
+                        <TouchableOpacity ml = {3}     
+                        onPress={() =>
+                            this.props.navigation.navigate("Search")
+                        }>
                     <Icon id={"search"} size={18} fill={"#000"} opacity={0.7}/>
                        </TouchableOpacity>
                        </View>
