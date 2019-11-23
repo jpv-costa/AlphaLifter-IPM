@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { List } from "../../../List/List";
 import styled from "styled-components";
 import { color, space, layout, size, typography } from "styled-system";
@@ -80,14 +80,14 @@ export const ExerciseLog = props => {
                         ref={inputs[i * 3 + 1]}
                         fontSize={4}
                         blurOnSubmit={false}
-                        keyboardType='number-pad'
+                        keyboardType='decimal-pad'
                         onFocus={() => {
                             setCurrentSet(i);
                         }}
                         onSubmitEditing={() => {
                             inputs[i * 3 + 2].current.focus();
                         }}
-                        placeholder={reps}
+                        placeholder={"" + reps}
                     />
                     <Text ml={1}>Reps</Text>
                 </ListHeader>
@@ -98,7 +98,7 @@ export const ExerciseLog = props => {
                         maxLength={3}
                         ref={inputs[i * 3 + 2]}
                         fontSize={4}
-                        keyboardType='number-pad'
+                        keyboardType='decimal-pad'
                         blurOnSubmit={false}
                         onFocus={() => {
                             setCurrentSet(i);

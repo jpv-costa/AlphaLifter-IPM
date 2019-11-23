@@ -1,19 +1,12 @@
-import React, { useState } from "react";
-import {
-    Image,
-    Platform,
-    StyleSheet,
-    SafeAreaView,
-    Dimensions
-} from "react-native";
+import React from "react";
+import { RefreshControl } from "react-native";
 import styled from "styled-components";
 import { color, space, layout, size, typography, flexbox } from "styled-system";
 import { Icon } from "../components/Icon/Icon";
 import { LibraryProgramCard } from "../components/cards/libraryProgramCard/LibraryProgramCard";
 import { RoundCornersButton, RoundButton } from "../components/button/Button";
 import { ActionButton } from "../components/button/Button";
-
-const { width } = Dimensions.get("window");
+import ActionSheet from "react-native-actionsheet";
 
 const ScrollView = styled.ScrollView`
     ${space}
@@ -45,25 +38,80 @@ const Text = styled.Text`
     opacity : ${props => (props.opacity ? props.opacity : 1)};
 `;
 
-
+function wait(timeout) {
+    return new Promise(resolve => {
+        setTimeout(resolve, timeout);
+    });
+}
 
 export default class LibraryScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
             headerTitle: "Library",
             headerRight: (
-                <TouchableOpacity mr={4}onPress={() =>
-                    navigation.navigate("ProgretionForm")}>
-                    <Icon id={"plus"} size={18} fill={"#000"} opacity={0.7}/>
+                <TouchableOpacity
+                    mr={4}
+                    onPress={navigation.getParam("showActionSheet")}>
+                    <Icon id={"plus"} size={18} fill={"#000"} opacity={0.7} />
                 </TouchableOpacity>
             )
         };
     };
+    showActionSheet = () => {
+        this.ActionSheet.show();
+    };
+
+    state = {
+        refreshing: false
+    };
+
+    componentDidMount() {
+        const { navigation } = this.props;
+        navigation.setParams({
+            showActionSheet: this.showActionSheet
+        });
+    }
 
     render() {
+        const onRefresh = () => {
+            this.setState({
+                refreshing: true
+            });
+
+            wait(2000).then(() =>
+                this.setState({
+                    refreshing: false
+                })
+            );
+        };
+
         return (
             <React.Fragment>
-                <ScrollView>
+                <ActionSheet
+                    ref={o => (this.ActionSheet = o)}
+                    title={"What do you wish to create?"}
+                    options={["Training Program", "Workout", "Cancel"]}
+                    cancelButtonIndex={2}
+                    destructiveButtonIndex={1}
+                    onPress={index => {
+                        switch (index) {
+                            case 0:
+                                this.props.navigation.navigate(
+                                    "ProgretionForm"
+                                );
+                                break;
+                            case 1:
+                                break;
+                        }
+                    }}
+                />
+                <ScrollView
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={this.state.refreshing}
+                            onRefresh={onRefresh}
+                        />
+                    }>
                     <View px={4} mt={4}>
                         <View
                             flexDirection='row'
@@ -71,15 +119,19 @@ export default class LibraryScreen extends React.Component {
                             <Text fontSize={3} opacity={0.7} fontWeight='bold'>
                                 Training Programs
                             </Text>
-                            <View flexDirection = 'row' justifyContent='flex-end'>
-                        <RoundCornersButton text='View All'/>
-                        <TouchableOpacity ml = {3}     
-                        onPress={() =>
-                            this.props.navigation.navigate("Search", {type: "program"})
-                        }>
-                    <Icon id={"search"} size={18} fill={"#000"} opacity={0.7}/>
-                       </TouchableOpacity>
-                       </View>
+                            <View flexDirection='row' justifyContent='flex-end'>
+                                <RoundCornersButton text='View All' />
+                                <TouchableOpacity
+                                 ml={3} 
+                                 onPress={() => this.props.navigation.navigate("Search", {type: "program"})}>
+                                    <Icon
+                                        id={"search"}
+                                        size={18}
+                                        fill={"#000"}
+                                        opacity={0.7}
+                                    />
+                                </TouchableOpacity>
+                            </View>
                         </View>
                         <Text fontSize={2} opacity={0.5} mt={2}>
                             Recent
@@ -114,15 +166,19 @@ export default class LibraryScreen extends React.Component {
                             <Text fontSize={3} opacity={0.7} fontWeight='bold'>
                                 Workouts
                             </Text>
-                            <View flexDirection = 'row' justifyContent='flex-end'>
-                        <RoundCornersButton text='View All'/>
-                        <TouchableOpacity ml = {3}
-                          onPress={() =>
-                            this.props.navigation.navigate("Search", {type: "workout"})
-                        }>
-                    <Icon id={"search"} size={18} fill={"#000"} opacity={0.7}/>
-                       </TouchableOpacity>
-                       </View>
+                            <View flexDirection='row' justifyContent='flex-end'>
+                                <RoundCornersButton text='View All' />
+                                <TouchableOpacity 
+                                  ml={3} 
+                                  onPress={() => this.props.navigation.navigate("Search", {type: "workout"})}>
+                                    <Icon
+                                        id={"search"}
+                                        size={18}
+                                        fill={"#000"}
+                                        opacity={0.7}
+                                    />
+                                </TouchableOpacity>
+                            </View>
                         </View>
                         <Text fontSize={2} opacity={0.5} mt={2}>
                             Recent
