@@ -55,17 +55,26 @@ export class CreateWorkoutForm extends React.Component {
     render() {
         return (
             <View flex={1}>
-                <Form onFinish={() => console.log(this.state)}>
+                <Form
+                    onFinish={() =>
+                        this.props.navigation.navigate("Search", {
+                            type: "exercises"
+                        })
+                    }>
                     <InputForm question={"What should it be named?"}>
-                        <SingleInput placeholder={"Upper Workout"} onChange={(text) => this.setState({name:text})}/>
+                        <SingleInput
+                            placeholder={"Upper Workout"}
+                            onChange={text => this.setState({ name: text })}
+                        />
                     </InputForm>
                     <InputForm question={"Select the cycles"}>
                         <List
                             data={chooseNumberCycles}
                             selectList
                             multiselect
-                            onItemPress={(item, index, selected) =>
-                                {this.setState({cycles: index.slice(1)})}}
+                            onItemPress={(item, index, selected) => {
+                                this.setState({ cycles: index.slice(1) });
+                            }}
                         />
                     </InputForm>
                 </Form>

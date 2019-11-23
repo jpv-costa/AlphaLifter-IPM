@@ -54,6 +54,10 @@ export default class ReOrderScreen extends React.Component {
         };
     };
 
+    state = {
+        selected: []
+    };
+
     render() {
         const { navigation } = this.props;
 
@@ -110,7 +114,9 @@ export default class ReOrderScreen extends React.Component {
                     selectList
                     multiselect
                     onItemPress={(item, index, selected) =>
-                        console.log(selected)
+                        this.setState({
+                            selected: selected.slice(1, selected.length)
+                        })
                     }
                 />
             );
@@ -136,7 +142,16 @@ export default class ReOrderScreen extends React.Component {
                         onPress={() => {
                             if (type == "exercises") {
                                 //navigate to exercise page
-                                // this.props.navigation.navigate("CycleSelection")
+
+                                this.props.navigation.navigate(
+                                    "ExerciseConfiguration",
+                                    {
+                                        name:
+                                            exercisesDashboardData[
+                                                this.state.selected[0]
+                                            ].name
+                                    }
+                                );
                             } else {
                                 this.props.navigation.navigate(
                                     "CycleSelection"

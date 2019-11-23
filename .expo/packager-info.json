@@ -1,4 +1,9 @@
 {
-  "packagerPort": null,
-  "packagerPid": null
+  "expoServerPort": 19000,
+  "expoServerNgrokUrl": "https://7c-5mm.anonymous.alphalifter.exp.direct",
+  "packagerNgrokUrl": "https://packager.7c-5mm.anonymous.alphalifter.exp.direct",
+  "ngrokPid": 38618,
+  "devToolsPort": 19002,
+  "packagerPort": 19004,
+  "packagerPid": 38602
 }
