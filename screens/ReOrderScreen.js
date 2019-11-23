@@ -15,6 +15,9 @@ import { DashboardWorkoutList } from "../components/List/DashboardWorkoutList";
 import { ActionButton } from "../components/button/Button";
 import { ReOrderScreen } from "./SearchLibraryScreen";
 
+import {connect} from 'react-redux';
+import * as actionTypes from "../store/actions";
+
 const { width } = Dimensions.get("window");
 
 const ScrollView = styled.ScrollView`
@@ -85,7 +88,7 @@ export class SearchLibraryScreen extends React.Component {
     }
 }
 
-export default connect(mapStateToProps,null)(ReOrderScreen);
+// export default connect(mapStateToProps,null)(ReOrderScreen);
 
 const mapStateToProps = state => {
     return {
