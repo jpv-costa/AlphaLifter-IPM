@@ -5,12 +5,10 @@ import { MyButton } from "./Button";
 import { View, Dimensions } from "react-native";
 
 const CenterButtons = styled.View`
-    flex: 1;
     flex-direction: row;
     justify-content: space-around;
     align-content: flex-end;
 `;
-
 
 export const FormButtons = props => {
     const { onNext, onPrevious, disableNext, disablePrevious } = props;
@@ -18,7 +16,7 @@ export const FormButtons = props => {
     console.log("botao width " + props.width);
 
     return (
-        <CenterButtons style={{height: props.height, width: '100%'}}>
+        <CenterButtons style={{ width: "100%" }}>
             <MyButton
                 name={"Back"}
                 secondaryLight
@@ -27,7 +25,7 @@ export const FormButtons = props => {
                 width={props.width}
             />
             <MyButton
-                name={(disableNext)?"Finish":"Next"}
+                name={disableNext ? "Finish" : "Next"}
                 secondaryLight
                 onPress={onNext}
                 width={props.width}
@@ -37,6 +35,5 @@ export const FormButtons = props => {
 };
 
 FormButtons.defaultProps = {
-    height: 50,
-    width: '45%'
-}
+    width: "45%"
+};

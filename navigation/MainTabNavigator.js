@@ -15,6 +15,10 @@ import theme from "../components/theme";
 import WorkoutLoggingScreen from "../screens/WorkoutLoggingScreen";
 import WorkoutExerciseLogScreen from "../screens/WorkoutExerciseLogScreen";
 import ProgramScreen from "../screens/ProgramScreen";
+import SearchLibraryScreen from "../screens/SearchLibraryScreen";
+import CreateExerciseForm from "../screens/CreateExerciseForm";
+import CreateProgressionForm from "../screens/CreateProgressionForm";
+import CreateWorkoutForm from "../screens/CreateWorkoutForm";
 
 const config = Platform.select({
     web: { headerMode: "screen" },
@@ -43,10 +47,14 @@ ProgressStack.path = "";
 
 const LibraryStack = createStackNavigator(
     {
-        Links: LibraryScreen,
+        Library: LibraryScreen,
+        Search: SearchLibraryScreen,
         Logging: WorkoutLoggingScreen,
-        Exercise: WorkoutExerciseLogScreen,
-        Program: ProgramScreen
+        Program: ProgramScreen,
+        ExerciseForm: CreateExerciseForm,
+        ProgretionForm: CreateProgressionForm,
+        WorkoutForm: CreateWorkoutForm,
+        Exercise: WorkoutExerciseLogScreen
     },
     config
 );

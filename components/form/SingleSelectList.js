@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { FlatList, View, Text, Dimensions } from "react-native";
 import { color, space, layout, size, typography } from "styled-system";
-import { ListItem } from 'react-native-elements'
+import { ListItem } from "react-native-elements";
 import styled from "styled-components";
 
 const CenterList = styled.View`
-    flex: 1;
+    flexGrow: 1;
     justify-content: center;
     align-items: center;
-    width: 100%;
     ${space}
     ${layout}
     ${color}
@@ -25,11 +24,11 @@ export const SingleSelectList = props => {
         <CenterList fontSize={8}>
             <FlatList
                 data={data}
-                style={{ width: "100%"}}
+                style={{ flexGrow: 1, width: "100%" }}
                 renderItem={({ item, index }) => (
                     <ListItem
                         id={item.id}
-                        style={{ width: "100%"}}
+                        style={{ flex: 1, width: "100%" }}
                         title={item.title}
                         selected={selected == item.id}
                         index={index}
@@ -45,7 +44,7 @@ export const SingleSelectList = props => {
                     />
                 )}
                 keyExtractor={item => item.id}
-                />
+            />
         </CenterList>
     );
 };

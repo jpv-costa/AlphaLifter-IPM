@@ -1,6 +1,17 @@
 import React from "react";
-import styled from "styled-components";
 import { color, space, layout, size, typography, flexbox } from "styled-system";
+import {
+    Image,
+    Platform,
+    StyleSheet,
+    SafeAreaView,
+    Dimensions,
+    TouchableHighlight,
+    Alert,
+    Modal
+} from "react-native";
+import styled from "styled-components";
+import { Icon } from "../components/Icon/Icon";
 import { ActionButton } from "../components/button/Button";
 import { WorkoutTimer } from "../components/workoutTime/WorkoutTime";
 import {
@@ -16,6 +27,14 @@ const View = styled.View`
     ${color}
 `;
 
+const Text = styled.Text`
+    ${space}
+    ${layout}
+    ${color}
+    ${typography}
+    ${size}
+    opacity : ${props => (props.opacity ? props.opacity : 1)};
+`;
 export default class WorkoutLoggingScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
@@ -25,7 +44,7 @@ export default class WorkoutLoggingScreen extends React.Component {
 
     render() {
         return (
-            <View>
+            <View flex={1}>
                 <WorkoutTimer
                     onBackPress={() => this.props.navigation.goBack()}
                     startMins={2}
@@ -35,12 +54,13 @@ export default class WorkoutLoggingScreen extends React.Component {
                 <ConfiguredExerciseList
                     selectList
                     data={data}
-                    onItemPress={item => {
+                    onItemPress={(item, index) => {
                         this.props.navigation.navigate("Exercise", {
                             name: item.name,
                             data: {
                                 1: item.configuration["1"]
-                            }
+                            },
+                            rest: data.slice(index + 1, data.length)
                         });
                     }}
                 />
@@ -49,9 +69,28 @@ export default class WorkoutLoggingScreen extends React.Component {
                         mt={3}
                         secondaryDark
                         text='Finish Workout'
-                        onPress={() =>
-                            this.props.navigation.navigate("Logging")
-                        }
+                        onPress={() => {
+                            Alert.alert(
+                                "Are you sure you want to finish the workout?",
+                                "",
+                                [
+                                    {
+                                        text: "Finish",
+                                        onPress: () =>
+                                            this.props.navigation.navigate(
+                                                "Library"
+                                            )
+                                    },
+                                    {
+                                        text: "Cancel",
+                                        onPress: () =>
+                                            console.log("Cancel Pressed"),
+                                        style: "cancel"
+                                    }
+                                ],
+                                { cancelable: true }
+                            );
+                        }}
                     />
                 </View>
             </View>

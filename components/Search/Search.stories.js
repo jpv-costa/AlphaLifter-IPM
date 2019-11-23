@@ -7,7 +7,7 @@ import { ThemeProvider } from "styled-components";
 import theme from "../theme";
 import { SafeAreaView, Dimensions } from "react-native";
 import { DashboardMuscleList } from "../List/DashboardMuscleList";
-import { DashboardExerciseList } from "../List/DashboardExerciseList";
+import { DashboardProgramList } from "../List/DashboardProgramList";
 
 const CenteredView = styled.View`
     flex: 1;
@@ -56,6 +56,15 @@ storiesOf("Search", module)
                 "array@variations"
             ]}>
             <DashboardExerciseList selectList onItemPress={onItemPress} />
+        </Search>
+    ))
+    .add("Searchable Program List", () => (
+        <Search
+            mt={0}
+            data={programDashboardData}
+            placeholder={"Type the exercise..."}
+            searchProperties={["name"]}>
+            <DashboardProgramList selectList onItemPress={onItemPress} />
         </Search>
     ));
 
@@ -113,5 +122,32 @@ const exercisesDashboardData = [
         },
         name: "Shoulder Press",
         variations: ["Standing, Dumbbell variation"]
+    }
+];
+
+const programDashboardData = [
+    {
+        id: 1,
+        name: "High Volume Program",
+        isCurrent: true,
+        cycles: 5,
+        workouts: 5,
+        progress: "5%"
+    },
+    {
+        id: 2,
+        name: "Low Volume Program",
+        isCurrent: false,
+        cycles: 4,
+        workouts: 3,
+        progress: "7%"
+    },
+    {
+        id: 3,
+        name: "High Volume Program",
+        isCurrent: false,
+        cycles: 5,
+        workouts: 5,
+        progress: "5%"
     }
 ];

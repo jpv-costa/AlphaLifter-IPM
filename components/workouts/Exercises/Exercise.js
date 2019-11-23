@@ -65,7 +65,7 @@ export const ConfiguredExerciseList = props => {
 
     return (
         <List
-            onItemPress={index => onItemPress(data[index])}
+            onItemPress={index => onItemPress(data[index], index)}
             data={parsedData}
             iconType={"id"}
             {...other}
