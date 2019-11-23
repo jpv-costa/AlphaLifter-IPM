@@ -46,21 +46,26 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 workouts: newWorkouts
             };
+            break;
         case actionTypes.ASSIGN_EXERCISES_TO_WORKOUT: //Done
-            const { workout, exercises } = action.payload;
-            const newWorkouts = {...state.workouts};
-            const newWorkout = {...state.workouts[workout-1]};
-            newWorkout.exercises.concat(exercises);
-            newWorkouts.splice(workout-1,1,newWorkout);
+            const workout2 = action.payload.workout;
+            const exercises = action.payload.exercises;
+
+            const newWorkouts2 = {...state.workouts};
+            const newWorkout2 = {...state.workouts[workout2-1]};
+            newWorkout2.exercises.concat(exercises);
+            newWorkouts2.splice(workout-1,1,newWorkout2);
             return {
                 ...state,
-                workouts: newWorkouts
+                workouts: newWorkouts2
             };
+            break;
         case actionTypes.REORDER: //TODO
             return {
                 ...state,
                 
             };
+            break;
         default:
             return state;
     }
