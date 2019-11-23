@@ -100,6 +100,9 @@ export default class LibraryScreen extends React.Component {
                                 );
                                 break;
                             case 1:
+                                this.props.navigation.navigate(
+                                    "WorkoutForm"
+                                );
                                 break;
                         }
                     }}

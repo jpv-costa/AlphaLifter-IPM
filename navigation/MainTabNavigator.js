@@ -17,6 +17,7 @@ import WorkoutExerciseLogScreen from "../screens/WorkoutExerciseLogScreen";
 import SearchLibraryScreen from "../screens/SearchLibraryScreen";
 import CreateExerciseForm from "../screens/CreateExerciseForm";
 import CreateProgressionForm from "../screens/CreateProgressionForm";
+import CreateWorkoutForm from "../screens/CreateWorkoutForm";
 
 const config = Platform.select({
     web: { headerMode: "screen" },
@@ -50,6 +51,7 @@ const LibraryStack = createStackNavigator(
         Logging: WorkoutLoggingScreen,
         ExerciseForm: CreateExerciseForm,
         ProgretionForm: CreateProgressionForm,
+        WorkoutForm: CreateWorkoutForm,
         Exercise: WorkoutExerciseLogScreen
     },
     config
