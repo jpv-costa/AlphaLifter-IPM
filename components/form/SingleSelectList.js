@@ -32,7 +32,7 @@ export class SingleSelectList extends React.Component {
                             id={item.id}
                             style={{ flex: 1, width: "100%" }}
                             title={item.title}
-                            selected={this.selected == item.title}
+                            selected={this.state.selected == item.title}
                             index={index}
                             description={item.description}
                             onPress={() => {
