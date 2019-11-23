@@ -101,7 +101,7 @@ export class LibraryScreen extends React.Component {
                                 this.props.navigation.navigate("ProgramForm");
                                 break;
                             case 1:
-                                this.props.navigation.navigate("WorkoutForm");
+                                // this.props.navigation.navigate("WorkoutForm");
                                 break;
                         }
                     }}
@@ -124,12 +124,13 @@ export class LibraryScreen extends React.Component {
                                 <RoundCornersButton text='View All' />
                                 <TouchableOpacity
                                     ml={3}
-                                    onPress={() =>
-                                        this.props.navigation.navigate(
-                                            "Search",
-                                            { type: "program" }
-                                        )
-                                    }>
+                                    // onPress={() =>
+                                    //     this.props.navigation.navigate(
+                                    //         "Search",
+                                    //         { type: "program" }
+                                    //     )
+                                    // }
+                                >
                                     <Icon
                                         id={"search"}
                                         size={18}
@@ -182,12 +183,13 @@ export class LibraryScreen extends React.Component {
                                 <RoundCornersButton text='View All' />
                                 <TouchableOpacity
                                     ml={3}
-                                    onPress={() =>
-                                        this.props.navigation.navigate(
-                                            "Search",
-                                            { type: "workout" }
-                                        )
-                                    }>
+                                    // onPress={() =>
+                                    //     this.props.navigation.navigate(
+                                    //         "Search",
+                                    //         { type: "workout" }
+                                    //     )
+                                    // }
+                                >
                                     <Icon
                                         id={"search"}
                                         size={18}
