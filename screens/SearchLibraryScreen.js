@@ -9,9 +9,9 @@ import {
 import styled from "styled-components";
 import { color, space, layout, size, typography, flexbox } from "styled-system";
 import { Icon } from "../components/Icon/Icon";
-import Search from "../components/Search/Search" 
-import {DashboardProgramList} from "../components/List/DashboardProgramList"
-import {DashboardWorkoutList} from "../components/List/DashboardWorkoutList"
+import Search from "../components/Search/Search";
+import { DashboardProgramList } from "../components/List/DashboardProgramList";
+import { DashboardWorkoutList } from "../components/List/DashboardWorkoutList";
 
 const { width } = Dimensions.get("window");
 
@@ -45,8 +45,6 @@ const Text = styled.Text`
     opacity : ${props => (props.opacity ? props.opacity : 1)};
 `;
 
-
-
 export default class SearchLibraryScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
@@ -54,44 +52,45 @@ export default class SearchLibraryScreen extends React.Component {
         };
     };
 
-render() {
+    render() {
+        const { navigation } = this.props;
 
-    const {navigation} = this.props
+        const type = navigation.getParam("type");
 
-    const type = navigation.getParam("type");
+        let data;
+        let placeholder;
+        let searchProperties;
+        let listType;
 
-    let data;
-    let placeholder;
-    let searchProperties;
-    let listType;
+        if (type === "program") {
+            data = programData;
+            placeholder = "Type program name...";
+            searchProperties = ["name"];
+            listType = <DashboardProgramList data={data} selectList />;
+        }
 
-    if(type === "program"){
-        data = programData;
-        placeholder = "Type program name...";
-        searchProperties = ["name"];
-        listType = <DashboardProgramList data = {data} selectList/>
+        if (type === "workout") {
+            data = workoutData;
+            placeholder = "Type workout name...";
+            searchProperties = ["name, muscles"];
+            listType = <DashboardWorkoutList data={data} selectList />;
+        }
+        console.log(data);
+
+        return (
+            <View style={{ flex: 1 }}>
+                <Search
+                    mt={5}
+                    style={{ flex: 1 }}
+                    data={data}
+                    placeholder={placeholder}
+                    searchProperties={searchProperties}>
+                    {listType}
+                </Search>
+            </View>
+        );
     }
-
-    if(type === "workout"){
-        data = workoutData;
-        placeholder = "Type workout name...";
-        searchProperties = ["name, muscles"];
-        listType = <DashboardWorkoutList data = {data} selectList/>
-    }
-
-     return (
-       <Search
-        mt={5}
-        data={data}
-        placeholder={placeholder}
-        searchProperties={searchProperties}>
-        {listType}
-    </Search>
-     );
-
-     }
 }
-
 
 const programData = [
     {
@@ -119,7 +118,6 @@ const programData = [
         progress: "5%"
     }
 ];
-
 
 const workoutData = [
     {

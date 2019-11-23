@@ -92,7 +92,6 @@ export default class LibraryScreen extends React.Component {
                     title={"What do you wish to create?"}
                     options={["Training Program", "Workout", "Cancel"]}
                     cancelButtonIndex={2}
-                    destructiveButtonIndex={1}
                     onPress={index => {
                         switch (index) {
                             case 0:
@@ -122,8 +121,13 @@ export default class LibraryScreen extends React.Component {
                             <View flexDirection='row' justifyContent='flex-end'>
                                 <RoundCornersButton text='View All' />
                                 <TouchableOpacity
-                                 ml={3} 
-                                 onPress={() => this.props.navigation.navigate("Search", {type: "program"})}>
+                                    ml={3}
+                                    onPress={() =>
+                                        this.props.navigation.navigate(
+                                            "Search",
+                                            { type: "program" }
+                                        )
+                                    }>
                                     <Icon
                                         id={"search"}
                                         size={18}
@@ -168,9 +172,14 @@ export default class LibraryScreen extends React.Component {
                             </Text>
                             <View flexDirection='row' justifyContent='flex-end'>
                                 <RoundCornersButton text='View All' />
-                                <TouchableOpacity 
-                                  ml={3} 
-                                  onPress={() => this.props.navigation.navigate("Search", {type: "workout"})}>
+                                <TouchableOpacity
+                                    ml={3}
+                                    onPress={() =>
+                                        this.props.navigation.navigate(
+                                            "Search",
+                                            { type: "workout" }
+                                        )
+                                    }>
                                     <Icon
                                         id={"search"}
                                         size={18}
