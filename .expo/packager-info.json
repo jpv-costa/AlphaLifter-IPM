@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "expoServerPort": 19000,
   "expoServerNgrokUrl": "https://i8-y9b.anonymous.alphalifter.exp.direct",
@@ -7,3 +8,6 @@
   "packagerPort": 19001,
   "packagerPid": 17056
 }
+=======
+{}
+>>>>>>> fff7b6072606151c80fb3a47295e875752e59dd4

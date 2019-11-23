@@ -128,7 +128,7 @@ export default class ReOrderScreen extends React.Component {
                         secondaryDark
                         text='Next'
                         onPress={() => {
-                            if (type == "exercise") {
+                            if (type == "exercises") {
                                 //navigate to exercise page
                                 // this.props.navigation.navigate("CycleSelection")
                             } else {

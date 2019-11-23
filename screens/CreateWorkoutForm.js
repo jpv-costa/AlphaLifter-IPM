@@ -51,8 +51,8 @@ export default class CreateWorkoutForm extends React.Component {
         return (
             <View flex={1}>
                 <Form>
-                    <InputForm question={"Insert a name"}>
-                        <SingleInput placeholder={"Choose a name"} />
+                    <InputForm question={"What should it be named?"}>
+                        <SingleInput placeholder={"Upper Workout"} />
                     </InputForm>
                     <InputForm question={"Select the cycles"}>
                         <List
