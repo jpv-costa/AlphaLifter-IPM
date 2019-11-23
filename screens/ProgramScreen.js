@@ -148,22 +148,22 @@ export default class ProgramScreen extends React.Component {
         content = [
             <ScrollView>
                 <View px={4} my={3} flexDirection='row' alignItems='center'>
-                        <IconCircle>
+                    <IconCircle>
                         <TouchableOpacity
+                            flexDirection='row'
+                            alignItems='center'
+                            onPress={this.props.navigation.getParam(
+                                "showActionSheet"
+                            )}>
+                            <MatIcon name={"add"} size={20} color={"#fff"} />
+                        </TouchableOpacity>
+                    </IconCircle>
+                    <TouchableOpacity
                         flexDirection='row'
                         alignItems='center'
                         onPress={this.props.navigation.getParam(
                             "showActionSheet"
                         )}>
-                            <MatIcon name={"add"} size={20} color={"#fff"} />
-                            </TouchableOpacity>
-                        </IconCircle>
-                        <TouchableOpacity
-                        flexDirection='row'
-                        alignItems='center'
-                        onPress={this.props.navigation.getParam(
-                            "showActionSheet"
-                        )}>              
                         <Text
                             color={"secondaryShades.0"}
                             ml={4}
@@ -211,6 +211,18 @@ export default class ProgramScreen extends React.Component {
                     tabContent={content}
                 />
                 {/* {this.content} */}
+                {this.props.navigation.getParam("editMode", false) && (
+                    <View px={4} mb={4}>
+                        <ActionButton
+                            mt={3}
+                            secondaryDark
+                            text='Save Program'
+                            onPress={() =>
+                                this.props.navigation.navigate("Library")
+                            }
+                        />
+                    </View>
+                )}
             </React.Fragment>
         );
     }
