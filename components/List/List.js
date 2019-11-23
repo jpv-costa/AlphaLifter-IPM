@@ -321,17 +321,27 @@ class NonDraggableList extends React.Component {
                                         } else {
                                             this.state.selected.push(item.id);
                                         }
+                                        if (onItemPress) {
+                                            onItemPress(
+                                                index,
+                                                this.state.selected
+                                            );
+                                        }
                                         this.setState(previousState => ({
                                             selected: [
                                                 ...previousState.selected
                                             ]
                                         }));
                                     } else {
-                                        if (onItemPress) {
-                                            onItemPress(index);
-                                        }
                                         this.state.selected.pop();
                                         this.state.selected.push(item.id);
+
+                                        if (onItemPress) {
+                                            onItemPress(
+                                                index,
+                                                this.state.selected
+                                            );
+                                        }
 
                                         this.setState(previousState => ({
                                             selected: [

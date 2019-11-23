@@ -73,7 +73,9 @@ export default class ReOrderScreen extends React.Component {
             listType = (
                 <DashboardProgramList
                     selectList
-                    onItemPress={() => console.log("selected")}
+                    onItemPress={(item, index, selected) =>
+                        console.log(selected)
+                    }
                 />
             );
         }
@@ -85,7 +87,9 @@ export default class ReOrderScreen extends React.Component {
             listType = (
                 <DashboardWorkoutList
                     selectList
-                    onItemPress={() => console.log("selected")}
+                    onItemPress={(item, index, selected) =>
+                        console.log(selected)
+                    }
                 />
             );
         }
@@ -105,7 +109,9 @@ export default class ReOrderScreen extends React.Component {
                 <DashboardExerciseList
                     selectList
                     multiselect
-                    onItemPress={() => console.log("selected")}
+                    onItemPress={(item, index, selected) =>
+                        console.log(selected)
+                    }
                 />
             );
         }

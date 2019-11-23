@@ -19,14 +19,17 @@ export const DashboardWorkoutList = props => {
             id: id,
             title: name + (isCurrent ? " (current)" : ""),
             extraInfo: progress,
-            description: exercises + " exercises which evolve " + muscles + ",...",
+            description:
+                exercises + " exercises which evolve " + muscles + ",...",
             selected: selected
         };
     });
 
     return (
         <List
-            onItemPress={index => onItemPress(data[index])}
+            onItemPress={(index, selected) =>
+                onItemPress(data[index], index, selected)
+            }
             data={parsedData}
             selectedId={selectedId}
             {...other}
