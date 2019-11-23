@@ -44,7 +44,7 @@ function wait(timeout) {
     });
 }
 
-export class LibraryScreen extends React.Component {
+export default class LibraryScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
             headerTitle: "Library",
