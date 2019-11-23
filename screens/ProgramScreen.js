@@ -72,6 +72,44 @@ export default class ProgramScreen extends React.Component {
         });
     }
 
+<<<<<<< HEAD
+    content = [
+        <ScrollView>
+            <View px={4} my={3}>
+                <TouchableOpacity flexDirection='row' alignItems='center'>
+                    <IconCircle>
+                    <TouchableOpacity flexDirection='row' alignItems='center'
+                  onPress={() =>
+                    this.props.navigation.navigate(
+                        "WorkoutForm"
+                    )
+                }>
+                        <MatIcon name={"add"} size={20} color={"#fff"} />
+                        </TouchableOpacity>
+                    </IconCircle>
+                    <TouchableOpacity flexDirection='row' 
+                  onPress={() =>
+                    this.props.navigation.navigate(
+                        "WorkoutForm"
+                    )
+                }>
+                    <Text
+                        color={"secondaryShades.0"}
+                        ml={4}
+                        fontWeight='bold'
+                        fontSize={3}>
+                        Add Workout
+                    </Text>
+                    </TouchableOpacity>
+                </TouchableOpacity>
+            </View>
+            <View>{this.getCycles()}</View>
+        </ScrollView>,
+        <Text>Not implemented.</Text>
+    ];
+
+=======
+>>>>>>> 71452ee81bf9279ce0d50617ff5d5d9ecc419fd3
     static navigationOptions = ({ navigation }) => {
         return {
             headerTitle: navigation.state.params.program.title,
