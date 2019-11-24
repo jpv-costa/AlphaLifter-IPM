@@ -56,7 +56,8 @@ export class CreateProgretionForm extends React.Component {
         return (
             <View flex={1}>
                 <Form
-                    onFinish={() =>
+                    onFinish={() => {
+                        this.props.navigation.navigate("ExerciseConfiguration");
                         this.props.onAssignExerciseProgression(
                             this.props.workout,
                             this.props.exercise,
@@ -66,8 +67,8 @@ export class CreateProgretionForm extends React.Component {
                             this.state.reps2,
                             this.state.rir1,
                             this.state.rir2
-                        )
-                    }>
+                        );
+                    }}>
                     <InputForm question={"What is the progression scheme?"}>
                         <SingleSelectList
                             data={chooseProgressionData}

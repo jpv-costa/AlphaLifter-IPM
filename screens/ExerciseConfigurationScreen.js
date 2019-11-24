@@ -72,7 +72,11 @@ export default class ExerciseConfigurationScreen extends React.Component {
                             <View mr={2}>
                                 <RoundCornersButton
                                     text='Add'
-                                    /*onPress =   */
+                                    onPress={() =>
+                                        this.props.navigation.navigate(
+                                            "CreateProgression"
+                                        )
+                                    }
                                 />
                             </View>
                             <RoundCornersButton text='Re-order' />
