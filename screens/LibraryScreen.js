@@ -235,7 +235,7 @@ export class LibraryScreen extends React.Component {
                         secondaryDark
                         text='Start Next Workout'
                         onPress={() =>
-                            this.props.navigation.navigate("Logging")
+                            this.props.navigation.navigate("Logging", {workout:this.props.workouts[this.props.workoutslength-1]})
                         }
                     />
                 </View>
@@ -280,7 +280,7 @@ const mapStateToProps = state => {
 
     return {
         programs: programs,
-        workouts: workouts
+        workouts: workouts,
     };
 };
 

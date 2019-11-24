@@ -98,16 +98,6 @@ export class ReOrderScreen extends React.Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        orderedWorkout: workouts =>
-            dispatch({
-                type: actionTypes.REORDER,
-                payload: { workouts: workouts }
-            })
-    };
-};
-
 const mapDispatchToProps = dispatch => {
     return {
         orderedWorkout: workouts =>
@@ -118,7 +108,7 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReOrderScreen);
+export default connect(null, mapDispatchToProps)(ReOrderScreen);
 
 const workoutData = [
     {
