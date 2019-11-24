@@ -233,6 +233,7 @@ export class ProgramScreen extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
     let workouts = [];
+    console.log(ownProps.program);
 
     state.workouts.map(w => {
         workouts.push({

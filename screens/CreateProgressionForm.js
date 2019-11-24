@@ -148,7 +148,8 @@ const mapDispatchToProps = dispatch => {
             exercise,
             progression,
             targetWeight,
-            targetReps,
+            targetReps1,
+            targetReps2,
             targetRir1,
             targetRir2
         ) =>

@@ -5,6 +5,8 @@ import { color, space, layout, size, typography, flexbox } from "styled-system";
 import { List } from "../components/List/List";
 import {} from "../components/inputs/InputQuestions/InputQuestions";
 import { ActionButton } from "../components/button/Button";
+import * as actionTypes from "../store/actions";
+import { connect } from "react-redux";
 
 const { width } = Dimensions.get("window");
 
@@ -39,7 +41,7 @@ const QuestionItem = styled.View`
     ${size}
 `;
 
-export default class CycleSelectionScreen extends React.Component {
+export class CycleSelectionScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
             header: null
@@ -84,6 +86,24 @@ export default class CycleSelectionScreen extends React.Component {
         );
     }
 }
+
+const mapDispatchToProps = dispatch => {
+    //[{workout:name, exercises:[{exercise:name, progression, targetweight: weight, targetreps1: reps1,targetreps2:reps2, targetrir1:rir1, targetrir2:rir2}]
+
+    return {
+        onAssignWorkout: (program, workoutName, cycles) =>
+            dispatch({
+                type: actionTypes.ASSIGN_WORKOUT_TO_PROGRAM,
+                payload: {
+                    program,
+                    workoutName,
+                    cycles
+                }
+            })
+    };
+};
+
+export default connect(null, mapDispatchToProps)(CycleSelectionScreen);
 
 const onItemPress = item => {
     console.log("You pressed item '" + item.title + "'");
