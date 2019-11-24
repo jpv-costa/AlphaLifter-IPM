@@ -51,14 +51,15 @@ const reducer = (state = initialState, action) => {
                 })
             };
         }
-        case actionTypes.ASSIGN_WORKOUT_TO_PROGRAM: { //DONE
+        case actionTypes.ASSIGN_WORKOUT_TO_PROGRAM: {
+            //DONE
             let { program, workoutName, cycles } = action.payload;
             var workout;
-            state.workouts.map((e,index)=> {
-                if (e.name==workoutName) {
-                    workout = index+1;
+            state.workouts.map((e, index) => {
+                if (e.name == workoutName) {
+                    workout = index + 1;
                 }
-            })
+            });
 
             let newPrograms = state.programs.filter(() => true);
             console.log(newPrograms);
