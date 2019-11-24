@@ -39,7 +39,7 @@ const Text = styled.Text`
     opacity : ${props => (props.opacity ? props.opacity : 1)};
 `;
 
-export class CreateProgramForm extends React.Component {
+export default class CreateProgramForm extends React.Component {
     workout = this.props.workout;
     state = {};
     static navigationOptions = ({ navigation }) => {
@@ -53,13 +53,11 @@ export class CreateProgramForm extends React.Component {
             <View flex={1}>
                 <Form
                     onFinish={() => {
-                        this.props.onProgramCreated(
-                            this.state.name,
-                            this.state.cycles
-                        );
-
                         this.props.navigation.navigate("Program", {
-                            program: this.props.program,
+                            program: {
+                                title: this.state.name,
+                                cycles: this.state.cycles
+                            },
                             editMode: true
                         });
                     }}>
@@ -85,21 +83,21 @@ export class CreateProgramForm extends React.Component {
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    //[{program: name, cycles:number, workouts:[{workout:id, cycle}]}]
-    return {
-        onProgramCreated: (name, cycles) =>
-            dispatch({
-                type: actionTypes.ADD_PROGRAM,
-                payload: { name: name, cycles: cycles }
-            })
-    };
-};
+// const mapDispatchToProps = dispatch => {
+//     //[{program: name, cycles:number, workouts:[{workout:id, cycle}]}]
+//     return {
+//         onProgramCreated: (name, cycles) =>
+//             dispatch({
+//                 type: actionTypes.ADD_PROGRAM,
+//                 payload: { name: name, cycles: cycles }
+//             })
+//     };
+// };
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-        program: state.programs.filter(p => p.name == ownProps.navigation.state.params.program.title)[0]
-    };
-};
+// const mapStateToProps = (state, ownProps) => {
+//     return {
+//         program: state.programs.filter(p => p.name == ownProps.navigation.state.params.program.title)[0]
+//     };
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateProgramForm);
+// export default connect(mapStateToProps, mapDispatchToProps)(CreateProgramForm);

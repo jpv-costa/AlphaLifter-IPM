@@ -6,7 +6,14 @@ const initialState = {
             id: 1,
             name: "High Volume Program",
             cycles: 3,
-            workouts: [{ id: 1, cycles: [1] }]
+            workouts: [
+                {
+                    id: 1,
+                    name: "Upper Workout",
+                    exercises: 3,
+                    cycles: [1]
+                }
+            ]
         }
     ], //[{id:id, name:name, cycles:number, workouts:[{workout:id, [cycles]}]}]
     workouts: [
@@ -42,11 +49,35 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.ADD_PROGRAM: {
             //DONE
+            let workouts = action.payload.workouts;
+            let transformedArray = [];
+
+            workouts.forEach((cycle, index) => {
+                cycle.forEach(workout => {
+                    const transformedWorkout = transformedArray.filter(
+                        w => w.name == workout.title
+                    );
+                    const added = transformedWorkout.length >= 1;
+
+                    if (added) {
+                        transformedWorkout.cycles.push(index + 1);
+                    } else {
+                        transformedArray.push({
+                            id: transformedArray.length + 1,
+                            name: workout.title,
+                            exercises: workout.value[0].value,
+                            cycles: [index + 1]
+                        });
+                    }
+                });
+            });
 
             return {
                 ...state,
                 programs: state.programs.concat({
-                    ...action.payload,
+                    workouts: transformedArray,
+                    cycles: action.payload.cycles,
+                    name: action.payload.name,
                     id: state.programs.length + 1,
                     workouts: []
                 })

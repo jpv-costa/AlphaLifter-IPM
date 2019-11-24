@@ -63,6 +63,16 @@ export class ProgramScreen extends React.Component {
     program = this.props.navigation.state.params.program;
     header = ["Workouts", "Analysis"];
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            program: props.program,
+            cycles: props.cycles,
+            workouts: props.workouts
+        };
+    }
+
     showActionSheet = () => {
         this.ActionSheet.show();
     };
@@ -91,14 +101,10 @@ export class ProgramScreen extends React.Component {
     };
 
     render() {
-        // console.log(this.props.navigation.state.params);
-        const cycles = this.props.cycles
-            ? this.props.cycles
-            : this.props.navigation.getParam("program").cycles;
         const getCycles = () => {
             const result = [];
 
-            for (let i = 1; i <= cycles; i++) {
+            for (let i = 1; i <= this.props.cycles; i++) {
                 result.push(
                     <View mb={4}>
                         <View
@@ -213,7 +219,7 @@ export class ProgramScreen extends React.Component {
                     }}
                 />
                 <Text fontSize={2} my={3} mx={4} opacity={0.5}>
-                    Length: {cycles} cycles.
+                    Length: {this.props.cycles} cycles.
                 </Text>
                 <Navigator
                     width={width}
@@ -227,9 +233,14 @@ export class ProgramScreen extends React.Component {
                             mt={3}
                             secondaryDark
                             text='Save Program'
-                            onPress={() =>
-                                this.props.navigation.navigate("Library")
-                            }
+                            onPress={() => {
+                                this.props.navigation.navigate("Library");
+                                this.props.onProgramCreated(
+                                    this.state.program,
+                                    this.state.cycles,
+                                    this.state.workouts
+                                );
+                            }}
                         />
                     </View>
                 )}
@@ -243,43 +254,65 @@ const mapStateToProps = (state, ownProps) => {
     let program = state.programs.filter(
         p => p.name == ownProps.navigation.state.params.program.title
     )[0];
+    let cycles;
 
-    for (let i = 0; i < state.programs[program.id - 1].cycles; i++) {
-        workouts.push([]);
-    }
+    if (program) {
+        cycles = state.programs[program.id - 1].cycles;
+        for (let i = 0; i < cycles; i++) {
+            workouts.push([]);
+        }
 
-    state.programs[program.id - 1].workouts.map(w => {
-        const workout = state.workouts[w.id - 1];
-        const cycles = w.cycles;
+        state.programs[program.id - 1].workouts.map(w => {
+            const includedInCycles = w.cycles;
 
-        cycles.forEach(cycle => {
-            workouts[cycle - 1].push({
-                id: workout.id,
-                title: workout.name,
-                value: [
-                    {
-                        id: 2,
-                        title: "Exercises",
-                        value: workout.exercises.length
-                    },
-                    { id: 3, title: "Duration", value: "1h30min" },
-                    { id: 4, title: "Focus", value: "Chest and Biceps" }
-                ]
+            includedInCycles.forEach(cycle => {
+                workouts[cycle - 1].push({
+                    id: w.id,
+                    title: w.name,
+                    value: [
+                        {
+                            id: 2,
+                            title: "Exercises",
+                            value: w.exercises
+                        },
+                        { id: 3, title: "Duration", value: "1h30min" },
+                        { id: 4, title: "Focus", value: "Chest and Biceps" }
+                    ]
+                });
             });
         });
-    });
+    } else {
+        program = ownProps.navigation.state.params.program.title;
+        cycles = ownProps.navigation.state.params.program.cycles;
 
-    console.log("BOASSS");
-    console.log(workouts);
+        for (let i = 0; i < cycles; i++) {
+            workouts.push([]);
+        }
+    }
 
     return {
         program: program,
-        cycles: program.cycles,
+        cycles: cycles,
         workouts: workouts
     };
 };
 
-export default connect(mapStateToProps, null)(ProgramScreen);
+const mapDispatchToProps = dispatch => {
+    //[{program: name, cycles:number, workouts:[{workout:id, cycle}]}]
+    return {
+        onProgramCreated: (name, cycles, workouts) =>
+            dispatch({
+                type: actionTypes.ADD_PROGRAM,
+                payload: {
+                    name: name,
+                    cycles: cycles,
+                    workouts: workouts
+                }
+            })
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProgramScreen);
 
 const workoutsCardData = [
     {

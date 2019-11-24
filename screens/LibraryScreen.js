@@ -166,11 +166,10 @@ export class LibraryScreen extends React.Component {
                                         this.props.navigation.navigate(
                                             "Program",
                                             { program: program }
-                                        )
+                                        );
                                         console.log("redirecting to program:");
                                         console.log(program);
-                                        }
-                                    }
+                                    }}
                                 />
                             ))}
                         </ScrollView>
@@ -259,7 +258,7 @@ const mapStateToProps = state => {
                 {
                     id: 4,
                     title: "Workouts/Cycle",
-                    value: p.workouts.length / p.cycles
+                    value: (p.workouts.length / p.cycles).toFixed(2)
                 },
                 { id: 5, title: "Workout Duration", value: "1h10m" }
             ]
