@@ -237,7 +237,7 @@ const mapStateToProps = (state, ownProps) => {
     let workouts = [];
 
     state.workouts.map(w => {
-        workouts.push({id:w.id, name:w.name, value:
+        workouts.push({id:w.id, title:w.name, value:
             [
                 {id: 2, title: "Exercises", value: w.exercises.length},
                 {id: 3, title: "Duration", value: "1h30min"},
