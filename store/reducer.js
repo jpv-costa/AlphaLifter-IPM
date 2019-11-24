@@ -19,11 +19,16 @@ const reducer = (state = initialState, action) => {
             };
         }
         case actionTypes.ASSIGN_WORKOUT_TO_PROGRAM: { //DONE
-            let { program, workoutName, cycles } = action.payload;
-            var workout;
+            let { programName, workoutName, cycles } = action.payload;
+            var workout, program;
             state.workouts.map((e,index)=> {
                 if (e.name==workoutName) {
                     workout = index+1;
+                }
+            })
+            state.programs.map((e,index)=> {
+                if (e.name==workoutName) {
+                    program = index+1;
                 }
             })
             let newPrograms = state.programs.filter(() => true);

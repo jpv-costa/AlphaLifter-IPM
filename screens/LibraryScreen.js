@@ -101,7 +101,7 @@ export class LibraryScreen extends React.Component {
                                 this.props.navigation.navigate("ProgramForm");
                                 break;
                             case 1:
-                                // this.props.navigation.navigate("WorkoutForm");
+                                // this.props.navigation.navigate("WorkoutForm"); //TODO
                                 break;
                         }
                     }}
@@ -160,11 +160,14 @@ export class LibraryScreen extends React.Component {
                                 <LibraryProgramCard
                                     programCardData={program}
                                     ml={4}
-                                    onPress={() =>
+                                    onPress={() => {
                                         this.props.navigation.navigate(
                                             "Program",
                                             { program: program }
                                         )
+                                        console.log("redirecting to program:");
+                                        console.log(program);
+                                        }
                                     }
                                 />
                             ))}
@@ -279,7 +282,7 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps)(LibraryScreen);
+export default connect(mapStateToProps, null)(LibraryScreen);
 
 const programCardData = [
     {

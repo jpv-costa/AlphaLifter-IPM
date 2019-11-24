@@ -45,7 +45,7 @@ const Text = styled.Text`
 
 export class CreateWorkoutForm extends React.Component {
     state= {}
-    program = 1;
+    // program = 1;
 
     static navigationOptions = ({ navigation }) => {
         return {
@@ -60,7 +60,7 @@ export class CreateWorkoutForm extends React.Component {
                     onFinish={() =>
                         {
                             this.props.onWorkoutCreated(this.state.name);
-                            this.props.onAssignWorkoutsToProgram(this.program,this.state.name,this.state.cycles);
+                            this.props.onAssignWorkoutsToProgram(this.props.program,this.state.name,this.state.cycles);
                             this.props.navigation.navigate("Search", {
                                 type: "exercises"
                             });
@@ -93,7 +93,7 @@ const mapDispatchToProps = dispatch => {
     //[{workout:name, exercises:[{exercise1ID, progression:type, targetweight: weight, targetreps: reps, targetrir1:rir1, targetrir2:rir2}]
     return {
         onWorkoutCreated: (name) => dispatch({type: actionTypes.ADD_WORKOUT, payload:{name:name}}),
-        onAssignWorkoutsToProgram: (program, workout, cycles) => dispatch({type: actionTypes.ASSIGN_WORKOUT_TO_PROGRAM, payload:{program:program, workoutName:workout, cycles:cycles}})
+        onAssignWorkoutsToProgram: (programName, workout, cycles) => dispatch({type: actionTypes.ASSIGN_WORKOUT_TO_PROGRAM, payload:{programName:programName, workoutName:workout, cycles:cycles}})
     }
 }
 

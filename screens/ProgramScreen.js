@@ -62,7 +62,7 @@ const Text = styled.Text`
 export class ProgramScreen extends React.Component {
     program = this.props.navigation.state.params.program;
     header = ["Workouts", "Analysis"];
-    cycles = 2;
+    cycles = 3;
 
     showActionSheet = () => {
         this.ActionSheet.show();
@@ -92,6 +92,7 @@ export class ProgramScreen extends React.Component {
     };
 
     render() {
+        console.log(this.props.navigation.state.params);
         const getCycles = () => {
             const result = [];
 
@@ -195,7 +196,8 @@ export class ProgramScreen extends React.Component {
                     onPress={index => {
                         switch (index) {
                             case 0:
-                                this.props.navigation.navigate("WorkoutForm");
+                                console.log("program: " + this.program)
+                                this.props.navigation.navigate("WorkoutForm", {program: this.program});
                                 break;
                             case 1:
                                 this.props.navigation.navigate("Search", {
@@ -245,11 +247,14 @@ const mapStateToProps = (state, ownProps) => {
         })
     })
 
-    let program = state.programs.filter(p => p.id == ownProps.program);
+    let program = state.programs.filter(p => p.name == ownProps.program)[0];
+    console.log("program screen program")
+    console.log(program);
 
     return {
         cycles: program.cycles,
-        workouts: workouts
+        workouts: workouts,
+        program: program
     }
 }
 
