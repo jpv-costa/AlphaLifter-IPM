@@ -43,23 +43,14 @@ const Text = styled.Text`
     opacity : ${props => (props.opacity ? props.opacity : 1)};
 `;
 
-export class CreateWorkoutForm extends React.Component {
+export class CreateWorkoutSimpleForm extends React.Component {
     state= {}
-    program = this.props.navigation.state.params.program;
 
     static navigationOptions = ({ navigation }) => {
         return {
             headerTitle: "Create Workout"
         };
     };
-
-    getCycles() {
-        let content = [];
-        for (let i = 0; i< this.program.cycles; i++) {
-            content.push({id: i+1, title: (i+1)+ " cycle"}) 
-        }
-        return content;
-    }
 
     render() {
         return (
@@ -68,8 +59,6 @@ export class CreateWorkoutForm extends React.Component {
                     onFinish={() =>
                         {
                             this.props.onWorkoutCreated(this.state.name);
-                            console.log(this.props);
-                            this.props.onAssignWorkoutsToProgram(this.program.id,this.state.name,this.state.cycles);
                             this.props.navigation.navigate("Search", {
                                 type: "exercises"
                             });
@@ -82,16 +71,6 @@ export class CreateWorkoutForm extends React.Component {
                             onChange={text => this.setState({ name: text })}
                         />
                     </InputForm>
-                    <InputForm question={"Select the cycles"}>
-                        <List
-                            data={this.getCycles()}
-                            selectList
-                            multiselect
-                            onItemPress={(item, index, selected) => {
-                                this.setState({ cycles: index.slice(1) });
-                            }}
-                        />
-                    </InputForm>
                 </Form>
             </View>
         );
@@ -102,24 +81,8 @@ const mapDispatchToProps = dispatch => {
     //[{workout:name, exercises:[{exercise1ID, progression:type, targetweight: weight, targetreps: reps, targetrir1:rir1, targetrir2:rir2}]
     return {
         onWorkoutCreated: (name) => dispatch({type: actionTypes.ADD_WORKOUT, payload:{name:name}}),
-        onAssignWorkoutsToProgram: (program, workout, cycles) => dispatch({type: actionTypes.ASSIGN_WORKOUT_TO_PROGRAM, payload:{program:program, workoutName:workout, cycles:cycles}})
     }
 }
 
-export default connect(null, mapDispatchToProps)(CreateWorkoutForm);
+export default connect(null, mapDispatchToProps)(CreateWorkoutSimpleForm);
 
-const chooseNumberCycles = [
-    {
-        id: 1,
-        title: "1 cycle"
-    },
-    {
-        id: 2,
-        title: "2 cycle"
-    },
-
-    {
-        id: 3,
-        title: "3 cycle"
-    }
-];
