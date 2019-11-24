@@ -94,6 +94,7 @@ export class CreateProgretionForm extends React.Component {
                             onChange={text => {
                                 this.state.startLoad = text;
                             }}
+                            hasNext = {true}
                         />
                     </InputForm>
 
@@ -104,6 +105,7 @@ export class CreateProgretionForm extends React.Component {
                             onChange={text => {
                                 this.state.loadIncrease = text;
                             }}
+                            hasPrevious = {true}
                         />
                     </InputForm>
 
