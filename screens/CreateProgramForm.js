@@ -59,10 +59,7 @@ export class CreateProgramForm extends React.Component {
                         );
 
                         this.props.navigation.navigate("Program", {
-                            program: {
-                                title: this.state.name,
-                                cycles: this.state.cycles
-                            },
+                            program: this.props.program,
                             editMode: true
                         });
                     }}>
@@ -99,4 +96,10 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(null, mapDispatchToProps)(CreateProgramForm);
+const mapStateToProps = (state, ownProps) => {
+    return {
+        program: state.programs.filter(p => p.name == ownProps.navigation.state.params.program.title)[0]
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateProgramForm);

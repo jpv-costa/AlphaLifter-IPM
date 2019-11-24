@@ -3,15 +3,15 @@ import * as actionTypes from "./actions";
 const initialState = {
     programs: [
         {
-            program: 1,
+            id: 1,
             name: "High Volume Program",
             cycles: 3,
             workouts: [{ id: 1, cycles: [1] }]
         }
-    ], //[{program:id, name:name, cycles:number, workouts:[{workout:id, [cycles]}]}]
+    ], //[{id:id, name:name, cycles:number, workouts:[{workout:id, [cycles]}]}]
     workouts: [
         {
-            workout: 1,
+            id: 1,
             name: "Upper Workout",
             exercises: [
                 {
@@ -25,15 +25,15 @@ const initialState = {
                 }
             ]
         }
-    ], //[{workout:id, name: name, exercises:[{exercise:id, progression:progression, targetweight: weight, targetreps: reps, targetrir1:rir1, targetrir2:rir2}]
+    ], //[{id:id, name: name, exercises:[{exercise:id, progression:progression, targetweight: weight, targetreps: reps, targetrir1:rir1, targetrir2:rir2}]
     exercises: [
         {
-            exercise: 1,
+            id: 1,
             name: "Chest Press",
             primaryMuscles: ["chest", "abs"],
             secondaryMuscles: [""]
         }
-    ] //[{exercise:id, name:name, primaryMuscles:primaryMuscles, secondaryMuscles:secondaryMuscles}]
+    ] //[{id:id, name:name, primaryMuscles:primaryMuscles, secondaryMuscles:secondaryMuscles}]
 };
 
 const reducer = (state = initialState, action) => {
@@ -47,7 +47,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 programs: state.programs.concat({
                     ...action.payload,
-                    program: state.programs.length + 1,
+                    id: state.programs.length + 1,
                     workouts: []
                 })
             };
@@ -55,6 +55,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.ASSIGN_WORKOUT_TO_PROGRAM: {
             //DONE
             let { program, workoutName, cycles } = action.payload;
+            console.log("program to add = " + program);
             var workout;
             state.workouts.map((e, index) => {
                 if (e.name == workoutName) {

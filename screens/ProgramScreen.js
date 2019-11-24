@@ -198,9 +198,10 @@ export class ProgramScreen extends React.Component {
                     onPress={index => {
                         switch (index) {
                             case 0:
-                                // console.log("program: " + this.program);
+                                console.log("program: ");
+                                console.log(this.props.program);
                                 this.props.navigation.navigate("WorkoutForm", {
-                                    program: this.program
+                                    program: this.props.program
                                 });
                                 break;
                             case 1:
@@ -243,11 +244,11 @@ const mapStateToProps = (state, ownProps) => {
         p => p.name == ownProps.navigation.state.params.program.title
     )[0];
 
-    for (let i = 0; i < state.programs[program.program - 1].cycles; i++) {
+    for (let i = 0; i < state.programs[program.id - 1].cycles; i++) {
         workouts.push([]);
     }
 
-    state.programs[program.program - 1].workouts.map(w => {
+    state.programs[program.id - 1].workouts.map(w => {
         const workout = state.workouts[w.id - 1];
         const cycles = w.cycles;
 
