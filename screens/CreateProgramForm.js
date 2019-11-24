@@ -59,7 +59,10 @@ export class CreateProgramForm extends React.Component {
                         );
 
                         this.props.navigation.navigate("Program", {
-                            program: this.state.name,
+                            program: {
+                                title: this.state.name,
+                                cycles: this.state.cycles
+                            },
                             editMode: true
                         });
                     }}>

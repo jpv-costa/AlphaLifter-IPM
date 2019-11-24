@@ -92,10 +92,13 @@ export class ProgramScreen extends React.Component {
 
     render() {
         // console.log(this.props.navigation.state.params);
+        const cycles = this.props.cycles
+            ? this.props.cycles
+            : this.props.navigation.getParam("program").cycles;
         const getCycles = () => {
             const result = [];
 
-            for (let i = 1; i <= this.props.cycles; i++) {
+            for (let i = 1; i <= cycles; i++) {
                 result.push(
                     <View mb={4}>
                         <View
@@ -108,7 +111,7 @@ export class ProgramScreen extends React.Component {
                                 mt={2}
                                 ml={4}
                                 fontWeight={"bold"}>
-                                {i} cycle
+                                Cycle {i}
                             </Text>
                             <View mr={4}>
                                 <RoundCornersButton
@@ -209,7 +212,7 @@ export class ProgramScreen extends React.Component {
                     }}
                 />
                 <Text fontSize={2} my={3} mx={4} opacity={0.5}>
-                    Length: {this.props.cycles} cycles.
+                    Length: {cycles} cycles.
                 </Text>
                 <Navigator
                     width={width}
