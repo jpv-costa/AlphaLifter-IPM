@@ -14,10 +14,6 @@ const CenteredView = styled.View`
     align-items: center;
 `;
 
-const onItemPress = item => {
-    console.log("You pressed item '" + item.title + "'");
-};
-
 storiesOf("Buttons", module)
     // The ThemeProvider feeds the theme options to the components scope
     // (therefore the component can use them),

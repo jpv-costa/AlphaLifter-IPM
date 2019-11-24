@@ -13,8 +13,6 @@ const CenterButtons = styled.View`
 export const FormButtons = props => {
     const { onFinish, onNext, onPrevious, disableNext, disablePrevious } = props;
 
-    console.log("disableNext " + props.width);
-
     return (
         <CenterButtons style={{ width: "100%" }}>
             <MyButton
