@@ -47,6 +47,7 @@ export default class ExerciseConfigurationScreen extends React.Component {
 
     render() {
         // console.log(this.props.navigation.getParam("name"));
+        const restOfExercises = this.props.navigation.getParam("rest");
         return (
             <View flex={1}>
                 <View mr={4}>
@@ -74,7 +75,13 @@ export default class ExerciseConfigurationScreen extends React.Component {
                                     text='Add'
                                     onPress={() =>
                                         this.props.navigation.navigate(
-                                            "CreateProgression"
+                                            "CreateProgression",
+                                            {
+                                                name: this.props.navigation.getParam(
+                                                    "name"
+                                                ),
+                                                rest: restOfExercises
+                                            }
                                         )
                                     }
                                 />
@@ -85,11 +92,11 @@ export default class ExerciseConfigurationScreen extends React.Component {
                 </View>
 
                 <View mt={1} flexGrow={1} mt={1}>
-                    <DashboardExerciseList
+                    {/* <DashboardExerciseList
                         data={exercisesDashboardData}
                         selectList
                         onItemPress={onItemPress}
-                    />
+                    /> */}
                 </View>
 
                 <View mt={5} flex={1}>
@@ -114,7 +121,7 @@ export default class ExerciseConfigurationScreen extends React.Component {
                             secondaryDark
                             text={"Finish"}
                             onPress={() =>
-                                this.props.navigation.navigate("Library")
+                                this.props.navigation.navigate("Program")
                             }
                         />
                     </View>

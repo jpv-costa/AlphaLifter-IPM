@@ -48,7 +48,16 @@ export class CycleSelectionScreen extends React.Component {
         };
     };
 
+    state = {
+        selected: []
+    };
+
     render() {
+        const selectedWorkout = this.props.navigation.getParam(
+            "selectedWorkout"
+        );
+        const program = this.props.navigation.getParam("program");
+
         return (
             <SafeAreaView style={{ flex: 1 }}>
                 <QuestionItem pt={3} px={4}>
@@ -60,7 +69,12 @@ export class CycleSelectionScreen extends React.Component {
                     data={chooseNumberCycles}
                     selectList
                     multiselect
-                    onItemPress={onItemPress}
+                    onItemPress={(index, selected) => {
+                        console.log(selected.slice(1, selected.length));
+                        this.setState({
+                            selected: selected.slice(1, selected.length)
+                        });
+                    }}
                 />
                 <View px={4} mb={4}>
                     <ActionButton
@@ -73,6 +87,11 @@ export class CycleSelectionScreen extends React.Component {
                                     "previousScreen"
                                 ) == "workoutSearch"
                             ) {
+                                this.props.onAssignWorkout(
+                                    program,
+                                    selectedWorkout - 1,
+                                    this.state.selected
+                                );
                                 this.props.navigation.navigate("Program");
                             } else {
                                 this.props.navigation.navigate("Search", {
@@ -91,12 +110,12 @@ const mapDispatchToProps = dispatch => {
     //[{workout:name, exercises:[{exercise:name, progression, targetweight: weight, targetreps1: reps1,targetreps2:reps2, targetrir1:rir1, targetrir2:rir2}]
 
     return {
-        onAssignWorkout: (program, workoutName, cycles) =>
+        onAssignWorkout: (program, workoutIndex, cycles) =>
             dispatch({
                 type: actionTypes.ASSIGN_WORKOUT_TO_PROGRAM,
                 payload: {
                     program,
-                    workoutName,
+                    workoutIndex,
                     cycles
                 }
             })
