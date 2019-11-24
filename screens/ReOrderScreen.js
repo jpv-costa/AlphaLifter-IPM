@@ -13,9 +13,13 @@ import Search from "../components/Search/Search";
 import { DashboardProgramList } from "../components/List/DashboardProgramList";
 import { DashboardWorkoutList } from "../components/List/DashboardWorkoutList";
 import { ActionButton } from "../components/button/Button";
+<<<<<<< HEAD
+import {connect} from 'react-redux';
+=======
 import { SearchLibraryScreen } from "./SearchLibraryScreen";
 
 import { connect } from "react-redux";
+>>>>>>> b4d952420544cd9d9f1123d269e47b8ffdeaa562
 import * as actionTypes from "../store/actions";
 
 const { width } = Dimensions.get("window");
