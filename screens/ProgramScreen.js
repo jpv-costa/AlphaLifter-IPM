@@ -123,11 +123,11 @@ export class ProgramScreen extends React.Component {
                                 <RoundCornersButton
                                     text='Re-order'
                                     mr={4}
-                                    onPress={() =>
-                                        this.props.navigation.navigate(
-                                            "ReOrder"
-                                        )
-                                    }
+                                    // onPress={() =>
+                                    //     this.props.navigation.navigate(
+                                    //         "ReOrder"
+                                    //     )
+                                    // }
                                 />
                             </View>
                         </View>
