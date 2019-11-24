@@ -236,11 +236,6 @@ export class ProgramScreen extends React.Component {
                             text='Save Program'
                             onPress={() => {
                                 this.props.navigation.navigate("Library");
-                                this.props.onProgramCreated(
-                                    this.state.program,
-                                    this.state.cycles,
-                                    this.state.workouts
-                                );
                             }}
                         />
                     </View>

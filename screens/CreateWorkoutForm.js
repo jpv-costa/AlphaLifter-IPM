@@ -15,7 +15,7 @@ import { FormButtons } from "../components/button/FormButtons";
 import { SingleSelectList } from "../components/form/SingleSelectList";
 import { List } from "../components/List/List";
 
-import {connect} from 'react-redux';
+import { connect } from "react-redux";
 import * as actionTypes from "../store/actions";
 
 const { width } = Dimensions.get("window");
@@ -44,7 +44,7 @@ const Text = styled.Text`
 `;
 
 export class CreateWorkoutForm extends React.Component {
-    state= {}
+    state = {};
     program = this.props.navigation.state.params.program;
 
     static navigationOptions = ({ navigation }) => {
@@ -55,8 +55,8 @@ export class CreateWorkoutForm extends React.Component {
 
     getCycles() {
         let content = [];
-        for (let i = 0; i< this.program.cycles; i++) {
-            content.push({id: i+1, title: (i+1)+ " cycle"}) 
+        for (let i = 0; i < this.program.cycles; i++) {
+            content.push({ id: i + 1, title: i + 1 + " cycle" });
         }
         return content;
     }
@@ -65,17 +65,18 @@ export class CreateWorkoutForm extends React.Component {
         return (
             <View flex={1}>
                 <Form
-                    onFinish={() =>
-                        {
-                            this.props.onWorkoutCreated(this.state.name);
-                            console.log(this.props);
-                            this.props.onAssignWorkoutsToProgram(this.program.id,this.state.name,this.state.cycles);
-                            this.props.navigation.navigate("Search", {
-                                type: "exercises"
-                            });
-                        }
-                        
-                    }>
+                    onFinish={() => {
+                        this.props.onWorkoutCreated(this.state.name);
+                        // console.log(this.props);
+                        this.props.onAssignWorkoutsToProgram(
+                            this.program.id,
+                            this.state.name,
+                            this.state.cycles
+                        );
+                        this.props.navigation.navigate("Search", {
+                            type: "exercises"
+                        });
+                    }}>
                     <InputForm question={"What should it be named?"}>
                         <SingleInput
                             placeholder={"Upper Workout"}
@@ -87,8 +88,10 @@ export class CreateWorkoutForm extends React.Component {
                             data={this.getCycles()}
                             selectList
                             multiselect
-                            onItemPress={(item, index, selected) => {
-                                this.setState({ cycles: index.slice(1) });
+                            onItemPress={(item, selected) => {
+                                this.setState({
+                                    cycles: selected.slice(1, selected.length)
+                                });
                             }}
                         />
                     </InputForm>
@@ -101,10 +104,22 @@ export class CreateWorkoutForm extends React.Component {
 const mapDispatchToProps = dispatch => {
     //[{workout:name, exercises:[{exercise1ID, progression:type, targetweight: weight, targetreps: reps, targetrir1:rir1, targetrir2:rir2}]
     return {
-        onWorkoutCreated: (name) => dispatch({type: actionTypes.ADD_WORKOUT, payload:{name:name}}),
-        onAssignWorkoutsToProgram: (program, workout, cycles) => dispatch({type: actionTypes.ASSIGN_WORKOUT_TO_PROGRAM, payload:{program:program, workoutName:workout, cycles:cycles}})
-    }
-}
+        onWorkoutCreated: name =>
+            dispatch({
+                type: actionTypes.ADD_WORKOUT,
+                payload: { name: name }
+            }),
+        onAssignWorkoutsToProgram: (program, workout, cycles) =>
+            dispatch({
+                type: actionTypes.ASSIGN_WORKOUT_TO_PROGRAM,
+                payload: {
+                    program: program,
+                    workoutName: workout,
+                    cycles: cycles
+                }
+            })
+    };
+};
 
 export default connect(null, mapDispatchToProps)(CreateWorkoutForm);
 

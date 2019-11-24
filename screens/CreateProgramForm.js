@@ -39,7 +39,7 @@ const Text = styled.Text`
     opacity : ${props => (props.opacity ? props.opacity : 1)};
 `;
 
-export default class CreateProgramForm extends React.Component {
+export class CreateProgramForm extends React.Component {
     workout = this.props.workout;
     state = {};
     static navigationOptions = ({ navigation }) => {
@@ -53,6 +53,11 @@ export default class CreateProgramForm extends React.Component {
             <View flex={1}>
                 <Form
                     onFinish={() => {
+                        this.props.onProgramCreated(
+                            this.state.name,
+                            this.state.cycles,
+                            []
+                        );
                         this.props.navigation.navigate("Program", {
                             program: {
                                 title: this.state.name,
@@ -99,5 +104,18 @@ export default class CreateProgramForm extends React.Component {
 //         program: state.programs.filter(p => p.name == ownProps.navigation.state.params.program.title)[0]
 //     };
 // };
-
-// export default connect(mapStateToProps, mapDispatchToProps)(CreateProgramForm);
+const mapDispatchToProps = dispatch => {
+    //[{program: name, cycles:number, workouts:[{workout:id, cycle}]}]
+    return {
+        onProgramCreated: (name, cycles, workouts) =>
+            dispatch({
+                type: actionTypes.ADD_PROGRAM,
+                payload: {
+                    name: name,
+                    cycles: cycles,
+                    workouts: workouts
+                }
+            })
+    };
+};
+export default connect(null, mapDispatchToProps)(CreateProgramForm);
