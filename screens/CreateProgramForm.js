@@ -72,7 +72,7 @@ export class CreateProgramForm extends React.Component {
                         />
                     </InputForm>
 
-                    <InputForm question={"How long should it be?"}>
+                    <InputForm question={"How many cycles should it have?"}>
                         <SingleInput
                             placeholder={"3"}
                             units={"cycles"}
