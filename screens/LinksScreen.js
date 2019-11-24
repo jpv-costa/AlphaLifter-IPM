@@ -2,7 +2,7 @@ import React from "react";
 import { ScrollView, StyleSheet, Text } from "react-native";
 import { ExpoLinksView } from "@expo/samples";
 
-export function LinksScreen() {
+export default function LinksScreen() {
     return (
         <ScrollView style={styles.container}>
             {/**

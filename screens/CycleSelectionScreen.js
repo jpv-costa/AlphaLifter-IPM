@@ -39,7 +39,7 @@ const QuestionItem = styled.View`
     ${size}
 `;
 
-export class CycleSelectionScreen extends React.Component {
+export default class CycleSelectionScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
             header: null

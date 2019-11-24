@@ -279,7 +279,7 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, null)(LibraryScreen);
+export default connect(mapStateToProps)(LibraryScreen);
 
 const programCardData = [
     {
