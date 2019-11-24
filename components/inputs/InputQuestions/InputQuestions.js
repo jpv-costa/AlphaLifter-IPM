@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { color, space, layout, size, typography } from "styled-system";
+import { statement } from "@babel/template";
 
 const Text = styled.Text`
     ${space}
@@ -29,8 +30,18 @@ const TextInput = styled.TextInput`
   ${size}
 `;
 
+
+const handleTittleInputSubmit = () => {
+    this.setState({focusDescriptionInput: true})
+}
+
 export const SingleInputNumeric = props => {
-    const { placeholder, units, onChange } = props;
+    const { placeholder, units, onChange, hasPrevious, hasNext} = props;
+    
+    let state = {
+        focusDescriptionInput: false
+    }
+
     return (
         <CenterItem>
             <UserInput>
@@ -42,7 +53,10 @@ export const SingleInputNumeric = props => {
                     maxFontSizeMultiplier={6}
                     maxLength={6}
                     multiline={false}
-                    onChangeText={text => onChange(text)}></TextInput>
+                    onChangeText={text => onChange(text)}
+                    blurOnSubmit={ (hasNext === true) ? true : false}
+                    onSubmitEditting = {(hasNext === true) ? handleTittleInputSubmit : state.focusDescriptionInput}
+                    focus = {(hasPrevious === true) ? state.focusDescriptionInput : state.focusDescriptionInput} ></TextInput>
                 <Text
                     fontSize={5}
                     ml={3}
@@ -56,7 +70,12 @@ export const SingleInputNumeric = props => {
 };
 
 export const SingleInput = props => {
-    const { placeholder, onChange } = props;
+    const { placeholder, onChange, hasPrevious, hasNext  } = props;
+
+    let state = {
+        focusDescriptionInput: false
+    }
+    
     return (
         <CenterItem>
             <UserInput>
@@ -66,7 +85,10 @@ export const SingleInput = props => {
                     onChangeText={text => onChange(text)}
                     autoCorrect={false}
                     maxFontSizeMultiplier={6}
-                    multiline={false}></TextInput>
+                    multiline={false}
+                    blurOnSubmit={ (hasNext === true) ? true : false}
+                    onSubmitEditting = {(hasNext === true) ? handleTittleInputSubmit : state.focusDescriptionInput}
+                    focus = {(hasPrevious === true) ? state.focusDescriptionInput : state.focusDescriptionInput} ></TextInput>
             </UserInput>
         </CenterItem>
     );
