@@ -56,7 +56,7 @@ export class CreateWorkoutForm extends React.Component {
     getCycles() {
         let content = [];
         for (let i = 0; i< this.program.cycles; i++) {
-            content.push({id: i+1, title: i+ " cycle"}) 
+            content.push({id: i+1, title: (i+1)+ " cycle"}) 
         }
         return content;
     }
