@@ -44,7 +44,7 @@ const Text = styled.Text`
     opacity : ${props => (props.opacity ? props.opacity : 1)};
 `;
 
-export function ProgressScreen(props) {
+export default function ProgressScreen(props) {
     const [data, setData] = useState({
         id: 1,
         data: oneRepMaxes["1"]

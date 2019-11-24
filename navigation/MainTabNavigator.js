@@ -7,22 +7,22 @@ import {
 
 import TabBarIcon from "../components/TabBarIcon";
 import { Icon } from "../components/Icon/Icon";
-import { ProgressScreen } from "../screens/ProgressScreen";
-import { LinksScreen } from "../screens/LinksScreen";
-import { LibraryScreen } from "../screens/LibraryScreen";
+import ProgressScreen from "../screens/ProgressScreen";
+import LinksScreen from "../screens/LinksScreen";
+import LibraryScreen from "../screens/LibraryScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import theme from "../components/theme";
-import { WorkoutLoggingScreen } from "../screens/WorkoutLoggingScreen";
-import { WorkoutExerciseLogScreen } from "../screens/WorkoutExerciseLogScreen";
-import { ProgramScreen } from "../screens/ProgramScreen";
-import { SearchLibraryScreen } from "../screens/SearchLibraryScreen";
-import { CreateExerciseForm } from "../screens/CreateExerciseForm";
-import { CreateProgretionForm } from "../screens/CreateProgressionForm";
-import { CreateWorkoutForm } from "../screens/CreateWorkoutForm";
-import { CreateProgramForm } from "../screens/CreateProgramForm";
-import { ReOrderScreen } from "../screens/ReOrderScreen";
-import { CycleSelectionScreen } from "../screens/CycleSelectionScreen";
-import { ExerciseConfigurationScreen } from "../screens/ExerciseConfigurationScreen";
+import WorkoutLoggingScreen from "../screens/WorkoutLoggingScreen";
+import WorkoutExerciseLogScreen from "../screens/WorkoutExerciseLogScreen";
+import ProgramScreen from "../screens/ProgramScreen";
+import SearchLibraryScreen from "../screens/SearchLibraryScreen";
+import CreateExerciseForm from "../screens/CreateExerciseForm";
+import CreateProgretionForm from "../screens/CreateProgressionForm";
+import CreateWorkoutForm from "../screens/CreateWorkoutForm";
+import CreateProgramForm from "../screens/CreateProgramForm";
+import ReOrderScreen from "../screens/ReOrderScreen";
+import CycleSelectionScreen from "../screens/CycleSelectionScreen";
+import ExerciseConfigurationScreen from "../screens/ExerciseConfigurationScreen";
 
 const config = Platform.select({
     web: { headerMode: "screen" },
