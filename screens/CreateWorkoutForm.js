@@ -43,7 +43,7 @@ const Text = styled.Text`
     opacity : ${props => (props.opacity ? props.opacity : 1)};
 `;
 
-export class CreateWorkoutForm extends React.Component {
+export default class CreateWorkoutForm extends React.Component {
     state = {};
     program = this.props.navigation.state.params.program;
 
@@ -66,15 +66,13 @@ export class CreateWorkoutForm extends React.Component {
             <View flex={1}>
                 <Form
                     onFinish={() => {
-                        this.props.onWorkoutCreated(this.state.name);
-                        // console.log(this.props);
-                        this.props.onAssignWorkoutsToProgram(
-                            this.program.id,
-                            this.state.name,
-                            this.state.cycles
-                        );
+                        // this.props.onWorkoutCreated(this.state.name);
+                        console.log(this.state.name);
                         this.props.navigation.navigate("Search", {
-                            type: "exercises"
+                            type: "exercises",
+                            program: this.program.id,
+                            name: this.state.name,
+                            cycles: this.state.cycles
                         });
                     }}>
                     <InputForm question={"What should it be named?"}>
@@ -101,27 +99,7 @@ export class CreateWorkoutForm extends React.Component {
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    //[{workout:name, exercises:[{exercise1ID, progression:type, targetweight: weight, targetreps: reps, targetrir1:rir1, targetrir2:rir2}]
-    return {
-        onWorkoutCreated: name =>
-            dispatch({
-                type: actionTypes.ADD_WORKOUT,
-                payload: { name: name }
-            }),
-        onAssignWorkoutsToProgram: (program, workout, cycles) =>
-            dispatch({
-                type: actionTypes.ASSIGN_WORKOUT_TO_PROGRAM,
-                payload: {
-                    program: program,
-                    workoutName: workout,
-                    cycles: cycles
-                }
-            })
-    };
-};
-
-export default connect(null, mapDispatchToProps)(CreateWorkoutForm);
+// export default connect(null, )(CreateWorkoutForm);
 
 const chooseNumberCycles = [
     {

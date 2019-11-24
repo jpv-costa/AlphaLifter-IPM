@@ -48,26 +48,42 @@ export class CreateProgretionForm extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
         return {
-            headerTitle: "Assign Exercise Progression"
+            headerTitle: navigation.getParam("name")
         };
     };
 
     render() {
+        const restOfExercises = this.props.navigation.getParam("rest");
+
         return (
             <View flex={1}>
                 <Form
                     onFinish={() => {
-                        this.props.navigation.navigate("ExerciseConfiguration");
-                        this.props.onAssignExerciseProgression(
-                            this.props.workout,
-                            this.props.exercise,
-                            this.state.progression,
-                            this.state.startLoad,
-                            this.state.reps1,
-                            this.state.reps2,
-                            this.state.rir1,
-                            this.state.rir2
-                        );
+                        if (restOfExercises.length == 0) {
+                            this.props.navigation.navigate("Program");
+                        } else {
+                            this.props.navigation.navigate(
+                                "ExerciseConfiguration",
+                                {
+                                    name: restOfExercises[0],
+                                    rest: restOfExercises.slice(
+                                        1,
+                                        restOfExercises
+                                    )
+                                }
+                            );
+                        }
+
+                        // this.props.onAssignExerciseProgression(
+                        //     this.props.workout,
+                        //     this.props.exercise,
+                        //     this.state.progression,
+                        //     this.state.startLoad,
+                        //     this.state.reps1,
+                        //     this.state.reps2,
+                        //     this.state.rir1,
+                        //     this.state.rir2
+                        // );
                     }}>
                     <InputForm question={"What is the progression scheme?"}>
                         <SingleSelectList
@@ -94,7 +110,7 @@ export class CreateProgretionForm extends React.Component {
                             onChange={text => {
                                 this.state.startLoad = text;
                             }}
-                            hasNext = {true}
+                            hasNext={true}
                         />
                     </InputForm>
 
@@ -105,7 +121,7 @@ export class CreateProgretionForm extends React.Component {
                             onChange={text => {
                                 this.state.loadIncrease = text;
                             }}
-                            hasPrevious = {true}
+                            hasPrevious={true}
                         />
                     </InputForm>
 

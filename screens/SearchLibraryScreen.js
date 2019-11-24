@@ -146,14 +146,37 @@ export class SearchLibraryScreen extends React.Component {
                         onPress={() => {
                             if (type == "exercises") {
                                 //navigate to exercise page
+                                // program, workout, cycles
+
+                                this.props.onAssignWorkoutsToProgram(
+                                    this.props.navigation.getParam("program"),
+                                    {
+                                        name: this.props.navigation.getParam(
+                                            "name"
+                                        ),
+                                        exercises: this.state.selected
+                                    },
+                                    this.props.navigation.getParam("cycles")
+                                );
 
                                 this.props.navigation.navigate(
                                     "ExerciseConfiguration",
                                     {
                                         name:
                                             exercisesDashboardData[
-                                                this.state.selected[0]
-                                            ].name
+                                                this.state.selected[0] - 1
+                                            ].name,
+                                        rest: this.state.selected
+                                            .slice(
+                                                1,
+                                                this.state.selected.length
+                                            )
+                                            .map(
+                                                index =>
+                                                    exercisesDashboardData[
+                                                        index - 1
+                                                    ].name
+                                            )
                                     }
                                 );
                             } else {
@@ -192,7 +215,25 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps)(SearchLibraryScreen);
+const mapDispatchToProps = dispatch => {
+    //[{workout:name, exercises:[{exercise1ID, progression:type, targetweight: weight, targetreps: reps, targetrir1:rir1, targetrir2:rir2}]
+    return {
+        onAssignWorkoutsToProgram: (program, workout, cycles) =>
+            dispatch({
+                type: actionTypes.ADD_WORKOUT,
+                payload: {
+                    program: program,
+                    workout: workout,
+                    cycles: cycles
+                }
+            })
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SearchLibraryScreen);
 
 const programData = [
     {

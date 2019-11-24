@@ -100,8 +100,6 @@ const reducer = (state = initialState, action) => {
             };
 
             newProgram.workouts.push(newWorkout);
-            console.log("BOASSS");
-            console.log(newProgram);
 
             newPrograms[newProgram.id - 1] = newProgram;
 
@@ -112,13 +110,25 @@ const reducer = (state = initialState, action) => {
         }
         case actionTypes.ADD_WORKOUT: {
             //DONE
+            let { program, workout, cycles } = action.payload;
+
+            let newPrograms = state.programs;
+            let newProgram = state.programs[program - 1];
+
+            let newWorkout = {
+                id: newProgram.workouts.length + 1,
+                name: workout.name,
+                exercises: workout.exercises.length,
+                cycles: cycles
+            };
+
+            newProgram.workouts.push(newWorkout);
+
+            newPrograms[newProgram.id - 1] = newProgram;
+
             return {
                 ...state,
-                workouts: state.workouts.concat({
-                    ...action.payload,
-                    workout: state.workouts.length + 1,
-                    exercises: []
-                })
+                programs: newPrograms
             };
         }
         case actionTypes.ADD_EXERCISE: {
