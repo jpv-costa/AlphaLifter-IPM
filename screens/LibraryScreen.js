@@ -235,7 +235,7 @@ export class LibraryScreen extends React.Component {
                         secondaryDark
                         text='Start Next Workout'
                         onPress={() =>
-                            this.props.navigation.navigate("Logging", {workout:this.props.workouts[this.props.workoutslength-1]})
+                            this.props.navigation.navigate("Logging", {workout:this.props.workouts[this.props.workouts.length-1]})
                         }
                     />
                 </View>
