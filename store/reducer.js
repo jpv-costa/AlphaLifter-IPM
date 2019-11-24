@@ -24,6 +24,7 @@ const initialState = {
                 {
                     exercise: 1,
                     progression: "Double Progression",
+                    targetsets: 10,
                     targetweight: 120,
                     targetreps1: 6,
                     targetreps2: 8,
@@ -147,6 +148,7 @@ const reducer = (state = initialState, action) => {
                 workout,
                 exercise,
                 progression,
+                targetsets,
                 targetWeight,
                 targetReps1,
                 targetReps2,
@@ -158,11 +160,12 @@ const reducer = (state = initialState, action) => {
             newWorkout.exercises.concat({
                 exercise: exercise,
                 progression: progression,
-                targetWeight: targetWeight,
-                targetReps1: targetReps1,
-                targetReps2: targetReps2,
-                targetRir1: targetRir1,
-                targetRir2: targetRir2
+                targetsets: targetsets,
+                targetweight: targetWeight,
+                targetreps1: targetReps1,
+                targetreps2: targetReps2,
+                targetrir1: targetRir1,
+                targetrir2: targetRir2
             });
             newWorkouts.splice(workout - 1, 1, newWorkout);
 

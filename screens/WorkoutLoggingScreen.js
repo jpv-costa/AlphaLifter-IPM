@@ -19,6 +19,9 @@ import {
     EquipmentTypes
 } from "../components/workouts/Exercises/Exercise";
 
+import { connect } from "react-redux";
+import * as actionTypes from "../store/actions";
+
 const View = styled.View`
     ${space}
     ${layout}
@@ -34,12 +37,14 @@ const Text = styled.Text`
     ${size}
     opacity : ${props => (props.opacity ? props.opacity : 1)};
 `;
-export default class WorkoutLoggingScreen extends React.Component {
+export class WorkoutLoggingScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
             header: null
         };
     };
+
+    paramz = this.props.navigation.state.params;
 
     render() {
         return (
@@ -48,11 +53,11 @@ export default class WorkoutLoggingScreen extends React.Component {
                     onBackPress={() => this.props.navigation.goBack()}
                     startMins={2}
                     startSecs={30}
-                    currentWorkout={"Push Workout"}
+                    currentWorkout={this.paramz.workout.title}
                 />
                 <ConfiguredExerciseList
                     selectList
-                    data={data}
+                    data={this.props.data}
                     onItemPress={(item, index) => {
                         this.props.navigation.navigate("Exercise", {
                             name: item.name,
@@ -97,118 +102,163 @@ export default class WorkoutLoggingScreen extends React.Component {
     }
 }
 
-const data = [
-    {
-        id: 1,
-        icon: {
-            primaryMuscles: ["chest"],
-            secondaryMuscles: ["abs"],
-            view: "front-upper"
-        },
-        name: "Bench Press",
-        completed: true,
-        estimatedDuration: "+/- 30min",
-        equipment: EquipmentTypes.dumbbell,
-        configuration: {
-            1: {
-                sets: 1,
-                reps: {
-                    min: 4,
-                    max: 6
+const mapStateToProps = (state, ownProps) => {
+    let data = [{}];
+
+    let workout = state.workouts.filter(w => w.workout==ownProps.navigation.state.params.workout.workout)[0];
+
+    for(let i = 1; i<= workout.exercises.length; i++) {
+        let exerciseId = workout.exercises[i-1].id;
+        data.push(
+            {
+                id: exerciseId,
+                icon: {
+                    primaryMuscles: state.exercises[id-1].primaryMuscles,
+                    secondaryMuscles: state.exercises[id-1].secondaryMuscles,
+                    view: "front-upper"
                 },
-                weight: 120,
-                RIR: {
-                    min: 1,
-                    max: 2
+                name: state.exercises[id-1].name,
+                completed:false,
+                estimatedDuration: "+/- 30min",
+                equipment: EquipmentTypes.dumbbell,
+                configuration:{
+                    1:{
+                        sets:exercise.targetsets,
+                        reps:{
+                            min:targetreps1,
+                            max:targetreps2
+                        },
+                        weight:targetweight,
+                        RIR:{
+                            min:targetrir1,
+                            max:targetrir2
+                        }
+                    }
                 }
-            },
-            2: {
-                sets: 4,
-                reps: 5,
-                weight: 130,
-                RIR: {
-                    min: 1,
-                    max: 3
-                }
-            }
-        }
-    },
-    {
-        id: 2,
-        icon: {
-            primaryMuscles: ["chest"],
-            secondaryMuscles: ["abs"],
-            view: "front-upper"
-        },
-        name: "Lateral Raises",
-        completed: false,
-        estimatedDuration: "+/- 22min",
-        equipment: EquipmentTypes.cable,
-        configuration: {
-            1: {
-                sets: 3,
-                reps: 7,
-                weight: 20,
-                RIR: {
-                    min: 1,
-                    max: 4
-                }
-            }
-        }
-    },
-    {
-        id: 3,
-        icon: {
-            primaryMuscles: ["chest"],
-            secondaryMuscles: ["abs"],
-            view: "front-upper"
-        },
-        name: "Row",
-        completed: false,
-        estimatedDuration: "+/- 14min",
-        equipment: EquipmentTypes.barbell,
-        configuration: {
-            1: {
-                sets: 2,
-                reps: 3,
-                weight: 30,
-                RIR: {
-                    min: 1,
-                    max: 2
-                }
-            }
-        }
-    },
-    {
-        id: 4,
-        icon: {
-            primaryMuscles: ["chest"],
-            secondaryMuscles: ["abs"],
-            view: "front-upper"
-        },
-        name: "Back Squat",
-        completed: false,
-        estimatedDuration: "+/- 19min",
-        equipment: EquipmentTypes.barbell,
-        configuration: {
-            1: {
-                sets: 1,
-                reps: 3,
-                weight: 85,
-                RIR: {
-                    min: 1,
-                    max: 2
-                }
-            },
-            2: {
-                sets: 4,
-                reps: 5,
-                weight: 25,
-                RIR: {
-                    min: 1,
-                    max: 3
-                }
-            }
-        }
+            });
     }
-];
+    
+    
+
+    return {
+        data: data
+    };
+};
+
+export default connect(mapStateToProps, null)(WorkoutLoggingScreen);
+
+// const data = [
+//     {
+//         id: 1,
+//         icon: {
+//             primaryMuscles: ["chest"],
+//             secondaryMuscles: ["abs"],
+//             view: "front-upper"
+//         },
+//         name: "Bench Press",
+//         completed: true,
+//         estimatedDuration: "+/- 30min",
+//         equipment: EquipmentTypes.dumbbell,
+//         configuration: {
+//             1: {
+//                 sets: 1,
+//                 reps: {
+//                     min: 4,
+//                     max: 6
+//                 },
+//                 weight: 120,
+//                 RIR: {
+//                     min: 1,
+//                     max: 2
+//                 }
+//             },
+//             2: {
+//                 sets: 4,
+//                 reps: 5,
+//                 weight: 130,
+//                 RIR: {
+//                     min: 1,
+//                     max: 3
+//                 }
+//             }
+//         }
+//     },
+//     {
+//         id: 2,
+//         icon: {
+//             primaryMuscles: ["chest"],
+//             secondaryMuscles: ["abs"],
+//             view: "front-upper"
+//         },
+//         name: "Lateral Raises",
+//         completed: false,
+//         estimatedDuration: "+/- 22min",
+//         equipment: EquipmentTypes.cable,
+//         configuration: {
+//             1: {
+//                 sets: 3,
+//                 reps: 7,
+//                 weight: 20,
+//                 RIR: {
+//                     min: 1,
+//                     max: 4
+//                 }
+//             }
+//         }
+//     },
+//     {
+//         id: 3,
+//         icon: {
+//             primaryMuscles: ["chest"],
+//             secondaryMuscles: ["abs"],
+//             view: "front-upper"
+//         },
+//         name: "Row",
+//         completed: false,
+//         estimatedDuration: "+/- 14min",
+//         equipment: EquipmentTypes.barbell,
+//         configuration: {
+//             1: {
+//                 sets: 2,
+//                 reps: 3,
+//                 weight: 30,
+//                 RIR: {
+//                     min: 1,
+//                     max: 2
+//                 }
+//             }
+//         }
+//     },
+//     {
+//         id: 4,
+//         icon: {
+//             primaryMuscles: ["chest"],
+//             secondaryMuscles: ["abs"],
+//             view: "front-upper"
+//         },
+//         name: "Back Squat",
+//         completed: false,
+//         estimatedDuration: "+/- 19min",
+//         equipment: EquipmentTypes.barbell,
+//         configuration: {
+//             1: {
+//                 sets: 1,
+//                 reps: 3,
+//                 weight: 85,
+//                 RIR: {
+//                     min: 1,
+//                     max: 2
+//                 }
+//             },
+//             2: {
+//                 sets: 4,
+//                 reps: 5,
+//                 weight: 25,
+//                 RIR: {
+//                     min: 1,
+//                     max: 3
+//                 }
+//             }
+//         }
+//     }
+// ];
