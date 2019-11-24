@@ -45,21 +45,12 @@ const Text = styled.Text`
 
 export class CreateWorkoutSimpleForm extends React.Component {
     state= {}
-    program = this.props.navigation.state.params.program;
 
     static navigationOptions = ({ navigation }) => {
         return {
             headerTitle: "Create Workout"
         };
     };
-
-    getCycles() {
-        let content = [];
-        for (let i = 0; i< this.program.cycles; i++) {
-            content.push({id: i+1, title: i+ " cycle"}) 
-        }
-        return content;
-    }
 
     render() {
         return (
