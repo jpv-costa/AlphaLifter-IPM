@@ -5,8 +5,8 @@ const initialState = {
         {
             program: 1,
             name: "High Volume Program",
-            cycles: 2,
-            workouts: [{ id: 1, name: "Upper Workout", exercises: [1, 2, 3] }]
+            cycles: 3,
+            workouts: [{ id: 1, cycles: [1] }]
         }
     ], //[{program:id, name:name, cycles:number, workouts:[{workout:id, [cycles]}]}]
     workouts: [
@@ -18,7 +18,8 @@ const initialState = {
                     exercise: 1,
                     progression: "Double Progression",
                     targetweight: 120,
-                    targetreps: 6,
+                    targetreps1: 6,
+                    targetreps2: 8,
                     targetrir1: 6,
                     targetrir2: 8
                 }

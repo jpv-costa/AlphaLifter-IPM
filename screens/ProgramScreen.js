@@ -137,7 +137,7 @@ export class ProgramScreen extends React.Component {
                                 bottom: 0,
                                 right: 24
                             }}>
-                            {this.props.workouts.map(workout => (
+                            {this.props.workouts[i - 1].map(workout => (
                                 <LibraryProgramCard
                                     programCardData={workout}
                                     ml={4}
@@ -243,17 +243,33 @@ const mapStateToProps = (state, ownProps) => {
         p => p.name == ownProps.navigation.state.params.program.title
     )[0];
 
+    for (let i = 0; i < state.programs[program.program - 1].cycles; i++) {
+        workouts.push([]);
+    }
+
     state.programs[program.program - 1].workouts.map(w => {
-        workouts.push({
-            id: w.id,
-            title: w.name,
-            value: [
-                { id: 2, title: "Exercises", value: w.exercises.length },
-                { id: 3, title: "Duration", value: "1h30min" },
-                { id: 4, title: "Focus", value: "Chest and Biceps" }
-            ]
+        const workout = state.workouts[w.id - 1];
+        const cycles = w.cycles;
+
+        cycles.forEach(cycle => {
+            workouts[cycle - 1].push({
+                id: workout.id,
+                title: workout.name,
+                value: [
+                    {
+                        id: 2,
+                        title: "Exercises",
+                        value: workout.exercises.length
+                    },
+                    { id: 3, title: "Duration", value: "1h30min" },
+                    { id: 4, title: "Focus", value: "Chest and Biceps" }
+                ]
+            });
         });
     });
+
+    console.log("BOASSS");
+    console.log(workouts);
 
     return {
         program: program,
