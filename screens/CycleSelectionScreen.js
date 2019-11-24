@@ -65,11 +65,19 @@ export default class CycleSelectionScreen extends React.Component {
                         mt={3}
                         secondaryDark
                         text='Next'
-                        onPress={() =>
-                            this.props.navigation.navigate("Search", {
-                                type: "exercises"
-                            })
-                        }
+                        onPress={() => {
+                            if (
+                                this.props.navigation.getParam(
+                                    "previousScreen"
+                                ) == "workoutSearch"
+                            ) {
+                                this.props.navigation.navigate("Program");
+                            } else {
+                                this.props.navigation.navigate("Search", {
+                                    type: "exercises"
+                                });
+                            }
+                        }}
                     />
                 </View>
             </SafeAreaView>

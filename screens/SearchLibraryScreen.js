@@ -158,7 +158,8 @@ export class SearchLibraryScreen extends React.Component {
                                 );
                             } else {
                                 this.props.navigation.navigate(
-                                    "CycleSelection"
+                                    "CycleSelection",
+                                    { previousScreen: "workoutSearch" }
                                 );
                             }
                         }}
