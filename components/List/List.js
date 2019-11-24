@@ -387,7 +387,7 @@ class NonDraggableList extends React.Component {
 }
 
 const DraggableList = props => {
-    const { data, numberedBullet, width } = props;
+    const { data, numberedBullet, width, onMoveEnd } = props;
 
     const [listData, setListData] = useState(data);
     const renderItem = ({ item, index, move, moveEnd, isActive }) => {
@@ -417,14 +417,24 @@ const DraggableList = props => {
             renderItem={renderItem}
             keyExtractor={(item, index) => `draggable-item-${item.id}`}
             scrollPercent={5}
-            onMoveEnd={({ data }) => setListData(data)}
+            onMoveEnd={({ data }) => {
+                onMoveEnd(data);
+                setListData(data);
+            }}
         />
     );
 };
 
 export class List extends React.Component {
     render() {
-        const { data, draggable, numberedBullet, width, ...other } = this.props;
+        const {
+            data,
+            draggable,
+            numberedBullet,
+            width,
+            onMoveEnd,
+            ...other
+        } = this.props;
 
         if (draggable) {
             return (
@@ -432,6 +442,7 @@ export class List extends React.Component {
                     numberedBullet={numberedBullet}
                     data={data}
                     width={width}
+                    onMoveEnd={onMoveEnd}
                 />
             );
         } else {

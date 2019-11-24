@@ -17,7 +17,7 @@ import WorkoutExerciseLogScreen from "../screens/WorkoutExerciseLogScreen";
 import ProgramScreen from "../screens/ProgramScreen";
 import SearchLibraryScreen from "../screens/SearchLibraryScreen";
 import CreateExerciseForm from "../screens/CreateExerciseForm";
-import CreateProgressionForm from "../screens/CreateProgressionForm";
+import CreateProgretionForm from "../screens/CreateProgressionForm";
 import CreateWorkoutForm from "../screens/CreateWorkoutForm";
 import CreateProgramForm from "../screens/CreateProgramForm";
 import ReOrderScreen from "../screens/ReOrderScreen";
@@ -56,7 +56,7 @@ const LibraryStack = createStackNavigator(
         Logging: WorkoutLoggingScreen,
         Program: ProgramScreen,
         ExerciseForm: CreateExerciseForm,
-        ProgretionForm: CreateProgressionForm,
+        ProgretionForm: CreateProgretionForm,
         ProgramForm: CreateProgramForm,
         WorkoutForm: CreateWorkoutForm,
         Exercise: WorkoutExerciseLogScreen,

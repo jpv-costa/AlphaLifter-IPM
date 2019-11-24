@@ -13,7 +13,13 @@ import Search from "../components/Search/Search";
 import { DashboardProgramList } from "../components/List/DashboardProgramList";
 import { DashboardWorkoutList } from "../components/List/DashboardWorkoutList";
 import { ActionButton } from "../components/button/Button";
+<<<<<<< HEAD
 import {connect} from 'react-redux';
+=======
+import { SearchLibraryScreen } from "./SearchLibraryScreen";
+
+import { connect } from "react-redux";
+>>>>>>> b4d952420544cd9d9f1123d269e47b8ffdeaa562
 import * as actionTypes from "../store/actions";
 
 const { width } = Dimensions.get("window");
@@ -48,14 +54,7 @@ const Text = styled.Text`
     opacity : ${props => (props.opacity ? props.opacity : 1)};
 `;
 
-export class SearchLibraryScreen extends React.Component {
-<<<<<<< HEAD
-
-    state = {}
-    
-
-=======
->>>>>>> 60363ef17fb447c58e1198019b424816cc960cf3
+export class ReOrderScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
             headerTitle: "Edit Workout Order",
@@ -79,15 +78,23 @@ export class SearchLibraryScreen extends React.Component {
 
         return (
             <View style={{ flex: 1 }}>
-                <DashboardWorkoutList data={this.setState({ workouts: data })} selectList draggable />
+                <DashboardWorkoutList
+                    data={this.props.workouts}
+                    selectList
+                    draggable
+                    onItemPress={(item, index, selected) =>
+                        {this.setState({workouts: index.slice(1)})}}
+                />
                 <View px={4} mb={4}>
                     <ActionButton
                         mt={3}
                         secondaryDark
                         text='Save'
-                        onPress={() =>
+                        onPress={() => {
+                            this.props.navigation.goBack();
                             this.props.orderedWorkout(this.state.workouts),
-                            console.log("Pressed Save button")}
+                                console.log("Pressed Save button");
+                        }}
                     />
                 </View>
             </View>
@@ -95,25 +102,28 @@ export class SearchLibraryScreen extends React.Component {
     }
 }
 
-<<<<<<< HEAD
-const mapDispatchToProps = dispatch => {
-    return {
-        orderedWorkout: (workouts) => dispatch({type: actionTypes.REORDER, payload: {workouts: workouts}})
-    };
-}
-
-export default connect(null, mapDispatchToProps)(SearchLibraryScreen);
-
-=======
-// export default connect(mapStateToProps,null)(ReOrderScreen);
-
 const mapStateToProps = state => {
     return {
-        
-    }
-}
+        orderedWorkout: workouts =>
+            dispatch({
+                type: actionTypes.REORDER,
+                payload: { workouts: workouts }
+            })
+    };
+};
 
->>>>>>> 60363ef17fb447c58e1198019b424816cc960cf3
+const mapDispatchToProps = dispatch => {
+    return {
+        orderedWorkout: workouts =>
+            dispatch({
+                type: actionTypes.REORDER,
+                payload: { workouts: workouts }
+            })
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReOrderScreen);
+
 const workoutData = [
     {
         id: 1,

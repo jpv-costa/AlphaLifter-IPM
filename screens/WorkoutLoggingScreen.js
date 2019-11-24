@@ -19,7 +19,6 @@ import {
     EquipmentTypes
 } from "../components/workouts/Exercises/Exercise";
 
-
 const View = styled.View`
     ${space}
     ${layout}

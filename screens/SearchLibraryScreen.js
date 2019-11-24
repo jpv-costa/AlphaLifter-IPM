@@ -14,9 +14,9 @@ import { DashboardProgramList } from "../components/List/DashboardProgramList";
 import { DashboardWorkoutList } from "../components/List/DashboardWorkoutList";
 import { DashboardExerciseList } from "../components/List/DashboardExerciseList";
 import { ActionButton } from "../components/button/Button";
-import { SearchLibraryScreen } from "./ReOrderScreen";
+import { ReOrderScreen } from "./ReOrderScreen";
 
-import {connect} from 'react-redux';
+import { connect } from "react-redux";
 import * as actionTypes from "../store/actions";
 
 const { width } = Dimensions.get("window");
@@ -51,7 +51,7 @@ const Text = styled.Text`
     opacity : ${props => (props.opacity ? props.opacity : 1)};
 `;
 
-export class ReOrderScreen extends React.Component {
+export class SearchLibraryScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
             header: null
@@ -169,13 +169,11 @@ export class ReOrderScreen extends React.Component {
     }
 }
 
-export default connect(mapStateToProps,null)(SearchLibraryScreen);
+export default connect(mapStateToProps, null)(SearchLibraryScreen);
 
 const mapStateToProps = state => {
-    return {
-        
-    }
-}
+    return {};
+};
 
 const programData = [
     {

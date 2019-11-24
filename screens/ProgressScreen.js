@@ -44,13 +44,13 @@ const Text = styled.Text`
     opacity : ${props => (props.opacity ? props.opacity : 1)};
 `;
 
-export default function HomeScreen(props) {
+export default function ProgressScreen(props) {
     const [data, setData] = useState({
         id: 1,
         data: oneRepMaxes["1"]
     });
 
-    console.disableYellowBox = true; 
+    console.disableYellowBox = true;
 
     const content = [
         <DashboardProgramList
@@ -127,7 +127,7 @@ export default function HomeScreen(props) {
     );
 }
 
-HomeScreen.navigationOptions = {
+ProgressScreen.navigationOptions = {
     title: "Progress"
 };
 
