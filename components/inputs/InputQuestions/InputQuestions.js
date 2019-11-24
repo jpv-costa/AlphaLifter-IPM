@@ -35,7 +35,7 @@ const TextInput = styled.TextInput`
 
 
 export const SingleInputNumeric = props => {
-    const { placeholder, units, onChange,  hasNext, ref} = props;
+    const { placeholder, units, onChange} = props;
 
     return (
         <CenterItem>
@@ -49,8 +49,7 @@ export const SingleInputNumeric = props => {
                     maxLength={6}
                     multiline={false}
                     onChangeText={text => onChange(text)}
-                    blurOnSubmit={ (hasNext === true) ? true : false}
-                    onSubmitEditting = {(hasNext === true) ? focusInput(ref) : false}></TextInput>
+                    blurOnSubmit={false}/>
                 <Text
                     fontSize={5}
                     ml={3}
@@ -64,7 +63,8 @@ export const SingleInputNumeric = props => {
 };
 
 export const SingleInput = props => {
-    const { placeholder, onChange, hasNext, nextRef } = props;
+    const { placeholder, onChange } = props;
+
 
 
     return (
@@ -77,7 +77,8 @@ export const SingleInput = props => {
                     autoCorrect={false}
                     maxFontSizeMultiplier={6}
                     multiline={false}
-                    blurOnSubmit={false}></TextInput>
+                    blurOnSubmit={false}
+                    />
             </UserInput>
         </CenterItem>
     );
