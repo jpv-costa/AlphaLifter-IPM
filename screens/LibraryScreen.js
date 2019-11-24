@@ -101,7 +101,7 @@ export class LibraryScreen extends React.Component {
                                 this.props.navigation.navigate("ProgramForm");
                                 break;
                             case 1:
-                                // this.props.navigation.navigate("WorkoutForm"); //TODO
+                                this.props.navigation.navigate("WorkoutSimpleForm");
                                 break;
                         }
                     }}
