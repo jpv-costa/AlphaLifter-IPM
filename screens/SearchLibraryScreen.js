@@ -172,10 +172,10 @@ export class SearchLibraryScreen extends React.Component {
 
 const mapStateToProps = state => {
     let workouts = [];
-    console.log("boas");
+
     state.workouts.map(w => {
         workouts.push({
-            id: w.workout,
+            id: w.id,
             name: w.name,
             isCurrent: false,
             exercises: w.exercises.length,
