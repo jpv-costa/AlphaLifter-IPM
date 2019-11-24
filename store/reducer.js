@@ -7,8 +7,10 @@ const initialState = {
 }
 
 const reducer = (state = initialState, action) => {
+    console.log(action.payload);
     switch(action.type) {
         case actionTypes.ADD_PROGRAM: { //DONE
+           
             return {
                 ...state,
                 programs: state.programs.concat({...action.payload,program:state.programs.length+1, workouts:[]})

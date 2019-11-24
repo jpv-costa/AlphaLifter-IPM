@@ -75,9 +75,11 @@ export class ReOrderScreen extends React.Component {
         return (
             <View style={{ flex: 1 }}>
                 <DashboardWorkoutList
-                    data={this.setState({ workouts: data })}
+                    data={this.props.workouts}
                     selectList
                     draggable
+                    onItemPress={(item, index, selected) =>
+                        {this.setState({workouts: index.slice(1)})}}
                 />
                 <View px={4} mb={4}>
                     <ActionButton
@@ -96,6 +98,16 @@ export class ReOrderScreen extends React.Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        orderedWorkout: workouts =>
+            dispatch({
+                type: actionTypes.REORDER,
+                payload: { workouts: workouts }
+            })
+    };
+};
+
 const mapDispatchToProps = dispatch => {
     return {
         orderedWorkout: workouts =>
@@ -106,7 +118,7 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(null, mapDispatchToProps)(ReOrderScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(ReOrderScreen);
 
 const workoutData = [
     {

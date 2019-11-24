@@ -91,7 +91,7 @@ const mapDispatchToProps = dispatch => {
         onProgramCreated: (name, cycles) =>
             dispatch({
                 type: actionTypes.ADD_PROGRAM,
-                payload: { program: name, cycles: cycles }
+                payload: { name: name, cycles: cycles }
             })
     };
 };
