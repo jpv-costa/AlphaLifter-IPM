@@ -204,15 +204,16 @@ export class ProgramScreen extends React.Component {
                     onPress={index => {
                         switch (index) {
                             case 0:
-                                console.log("program: ");
-                                console.log(this.props.program);
+                                // console.log("program: ");
+                                // console.log(this.props.program);
                                 this.props.navigation.navigate("WorkoutForm", {
                                     program: this.props.program
                                 });
                                 break;
                             case 1:
                                 this.props.navigation.navigate("Search", {
-                                    type: "workout"
+                                    type: "workout",
+                                    program: this.state.program
                                 });
                                 break;
                         }

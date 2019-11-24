@@ -71,8 +71,6 @@ export class SearchLibraryScreen extends React.Component {
         let searchProperties;
         let listType;
 
-        console.log(type);
-
         if (type === "program") {
             data = programData;
             placeholder = "Type program name...";
@@ -88,7 +86,7 @@ export class SearchLibraryScreen extends React.Component {
         }
 
         if (type === "workout") {
-            console.log(this.props.workouts);
+            // console.log(this.props.workouts);
             data = this.props.workouts;
             placeholder = "Type workout name...";
             searchProperties = ["name, muscles"];
@@ -96,7 +94,9 @@ export class SearchLibraryScreen extends React.Component {
                 <DashboardWorkoutList
                     selectList
                     onItemPress={(item, index, selected) =>
-                        console.log(selected)
+                        this.setState({
+                            selected
+                        })
                     }
                 />
             );
@@ -159,7 +159,11 @@ export class SearchLibraryScreen extends React.Component {
                             } else {
                                 this.props.navigation.navigate(
                                     "CycleSelection",
-                                    { previousScreen: "workoutSearch" }
+                                    {
+                                        previousScreen: "workoutSearch",
+                                        program: navigation.getParam("program"),
+                                        selectedWorkout: this.state.selected[0]
+                                    }
                                 );
                             }
                         }}

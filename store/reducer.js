@@ -44,8 +44,8 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-    console.log("payload");
-    console.log(action.payload);
+    // console.log("payload");
+    // console.log(action.payload);
     switch (action.type) {
         case actionTypes.ADD_PROGRAM: {
             //DONE
@@ -85,20 +85,25 @@ const reducer = (state = initialState, action) => {
         }
         case actionTypes.ASSIGN_WORKOUT_TO_PROGRAM: {
             //DONE
-            let { program, workoutName, cycles } = action.payload;
-            console.log("program to add = " + program);
-            var workout;
-            state.workouts.map((e, index) => {
-                if (e.name == workoutName) {
-                    workout = index + 1;
-                }
-            });
+            let { program, workoutIndex, cycles } = action.payload;
 
-            let newPrograms = state.programs.filter(() => true);
-            console.log(newPrograms);
-            let newProgram = { ...state.programs[program - 1] };
-            newProgram.workouts.concat(workout);
-            newPrograms.splice(program - 1, 1, newProgram);
+            let newPrograms = state.programs;
+            let newProgram = state.programs.filter(
+                item => item.name == program.name
+            )[0];
+
+            let newWorkout = {
+                id: newProgram.workouts.length + 1,
+                name: state.workouts[workoutIndex].name,
+                exercises: state.workouts[workoutIndex].exercises.length,
+                cycles: cycles
+            };
+
+            newProgram.workouts.push(newWorkout);
+            console.log("BOASSS");
+            console.log(newProgram);
+
+            newPrograms[newProgram.id - 1] = newProgram;
 
             return {
                 ...state,
