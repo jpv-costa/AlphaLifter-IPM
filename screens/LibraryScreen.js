@@ -161,6 +161,8 @@ export class LibraryScreen extends React.Component {
                                     programCardData={program}
                                     ml={4}
                                     onPress={() => {
+                                        console.log("library");
+                                        console.log(program);
                                         this.props.navigation.navigate(
                                             "Program",
                                             { program: program }
@@ -263,6 +265,7 @@ const mapStateToProps = state => {
             ]
         });
     });
+    console.log(programs);
 
     state.workouts.map(w => {
         workouts.push({
