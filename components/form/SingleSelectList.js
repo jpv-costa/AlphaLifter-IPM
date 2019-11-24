@@ -3,6 +3,7 @@ import { FlatList, View, Text, Dimensions } from "react-native";
 import { color, space, layout, size, typography } from "styled-system";
 import { ListItem } from "react-native-elements";
 import styled from "styled-components";
+import theme from "../theme";
 
 const CenterList = styled.View`
     flexGrow: 1;
@@ -16,10 +17,9 @@ const CenterList = styled.View`
 `;
 
 export class SingleSelectList extends React.Component {
-
     state = {
         selected: null
-    }
+    };
 
     render() {
         return (
@@ -32,12 +32,23 @@ export class SingleSelectList extends React.Component {
                             id={item.id}
                             style={{ flex: 1, width: "100%" }}
                             title={item.title}
-                            selected={this.state.selected == item.title}
+                            containerStyle={{
+                                backgroundColor:
+                                    this.state.selected == item.title
+                                        ? theme.colors.secondaryTints[3]
+                                        : "#fff"
+                            }}
+                            contentContainerStyle={{
+                                color:
+                                    this.state.selected == item.title
+                                        ? "#fff"
+                                        : "#555"
+                            }}
                             index={index}
                             description={item.description}
                             onPress={() => {
                                 if (this.props.onItemPress) {
-                                    this.setState({selected: item.title});
+                                    this.setState({ selected: item.title });
                                     this.props.onItemPress(item);
                                 }
                             }}
@@ -51,4 +62,4 @@ export class SingleSelectList extends React.Component {
             </CenterList>
         );
     }
-};
+}
