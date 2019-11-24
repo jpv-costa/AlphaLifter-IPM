@@ -246,7 +246,7 @@ export class LibraryScreen extends React.Component {
 const mapStateToProps = state => {
     let programs = [],
         workouts = [];
-    console.log("boas");
+
     state.programs.map(p => {
         programs.push({
             id: p.id,

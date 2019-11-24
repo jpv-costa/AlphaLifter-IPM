@@ -14,7 +14,6 @@ import { DashboardProgramList } from "../components/List/DashboardProgramList";
 import { DashboardWorkoutList } from "../components/List/DashboardWorkoutList";
 import { DashboardExerciseList } from "../components/List/DashboardExerciseList";
 import { ActionButton } from "../components/button/Button";
-import { ReOrderScreen } from "./ReOrderScreen";
 
 import { connect } from "react-redux";
 import * as actionTypes from "../store/actions";
@@ -89,7 +88,8 @@ export class SearchLibraryScreen extends React.Component {
         }
 
         if (type === "workout") {
-            data = workoutData;
+            console.log(this.props.workouts);
+            data = this.props.workouts;
             placeholder = "Type workout name...";
             searchProperties = ["name, muscles"];
             listType = (
@@ -158,7 +158,8 @@ export class SearchLibraryScreen extends React.Component {
                                 );
                             } else {
                                 this.props.navigation.navigate(
-                                    "CycleSelection"
+                                    "CycleSelection",
+                                    { previousScreen: "workoutSearch" }
                                 );
                             }
                         }}
@@ -169,11 +170,25 @@ export class SearchLibraryScreen extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, null)(SearchLibraryScreen);
-
 const mapStateToProps = state => {
-    return {};
+    let workouts = [];
+    console.log("boas");
+    state.workouts.map(w => {
+        workouts.push({
+            id: w.workout,
+            name: w.name,
+            isCurrent: false,
+            exercises: w.exercises.length,
+            muscles: "Chest, Shoulders"
+        });
+    });
+
+    return {
+        workouts: workouts
+    };
 };
+
+export default connect(mapStateToProps)(SearchLibraryScreen);
 
 const programData = [
     {

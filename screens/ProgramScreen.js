@@ -12,7 +12,7 @@ import theme from "../components/theme";
 
 import ActionSheet from "react-native-actionsheet";
 
-import {connect} from 'react-redux';
+import { connect } from "react-redux";
 import * as actionTypes from "../store/actions";
 
 const { width } = Dimensions.get("window");
@@ -92,7 +92,7 @@ export class ProgramScreen extends React.Component {
     };
 
     render() {
-        console.log(this.props.navigation.state.params);
+        // console.log(this.props.navigation.state.params);
         const getCycles = () => {
             const result = [];
 
@@ -233,30 +233,30 @@ export class ProgramScreen extends React.Component {
     }
 }
 
-export default connect(mapStateToProps,null)(ProgramScreen);
-
 const mapStateToProps = (state, ownProps) => {
     let workouts = [];
+    let program = state.programs.filter(p => p.name == ownProps.navigation.state.params.program)[0];
 
-    state.workouts.map(w => {
-        workouts.push({id:w.id, title:w.name, value:
-            [
-                {id: 2, title: "Exercises", value: w.exercises.length},
-                {id: 3, title: "Duration", value: "1h30min"},
-                {id: 4, title: "Focus", value: "Chest and Biceps"}            ]
-        })
-    })
-
-    let program = state.programs.filter(p => p.name == ownProps.program)[0];
-    console.log("program screen program")
-    console.log(program);
+    state.programs[program.program-1].workouts.map(w => {
+        workouts.push({
+            id: w.id,
+            title: w.name,
+            value: [
+                { id: 2, title: "Exercises", value: w.exercises.length },
+                { id: 3, title: "Duration", value: "1h30min" },
+                { id: 4, title: "Focus", value: "Chest and Biceps" }
+            ]
+        });
+    });
 
     return {
+        program: program,
         cycles: program.cycles,
-        workouts: workouts,
-        program: program
-    }
-}
+        workouts: workouts
+    };
+};
+
+export default connect(mapStateToProps, null)(ProgramScreen);
 
 const workoutsCardData = [
     {
