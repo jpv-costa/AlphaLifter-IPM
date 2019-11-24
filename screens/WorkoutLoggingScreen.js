@@ -104,11 +104,14 @@ export class WorkoutLoggingScreen extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
     let data = [{}];
-
-    let workout = state.workouts.filter(w => w.workout==ownProps.navigation.state.params.workout.workout)[0];
-
+    console.log("logg mapstatetoprops")
+    console.log(ownProps.navigation.state.params.workout.id)
+    console.log(state.workouts);
+    let workout = state.workouts.filter(w => (w.id == ownProps.navigation.state.params.workout.id))[0];
+    console.log(workout);
     for(let i = 1; i<= workout.exercises.length; i++) {
-        let exerciseId = workout.exercises[i-1].id;
+        let exerciseId = state.workouts[workout.id-1].exercises[i-1].id;
+        console.log(exerciseId)
         data.push(
             {
                 id: exerciseId,
@@ -137,8 +140,6 @@ const mapStateToProps = (state, ownProps) => {
                 }
             });
     }
-    
-    
 
     return {
         data: data
@@ -146,119 +147,3 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 export default connect(mapStateToProps, null)(WorkoutLoggingScreen);
-
-// const data = [
-//     {
-//         id: 1,
-//         icon: {
-//             primaryMuscles: ["chest"],
-//             secondaryMuscles: ["abs"],
-//             view: "front-upper"
-//         },
-//         name: "Bench Press",
-//         completed: true,
-//         estimatedDuration: "+/- 30min",
-//         equipment: EquipmentTypes.dumbbell,
-//         configuration: {
-//             1: {
-//                 sets: 1,
-//                 reps: {
-//                     min: 4,
-//                     max: 6
-//                 },
-//                 weight: 120,
-//                 RIR: {
-//                     min: 1,
-//                     max: 2
-//                 }
-//             },
-//             2: {
-//                 sets: 4,
-//                 reps: 5,
-//                 weight: 130,
-//                 RIR: {
-//                     min: 1,
-//                     max: 3
-//                 }
-//             }
-//         }
-//     },
-//     {
-//         id: 2,
-//         icon: {
-//             primaryMuscles: ["chest"],
-//             secondaryMuscles: ["abs"],
-//             view: "front-upper"
-//         },
-//         name: "Lateral Raises",
-//         completed: false,
-//         estimatedDuration: "+/- 22min",
-//         equipment: EquipmentTypes.cable,
-//         configuration: {
-//             1: {
-//                 sets: 3,
-//                 reps: 7,
-//                 weight: 20,
-//                 RIR: {
-//                     min: 1,
-//                     max: 4
-//                 }
-//             }
-//         }
-//     },
-//     {
-//         id: 3,
-//         icon: {
-//             primaryMuscles: ["chest"],
-//             secondaryMuscles: ["abs"],
-//             view: "front-upper"
-//         },
-//         name: "Row",
-//         completed: false,
-//         estimatedDuration: "+/- 14min",
-//         equipment: EquipmentTypes.barbell,
-//         configuration: {
-//             1: {
-//                 sets: 2,
-//                 reps: 3,
-//                 weight: 30,
-//                 RIR: {
-//                     min: 1,
-//                     max: 2
-//                 }
-//             }
-//         }
-//     },
-//     {
-//         id: 4,
-//         icon: {
-//             primaryMuscles: ["chest"],
-//             secondaryMuscles: ["abs"],
-//             view: "front-upper"
-//         },
-//         name: "Back Squat",
-//         completed: false,
-//         estimatedDuration: "+/- 19min",
-//         equipment: EquipmentTypes.barbell,
-//         configuration: {
-//             1: {
-//                 sets: 1,
-//                 reps: 3,
-//                 weight: 85,
-//                 RIR: {
-//                     min: 1,
-//                     max: 2
-//                 }
-//             },
-//             2: {
-//                 sets: 4,
-//                 reps: 5,
-//                 weight: 25,
-//                 RIR: {
-//                     min: 1,
-//                     max: 3
-//                 }
-//             }
-//         }
-//     }
-// ];
