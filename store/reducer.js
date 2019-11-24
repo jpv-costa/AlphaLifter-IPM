@@ -6,7 +6,7 @@ const initialState = {
             id: 1,
             name: "High Volume Program",
             cycles: 2,
-            workouts: []
+            workouts: [{ id: 1, name: "Upper Workout", exercises: [1, 2, 3] }]
         }
     ], //[{id:id, name:name, cycles:number, workouts:[{workout:id, [cycles]}]}]
     workouts: [
@@ -51,15 +51,16 @@ const reducer = (state = initialState, action) => {
                 })
             };
         }
-        case actionTypes.ASSIGN_WORKOUT_TO_PROGRAM: { //DONE
+        case actionTypes.ASSIGN_WORKOUT_TO_PROGRAM: {
+            //DONE
             let { program, workoutName, cycles } = action.payload;
             console.log("program to add = " + program);
             var workout;
-            state.workouts.map((e,index)=> {
-                if (e.name==workoutName) {
-                    workout = index+1;
+            state.workouts.map((e, index) => {
+                if (e.name == workoutName) {
+                    workout = index + 1;
                 }
-            })
+            });
 
             let newPrograms = state.programs.filter(() => true);
             console.log(newPrograms);

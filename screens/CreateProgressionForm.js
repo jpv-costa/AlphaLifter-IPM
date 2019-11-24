@@ -94,6 +94,7 @@ export class CreateProgretionForm extends React.Component {
                             onChange={text => {
                                 this.state.startLoad = text;
                             }}
+                            hasNext = {true}
                         />
                     </InputForm>
 
@@ -104,6 +105,7 @@ export class CreateProgretionForm extends React.Component {
                             onChange={text => {
                                 this.state.loadIncrease = text;
                             }}
+                            hasPrevious = {true}
                         />
                     </InputForm>
 
@@ -148,7 +150,8 @@ const mapDispatchToProps = dispatch => {
             exercise,
             progression,
             targetWeight,
-            targetReps,
+            targetReps1,
+            targetReps2,
             targetRir1,
             targetRir2
         ) =>
