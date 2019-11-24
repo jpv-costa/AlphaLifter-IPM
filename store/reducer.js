@@ -6,7 +6,7 @@ const initialState = {
             program: 1,
             name: "High Volume Program",
             cycles: 2,
-            workouts: []
+            workouts: [{ id: 1, name: "Upper Workout", exercises: [1, 2, 3] }]
         }
     ], //[{program:id, name:name, cycles:number, workouts:[{workout:id, [cycles]}]}]
     workouts: [

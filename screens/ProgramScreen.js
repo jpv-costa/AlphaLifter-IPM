@@ -62,7 +62,6 @@ const Text = styled.Text`
 export class ProgramScreen extends React.Component {
     program = this.props.navigation.state.params.program;
     header = ["Workouts", "Analysis"];
-    cycles = 3;
 
     showActionSheet = () => {
         this.ActionSheet.show();
@@ -210,7 +209,7 @@ export class ProgramScreen extends React.Component {
                     }}
                 />
                 <Text fontSize={2} my={3} mx={4} opacity={0.5}>
-                    Length: {this.cycles} cycles.
+                    Length: {this.props.cycles} cycles.
                 </Text>
                 <Navigator
                     width={width}
@@ -240,9 +239,6 @@ const mapStateToProps = (state, ownProps) => {
     let program = state.programs.filter(
         p => p.name == ownProps.navigation.state.params.program.title
     )[0];
-
-    console.log("BOASSS");
-    console.log(program);
 
     state.programs[program.program - 1].workouts.map(w => {
         workouts.push({
