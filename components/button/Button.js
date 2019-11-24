@@ -29,7 +29,6 @@ const Button = styled.TouchableOpacity`
 `;
 
 export const MyButton = props => {
-    console.log("mybutton width " + props.width);
     return (
         <Button
             style={{ opacity: props.disabled ? 0.3 : 1, width: props.width }}

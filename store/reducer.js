@@ -60,6 +60,7 @@ const reducer = (state = initialState, action) => {
                     workout = index + 1;
                 }
             });
+
             let newPrograms = state.programs.filter(() => true);
             console.log(newPrograms);
             let newProgram = { ...state.programs[program - 1] };

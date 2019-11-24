@@ -45,7 +45,7 @@ const Text = styled.Text`
 
 export class CreateWorkoutForm extends React.Component {
     state= {}
-    program = 1;
+    // program = 1;
 
     static navigationOptions = ({ navigation }) => {
         return {
@@ -60,7 +60,7 @@ export class CreateWorkoutForm extends React.Component {
                     onFinish={() =>
                         {
                             this.props.onWorkoutCreated(this.state.name);
-                            this.props.onAssignWorkoutsToProgram(this.program,this.state.name,this.state.cycles);
+                            this.props.onAssignWorkoutsToProgram(this.props.program,this.state.name,this.state.cycles);
                             this.props.navigation.navigate("Search", {
                                 type: "exercises"
                             });
